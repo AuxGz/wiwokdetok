@@ -1,0 +1,27 @@
+---
+import Container from "./Container.astro";
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <Container>
+    <div class="footer-inner">
+      <p>&copy; {currentYear} Website Sekolah. Seluruh hak cipta dilindungi.</p>
+    </div>
+  </Container>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: auto;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    padding: 1.5rem 0;
+  }
+  .footer-inner {
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+  }
+</style>

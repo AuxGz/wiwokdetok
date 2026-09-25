@@ -1,0 +1,57 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/Container.astro";
+import Section from "../components/Section.astro";
+---
+
+<BaseLayout title="404 - Halaman Tidak Ditemukan | Website Sekolah">
+  <Section className="not-found-section">
+    <Container>
+      <div class="not-found-content">
+        <h1>404</h1>
+        <h2>Halaman Tidak Ditemukan</h2>
+        <p>Halaman yang Anda tuju tidak tersedia atau telah dipindahkan.</p>
+        <div class="actions">
+          <a href="/" class="btn btn-primary">Kembali ke Beranda</a>
+        </div>
+      </div>
+    </Container>
+  </Section>
+</BaseLayout>
+
+<style>
+  .not-found-section {
+    padding: 6rem 0;
+    text-align: center;
+  }
+  .not-found-content h1 {
+    font-size: 5rem;
+    font-weight: 900;
+    color: var(--color-primary);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .not-found-content h2 {
+    font-size: 1.75rem;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+  }
+  .not-found-content p {
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+  }
+  .btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.375rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: #ffffff;
+  }
+  .btn-primary:hover {
+    background-color: var(--color-primary-hover);
+  }
+</style>

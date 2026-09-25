@@ -1,0 +1,50 @@
+{
+  "name": "school-web-app",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -k -n \"api,astro\" -c \"blue,green\" \"npm run dev:server\" \"npm run dev:astro\"",
+    "dev:server": "tsx watch src/server/dev-server.ts",
+    "dev:astro": "astro dev",
+    "prisma:generate": "prisma generate",
+    "build:astro": "astro build",
+    "build:server": "tsc -p tsconfig.server.json",
+    "build": "npm run prisma:generate && npm run build:astro && npm run build:server",
+    "start": "node dist/node/server/server.js",
+    "test": "vitest run",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@astrojs/node": "^11.1.6",
+    "@astrojs/react": "^7.0.0",
+    "@directus/sdk": "^26.0.0",
+    "@prisma/adapter-pg": "^7.10.0",
+    "@prisma/client": "^7.10.0",
+    "astro": "^7.3.5",
+    "dotenv": "^16.4.7",
+    "express": "^5.2.1",
+    "pg": "^8.13.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "@types/express": "^5.0.0",
+    "@types/node": "^24.0.0",
+    "@types/pg": "^8.11.11",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@types/supertest": "^6.0.2",
+    "concurrently": "^9.1.2",
+    "eslint": "^9.20.0",
+    "prettier": "^3.5.2",
+    "prisma": "^7.10.0",
+    "supertest": "^7.1.0",
+    "tsx": "^4.23.0",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.24.0",
+    "vitest": "^3.0.7"
+  }
+}

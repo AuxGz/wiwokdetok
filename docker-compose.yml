@@ -1,0 +1,82 @@
+services:
+  postgres:
+    image: pgvector/pgvector:0.8.6-pg16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_SUPERUSER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_SUPERUSER_PASSWORD:?Wajib menyetel POSTGRES_SUPERUSER_PASSWORD}
+      POSTGRES_DB: postgres
+      APP_DB_USER: ${APP_DB_USER:-app_user}
+      APP_DB_PASSWORD: ${APP_DB_PASSWORD:?Wajib menyetel APP_DB_PASSWORD}
+      CMS_DB_USER: ${CMS_DB_USER:-directus_user}
+      CMS_DB_PASSWORD: ${CMS_DB_PASSWORD:?Wajib menyetel CMS_DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/postgres/init/01-init-databases.sh:/docker-entrypoint-initdb.d/01-init-databases.sh:ro
+    # CATATAN: Port 5432 sengaja TIDAK dipublikasikan ke host demi keamanan produksi.
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  directus:
+    image: directus/directus:12.4.1
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SECRET: ${DIRECTUS_SECRET:?Wajib menyetel DIRECTUS_SECRET}
+      ADMIN_EMAIL: ${DIRECTUS_ADMIN_EMAIL:?Wajib menyetel DIRECTUS_ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${DIRECTUS_ADMIN_PASSWORD:?Wajib menyetel DIRECTUS_ADMIN_PASSWORD}
+      DB_CLIENT: "pg"
+      DB_HOST: "postgres"
+      DB_PORT: 5432
+      DB_DATABASE: "cms_db"
+      DB_USER: ${CMS_DB_USER:-directus_user}
+      DB_PASSWORD: ${CMS_DB_PASSWORD:?Wajib menyetel CMS_DB_PASSWORD}
+      PUBLIC_URL: ${DIRECTUS_PUBLIC_URL:?Wajib menyetel DIRECTUS_PUBLIC_URL}
+    ports:
+      - "127.0.0.1:8055:8055"
+    volumes:
+      - directus_uploads:/directus/uploads
+      - ./cms/extensions:/directus/extensions
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://localhost:8055/server/ping').then(r => r.ok ? process.exit(0) : process.exit(1)).catch(() => process.exit(1))"
+        ]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: "postgresql://${APP_DB_USER:-app_user}:${APP_DB_PASSWORD:?Wajib menyetel APP_DB_PASSWORD}@postgres:5432/app_db?schema=public"
+      # Override URL Directus ke hostname internal Docker network
+      DIRECTUS_URL: "http://directus:8055"
+      PUBLIC_SITE_URL: ${PUBLIC_SITE_URL:?Wajib menyetel PUBLIC_SITE_URL}
+    ports:
+      - "127.0.0.1:3000:3000"
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:3000/api/health').then(r => r.ok ? process.exit(0) : process.exit(1)).catch(() => process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  postgres_data:
+  directus_uploads:
