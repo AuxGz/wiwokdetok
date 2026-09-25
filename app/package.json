@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "concurrently -k -n \"api,astro\" -c \"blue,green\" \"npm run dev:server\" \"npm run dev:astro\"",
-    "dev:server": "tsx watch src/server/dev-server.ts",
+    "dev:server": "node --watch --import tsx src/server/dev-server.ts",
     "dev:astro": "astro dev",
     "prisma:generate": "prisma generate",
     "build:astro": "astro build",

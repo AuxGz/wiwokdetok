@@ -1,11 +1,16 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import request from "supertest";
 import { createApiApp } from "../src/server/api-app.js";
+import { prisma } from "../src/server/lib/prisma.js";
 
 describe("API Health & Routing Tests", () => {
   const app = createApiApp();
 
-  it("GET /api/health returns 200 and status ok", async () => {
+  beforeEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it("GET /api/health returns 200 and status ok without requiring database", async () => {
     const res = await request(app).get("/api/health");
     expect(res.status).toBe(200);
     expect(res.body).toHaveProperty("status", "ok");
@@ -13,11 +18,23 @@ describe("API Health & Routing Tests", () => {
     expect(res.body).toHaveProperty("timestamp");
   });
 
-  it("GET /api/health/ready returns 200 and status ready", async () => {
+  it("GET /api/health/ready returns 200 when database is reachable", async () => {
+    vi.spyOn(prisma, "$queryRaw").mockResolvedValueOnce([{ "?column?": 1 }] as never);
+
     const res = await request(app).get("/api/health/ready");
     expect(res.status).toBe(200);
     expect(res.body).toHaveProperty("status", "ready");
-    expect(res.body).toHaveProperty("timestamp");
+    expect(res.body).toHaveProperty("database", "connected");
+  });
+
+  it("GET /api/health/ready returns 503 when database is unavailable", async () => {
+    vi.spyOn(prisma, "$queryRaw").mockRejectedValueOnce(new Error("Connection refused"));
+
+    const res = await request(app).get("/api/health/ready");
+    expect(res.status).toBe(503);
+    expect(res.body).toHaveProperty("status", "unhealthy");
+    expect(res.body).toHaveProperty("database", "disconnected");
+    expect(res.body).toHaveProperty("error", "Connection refused");
   });
 
   it("GET /api/non-existent-route returns 404 JSON error", async () => {
