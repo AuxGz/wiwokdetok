@@ -27,14 +27,27 @@ describe("API Health & Routing Tests", () => {
     expect(res.body).toHaveProperty("database", "connected");
   });
 
-  it("GET /api/health/ready returns 503 when database is unavailable", async () => {
+  it("GET /api/health/ready returns 503 when database is unavailable without leaking error details", async () => {
     vi.spyOn(prisma, "$queryRaw").mockRejectedValueOnce(new Error("Connection refused"));
 
     const res = await request(app).get("/api/health/ready");
     expect(res.status).toBe(503);
     expect(res.body).toHaveProperty("status", "unhealthy");
     expect(res.body).toHaveProperty("database", "disconnected");
-    expect(res.body).toHaveProperty("error", "Connection refused");
+    expect(res.body).not.toHaveProperty("error");
+  });
+
+  it("GET /api/health/ready includes error details when NODE_ENV is development", async () => {
+    const originalEnv = process.env.NODE_ENV;
+    process.env.NODE_ENV = "development";
+    try {
+      vi.spyOn(prisma, "$queryRaw").mockRejectedValueOnce(new Error("Connection refused"));
+      const res = await request(app).get("/api/health/ready");
+      expect(res.status).toBe(503);
+      expect(res.body).toHaveProperty("error", "Connection refused");
+    } finally {
+      process.env.NODE_ENV = originalEnv;
+    }
   });
 
   it("GET /api/non-existent-route returns 404 JSON error", async () => {

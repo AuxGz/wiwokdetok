@@ -16,12 +16,18 @@ export function errorHandler(
       ? (err as { status: number }).status
       : 500;
 
-  const message = err instanceof Error ? err.message : "Terjadi kesalahan internal pada server";
+  const isDev = process.env.NODE_ENV === "development";
 
-  res.status(status).json({
-    error: {
-      message,
-      status,
-    },
-  });
+  if (isDev) {
+    res.status(status).json({
+      status: "error",
+      message: err instanceof Error ? err.message : "Internal server error",
+      stack: err instanceof Error ? err.stack : undefined,
+    });
+  } else {
+    res.status(status).json({
+      status: "error",
+      message: status >= 500 ? "Internal server error" : (err instanceof Error ? err.message : "Request error"),
+    });
+  }
 }

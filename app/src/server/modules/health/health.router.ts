@@ -20,10 +20,12 @@ healthRouter.get("/ready", async (_req: Request, res: Response) => {
       timestamp: new Date().toISOString(),
     });
   } catch (error) {
+    console.error("[health/ready] Database connection error:", error);
+    const isDev = process.env.NODE_ENV === "development";
     res.status(503).json({
       status: "unhealthy",
       database: "disconnected",
-      error: error instanceof Error ? error.message : "Database tidak terhubung",
+      ...(isDev ? { error: error instanceof Error ? error.message : "Database tidak terhubung" } : {}),
       timestamp: new Date().toISOString(),
     });
   }

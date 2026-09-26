@@ -29,7 +29,14 @@ RUN npm ci --omit=dev
 # Salin direktori dist/ yang memuat hasil build server (dist/node) dan astro (dist/astro)
 COPY --from=builder /app/dist ./dist
 
+# Salin skema, konfigurasi prisma, dan berkas migrasi untuk prisma migrate deploy
+COPY prisma ./prisma
+COPY prisma.config.ts ./
+COPY docker-entrypoint.sh ./
+RUN chmod +x docker-entrypoint.sh
+
 # Image produksi mandiri: TIDAK memerlukan kode sumber, node_modules dev lokal, ataupun berkas .env
 EXPOSE 3000
 
+ENTRYPOINT ["./docker-entrypoint.sh"]
 CMD ["node", "dist/node/server/server.js"]

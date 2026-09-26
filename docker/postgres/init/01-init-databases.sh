@@ -18,6 +18,9 @@ psql -v ON_ERROR_STOP=1 \
     CREATE ROLE :"app_user" WITH LOGIN PASSWORD :'app_pass';
     CREATE DATABASE app_db OWNER :"app_user";
     GRANT ALL PRIVILEGES ON DATABASE app_db TO :"app_user";
+
+    CREATE DATABASE app_shadow_db OWNER :"app_user";
+    GRANT ALL PRIVILEGES ON DATABASE app_shadow_db TO :"app_user";
 EOSQL
 
 psql -v ON_ERROR_STOP=1 \
@@ -35,4 +38,12 @@ psql -v ON_ERROR_STOP=1 \
     GRANT ALL ON SCHEMA public TO :"app_user";
 EOSQL
 
-echo "==> [PostgreSQL Init] Inisialisasi database dan pgvector selesai."
+psql -v ON_ERROR_STOP=1 \
+  --username "$POSTGRES_USER" \
+  --dbname "app_shadow_db" \
+  --set=app_user="$APP_DB_USER" <<-EOSQL
+    CREATE EXTENSION IF NOT EXISTS vector;
+    GRANT ALL ON SCHEMA public TO :"app_user";
+EOSQL
+
+echo "==> [PostgreSQL Init] Inisialisasi database, shadow database, dan pgvector selesai."

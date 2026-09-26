@@ -68,6 +68,14 @@ Docker Container: app (Port 3000)
    docker compose up -d
    ```
 
+   > [!NOTE]
+   > **Migrasi Otomatis Produksi (`prisma migrate deploy`)**:
+   > Saat kontainer `app` menyala, skrip `docker-entrypoint.sh` secara otomatis mengeksekusi `npx prisma migrate deploy` untuk menerapkan migrasi tertunda sebelum server Node.js dimulai.
+   > Jika ingin menjalankan migrasi secara manual:
+   > ```bash
+   > docker compose exec app npx prisma migrate deploy
+   > ```
+
 5. Periksa status ketiga kontainer:
    ```bash
    docker compose ps

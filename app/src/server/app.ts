@@ -8,6 +8,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export async function createApp(): Promise<Express> {
   const app = express();
 
+  // Konfigurasi trust proxy untuk topologi Webuzo/Nginx reverse proxy (1 hop di depan kontainer)
+  app.set("trust proxy", 1);
+
   // 1. Mount API Router terlebih dahulu (/api/*)
   app.use(createApiApp());
 

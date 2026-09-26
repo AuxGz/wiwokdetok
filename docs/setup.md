@@ -59,17 +59,29 @@ Perintah di atas akan membaca `package.json` dan memvalidasi integritas `package
 
 ---
 
-## 4. Inisialisasi Skema Prisma
+## 4. Inisialisasi Skema & Migrasi Prisma
 
 Jalankan generasi client Prisma 7:
 ```bash
 npm run prisma:generate
 ```
 
-Terapkan migrasi ke `app_db`:
+### Alur Migrasi Pengembangan (`prisma migrate dev`)
+Alur kerja pengembangan skema menggunakan database shadow terpisah (`app_shadow_db`) yang secara otomatis diinisialisasi oleh skrip `docker/postgres/init/01-init-databases.sh`.
+
+Jalankan perintah migrasi pengembangan di dalam kontainer `app` (di mana jaringan internal PostgreSQL dapat diakses langsung):
 ```bash
-npx prisma migrate dev --name init
+docker compose exec app npx prisma migrate dev --name <nama_migrasi>
 ```
+
+Atau jika dijalankan dari host lokal dengan port database terpetakan:
+```bash
+cd app
+npx prisma migrate dev --name <nama_migrasi>
+```
+
+> [!NOTE]
+> Shadow database `app_shadow_db` hanya digunakan selama proses pembuatan migrasi pengembangan (`prisma migrate dev`) dan **bukan** merupakan dependensi runtime produksi.
 
 ---
 

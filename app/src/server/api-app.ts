@@ -6,6 +6,9 @@ import { notFoundHandler } from "./middleware/not-found.js";
 export function createApiApp(): Express {
   const app = express();
 
+  // Konfigurasi trust proxy untuk reverse proxy Webuzo/Nginx
+  app.set("trust proxy", 1);
+
   app.use(express.json());
 
   const apiRouter = express.Router();
