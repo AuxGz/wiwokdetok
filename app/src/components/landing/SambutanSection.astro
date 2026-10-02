@@ -8,14 +8,30 @@ import Container from "../Container.astro";
       <!-- Foto Kepala Sekolah dengan Red Card di Belakang -->
       <div class="principal-visual">
         <div class="photo-frame-wrapper">
-          <div class="red-bg-card" aria-hidden="true"></div>
+          <!-- Dashed Halo Arc behind head -->
+          <div class="dashed-halo-arc" aria-hidden="true">
+            <svg width="340" height="340" viewBox="0 0 340 340" fill="none">
+              <circle cx="170" cy="170" r="160" stroke="#94a3b8" stroke-width="2" stroke-dasharray="8 8" />
+            </svg>
+          </div>
+
+          <!-- Red Shape with Large Rounded Corners & Watermark Rings -->
+          <div class="red-bg-card" aria-hidden="true">
+            <div class="card-ring ring-left-1"></div>
+            <div class="card-ring ring-left-2"></div>
+            <div class="card-ring ring-right-1"></div>
+            <div class="card-ring ring-right-2"></div>
+          </div>
+
+          <!-- Foto Kepala Sekolah -->
           <img
             src="/images/kepalaSekolah.png"
             alt="Kepala SMK Telkom Purwokerto - Aris Puji Santoso, S.Kom., M.M"
             class="principal-photo-img"
             width="530"
             height="796"
-            loading="lazy"
+            loading="eager"
+            decoding="async"
           />
         </div>
       </div>
@@ -77,31 +93,91 @@ import Container from "../Container.astro";
   .photo-frame-wrapper {
     position: relative;
     width: 100%;
-    max-width: 500px;
-    height: 600px;
+    max-width: 480px;
+    height: 540px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  .dashed-halo-arc {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 340px;
+    height: 340px;
+    z-index: 1;
+    pointer-events: none;
   }
 
   .red-bg-card {
     position: absolute;
-    width: 420px;
-    height: 400px;
+    width: 450px;
+    height: 380px;
     background-color: #ed1e28;
-    border-radius: 28px;
-    left: 45px;
-    top: 140px;
-    z-index: 1;
+    border-radius: 96px;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    z-index: 2;
+    overflow: hidden;
+  }
+
+  .card-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 24px solid rgba(255, 255, 255, 0.075);
+    pointer-events: none;
+  }
+
+  .ring-left-1 {
+    width: 200px;
+    height: 200px;
+    left: -80px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .ring-left-2 {
+    width: 320px;
+    height: 320px;
+    left: -140px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .ring-right-1 {
+    width: 200px;
+    height: 200px;
+    right: -80px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .ring-right-2 {
+    width: 320px;
+    height: 320px;
+    right: -140px;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .principal-photo-img {
     position: absolute;
-    z-index: 2;
-    width: 500px;
+    z-index: 3;
+    width: 400px;
     max-width: none;
     height: auto;
-    left: 0;
-    top: -150px;
-    filter: drop-shadow(0 20px 36px rgba(0, 0, 0, 0.14));
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 16px;
+    filter: drop-shadow(0 20px 36px rgba(0, 0, 0, 0.16));
     transition: transform 0.25s ease;
+  }
+
+  .principal-photo-img:hover {
+    transform: translateX(-50%) translateY(-4px);
   }
 
   .sambutan-content {
@@ -187,12 +263,30 @@ import Container from "../Container.astro";
     }
 
     .photo-frame-wrapper {
-      max-width: 320px;
+      max-width: 360px;
+      height: 420px;
+    }
+
+    .dashed-halo-arc {
+      width: 260px;
+      height: 260px;
+      top: 10px;
+    }
+
+    .dashed-halo-arc svg {
+      width: 260px;
+      height: 260px;
     }
 
     .red-bg-card {
-      width: 260px;
-      height: 280px;
+      width: 340px;
+      height: 290px;
+      border-radius: 72px;
+    }
+
+    .principal-photo-img {
+      width: 300px;
+      bottom: 12px;
     }
   }
 
@@ -203,6 +297,33 @@ import Container from "../Container.astro";
 
     .sambutan-title {
       font-size: 1.85rem;
+    }
+
+    .photo-frame-wrapper {
+      max-width: 310px;
+      height: 360px;
+    }
+
+    .red-bg-card {
+      width: 290px;
+      height: 250px;
+      border-radius: 60px;
+    }
+
+    .principal-photo-img {
+      width: 260px;
+      bottom: 10px;
+    }
+
+    .dashed-halo-arc {
+      width: 220px;
+      height: 220px;
+      top: 5px;
+    }
+
+    .dashed-halo-arc svg {
+      width: 220px;
+      height: 220px;
     }
   }
 </style>
