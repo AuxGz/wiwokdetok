@@ -6,24 +6,37 @@ const alumniList = [
     name: "PROF. DR. IR. MOH. KHAIRUDIN, M.T., PH.D.",
     role: "(Guru Besar Universitas Negeri Yogyakarta | Lulusan 1998)",
     quote: "Fondasi teknologi dan karakter yang saya dapatkan di SMK Telkom adalah pijakan awal kesuksesan. Kini saya bangga melihat almamater saya terus mencetak pemimpin masa depan.",
-    initials: "MK",
+    image: "/images/alumni_khairudin.png",
+    ringClass: "",
   },
   {
     name: "DR. TENIA WAHYUNINGRUM, S.KOM., M.T.",
     role: "(Direktur Telkom University Purwokerto | Lulusan 2001)",
     quote: "SMK Telkom Purwokerto adalah kawah candradimuka talenta digital. Lulusannya terbukti memiliki daya saing tinggi saat melanjutkan studi di Telkom University.",
-    initials: "TW",
+    image: "/images/alumni_tenia.png",
+    ringClass: "",
   },
   {
     name: "ALFA PUTRA KURNIA",
     role: "(Co-founder & CEO Arkademy.com | Alumni TKJ)",
     quote: "Menghadapi dunia bisnis butuh skill, knowledge, dan attitude. Semua fondasi adaptasi dunia kerja itu saya dapatkan lengkap di SMK Telkom Purwokerto.",
-    initials: "AP",
+    image: "/images/alumni_alfa.png",
+    ringClass: "avatar-blue-ring",
   },
 ];
 ---
 
 <section class="alumni-section" id="alumni">
+  <!-- Subtle Background Dot Grid Matrix matching Figma -->
+  <svg class="alumni-bg-dots" viewBox="0 0 1440 600" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <pattern id="alumni-dot-pat" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+        <circle cx="14" cy="14" r="2" fill="#ed1e28" fill-opacity="0.12" />
+      </pattern>
+    </defs>
+    <rect width="1440" height="600" fill="url(#alumni-dot-pat)" />
+  </svg>
+
   <Container>
     <div class="alumni-inner">
       <!-- Section Header -->
@@ -40,8 +53,15 @@ const alumniList = [
           {
             alumniList.map((item) => (
               <div class="alumni-card">
-                <div class="alumni-avatar-wrap">
-                  <span class="alumni-initials">{item.initials}</span>
+                <div class={`alumni-avatar-wrap ${item.ringClass}`}>
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    class="alumni-avatar-img"
+                    width="76"
+                    height="76"
+                    loading="lazy"
+                  />
                 </div>
 
                 <blockquote class="alumni-quote">
@@ -70,11 +90,25 @@ const alumniList = [
 
 <style>
   .alumni-section {
+    position: relative;
     padding: 5rem 0 6rem 0;
     background-color: #ffffff;
+    overflow: hidden;
+  }
+
+  .alumni-bg-dots {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
   }
 
   .alumni-inner {
+    position: relative;
+    z-index: 1;
     max-width: 1140px;
     margin-left: auto;
     margin-right: auto;
@@ -120,42 +154,49 @@ const alumniList = [
   }
 
   .alumni-card {
-    background-color: #f8fafc;
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: 20px;
     padding: 2.75rem 2rem 2.25rem 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
 
   .alumni-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.07);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
   }
 
   .alumni-avatar-wrap {
-    width: 72px;
-    height: 72px;
+    width: 76px;
+    height: 76px;
     border-radius: 50%;
     overflow: hidden;
     margin-bottom: 1.75rem;
-    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
     border: 3px solid #ffffff;
-    box-shadow: 0 4px 12px rgba(237, 30, 40, 0.12);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #f1f5f9;
+    flex-shrink: 0;
   }
 
-  .alumni-initials {
-    font-family: var(--font-poppins);
-    font-size: 1.35rem;
-    font-weight: 800;
-    color: #ed1e28;
-    letter-spacing: -0.02em;
+  .avatar-blue-ring {
+    border: 3px solid #0284c7;
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.25);
+  }
+
+  .alumni-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 50%;
   }
 
   .alumni-quote {

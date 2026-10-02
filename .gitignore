@@ -42,3 +42,4 @@ directus_uploads/
 # Agent & Tooling
 .agents/
 skills-lock.json
+scratch/

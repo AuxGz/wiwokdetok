@@ -3,19 +3,23 @@ import Container from "../Container.astro";
 
 const stats = [
   {
-    number: "900+",
+    number: "910+",
+    display: "9 1 0+",
     label: "Siswa aktif",
   },
   {
     number: "4",
+    display: "4",
     label: "Program keahlian",
   },
   {
-    number: "96+",
+    number: "68+",
+    display: "6 8+",
     label: "Mitra industri",
   },
   {
-    number: "150+",
+    number: "150",
+    display: "1 5 0",
     label: "Prestasi (5 thn)",
   },
 ];
@@ -27,8 +31,7 @@ const stats = [
       {
         stats.map((item) => (
           <div class="stat-col-item">
-            <span class="red-dash"></span>
-            <div class="stat-num" data-value={item.number}>{item.number}</div>
+            <div class="stat-num" data-value={item.display}>{item.display}</div>
             <div class="stat-label">{item.label}</div>
           </div>
         ))
@@ -90,10 +93,10 @@ const stats = [
 
   .stats-bar-card {
     background-color: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-    padding: 2.25rem 2.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    padding: 2.5rem 2rem;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     align-items: center;
@@ -108,29 +111,21 @@ const stats = [
   }
 
   .stat-col-item:first-child {
-    padding-left: 0.5rem;
+    padding-left: 1rem;
   }
 
   .stat-col-item:not(:last-child) {
-    border-right: 1px solid #f3f4f6;
-  }
-
-  .red-dash {
-    width: 20px;
-    height: 3px;
-    background-color: #ed1e28;
-    border-radius: 2px;
-    margin-bottom: 0.85rem;
+    border-right: 1px solid #f1f5f9;
   }
 
   .stat-num {
     font-family: var(--font-poppins);
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #1e1e1e;
+    font-size: 2.75rem;
+    font-weight: 800;
+    color: #111827;
     line-height: 1.1;
     margin-bottom: 0.35rem;
-    letter-spacing: -0.02em;
+    letter-spacing: 0.04em;
   }
 
   .stat-label {

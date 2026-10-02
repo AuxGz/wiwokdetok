@@ -106,6 +106,12 @@ const majorsData = [
 ---
 
 <section class="jurusan-section" id="jurusan">
+  <!-- Subtle decorative background dashed curves matching Figma -->
+  <svg class="jurusan-bg-arcs" viewBox="0 0 1440 600" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M-50 420 C 150 420, 260 300, 260 -50" stroke="#cbd5e1" stroke-width="2.5" stroke-dasharray="8 8" />
+    <path d="M1500 360 C 1200 420, 1080 260, 1120 -50" stroke="#cbd5e1" stroke-width="2.5" stroke-dasharray="8 8" />
+  </svg>
+
   <Container>
     <div class="jurusan-inner">
       <!-- Section Header -->
@@ -179,14 +185,18 @@ const majorsData = [
               role="tabpanel"
               aria-labelledby={`tab-${m.code}`}
             >
-              <!-- Left Visual: Photo with Red Card & Dashed Frame -->
+              <!-- Left Visual: Photo with Authentic Red Organic Backdrop -->
               <div class="major-visual-col">
                 <div class="visual-stack">
-                  <!-- Dashed Frame -->
-                  <div class="dashed-border-frame" aria-hidden="true"></div>
-                  <!-- Red Card Behind -->
-                  <div class="red-backdrop-card" aria-hidden="true"></div>
-                  <!-- Student Image -->
+                  <!-- Red Organic Backdrop Card with Concentric Rings -->
+                  <div class="jurusan-red-shape" aria-hidden="true">
+                    <svg class="jurusan-shape-rings" viewBox="0 0 400 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="200" cy="230" r="130" stroke="rgba(255, 255, 255, 0.10)" stroke-width="32" />
+                      <circle cx="200" cy="230" r="210" stroke="rgba(255, 255, 255, 0.07)" stroke-width="32" />
+                    </svg>
+                  </div>
+
+                  <!-- Student Cutout Image -->
                   <img
                     src={m.studentImg}
                     alt={`Siswa Jurusan ${m.code}`}
@@ -341,11 +351,26 @@ const majorsData = [
 
 <style>
   .jurusan-section {
+    position: relative;
     padding: 4.5rem 0 6rem 0;
     background-color: #ffffff;
+    overflow: hidden;
+  }
+
+  /* Decorative Background Dashed Arcs */
+  .jurusan-bg-arcs {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
   }
 
   .jurusan-inner {
+    position: relative;
+    z-index: 1;
     max-width: 1140px;
     margin-left: auto;
     margin-right: auto;
@@ -427,7 +452,7 @@ const majorsData = [
   }
 
   .tab-btn.active {
-    background-color: #ed1e28;
+    background: linear-gradient(135deg, #ed1e28 0%, #dc2626 100%);
     color: #ffffff;
     box-shadow: 0 4px 14px rgba(237, 30, 40, 0.28);
   }
@@ -470,42 +495,43 @@ const majorsData = [
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    min-height: 480px;
   }
 
-  .dashed-border-frame {
+  .jurusan-red-shape {
     position: absolute;
-    top: -24px;
-    left: -24px;
-    width: 280px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 380px;
     height: 380px;
-    border: 3.5px dashed #94a3b8;
-    border-radius: 20px;
+    background: linear-gradient(157deg, #ed1e28 0%, #dc2626 52%, #c41d24 100%);
+    border-radius: 140px 90px 140px 90px;
+    overflow: hidden;
     pointer-events: none;
     z-index: 1;
+    box-shadow: 0 16px 36px rgba(237, 30, 40, 0.22);
   }
 
-  .red-backdrop-card {
+  .jurusan-shape-rings {
     position: absolute;
-    bottom: 24px;
-    left: 24px;
-    width: 300px;
-    height: 320px;
-    background-color: #ed1e28;
-    border-radius: 20px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
-    z-index: 2;
   }
 
   .major-student-img {
     position: relative;
-    z-index: 3;
+    z-index: 2;
     width: 100%;
     height: auto;
     max-height: 490px;
     object-fit: contain;
     object-position: bottom center;
     display: block;
-    filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.12));
+    filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.16));
   }
 
   /* Right Details */

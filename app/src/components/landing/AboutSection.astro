@@ -28,6 +28,16 @@ import Container from "../Container.astro";
       <!-- Right Column: Visual Photo Stack with Red Accent Card -->
       <div class="about-visual-col">
         <div class="about-photo-stack">
+          <!-- Red Dot Grid Matrix Decoration -->
+          <svg class="dot-grid-matrix" width="220" height="170" viewBox="0 0 220 170" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <pattern id="about-dot-pattern" x="0" y="0" width="26" height="26" patternUnits="userSpaceOnUse">
+                <circle cx="13" cy="13" r="2.5" fill="#ed1e28" fill-opacity="0.45" />
+              </pattern>
+            </defs>
+            <rect width="220" height="170" fill="url(#about-dot-pattern)" />
+          </svg>
+
           <!-- Red Accent Card Behind -->
           <div class="red-accent-card" aria-hidden="true"></div>
 
@@ -135,6 +145,16 @@ import Container from "../Container.astro";
     width: 100%;
     max-width: 550px;
     margin-left: auto;
+  }
+
+  /* Red Dot Grid Matrix Decoration */
+  .dot-grid-matrix {
+    position: absolute;
+    top: -55px;
+    right: -45px;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.85;
   }
 
   /* Red Accent Card Behind */
