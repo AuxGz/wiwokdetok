@@ -110,37 +110,41 @@ const majorsData = [
   <svg class="jurusan-bg-arcs" viewBox="0 0 1440 1030" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <!-- Top-Left framing arc -->
     <path
-      d="M 278 -10 L 278 120 C 278 240 200 293 100 293 L -10 293"
+      d="M 278 -50 L 278 175 C 278 245 220 286 140 286 L -1500 286"
       stroke="#94a3b8"
       stroke-width="1.8"
       stroke-dasharray="6 6"
+      stroke-linecap="round"
       stroke-opacity="0.8"
       vector-effect="non-scaling-stroke"
     />
     <!-- Bottom curve flowing continuously behind student card matching Figma -->
     <path
-      d="M 36 1035 L 36 965 C 36 885 155 770 225 770 C 320 700 520 750 520 893 L 520 1035"
+      d="M 36 1500 L 36 965 C 36 885 155 770 225 770 C 320 700 520 750 520 893 L 520 1500"
       stroke="#94a3b8"
       stroke-width="1.8"
       stroke-dasharray="6 6"
+      stroke-linecap="round"
       stroke-opacity="0.8"
       vector-effect="non-scaling-stroke"
     />
     <!-- Top-Right framing bowl arc -->
     <path
-      d="M 1195 -10 C 1100 80 1100 270 1260 345 C 1335 365 1395 350 1450 330"
+      d="M 1180 -50 C 1145 60 1145 180 1225 285 C 1285 360 1375 355 1440 330 L 3000 200"
       stroke="#94a3b8"
       stroke-width="1.8"
       stroke-dasharray="6 6"
+      stroke-linecap="round"
       stroke-opacity="0.8"
       vector-effect="non-scaling-stroke"
     />
     <!-- Bottom-Right framing corner arc -->
     <path
-      d="M 1223 1040 L 1223 980 C 1223 850 1280 805 1380 805 L 1450 805"
+      d="M 1224 1500 L 1224 920 C 1224 835 1285 800 1360 800 L 3000 800"
       stroke="#94a3b8"
       stroke-width="1.8"
       stroke-dasharray="6 6"
+      stroke-linecap="round"
       stroke-opacity="0.8"
       vector-effect="non-scaling-stroke"
     />
@@ -410,12 +414,19 @@ const majorsData = [
     height: 100%;
     pointer-events: none;
     z-index: 0;
+    overflow: visible;
+  }
+
+  @media (max-width: 1024px) {
+    .jurusan-bg-arcs {
+      display: none;
+    }
   }
 
   .jurusan-inner {
     position: relative;
     z-index: 1;
-    max-width: 1140px;
+    max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
   }
