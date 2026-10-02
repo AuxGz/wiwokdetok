@@ -38,3 +38,7 @@ coverage/
 # Docker volumes / local data
 postgres_data/
 directus_uploads/
+
+# Agent & Tooling
+.agents/
+skills-lock.json
