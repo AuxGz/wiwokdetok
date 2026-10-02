@@ -1,0 +1,450 @@
+---
+import Container from "../Container.astro";
+
+const faqs = [
+  {
+    question: "Apa saja jurusan atau program keahlian yang tersedia di SMK Telkom Purwokerto?",
+    answer: "SMK Telkom Purwokerto memiliki 4 program keahlian unggulan berstandar industri: Pengembangan Game (PG), Rekayasa Perangkat Lunak (RPL), Teknik Komputer & Jaringan (TKJ), dan Teknik Jaringan Akses Telekomunikasi (TJA). Masing-masing dilengkapi laboratorium modern dan sertifikasi resmi.",
+  },
+  {
+    question: "Apa saja persyaratan dokumen yang harus disiapkan?",
+    answer: "Dokumen yang perlu disiapkan antara lain scan rapor SMP/MTs semester 1 sampai 5, scan Kartu Keluarga (KK), scan Akta Kelahiran, pas foto berwarna terbaru, dan piagam atau sertifikat prestasi (opsional untuk pendaftar jalur beasiswa/prestasi).",
+  },
+  {
+    question: "Apakah sekolah menyediakan fasilitas asrama atau tempat tinggal?",
+    answer: "SMK Telkom Purwokerto bekerjasama dengan mitra asrama dan pondokan/kost terverifikasi yang berada dekat lingkungan sekolah, dengan pengawasan aman, tertib, dan fasilitas memadai bagi siswa dari luar kota Purwokerto.",
+  },
+  {
+    question: "Bagaimana cara mengikuti School Tour sebelum mendaftar?",
+    answer: "Calon siswa dan orang tua dapat mengikuti School Tour dengan memilih menu School Tour di website ini untuk melihat jadwal kunjungan, atau langsung menghubungi hotline admisi WhatsApp kami untuk membuat janji pendampingan bersama tim sekolah.",
+  },
+];
+---
+
+<section class="faq-section" id="faq">
+  <Container>
+    <div class="faq-wrapper">
+      <!-- Left Column: Copy & Help Card -->
+      <div class="faq-left-col">
+        <div class="faq-tagline">
+          <span class="tagline-dash"></span>
+          <span class="tagline-text">FAQ</span>
+        </div>
+
+        <h2 class="faq-heading">
+          Pertanyaan yang<br />Sering Diajukan
+        </h2>
+
+        <p class="faq-description">
+          Temukan jawaban seputar proses pendaftaran, program keahlian, dan informasi penting lainnya di SMK Telkom Purwokerto.
+        </p>
+
+        <!-- Help Card matching Figma 1:1 -->
+        <div class="faq-help-card">
+          <div class="help-icon-wrap" aria-hidden="true">
+            <img src="/images/faq-support-icon.svg" alt="" width="24" height="24" class="help-svg" />
+          </div>
+
+          <div class="help-text-group">
+            <h3 class="help-title">Masih punya pertanyaan?</h3>
+            <p class="help-subtitle">
+              Tim kami siap membantu menjawab pertanyaan seputar PPDB dan program sekolah.
+            </p>
+          </div>
+
+          <a
+            href="https://wa.me/6281229701800?text=Halo%20Admin,%20saya%20ingin%20bertanya%20seputar%20SMK%20Telkom%20Purwokerto"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-hubungi-kami"
+          >
+            <span>Hubungi Kami</span>
+            <img src="/images/hubungi-arrow.svg" alt="" width="12" height="13" class="btn-arrow-icon" aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column: Accordion List matching Figma 1:1 -->
+      <div class="faq-right-col">
+        <div class="accordion-list">
+          {
+            faqs.map((item, index) => (
+              <div class="faq-item-wrap">
+                <div class="faq-divider" aria-hidden="true"></div>
+                <div class={`faq-item ${index === 0 ? "active" : ""}`} data-index={index}>
+                  <button
+                    type="button"
+                    class="faq-trigger"
+                    aria-expanded={index === 0 ? "true" : "false"}
+                    aria-controls={`faq-answer-${index}`}
+                    id={`faq-btn-${index}`}
+                  >
+                    <span class="faq-question">{item.question}</span>
+                    <span class="faq-toggle-circle" aria-hidden="true">
+                      <img src="/images/accordion-plus.svg" alt="" width="13" height="14" class="toggle-icon" />
+                    </span>
+                  </button>
+                  <div
+                    class="faq-content"
+                    id={`faq-answer-${index}`}
+                    role="region"
+                    aria-labelledby={`faq-btn-${index}`}
+                    style={index === 0 ? "display: block;" : "display: none;"}
+                  >
+                    <p class="faq-answer-text">{item.answer}</p>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+          <div class="faq-divider" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>
+
+<script>
+  function initFaqAccordion() {
+    const items = document.querySelectorAll(".faq-item");
+
+    items.forEach((item) => {
+      const trigger = item.querySelector(".faq-trigger");
+      const content = item.querySelector(".faq-content") as HTMLElement;
+
+      if (!trigger || !content) return;
+
+      trigger.addEventListener("click", () => {
+        const isActive = item.classList.contains("active");
+
+        // Close other open accordions
+        items.forEach((other) => {
+          if (other !== item && other.classList.contains("active")) {
+            other.classList.remove("active");
+            const otherTrigger = other.querySelector(".faq-trigger");
+            const otherContent = other.querySelector(".faq-content") as HTMLElement;
+            if (otherTrigger) otherTrigger.setAttribute("aria-expanded", "false");
+            if (otherContent) otherContent.style.display = "none";
+          }
+        });
+
+        // Toggle current item
+        if (isActive) {
+          item.classList.remove("active");
+          trigger.setAttribute("aria-expanded", "false");
+          content.style.display = "none";
+        } else {
+          item.classList.add("active");
+          trigger.setAttribute("aria-expanded", "true");
+          content.style.display = "block";
+        }
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initFaqAccordion);
+  } else {
+    initFaqAccordion();
+  }
+</script>
+
+<style>
+  .faq-section {
+    padding: 100px 0;
+    background-color: #ffffff;
+  }
+
+  .faq-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 80px;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  /* Left Column */
+  .faq-left-col {
+    width: 500px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .faq-tagline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1.25rem;
+  }
+
+  .tagline-dash {
+    display: inline-block;
+    width: 24px;
+    height: 2px;
+    background-color: #ed1e28;
+    border-radius: 2px;
+  }
+
+  .tagline-text {
+    font-family: var(--font-poppins);
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #ed1e28;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .faq-heading {
+    font-family: var(--font-jakarta);
+    font-size: 2.75rem;
+    font-weight: 800;
+    line-height: 1.18;
+    letter-spacing: -0.0114em;
+    color: #33343a;
+    margin: 0 0 1.25rem 0;
+  }
+
+  .faq-description {
+    font-family: var(--font-jakarta);
+    font-size: 1rem;
+    line-height: 1.625;
+    color: #55565b;
+    margin: 0 0 2.5rem 0;
+    max-width: 440px;
+  }
+
+  /* Help Card */
+  .faq-help-card {
+    width: 420px;
+    max-width: 100%;
+    padding: 32px;
+    background-color: #ffffff;
+    border: 1px solid #e7e8ea;
+    border-radius: 24px;
+    box-shadow: 0px 8px 24px 0px rgba(85, 86, 91, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .help-icon-wrap {
+    width: 56px;
+    height: 56px;
+    background-color: #fdf1f2;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .help-svg {
+    display: block;
+  }
+
+  .help-text-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .help-title {
+    font-family: var(--font-jakarta);
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.33;
+    letter-spacing: 0.002em;
+    color: #33343a;
+    margin: 0;
+  }
+
+  .help-subtitle {
+    font-family: var(--font-jakarta);
+    font-size: 0.875rem;
+    line-height: 1.57;
+    letter-spacing: 0.001em;
+    color: #55565b;
+    margin: 0;
+  }
+
+  .btn-hubungi-kami {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 13px 24px;
+    background-color: #ed1e28;
+    color: #ffffff;
+    font-family: var(--font-jakarta);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    line-height: 1.5;
+    border-radius: 999px;
+    text-decoration: none;
+    box-shadow: 0px 6px 16px 0px rgba(237, 30, 40, 0.24);
+    transition: background-color 0.2s ease, transform 0.15s ease;
+  }
+
+  .btn-hubungi-kami:hover {
+    background-color: #d81820;
+    transform: translateY(-1px);
+  }
+
+  .btn-hubungi-kami:active {
+    transform: scale(0.98);
+  }
+
+  .btn-arrow-icon {
+    display: block;
+  }
+
+  /* Right Column: Accordions */
+  .faq-right-col {
+    flex: 1;
+    max-width: 720px;
+  }
+
+  .accordion-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .faq-item-wrap {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .faq-divider {
+    height: 1px;
+    background-color: #e7e8ea;
+    width: 100%;
+  }
+
+  .faq-item {
+    padding: 24px 0;
+  }
+
+  .faq-trigger {
+    width: 100%;
+    min-height: 63px;
+    padding: 12px 16px;
+    background-color: #f5f5f5;
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.2s ease;
+  }
+
+  .faq-trigger:hover {
+    background-color: #efefef;
+  }
+
+  .faq-trigger:focus-visible {
+    outline: 2px solid #ed1e28;
+    outline-offset: 2px;
+  }
+
+  .faq-question {
+    font-family: var(--font-jakarta);
+    font-size: 1.0625rem;
+    font-weight: 700;
+    line-height: 1.41;
+    color: #33343a;
+    padding-right: 1rem;
+  }
+
+  .faq-toggle-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 9999px;
+    background-color: #ffffff;
+    border: 1px solid #e7e8ea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
+  }
+
+  .toggle-icon {
+    display: block;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .faq-item.active .faq-toggle-circle {
+    background-color: #fdf1f2;
+    border-color: #ed1e28;
+  }
+
+  .faq-item.active .toggle-icon {
+    transform: rotate(45deg);
+  }
+
+  .faq-content {
+    padding: 1.25rem 1.25rem 0.5rem 1.25rem;
+    animation: fadeIn 0.25s ease-out;
+  }
+
+  .faq-answer-text {
+    font-family: var(--font-jakarta);
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: #55565b;
+    margin: 0;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive Breakpoints */
+  @media (max-width: 1024px) {
+    .faq-wrapper {
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .faq-left-col {
+      width: 100%;
+    }
+
+    .faq-help-card {
+      width: 100%;
+    }
+
+    .faq-right-col {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .faq-section {
+      padding: 60px 0;
+    }
+
+    .faq-heading {
+      font-size: 2.125rem;
+    }
+
+    .faq-question {
+      font-size: 0.9375rem;
+    }
+
+    .faq-help-card {
+      padding: 24px;
+    }
+  }
+</style>
