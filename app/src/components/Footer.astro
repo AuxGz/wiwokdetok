@@ -1,27 +1,407 @@
 ---
 import Container from "./Container.astro";
-
-const currentYear = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
   <Container>
     <div class="footer-inner">
-      <p>&copy; {currentYear} Website Sekolah. Seluruh hak cipta dilindungi.</p>
+      <div class="footer-main">
+        <!-- Brand & Contact Section -->
+        <div class="footer-brand">
+          <div class="brand-header">
+            <img src="/images/image 22.png" alt="Logo SMK Telkom Purwokerto" class="brand-logo-img" width="36" height="36" />
+            <div class="brand-text">
+              <span class="brand-name">SMK Telkom</span>
+              <span class="brand-sub">Purwokerto</span>
+            </div>
+          </div>
+
+          <div class="contact-list">
+            <div class="contact-item">
+              <svg class="contact-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ed1e28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <span>Jl. D.I. Panjaitan No. 128, Purwokerto Selatan, Banyumas, Jawa Tengah 53147</span>
+            </div>
+
+            <div class="contact-item">
+              <svg class="contact-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ed1e28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              <span>0812–2970–1800</span>
+            </div>
+
+            <div class="contact-item">
+              <svg class="contact-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ed1e28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              <span>office@smktelkom-pwt.sch.id</span>
+            </div>
+          </div>
+
+          <!-- Social Media Icons (Instagram, Facebook, YouTube, TikTok) -->
+          <div class="social-links">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+              </svg>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="YouTube">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+              </svg>
+            </a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="TikTok">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.5 6.27 6.27 0 0 0 1.87-4.49V8.69a8.18 8.18 0 0 0 4.77 1.52V6.76c-.29-.01-.58-.03-.87-.07z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Sitemap Columns -->
+        <div class="footer-columns-wrap">
+          <!-- Sekolah -->
+          <div class="footer-nav-col">
+            <h4 class="col-heading">Sekolah</h4>
+            <ul class="col-nav-list">
+              <li><a href="#about">Apa itu SMK Telkom Purwokerto</a></li>
+              <li><a href="#sambutan">Sambutan Kepala Sekolah</a></li>
+              <li><a href="#why-us">Mengapa Pilih Kami</a></li>
+              <li><a href="#kerjasama">Kerjasama Industri</a></li>
+            </ul>
+          </div>
+
+          <!-- Informasi -->
+          <div class="footer-nav-col">
+            <h4 class="col-heading">Informasi</h4>
+            <ul class="col-nav-list">
+              <li><a href="#jurusan">Program Keahlian</a></li>
+              <li><a href="#berita">Berita Sekolah</a></li>
+              <li><a href="#ppdb" class="link-ppdb-highlight">PPDB 2026</a></li>
+              <li><a href="#about">Profile Guru</a></li>
+              <li><a href="#about">Profile Sekolah</a></li>
+              <li><a href="#about">Prestasi</a></li>
+              <li><a href="#about">Fasilitas</a></li>
+              <li><a href="#ekstrakurikuler">Ekstrakurikuler</a></li>
+            </ul>
+          </div>
+
+          <!-- Aplikasi -->
+          <div class="footer-nav-col">
+            <h4 class="col-heading">Aplikasi</h4>
+            <div class="apps-split-grid">
+              <ul class="col-nav-list">
+                <li><a href="#">MyLms</a></li>
+                <li><a href="#">Juara</a></li>
+                <li><a href="#">Lions</a></li>
+                <li><a href="#">Aduan</a></li>
+              </ul>
+              <ul class="col-nav-list">
+                <li><a href="#">Digits</a></li>
+                <li><a href="#">Bisa</a></li>
+                <li><a href="#">Starry</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="footer-bottom">
+        <div class="bottom-copy">
+          <strong>SMK Telkom Purwokerto</strong>
+          <span class="bullet">•</span>
+          <span>© 2026 Yayasan Pendidikan Telkom. All Rights Reserved.</span>
+        </div>
+
+        <div class="bottom-cta-group">
+          <div class="admin-chat-info">
+            <span class="chat-sub">ADA PERTANYAAN?</span>
+            <span class="chat-link">Chat WhatsApp Admin Sekarang</span>
+          </div>
+          <a href="https://wa.me/6281229701800" target="_blank" rel="noopener noreferrer" class="btn-daftar-ppdb-footer">
+            <span>Daftar PPDB</span>
+            <span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
     </div>
   </Container>
 </footer>
 
 <style>
   .site-footer {
+    background-color: #f8fafc;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 5rem;
+    padding-bottom: 2.5rem;
     margin-top: auto;
-    background: var(--color-surface);
-    border-top: 1px solid var(--color-border);
-    padding: 1.5rem 0;
   }
+
   .footer-inner {
-    text-align: center;
-    color: var(--color-text-muted);
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .footer-main {
+    display: grid;
+    grid-template-columns: 1.15fr 1.85fr;
+    gap: 4rem;
+    padding-bottom: 3.5rem;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .brand-header {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+  }
+
+  .brand-logo-img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-poppins);
+    font-weight: 800;
+    line-height: 1.15;
+    font-size: 1.15rem;
+    color: #111827;
+  }
+
+  .contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    font-family: var(--font-jakarta);
     font-size: 0.875rem;
+    color: #4b5563;
+    line-height: 1.5;
+  }
+
+  .contact-icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: #ed1e28;
+    color: #ffffff;
+    text-decoration: none;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .social-btn:hover {
+    background-color: #dc1822;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(237, 30, 40, 0.3);
+  }
+
+  /* Nav Columns */
+  .footer-columns-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.2fr;
+    gap: 2.5rem;
+  }
+
+  .col-heading {
+    font-family: var(--font-jakarta);
+    font-size: 1rem;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 0.625rem;
+  }
+
+  .col-heading::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 28px;
+    height: 2.5px;
+    background-color: #ed1e28;
+    border-radius: 1px;
+  }
+
+  .col-nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .col-nav-list a {
+    font-family: var(--font-jakarta);
+    font-size: 0.875rem;
+    color: #4b5563;
+    text-decoration: none;
+    transition: color 0.15s ease, transform 0.15s ease;
+    display: inline-block;
+  }
+
+  .col-nav-list a:hover {
+    color: #ed1e28;
+    transform: translateX(2px);
+  }
+
+  .link-ppdb-highlight {
+    color: #ed1e28 !important;
+    font-weight: 700;
+  }
+
+  .apps-split-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  /* Bottom Bar */
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 2rem;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .bottom-copy {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-jakarta);
+    font-size: 0.84375rem;
+    color: #64748b;
+  }
+
+  .bullet {
+    color: #94a3b8;
+  }
+
+  .bottom-cta-group {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .admin-chat-info {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+  }
+
+  .chat-sub {
+    font-family: var(--font-jakarta);
+    font-size: 0.6875rem;
+    font-weight: 800;
+    color: #94a3b8;
+    letter-spacing: 0.06em;
+  }
+
+  .chat-link {
+    font-family: var(--font-jakarta);
+    font-size: 0.84375rem;
+    font-weight: 600;
+    color: #475569;
+  }
+
+  .btn-daftar-ppdb-footer {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #ed1e28;
+    color: #ffffff;
+    font-family: var(--font-jakarta);
+    font-size: 0.84375rem;
+    font-weight: 700;
+    padding: 0.65rem 1.35rem;
+    border-radius: 9999px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(237, 30, 40, 0.25);
+    transition: all 0.2s ease;
+  }
+
+  .btn-daftar-ppdb-footer:hover {
+    background-color: #dc1822;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(237, 30, 40, 0.35);
+  }
+
+  @media (max-width: 992px) {
+    .footer-main {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .footer-columns-wrap {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .footer-columns-wrap {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.25rem;
+    }
+
+    .bottom-cta-group {
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    .admin-chat-info {
+      text-align: left;
+    }
   }
 </style>
