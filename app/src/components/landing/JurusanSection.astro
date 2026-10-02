@@ -12,17 +12,17 @@ const majorsData = [
       {
         title: "Game Programming & Engine",
         desc: "Membangun logika permainan, kecerdasan buatan (AI) musuh, dan mekanik menggunakan game engine standar industri seperti Unity atau Unreal Engine.",
-        icon: "gamepad",
+        icon: "cog",
       },
       {
         title: "2D/3D Game Art & Assets",
         desc: "Merancang dan memproduksi aset visual, mulai dari karakter, lingkungan, objek, hingga animasi dalam format 2D maupun 3D.",
-        icon: "layers",
+        icon: "box",
       },
       {
         title: "Game Design & Mechanics",
         desc: "Merancang alur cerita, aturan gameplay, tingkat kesulitan (level design), dan antarmuka pemain (UI/UX) agar permainan interaktif dan menyenangkan.",
-        icon: "box",
+        icon: "puzzle",
       },
     ],
     careers: "Game Developer, Game Programmer, Game Designer, 2D/3D Artist, Technical Artist, dan Game QA Tester.",
@@ -106,10 +106,53 @@ const majorsData = [
 ---
 
 <section class="jurusan-section" id="jurusan">
-  <!-- Subtle decorative background dashed curves matching Figma -->
-  <svg class="jurusan-bg-arcs" viewBox="0 0 1440 600" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <path d="M-50 420 C 150 420, 260 300, 260 -50" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4 4" vector-effect="non-scaling-stroke" stroke-opacity="0.5" />
-    <path d="M1500 360 C 1200 420, 1080 260, 1120 -50" stroke="#94a3b8" stroke-width="1.2" stroke-dasharray="4 4" vector-effect="non-scaling-stroke" stroke-opacity="0.5" />
+  <!-- Framing decorative background dashed curves matching Figma -->
+  <svg class="jurusan-bg-arcs" viewBox="0 0 1440 1030" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <!-- Top-Left framing arc -->
+    <path
+      d="M 278 -10 L 278 120 C 278 240 200 293 100 293 L -10 293"
+      stroke="#94a3b8"
+      stroke-width="1.8"
+      stroke-dasharray="6 6"
+      stroke-opacity="0.8"
+      vector-effect="non-scaling-stroke"
+    />
+    <!-- Bottom-Left framing arc into backdrop -->
+    <path
+      d="M 36 1040 L 36 970 C 36 910 55 870 110 830"
+      stroke="#94a3b8"
+      stroke-width="1.8"
+      stroke-dasharray="6 6"
+      stroke-opacity="0.8"
+      vector-effect="non-scaling-stroke"
+    />
+    <!-- Bottom-Center vertical segment under student card -->
+    <path
+      d="M 439 940 L 439 1040"
+      stroke="#94a3b8"
+      stroke-width="1.8"
+      stroke-dasharray="6 6"
+      stroke-opacity="0.8"
+      vector-effect="non-scaling-stroke"
+    />
+    <!-- Top-Right framing bowl arc -->
+    <path
+      d="M 1195 -10 C 1100 80 1100 270 1260 345 C 1335 365 1395 350 1450 330"
+      stroke="#94a3b8"
+      stroke-width="1.8"
+      stroke-dasharray="6 6"
+      stroke-opacity="0.8"
+      vector-effect="non-scaling-stroke"
+    />
+    <!-- Bottom-Right framing corner arc -->
+    <path
+      d="M 1223 1040 L 1223 980 C 1223 850 1280 805 1380 805 L 1450 805"
+      stroke="#94a3b8"
+      stroke-width="1.8"
+      stroke-dasharray="6 6"
+      stroke-opacity="0.8"
+      vector-effect="non-scaling-stroke"
+    />
   </svg>
 
   <Container>
@@ -162,10 +205,8 @@ const majorsData = [
                 )}
                 {m.code === "TJA" && (
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
-                    <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
-                    <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
-                    <line x1="12" y1="20" x2="12.01" y2="20"></line>
+                    <circle cx="12" cy="12" r="2"></circle>
+                    <path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49"></path>
                   </svg>
                 )}
                 <span>{m.code}</span>
@@ -188,11 +229,12 @@ const majorsData = [
               <!-- Left Visual: Photo with Authentic Red Organic Backdrop -->
               <div class="major-visual-col">
                 <div class="visual-stack">
-                  <!-- Red Organic Backdrop Card with Concentric Rings -->
+                  <!-- Red Backdrop Card with Concentric Rings -->
                   <div class="jurusan-red-shape" aria-hidden="true">
-                    <svg class="jurusan-shape-rings" viewBox="0 0 400 460" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="200" cy="230" r="130" stroke="rgba(255, 255, 255, 0.10)" stroke-width="32" />
-                      <circle cx="200" cy="230" r="210" stroke="rgba(255, 255, 255, 0.07)" stroke-width="32" />
+                    <svg class="jurusan-shape-rings" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="200" cy="200" r="100" stroke="rgba(255, 255, 255, 0.10)" stroke-width="28" />
+                      <circle cx="200" cy="200" r="170" stroke="rgba(255, 255, 255, 0.08)" stroke-width="28" />
+                      <circle cx="200" cy="200" r="240" stroke="rgba(255, 255, 255, 0.06)" stroke-width="28" />
                     </svg>
                   </div>
 
@@ -222,6 +264,17 @@ const majorsData = [
                   {m.pillars.map((pillar) => (
                     <div class="pillar-item">
                       <div class="pillar-icon-box">
+                        {pillar.icon === "cog" && (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ed1e28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                          </svg>
+                        )}
+                        {pillar.icon === "puzzle" && (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="#ed1e28" stroke="#ed1e28" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19.439 7.85c0-1.571-1.274-2.85-2.844-2.85H15a1 1 0 0 1-1-1V2.561C14 1.146 12.854 0 11.439 0c-1.414 0-2.56 1.146-2.56 2.561V4a1 1 0 0 1-1 1H6.44c-1.57 0-2.845 1.279-2.845 2.85V9.3c0 .553.448 1 1 1h1.44a2.56 2.56 0 0 1 0 5.12H4.595a1 1 0 0 0-1 1v1.445c0 1.57 1.275 2.845 2.845 2.845H9a1 1 0 0 1 1 1v1.439c0 1.415 1.146 2.561 2.561 2.561 1.415 0 2.561-1.146 2.561-2.561V22a1 1 0 0 1 1-1h1.439c1.57 0 2.845-1.275 2.845-2.845v-1.445a1 1 0 0 1 1-1 2.56 2.56 0 0 0 0-5.12 1 1 0 0 1-1-1V7.85z"></path>
+                          </svg>
+                        )}
                         {pillar.icon === "gamepad" && (
                           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ed1e28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="2" y="6" width="20" height="12" rx="2"></rect>
@@ -302,7 +355,7 @@ const majorsData = [
 
                 <!-- Action Button -->
                 <a href="#ppdb" class="btn-learn-more">
-                  <span>Daftar di Jurusan Ini</span>
+                  <span>Pelajari lebih lanjut</span>
                   <span class="btn-arrow">→</span>
                 </a>
               </div>
@@ -424,7 +477,7 @@ const majorsData = [
   .tab-bar {
     display: inline-flex;
     align-items: center;
-    background-color: #f8fafc;
+    background-color: #f1f5f9;
     border: 1px solid #e2e8f0;
     border-radius: 9999px;
     padding: 0.375rem;
@@ -437,8 +490,8 @@ const majorsData = [
     gap: 0.5rem;
     padding: 0.625rem 1.5rem;
     border-radius: 9999px;
-    background-color: transparent;
-    border: none;
+    background-color: #ffffff;
+    border: 1px solid transparent;
     color: #475569;
     font-family: var(--font-jakarta);
     font-size: 0.875rem;
@@ -454,6 +507,7 @@ const majorsData = [
   .tab-btn.active {
     background: linear-gradient(135deg, #ed1e28 0%, #dc2626 100%);
     color: #ffffff;
+    border-color: transparent;
     box-shadow: 0 4px 14px rgba(237, 30, 40, 0.28);
   }
 
@@ -503,10 +557,10 @@ const majorsData = [
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 380px;
-    height: 380px;
+    width: 390px;
+    height: 390px;
     background: linear-gradient(157deg, #ed1e28 0%, #dc2626 52%, #c41d24 100%);
-    border-radius: 140px 90px 140px 90px;
+    border-radius: 72px;
     overflow: hidden;
     pointer-events: none;
     z-index: 1;
