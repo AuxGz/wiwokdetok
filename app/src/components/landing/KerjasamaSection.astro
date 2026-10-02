@@ -2,13 +2,13 @@
 import Container from "../Container.astro";
 
 const partners = [
-  { name: "Dinkominfo Banyumas", logo: "/images/image 3.png", height: 76 },
-  { name: "Bank Jateng", logo: "/images/image 4.png", height: 68 },
-  { name: "PLN Indonesia Power", logo: "/images/image-Photoroom 1.png", height: 74 },
-  { name: "nusantara.media", logo: "/images/image 6.png", height: 58 },
-  { name: "Telkom Indonesia", logo: "/images/image 7.png", height: 76 },
-  { name: "METRODATA", logo: "/images/image 8.png", height: 72 },
-  { name: "Dicoding", logo: "/images/image 9.png", height: 62 },
+  { name: "Dinkominfo Banyumas", logo: "/images/image 3.png", scale: 1.28 },
+  { name: "Bank Jateng", logo: "/images/image 4.png", scale: 1.0 },
+  { name: "PLN Indonesia Power", logo: "/images/image-Photoroom 1.png", scale: 1.7 },
+  { name: "nusantara.media", logo: "/images/image 6.png", scale: 0.88 },
+  { name: "Telkom Indonesia", logo: "/images/image 7.png", scale: 1.3 },
+  { name: "METRODATA", logo: "/images/image 8.png", scale: 1.35 },
+  { name: "Dicoding", logo: "/images/image 9.png", scale: 1.65 },
 ];
 ---
 
@@ -26,17 +26,17 @@ const partners = [
     </div>
   </Container>
 
-  <!-- Infinite Scrolling Marquee Track with Edge Masking -->
+  <!-- Infinite Scrolling Marquee Track from Right to Left -->
   <div class="mitra-marquee-wrapper" id="mitra-marquee">
     <div class="mitra-track" id="mitra-track">
       {
-        [...partners, ...partners, ...partners].map((partner, index) => (
+        [...partners, ...partners, ...partners, ...partners].map((partner, index) => (
           <div class="partner-item" data-index={index} title={partner.name}>
             <img
               src={partner.logo}
               alt={partner.name}
               class="partner-logo-img"
-              style={`height: ${partner.height}px;`}
+              style={`transform: scale(${partner.scale});`}
               loading="eager"
               decoding="async"
             />
@@ -47,56 +47,9 @@ const partners = [
   </div>
 </section>
 
-<script>
-  function setupMitraScaling() {
-    const marquee = document.getElementById("mitra-marquee");
-    if (!marquee) return;
-    const items = Array.from(marquee.querySelectorAll(".partner-item"));
-    if (!items.length) return;
-
-    let isRunning = true;
-
-    function onFrame() {
-      if (!isRunning) return;
-      const rect = marquee.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const radius = rect.width / 2;
-
-      for (let i = 0; i < items.length; i++) {
-        const item = items[i] as HTMLElement;
-        const cRect = item.getBoundingClientRect();
-        // Skip items out of visible view
-        if (cRect.right < rect.left - 100 || cRect.left > rect.right + 100) {
-          continue;
-        }
-        const itemCenter = cRect.left + cRect.width / 2;
-        const dist = Math.abs(itemCenter - centerX);
-        const norm = Math.min(dist / radius, 1);
-
-        // Center is 1.25, edges scale down to 0.55 (semakin ke ujung semakin mengecil)
-        const scale = 1.25 - (norm * norm * 0.70);
-        const opacity = 1.0 - (norm * 0.65);
-
-        item.style.transform = `scale(${scale.toFixed(3)})`;
-        item.style.opacity = Math.max(opacity, 0.20).toFixed(3);
-      }
-      requestAnimationFrame(onFrame);
-    }
-
-    requestAnimationFrame(onFrame);
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", setupMitraScaling);
-  } else {
-    setupMitraScaling();
-  }
-  document.addEventListener("astro:page-load", setupMitraScaling);
-</script>
-
 <style>
   .kerjasama-section {
-    padding: 3rem 0 4.5rem 0;
+    padding: 3.5rem 0 4rem 0;
     background-color: #ffffff;
     border-top: 1px solid #f1f5f9;
     border-bottom: 1px solid #f1f5f9;
@@ -107,7 +60,7 @@ const partners = [
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
     flex-wrap: wrap;
     gap: 1.5rem;
     max-width: 1140px;
@@ -149,55 +102,77 @@ const partners = [
     position: relative;
     width: 100%;
     overflow: hidden;
-    padding: 2.5rem 0;
-    mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+    padding: 1.25rem 0;
+    mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
   }
 
   .mitra-track {
     display: flex;
     align-items: center;
-    gap: 4.5rem;
+    gap: 3.5rem;
     width: max-content;
-    animation: scrollLeft 30s linear infinite;
+    animation: marqueeScrollLeft 36s linear infinite;
     will-change: transform;
-    padding: 1.5rem 0;
   }
 
-  .mitra-track:hover {
-    animation-play-state: paused;
+  @media (hover: hover) and (pointer: fine) {
+    .mitra-track:hover {
+      animation-play-state: paused;
+    }
   }
 
-  @keyframes scrollLeft {
+  /* Right to Left smooth continuous scroll */
+  @keyframes marqueeScrollLeft {
     0% {
       transform: translate3d(0, 0, 0);
     }
     100% {
-      transform: translate3d(-33.333333%, 0, 0);
+      transform: translate3d(-25%, 0, 0);
     }
   }
 
+  /* Uniform logo container bounding box */
   .partner-item {
     flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    transform-origin: center center;
-    will-change: transform, opacity;
-    transition: filter 0.2s ease;
+    width: 150px;
+    height: 52px;
+    padding: 0 0.5rem;
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
   }
 
-  .partner-item:hover {
-    filter: brightness(1.05);
+  @media (hover: hover) and (pointer: fine) {
+    .partner-item:hover {
+      transform: scale(1.06);
+    }
   }
 
+  /* Standardized, uniform logo display */
   .partner-logo-img {
+    max-width: 130px;
+    max-height: 44px;
     width: auto;
+    height: auto;
     object-fit: contain;
     display: block;
     user-select: none;
     pointer-events: none;
-    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.03));
+    transform-origin: center center;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.04));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mitra-track {
+      animation: none !important;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .mitra-track::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   @media (max-width: 768px) {
@@ -208,7 +183,18 @@ const partners = [
     }
 
     .mitra-track {
-      gap: 2.5rem;
+      gap: 2.25rem;
+      animation-duration: 28s;
+    }
+
+    .partner-item {
+      width: 120px;
+      height: 44px;
+    }
+
+    .partner-logo-img {
+      max-width: 105px;
+      max-height: 38px;
     }
   }
 </style>
