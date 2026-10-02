@@ -1,0 +1,214 @@
+---
+import Container from "../Container.astro";
+
+const partners = [
+  { name: "Dinkominfo Banyumas", logo: "/images/image 3.png", height: 76 },
+  { name: "Bank Jateng", logo: "/images/image 4.png", height: 68 },
+  { name: "PLN Indonesia Power", logo: "/images/image-Photoroom 1.png", height: 74 },
+  { name: "nusantara.media", logo: "/images/image 6.png", height: 58 },
+  { name: "Telkom Indonesia", logo: "/images/image 7.png", height: 76 },
+  { name: "METRODATA", logo: "/images/image 8.png", height: 72 },
+  { name: "Dicoding", logo: "/images/image 9.png", height: 62 },
+];
+---
+
+<section class="kerjasama-section" id="kerjasama">
+  <Container>
+    <div class="kerjasama-header">
+      <div class="header-left">
+        <span class="tagline-dash"></span>
+        <span class="kerjasama-label">MITRA KAMI</span>
+        <span class="tagline-dash"></span>
+      </div>
+      <p class="header-right">
+        68 mitra aktif untuk PKL, kelas industri, dan penyaluran kerja.
+      </p>
+    </div>
+  </Container>
+
+  <!-- Infinite Scrolling Marquee Track with Edge Masking -->
+  <div class="mitra-marquee-wrapper" id="mitra-marquee">
+    <div class="mitra-track" id="mitra-track">
+      {
+        [...partners, ...partners, ...partners].map((partner, index) => (
+          <div class="partner-item" data-index={index} title={partner.name}>
+            <img
+              src={partner.logo}
+              alt={partner.name}
+              class="partner-logo-img"
+              style={`height: ${partner.height}px;`}
+              loading="eager"
+              decoding="async"
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  function setupMitraScaling() {
+    const marquee = document.getElementById("mitra-marquee");
+    if (!marquee) return;
+    const items = Array.from(marquee.querySelectorAll(".partner-item"));
+    if (!items.length) return;
+
+    let isRunning = true;
+
+    function onFrame() {
+      if (!isRunning) return;
+      const rect = marquee.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const radius = rect.width / 2;
+
+      for (let i = 0; i < items.length; i++) {
+        const item = items[i] as HTMLElement;
+        const cRect = item.getBoundingClientRect();
+        // Skip items out of visible view
+        if (cRect.right < rect.left - 100 || cRect.left > rect.right + 100) {
+          continue;
+        }
+        const itemCenter = cRect.left + cRect.width / 2;
+        const dist = Math.abs(itemCenter - centerX);
+        const norm = Math.min(dist / radius, 1);
+
+        // Center is 1.25, edges scale down to 0.55 (semakin ke ujung semakin mengecil)
+        const scale = 1.25 - (norm * norm * 0.70);
+        const opacity = 1.0 - (norm * 0.65);
+
+        item.style.transform = `scale(${scale.toFixed(3)})`;
+        item.style.opacity = Math.max(opacity, 0.20).toFixed(3);
+      }
+      requestAnimationFrame(onFrame);
+    }
+
+    requestAnimationFrame(onFrame);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupMitraScaling);
+  } else {
+    setupMitraScaling();
+  }
+  document.addEventListener("astro:page-load", setupMitraScaling);
+</script>
+
+<style>
+  .kerjasama-section {
+    padding: 3rem 0 4.5rem 0;
+    background-color: #ffffff;
+    border-top: 1px solid #f1f5f9;
+    border-bottom: 1px solid #f1f5f9;
+    overflow: hidden;
+  }
+
+  .kerjasama-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .header-left {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+  }
+
+  .tagline-dash {
+    display: inline-block;
+    width: 22px;
+    height: 2px;
+    background-color: #ed1e28;
+    border-radius: 1px;
+  }
+
+  .kerjasama-label {
+    font-family: var(--font-poppins);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: #ed1e28;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .header-right {
+    font-family: var(--font-jakarta);
+    font-size: 0.9375rem;
+    color: #475569;
+    margin: 0;
+  }
+
+  .mitra-marquee-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 2.5rem 0;
+    mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+  }
+
+  .mitra-track {
+    display: flex;
+    align-items: center;
+    gap: 4.5rem;
+    width: max-content;
+    animation: scrollLeft 30s linear infinite;
+    will-change: transform;
+    padding: 1.5rem 0;
+  }
+
+  .mitra-track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes scrollLeft {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(-33.333333%, 0, 0);
+    }
+  }
+
+  .partner-item {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-origin: center center;
+    will-change: transform, opacity;
+    transition: filter 0.2s ease;
+  }
+
+  .partner-item:hover {
+    filter: brightness(1.05);
+  }
+
+  .partner-logo-img {
+    width: auto;
+    object-fit: contain;
+    display: block;
+    user-select: none;
+    pointer-events: none;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.03));
+  }
+
+  @media (max-width: 768px) {
+    .kerjasama-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .mitra-track {
+      gap: 2.5rem;
+    }
+  }
+</style>
