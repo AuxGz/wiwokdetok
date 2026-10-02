@@ -88,6 +88,32 @@ const alumniList = [
   </Container>
 </section>
 
+<script>
+  function initAlumniCarousel() {
+    const nextBtn = document.querySelector(".carousel-next-btn");
+    const grid = document.querySelector(".alumni-grid");
+    if (!nextBtn || !grid) return;
+
+    nextBtn.addEventListener("click", () => {
+      const firstCard = grid.firstElementChild;
+      if (firstCard) {
+        grid.style.opacity = "0.6";
+        grid.style.transition = "opacity 0.15s ease";
+        setTimeout(() => {
+          grid.appendChild(firstCard);
+          grid.style.opacity = "1";
+        }, 150);
+      }
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initAlumniCarousel);
+  } else {
+    initAlumniCarousel();
+  }
+</script>
+
 <style>
   .alumni-section {
     position: relative;
