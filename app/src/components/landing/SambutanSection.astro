@@ -86,13 +86,13 @@ import Container from "../Container.astro";
     justify-content: center;
     align-items: flex-end;
     position: relative;
-    height: 560px;
+    height: 580px;
   }
 
   .photo-frame-wrapper {
     position: relative;
     width: 520px;
-    height: 560px;
+    height: 580px;
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -164,18 +164,14 @@ import Container from "../Container.astro";
   .principal-photo-img {
     position: absolute;
     z-index: 3;
-    width: 375px;
+    width: 440px;
     max-width: none;
     height: auto;
     left: 50%;
     transform: translateX(-50%);
     bottom: 0;
     filter: drop-shadow(0 20px 36px rgba(0, 0, 0, 0.16));
-    transition: transform 0.25s ease;
-  }
-
-  .principal-photo-img:hover {
-    transform: translateX(-50%) translateY(-4px);
+    pointer-events: none;
   }
 
   .sambutan-content {
@@ -271,7 +267,7 @@ import Container from "../Container.astro";
 
     .photo-frame-wrapper {
       max-width: 440px;
-      height: 480px;
+      height: 500px;
     }
 
     .dashed-halo-arc {
@@ -291,7 +287,7 @@ import Container from "../Container.astro";
     }
 
     .principal-photo-img {
-      width: 325px;
+      width: 365px;
       bottom: 0;
     }
   }
@@ -307,7 +303,7 @@ import Container from "../Container.astro";
 
     .photo-frame-wrapper {
       max-width: 320px;
-      height: 380px;
+      height: 390px;
     }
 
     .red-bg-card {
@@ -317,7 +313,7 @@ import Container from "../Container.astro";
     }
 
     .principal-photo-img {
-      width: 260px;
+      width: 285px;
       bottom: 0;
     }
 
