@@ -44,6 +44,14 @@ const stats = [
   const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (!isReduced) {
     const statCards = document.querySelectorAll(".stat-num");
+
+    // Initialize to 0 so the count-up starts visibly from zero
+    statCards.forEach((c) => {
+      const rawVal = c.getAttribute("data-value") || "";
+      const suffix = rawVal.replace(/[0-9]/g, "");
+      c.textContent = `0${suffix}`;
+    });
+
     const observer = new IntersectionObserver((entries, obs) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -53,14 +61,14 @@ const stats = [
             const rawVal = numEl.getAttribute("data-value") || "";
             const target = parseInt(rawVal.replace(/\D/g, ""), 10);
             const suffix = rawVal.replace(/[0-9]/g, "");
-            const duration = 650; // ms snappy count-up
+            const duration = 2600; // 2.6s steady and smooth count-up
             let startTime: number | null = null;
 
             const step = (now: number) => {
               if (startTime === null) startTime = now;
               const elapsed = now - startTime;
               const progress = Math.max(0, Math.min(elapsed / duration, 1));
-              const ease = 1 - Math.pow(1 - progress, 3);
+              const ease = 1 - Math.pow(1 - progress, 2); // easeOutQuad: gradual and visibly rolling
               const current = Math.round(ease * target);
               numEl.textContent = `${current.toLocaleString("id-ID")}${suffix}`;
               if (progress < 1) {
