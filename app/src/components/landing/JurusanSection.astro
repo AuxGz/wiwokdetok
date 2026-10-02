@@ -227,10 +227,10 @@ const majorsData = [
                 <div class="visual-stack">
                   <!-- Red Backdrop Card matching Figma -->
                   <div class="jurusan-red-shape" aria-hidden="true">
-                    <svg class="jurusan-shape-rings" viewBox="0 0 330 345" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <circle cx="165" cy="180" r="85" stroke="rgba(255, 255, 255, 0.08)" stroke-width="24" />
-                      <circle cx="165" cy="180" r="145" stroke="rgba(255, 255, 255, 0.07)" stroke-width="24" />
-                      <circle cx="165" cy="180" r="205" stroke="rgba(255, 255, 255, 0.05)" stroke-width="24" />
+                    <svg class="jurusan-shape-rings" viewBox="0 0 330 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="165" cy="170" r="85" stroke="rgba(255, 255, 255, 0.08)" stroke-width="24" />
+                      <circle cx="165" cy="170" r="145" stroke="rgba(255, 255, 255, 0.07)" stroke-width="24" />
+                      <circle cx="165" cy="170" r="205" stroke="rgba(255, 255, 255, 0.05)" stroke-width="24" />
                     </svg>
                   </div>
 
@@ -630,7 +630,7 @@ const majorsData = [
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    min-height: 520px;
+    height: 480px;
   }
 
   .jurusan-red-shape {
@@ -639,7 +639,7 @@ const majorsData = [
     left: 50%;
     transform: translateX(-50%);
     width: 330px;
-    height: 345px;
+    height: 340px;
     background: linear-gradient(157deg, #ed1e28 0%, #dc2626 52%, #c41d24 100%);
     border-radius: 95px 75px 70px 105px;
     overflow: hidden;
@@ -659,32 +659,38 @@ const majorsData = [
 
   .major-student-img {
     position: absolute;
-    bottom: 18px;
+    bottom: 0;
     z-index: 2;
     width: auto;
-    height: auto;
-    max-height: 505px;
     object-fit: contain;
     object-position: bottom center;
     display: block;
     filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.16));
   }
 
-  /* Per-major horizontal centering compensation */
+  /* Per-major sizing & horizontal positioning matching Figma 1:1 */
   .student-pg {
-    transform: translateX(-24px);
+    height: 405px;
+    left: calc(50% - 12px);
+    transform: translateX(-50%);
   }
 
   .student-rpl {
-    transform: translateX(-10px);
+    height: 405px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .student-tkj {
-    transform: translateX(18px);
+    height: 450px;
+    left: calc(50% + 8px);
+    transform: translateX(-50%);
   }
 
   .student-tja {
-    transform: translateX(-10px);
+    height: 455px;
+    left: calc(50% + 6px);
+    transform: translateX(-50%);
   }
 
   /* Right Details */
@@ -828,18 +834,33 @@ const majorsData = [
 
     .visual-stack {
       max-width: 360px;
-      min-height: 450px;
+      height: 410px;
     }
 
     .jurusan-red-shape {
       width: 275px;
-      height: 290px;
+      height: 285px;
       border-radius: 78px 62px 58px 86px;
     }
 
-    .major-student-img {
-      bottom: 15px;
-      max-height: 425px;
+    .student-pg {
+      height: 340px;
+      left: calc(50% - 10px);
+    }
+
+    .student-rpl {
+      height: 340px;
+      left: 50%;
+    }
+
+    .student-tkj {
+      height: 380px;
+      left: calc(50% + 6px);
+    }
+
+    .student-tja {
+      height: 385px;
+      left: calc(50% + 5px);
     }
   }
 
@@ -883,18 +904,33 @@ const majorsData = [
 
     .visual-stack {
       max-width: 300px;
-      min-height: 380px;
+      height: 340px;
     }
 
     .jurusan-red-shape {
       width: 230px;
-      height: 242px;
+      height: 240px;
       border-radius: 64px 50px 48px 72px;
     }
 
-    .major-student-img {
-      bottom: 12px;
-      max-height: 355px;
+    .student-pg {
+      height: 285px;
+      left: calc(50% - 8px);
+    }
+
+    .student-rpl {
+      height: 285px;
+      left: 50%;
+    }
+
+    .student-tkj {
+      height: 315px;
+      left: calc(50% + 5px);
+    }
+
+    .student-tja {
+      height: 320px;
+      left: calc(50% + 4px);
     }
   }
 </style>
