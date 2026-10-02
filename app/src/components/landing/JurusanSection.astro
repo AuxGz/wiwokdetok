@@ -31,22 +31,22 @@ const majorsData = [
     code: "RPL",
     titleRed: "Rekayasa",
     titleDark: "Perangkat Lunak",
-    desc: "Program yang mempelajari siklus hidup pembuatan perangkat lunak profesional: web modern, aplikasi mobile iOS/Android, integrasi REST API, dan arsitektur cloud computing.",
+    desc: "Program yang mempelajari pemrograman, basis data, dan rekayasa aplikasi web maupun mobile dengan alur kerja industri.",
     studentImg: "/images/IMG_4114-Photoroom 1.png",
     pillars: [
       {
         title: "Software Development",
-        desc: "Membangun aplikasi web dan mobile yang fungsional, dari perancangan arsitektur sampai rilis produksi.",
+        desc: "Membangun aplikasi web dan mobile yang fungsional, dari perancangan sampai rilis.",
         icon: "laptop",
       },
       {
         title: "Database & Back-end",
-        desc: "Merancang basis data relasional, REST API berkinerja tinggi, dan integrasi microservices.",
+        desc: "Merancang basis data, REST API, dan integrasi layanan dengan Laravel serta MySQL.",
         icon: "database",
       },
       {
         title: "UI/UX & Quality",
-        desc: "Merancang antarmuka ramah pengguna dan pengujian fungsionalitas otomatis sebelum deployment.",
+        desc: "Merancang antarmuka dan menguji kelayakan aplikasi sebelum diserahkan ke pengguna.",
         icon: "layers",
       },
     ],
@@ -54,53 +54,53 @@ const majorsData = [
   },
   {
     code: "TKJ",
-    titleRed: "Teknik",
-    titleDark: "Komputer & Jaringan",
-    desc: "Fokus pada perancangan infrastruktur jaringan berskala enterprise, konfigurasi router & switch industri, administrasi server Linux/Windows, serta keamanan siber.",
+    titleRed: "Teknik Komputer",
+    titleDark: "Jaringan",
+    desc: "Program keahlian yang berfokus pada perakitan keras komputer, instalasi sistem operasi, serta perancangan, administrasi, dan keamanan infrastruktur jaringan.",
     studentImg: "/images/IMG_4046-Photoroom 1.png",
     pillars: [
       {
-        title: "Network Engineering",
-        desc: "Konfigurasi routing dan switching berskala enterprise menggunakan perangkat standar industri Cisco dan MikroTik.",
+        title: "Network Infrastructure & Design",
+        desc: "Merancang, membangun, dan mengonfigurasi topologi jaringan (LAN/WAN/WLAN) menggunakan perangkat standar industri seperti router, switch, dan MikroTik.",
         icon: "server",
       },
       {
-        title: "Server Administration & Cloud",
-        desc: "Manajemen server Linux dan virtualisasi cloud untuk hosting layanan komersial berskala tinggi.",
+        title: "System & Server Admin",
+        desc: "Mengonfigurasi dan memelihara sistem operasi jaringan serta pengelolaan layanan server terpusat.",
         icon: "database",
       },
       {
-        title: "Cybersecurity Defense",
-        desc: "Implementasi proteksi firewall, enkripsi data, deteksi intrusi, dan mitigasi ancaman siber harian.",
+        title: "Cyber Security & Troubleshooting",
+        desc: "Mengamankan lalu lintas data jaringan dari ancaman siber dan menangani perbaikan infrastruktur keras/lunak.",
         icon: "shield",
       },
     ],
-    careers: "Network Engineer, System Administrator, Cloud Engineer, Cybersecurity Specialist, NOC Engineer.",
+    careers: "Network Engineer, Network Administrator, System Administrator, IT Support/Helpdesk, dan Teknisi Komputer/Jaringan.",
   },
   {
     code: "TJA",
     titleRed: "Teknik Jaringan",
-    titleDark: "Akses Telekomunikasi",
-    desc: "Keahlian spesifik transmisi data gelombang tinggi, instalasi kabel serat optik (fiber to the home), pengoperasian sistem nirkabel seluler, dan jaringan akses digital.",
+    titleDark: "Akses",
+    desc: "Program keahlian yang berfokus pada teknologi telekomunikasi, meliputi instalasi jaringan kabel fiber optik (FTTH), sistem transmisi radio, hingga infrastruktur komunikasi nirkabel dan seluler.",
     studentImg: "/images/IMG_4173-Photoroom 1.png",
     pillars: [
       {
-        title: "Fiber Optic Installation",
-        desc: "Teknik penyambungan fusion splicing, pengukuran OTDR, dan pemeliharaan jalur serat optik pita lebar.",
+        title: "Fiber Optic & Broadband Network",
+        desc: "Mempelajari teknik instalasi, penyambungan kabel (splicing), dan pengukuran kualitas jaringan fiber optik untuk layanan internet rumah (FTTH).",
         icon: "wifi",
       },
       {
-        title: "Cellular & Wireless Transmission",
-        desc: "Pengoperasian BTS seluler, jaringan microwave radio link, serta optimasi sinyal telekomunikasi 4G/5G.",
+        title: "Wireless & Cellular Technology",
+        desc: "Memahami sistem komunikasi radio, gelombang mikro (microwave), dan teknologi seluler termasuk perangkat pada menara telekomunikasi (BTS).",
         icon: "antenna",
       },
       {
-        title: "Broadband Network Operations",
-        desc: "Manajemen operasional jaringan akses kabel dan nirkabel untuk penyedia layanan internet terpadu.",
+        title: "Telecommunication Infrastructure",
+        desc: "Melakukan perancangan, pemeliharaan (maintenance), dan perbaikan (troubleshooting) pada perangkat akses pelanggan dan sentral telekomunikasi.",
         icon: "server",
       },
     ],
-    careers: "Fiber Optic Specialist, Telecom Field Engineer, Transmission Planner, Wireless Technician, RF Engineer.",
+    careers: "Teknisi Fiber Optik (Splicer), Teknisi Instalasi (Installer), Drive Tester, Rigger (Teknisi Menara BTS), dan Network Access Engineer.",
   },
 ];
 ---
@@ -226,7 +226,13 @@ const majorsData = [
               <div class="major-visual-col">
                 <div class="visual-stack">
                   <!-- Red Backdrop Card matching Figma -->
-                  <div class="jurusan-red-shape" aria-hidden="true"></div>
+                  <div class="jurusan-red-shape" aria-hidden="true">
+                    <svg class="jurusan-shape-rings" viewBox="0 0 330 345" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="165" cy="180" r="85" stroke="rgba(255, 255, 255, 0.08)" stroke-width="24" />
+                      <circle cx="165" cy="180" r="145" stroke="rgba(255, 255, 255, 0.07)" stroke-width="24" />
+                      <circle cx="165" cy="180" r="205" stroke="rgba(255, 255, 255, 0.05)" stroke-width="24" />
+                    </svg>
+                  </div>
 
                   <!-- Student Cutout Image -->
                   <img
@@ -573,7 +579,7 @@ const majorsData = [
     display: none;
     grid-template-columns: 1fr 1.15fr;
     gap: 4.5rem;
-    align-items: flex-end;
+    align-items: center;
   }
 
   .major-panel.active {
@@ -614,7 +620,7 @@ const majorsData = [
   .major-visual-col {
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
   }
 
   .visual-stack {
@@ -632,22 +638,32 @@ const majorsData = [
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 308px;
-    height: 380px;
-    background-color: #ed1e28;
-    border-radius: 28px 28px 0 0;
+    width: 330px;
+    height: 345px;
+    background: linear-gradient(157deg, #ed1e28 0%, #dc2626 52%, #c41d24 100%);
+    border-radius: 95px 75px 70px 105px;
     overflow: hidden;
     pointer-events: none;
     z-index: 1;
     box-shadow: 0 16px 36px rgba(237, 30, 40, 0.22);
   }
 
+  .jurusan-shape-rings {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
   .major-student-img {
-    position: relative;
+    position: absolute;
+    bottom: 18px;
     z-index: 2;
     width: auto;
     height: auto;
-    max-height: 515px;
+    max-height: 505px;
     object-fit: contain;
     object-position: bottom center;
     display: block;
@@ -660,7 +676,7 @@ const majorsData = [
   }
 
   .student-rpl {
-    transform: translateX(-8px);
+    transform: translateX(-10px);
   }
 
   .student-tkj {
@@ -668,7 +684,7 @@ const majorsData = [
   }
 
   .student-tja {
-    transform: translateX(-8px);
+    transform: translateX(-10px);
   }
 
   /* Right Details */
@@ -803,6 +819,7 @@ const majorsData = [
     .major-panel {
       grid-template-columns: 1fr;
       gap: 3rem;
+      align-items: center;
     }
 
     .major-heading {
@@ -811,17 +828,18 @@ const majorsData = [
 
     .visual-stack {
       max-width: 360px;
-      min-height: 440px;
+      min-height: 450px;
     }
 
     .jurusan-red-shape {
-      width: 260px;
-      height: 320px;
-      border-radius: 24px 24px 0 0;
+      width: 275px;
+      height: 290px;
+      border-radius: 78px 62px 58px 86px;
     }
 
     .major-student-img {
-      max-height: 440px;
+      bottom: 15px;
+      max-height: 425px;
     }
   }
 
@@ -865,17 +883,18 @@ const majorsData = [
 
     .visual-stack {
       max-width: 300px;
-      min-height: 370px;
+      min-height: 380px;
     }
 
     .jurusan-red-shape {
-      width: 220px;
-      height: 270px;
-      border-radius: 20px 20px 0 0;
+      width: 230px;
+      height: 242px;
+      border-radius: 64px 50px 48px 72px;
     }
 
     .major-student-img {
-      max-height: 370px;
+      bottom: 12px;
+      max-height: 355px;
     }
   }
 </style>
