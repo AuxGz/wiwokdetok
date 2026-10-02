@@ -10,8 +10,8 @@ import Container from "../Container.astro";
         <div class="photo-frame-wrapper">
           <!-- Dashed Halo Arc behind head -->
           <div class="dashed-halo-arc" aria-hidden="true">
-            <svg width="340" height="340" viewBox="0 0 340 340" fill="none">
-              <circle cx="170" cy="170" r="160" stroke="#94a3b8" stroke-width="2" stroke-dasharray="8 8" />
+            <svg width="320" height="320" viewBox="0 0 320 320" fill="none">
+              <circle cx="160" cy="160" r="158" stroke="#94a3b8" stroke-width="2" stroke-dasharray="8 8" />
             </svg>
           </div>
 
@@ -76,8 +76,8 @@ import Container from "../Container.astro";
   .sambutan-grid {
     display: grid;
     grid-template-columns: 1fr 1.15fr;
-    gap: 4.5rem;
-    align-items: center;
+    gap: 5rem;
+    align-items: flex-end;
     max-width: 1140px;
     margin-left: auto;
     margin-right: auto;
@@ -86,15 +86,15 @@ import Container from "../Container.astro";
   .principal-visual {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     position: relative;
   }
 
   .photo-frame-wrapper {
     position: relative;
     width: 100%;
-    max-width: 480px;
-    height: 540px;
+    max-width: 470px;
+    height: 520px;
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -102,11 +102,11 @@ import Container from "../Container.astro";
 
   .dashed-halo-arc {
     position: absolute;
-    top: 20px;
+    top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 340px;
-    height: 340px;
+    width: 320px;
+    height: 320px;
     z-index: 1;
     pointer-events: none;
   }
@@ -127,14 +127,14 @@ import Container from "../Container.astro";
   .card-ring {
     position: absolute;
     border-radius: 50%;
-    border: 24px solid rgba(255, 255, 255, 0.075);
+    border: 26px solid rgba(255, 255, 255, 0.08);
     pointer-events: none;
   }
 
   .ring-left-1 {
-    width: 200px;
-    height: 200px;
-    left: -80px;
+    width: 190px;
+    height: 190px;
+    left: -75px;
     top: 50%;
     transform: translateY(-50%);
   }
@@ -148,9 +148,9 @@ import Container from "../Container.astro";
   }
 
   .ring-right-1 {
-    width: 200px;
-    height: 200px;
-    right: -80px;
+    width: 190px;
+    height: 190px;
+    right: -75px;
     top: 50%;
     transform: translateY(-50%);
   }
@@ -166,12 +166,12 @@ import Container from "../Container.astro";
   .principal-photo-img {
     position: absolute;
     z-index: 3;
-    width: 400px;
+    width: 395px;
     max-width: none;
     height: auto;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 16px;
+    bottom: 0;
     filter: drop-shadow(0 20px 36px rgba(0, 0, 0, 0.16));
     transition: transform 0.25s ease;
   }
@@ -183,6 +183,7 @@ import Container from "../Container.astro";
   .sambutan-content {
     display: flex;
     flex-direction: column;
+    padding-bottom: 0.5rem;
   }
 
   .section-tagline {
@@ -256,6 +257,11 @@ import Container from "../Container.astro";
     .sambutan-grid {
       grid-template-columns: 1fr;
       gap: 3rem;
+      align-items: center;
+    }
+
+    .principal-visual {
+      align-items: center;
     }
 
     .sambutan-title {
