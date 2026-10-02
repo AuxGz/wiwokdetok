@@ -1,12 +1,41 @@
 :root {
-  --color-bg: #f8fafc;
+  --color-primary: #ed1e28;
+  --color-primary-dark: #dc2626;
+  --color-primary-light: #fef2f2;
+  --color-primary-shadow: rgba(254, 202, 202, 0.7);
+  --color-secondary: #1e3a8a;
+  --color-bg: #ffffff;
+  --color-bg-secondary: #f7f8f9;
+  --color-bg-muted: #f5f5f5;
   --color-surface: #ffffff;
-  --color-text: #0f172a;
-  --color-text-muted: #64748b;
-  --color-primary: #1d4ed8;
-  --color-primary-hover: #1e40af;
-  --color-border: #e2e8f0;
-  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --color-text-main: #2b2c31;
+  --color-text-title: #111827;
+  --color-text-muted: #4b5563;
+  --color-text-subtle: #6b7280;
+  --color-text-light: #9ca3af;
+  --color-border: #e7e8ea;
+  --color-border-dark: #d1d5db;
+  --font-poppins: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-jakarta: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-inter: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: var(--font-jakarta);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --shadow-red-sm: 0 4px 6px var(--color-primary-shadow);
+  --shadow-red-lg: 0 10px 15px var(--color-primary-shadow);
+  --shadow-neutral: 0 8px 16px rgba(85, 86, 91, 0.12);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* Emil Kowalski Animation Tokens */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --duration-fast: 140ms;
+  --duration-normal: 220ms;
+  --duration-slow: 320ms;
 }
 
 *, *::before, *::after {
@@ -15,21 +44,187 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
 body {
-  font-family: var(--font-sans);
+  font-family: var(--font-jakarta);
   background-color: var(--color-bg);
-  color: var(--color-text);
+  color: var(--color-text-main);
   line-height: 1.6;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 a {
-  color: var(--color-primary);
+  color: inherit;
   text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-out), opacity var(--duration-fast) var(--ease-out);
 }
 
-a:hover {
-  text-decoration: underline;
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-jakarta);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  padding: 0.625rem 1.375rem;
+  border-radius: var(--radius-sm);
+  transition: transform var(--duration-fast) var(--ease-out), background-color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover {
+    background-color: var(--color-primary-dark);
+    box-shadow: var(--shadow-red-lg);
+    color: #ffffff;
+    transform: translateY(-1px);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    transform: translateY(-1px);
+  }
+
+  .btn-white:hover {
+    background-color: #f8fafc;
+    color: var(--color-primary-dark);
+    transform: translateY(-1px);
+  }
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  box-shadow: var(--shadow-red-sm);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-dark);
+  box-shadow: var(--shadow-red-lg);
+  color: #ffffff;
+}
+
+.btn-outline {
+  border: 1px solid var(--color-border-dark);
+  background-color: #ffffff;
+  color: var(--color-text-title);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.btn-white {
+  background-color: #ffffff;
+  color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-white:hover {
+  background-color: #f8fafc;
+  color: var(--color-primary-dark);
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-poppins);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+}
+
+.section-label::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 2px;
+  background-color: var(--color-primary);
+}
+
+.section-title {
+  font-family: var(--font-poppins);
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--color-text-title);
+  margin-bottom: 0.75rem;
+}
+
+.section-subtitle {
+  font-family: var(--font-inter);
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  max-width: 680px;
+}
+
+/* Scroll Entrance / Stagger Utilities */
+.animate-fade-up {
+  animation: fadeUp 380ms var(--ease-out) backwards;
+}
+
+.stagger-1 { animation-delay: 40ms; }
+.stagger-2 { animation-delay: 80ms; }
+.stagger-3 { animation-delay: 120ms; }
+.stagger-4 { animation-delay: 160ms; }
+.stagger-5 { animation-delay: 200ms; }
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Reduced Motion Override - Emil Kowalski Rule #7 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 1.75rem;
+  }
 }

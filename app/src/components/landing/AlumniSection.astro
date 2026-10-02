@@ -1,0 +1,243 @@
+---
+import Container from "../Container.astro";
+
+const alumniList = [
+  {
+    name: "PROF. DR. IR. MOH. KHAIRUDIN, M.T., PH.D.",
+    role: "(Guru Besar Universitas Negeri Yogyakarta | Lulusan 1998)",
+    quote: "Fondasi teknologi dan karakter yang saya dapatkan di SMK Telkom adalah pijakan awal kesuksesan. Kini saya bangga melihat almamater saya terus mencetak pemimpin masa depan.",
+    initials: "MK",
+  },
+  {
+    name: "DR. TENIA WAHYUNINGRUM, S.KOM., M.T.",
+    role: "(Direktur Telkom University Purwokerto | Lulusan 2001)",
+    quote: "SMK Telkom Purwokerto adalah kawah candradimuka talenta digital. Lulusannya terbukti memiliki daya saing tinggi saat melanjutkan studi di Telkom University.",
+    initials: "TW",
+  },
+  {
+    name: "ALFA PUTRA KURNIA",
+    role: "(Co-founder & CEO Arkademy.com | Alumni TKJ)",
+    quote: "Menghadapi dunia bisnis butuh skill, knowledge, dan attitude. Semua fondasi adaptasi dunia kerja itu saya dapatkan lengkap di SMK Telkom Purwokerto.",
+    initials: "AP",
+  },
+];
+---
+
+<section class="alumni-section" id="alumni">
+  <Container>
+    <div class="alumni-inner">
+      <!-- Section Header -->
+      <div class="alumni-header">
+        <div class="alumni-eyebrow">
+          <span>Alumni</span> <span class="text-red">SMK Telkom Purwokerto</span>
+        </div>
+        <h2 class="alumni-title">Cerita Sukses Alumni</h2>
+      </div>
+
+      <!-- Carousel Wrap with Cards & Right Nav Button -->
+      <div class="alumni-carousel-container">
+        <div class="alumni-grid">
+          {
+            alumniList.map((item) => (
+              <div class="alumni-card">
+                <div class="alumni-avatar-wrap">
+                  <span class="alumni-initials">{item.initials}</span>
+                </div>
+
+                <blockquote class="alumni-quote">
+                  "{item.quote}"
+                </blockquote>
+
+                <div class="alumni-info">
+                  <h3 class="alumni-name">{item.name}</h3>
+                  <p class="alumni-role">{item.role}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+        <!-- Next Arrow Button -->
+        <button type="button" class="carousel-next-btn" aria-label="Alumni Berikutnya">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </Container>
+</section>
+
+<style>
+  .alumni-section {
+    padding: 5rem 0 6rem 0;
+    background-color: #ffffff;
+  }
+
+  .alumni-inner {
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .alumni-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .alumni-eyebrow {
+    font-family: var(--font-poppins);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 0.35rem;
+  }
+
+  .text-red {
+    color: #ed1e28;
+  }
+
+  .alumni-title {
+    font-family: var(--font-poppins);
+    font-size: 2.85rem;
+    font-weight: 800;
+    color: #ed1e28;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+  }
+
+  .alumni-carousel-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .alumni-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+    width: 100%;
+  }
+
+  .alumni-card {
+    background-color: #f8fafc;
+    border-radius: 20px;
+    padding: 2.75rem 2rem 2.25rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .alumni-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.07);
+  }
+
+  .alumni-avatar-wrap {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 1.75rem;
+    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+    border: 3px solid #ffffff;
+    box-shadow: 0 4px 12px rgba(237, 30, 40, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .alumni-initials {
+    font-family: var(--font-poppins);
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #ed1e28;
+    letter-spacing: -0.02em;
+  }
+
+  .alumni-quote {
+    font-family: var(--font-jakarta);
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    color: #4b5563;
+    margin: 0 0 2rem 0;
+    flex: 1;
+  }
+
+  .alumni-info {
+    margin-top: auto;
+  }
+
+  .alumni-name {
+    font-family: var(--font-jakarta);
+    font-size: 0.875rem;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.02em;
+    line-height: 1.3;
+  }
+
+  .alumni-role {
+    font-family: var(--font-jakarta);
+    font-size: 0.75rem;
+    color: #64748b;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* Carousel Next Arrow */
+  .carousel-next-btn {
+    position: absolute;
+    right: -24px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    color: #111827;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 5;
+  }
+
+  .carousel-next-btn:hover {
+    background-color: #ed1e28;
+    color: #ffffff;
+    border-color: #ed1e28;
+    transform: translateY(-50%) scale(1.05);
+  }
+
+  @media (max-width: 992px) {
+    .alumni-title {
+      font-size: 2.25rem;
+    }
+
+    .alumni-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .carousel-next-btn {
+      display: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .alumni-title {
+      font-size: 1.85rem;
+    }
+
+    .alumni-card {
+      padding: 2rem 1.5rem;
+    }
+  }
+</style>

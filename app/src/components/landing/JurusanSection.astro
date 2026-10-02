@@ -1,0 +1,673 @@
+---
+import Container from "../Container.astro";
+
+const majorsData = [
+  {
+    code: "PG",
+    titleRed: "Pengembangan",
+    titleDark: "Game",
+    desc: "Program yang mempelajari pemrograman, basis data, dan rekayasa aplikasi web maupun mobile dengan alur kerja industri.",
+    studentImg: "/images/IMG_3990-Photoroom 1.png",
+    pillars: [
+      {
+        title: "Software Development",
+        desc: "Membangun aplikasi web dan mobile yang fungsional, dari perancangan sampai rilis.",
+        icon: "laptop",
+      },
+      {
+        title: "Database & Back-end",
+        desc: "Merancang basis data, REST API, dan integrasi layanan dengan Laravel serta MySQL.",
+        icon: "database",
+      },
+      {
+        title: "UI/UX & Quality",
+        desc: "Merancang antarmuka dan menguji kelayakan aplikasi sebelum diserahkan ke pengguna.",
+        icon: "layers",
+      },
+    ],
+    careers: "Software Engineer, Web Developer, Mobile App Developer, Database Administrator, QA Engineer, System Analyst.",
+  },
+  {
+    code: "RPL",
+    titleRed: "Rekayasa",
+    titleDark: "Perangkat Lunak",
+    desc: "Program yang mempelajari siklus hidup pembuatan perangkat lunak profesional: web modern, aplikasi mobile iOS/Android, integrasi REST API, dan arsitektur cloud computing.",
+    studentImg: "/images/IMG_4046-Photoroom 1.png",
+    pillars: [
+      {
+        title: "Software Development",
+        desc: "Membangun aplikasi web dan mobile yang fungsional, dari perancangan arsitektur sampai rilis produksi.",
+        icon: "laptop",
+      },
+      {
+        title: "Database & Back-end",
+        desc: "Merancang basis data relasional, REST API berkinerja tinggi, dan integrasi microservices.",
+        icon: "database",
+      },
+      {
+        title: "UI/UX & Quality",
+        desc: "Merancang antarmuka ramah pengguna dan pengujian fungsionalitas otomatis sebelum deployment.",
+        icon: "layers",
+      },
+    ],
+    careers: "Software Engineer, Web Developer, Mobile App Developer, Database Administrator, QA Engineer, System Analyst.",
+  },
+  {
+    code: "TKJ",
+    titleRed: "Teknik",
+    titleDark: "Komputer & Jaringan",
+    desc: "Fokus pada perancangan infrastruktur jaringan berskala enterprise, konfigurasi router & switch industri, administrasi server Linux/Windows, serta keamanan siber.",
+    studentImg: "/images/IMG_4114-Photoroom 1.png",
+    pillars: [
+      {
+        title: "Network Engineering",
+        desc: "Konfigurasi routing dan switching berskala enterprise menggunakan perangkat standar industri Cisco dan MikroTik.",
+        icon: "server",
+      },
+      {
+        title: "Server Administration & Cloud",
+        desc: "Manajemen server Linux dan virtualisasi cloud untuk hosting layanan komersial berskala tinggi.",
+        icon: "database",
+      },
+      {
+        title: "Cybersecurity Defense",
+        desc: "Implementasi proteksi firewall, enkripsi data, deteksi intrusi, dan mitigasi ancaman siber harian.",
+        icon: "shield",
+      },
+    ],
+    careers: "Network Engineer, System Administrator, Cloud Engineer, Cybersecurity Specialist, NOC Engineer.",
+  },
+  {
+    code: "TJA",
+    titleRed: "Teknik Jaringan",
+    titleDark: "Akses Telekomunikasi",
+    desc: "Keahlian spesifik transmisi data gelombang tinggi, instalasi kabel serat optik (fiber to the home), pengoperasian sistem nirkabel seluler, dan jaringan akses digital.",
+    studentImg: "/images/IMG_4173-Photoroom 1.png",
+    pillars: [
+      {
+        title: "Fiber Optic Installation",
+        desc: "Teknik penyambungan fusion splicing, pengukuran OTDR, dan pemeliharaan jalur serat optik pita lebar.",
+        icon: "wifi",
+      },
+      {
+        title: "Cellular & Wireless Transmission",
+        desc: "Pengoperasian BTS seluler, jaringan microwave radio link, serta optimasi sinyal telekomunikasi 4G/5G.",
+        icon: "antenna",
+      },
+      {
+        title: "Broadband Network Operations",
+        desc: "Manajemen operasional jaringan akses kabel dan nirkabel untuk penyedia layanan internet terpadu.",
+        icon: "server",
+      },
+    ],
+    careers: "Fiber Optic Specialist, Telecom Field Engineer, Transmission Planner, Wireless Technician, RF Engineer.",
+  },
+];
+---
+
+<section class="jurusan-section" id="jurusan">
+  <Container>
+    <div class="jurusan-inner">
+      <!-- Section Header -->
+      <div class="jurusan-header">
+        <div class="header-tagline">
+          <span class="tagline-dash"></span>
+          <span class="tagline-text">PROGRAM KEAHLIAN</span>
+          <span class="tagline-dash"></span>
+        </div>
+        <h2 class="jurusan-main-title">
+          Pilih jurusan di SMK Telkom
+        </h2>
+      </div>
+
+      <!-- Tab Switcher Bar -->
+      <div class="tab-bar-wrap">
+        <div class="tab-bar" role="tablist">
+          {
+            majorsData.map((m, idx) => (
+              <button
+                type="button"
+                role="tab"
+                class={`tab-btn ${idx === 0 ? "active" : ""}`}
+                data-major-code={m.code}
+                id={`tab-${m.code}`}
+                aria-selected={idx === 0 ? "true" : "false"}
+              >
+                {m.code === "PG" && (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                    <polyline points="2 17 12 22 22 17"></polyline>
+                    <polyline points="2 12 12 17 22 12"></polyline>
+                  </svg>
+                )}
+                {m.code === "RPL" && (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="16 18 22 12 16 6"></polyline>
+                    <polyline points="8 6 2 12 8 18"></polyline>
+                  </svg>
+                )}
+                {m.code === "TKJ" && (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                    <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                    <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                    <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                  </svg>
+                )}
+                {m.code === "TJA" && (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+                    <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+                    <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                    <line x1="12" y1="20" x2="12.01" y2="20"></line>
+                  </svg>
+                )}
+                <span>{m.code}</span>
+              </button>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Major Content Panels -->
+      <div class="major-panels-wrap">
+        {
+          majorsData.map((m, idx) => (
+            <div
+              class={`major-panel ${idx === 0 ? "active" : ""}`}
+              id={`panel-${m.code}`}
+              role="tabpanel"
+              aria-labelledby={`tab-${m.code}`}
+            >
+              <!-- Left Visual: Photo with Red Card & Dashed Frame -->
+              <div class="major-visual-col">
+                <div class="visual-stack">
+                  <!-- Dashed Frame -->
+                  <div class="dashed-border-frame" aria-hidden="true"></div>
+                  <!-- Red Card Behind -->
+                  <div class="red-backdrop-card" aria-hidden="true"></div>
+                  <!-- Student Image -->
+                  <img
+                    src={m.studentImg}
+                    alt={`Siswa Jurusan ${m.code}`}
+                    class="major-student-img"
+                    width="478"
+                    height="660"
+                    loading="eager"
+                    decoding="async"
+                  />
+                </div>
+              </div>
+
+              <!-- Right Details: Copy & Pillars -->
+              <div class="major-detail-col">
+                <h3 class="major-heading">
+                  <span class="text-red">{m.titleRed}</span> {m.titleDark}
+                </h3>
+
+                <p class="major-overview">{m.desc}</p>
+
+                <!-- Pillars -->
+                <div class="pillars-list">
+                  {m.pillars.map((pillar) => (
+                    <div class="pillar-item">
+                      <div class="pillar-icon-box">
+                        {pillar.icon === "gamepad" && (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ed1e28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+                            <line x1="6" y1="12" x2="10" y2="12"></line>
+                            <line x1="8" y1="10" x2="8" y2="14"></line>
+                            <line x1="15" y1="13" x2="15.01" y2="13"></line>
+                            <line x1="18" y1="11" x2="18.01" y2="11"></line>
+                          </svg>
+                        )}
+                        {pillar.icon === "laptop" && (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ed1e28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="2" y1="20" x2="22" y2="20"></line>
+                          </svg>
+                        )}
+                        {pillar.icon === "database" && (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ed1e28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                          </svg>
+                        )}
+                        {pillar.icon === "layers" && (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ed1e28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                            <polyline points="2 17 12 22 22 17"></polyline>
+                            <polyline points="2 12 12 17 22 12"></polyline>
+                          </svg>
+                        )}
+                        {pillar.icon === "server" && (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ed1e28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                            <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                            <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                            <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                          </svg>
+                        )}
+                        {pillar.icon === "shield" && (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ed1e28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                          </svg>
+                        )}
+                        {pillar.icon === "wifi" && (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ed1e28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12.55a11 11 0 0 1 14.08 0"></path>
+                            <path d="M1.42 9a16 16 0 0 1 21.16 0"></path>
+                            <path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path>
+                            <line x1="12" y1="20" x2="12.01" y2="20"></line>
+                          </svg>
+                        )}
+                        {pillar.icon === "antenna" && (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ed1e28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="2"></circle>
+                            <path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"></path>
+                          </svg>
+                        )}
+                        {pillar.icon === "box" && (
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ed1e28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                          </svg>
+                        )}
+                      </div>
+                      <div class="pillar-text">
+                        <h4 class="pillar-title">{pillar.title}</h4>
+                        <p class="pillar-desc">{pillar.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <!-- Career Section -->
+                <div class="career-box">
+                  <span class="career-label">Prospek Kerja:</span>
+                  <p class="career-text">{m.careers}</p>
+                </div>
+
+                <!-- Action Button -->
+                <a href="#ppdb" class="btn-learn-more">
+                  <span>Pelajari lebih lanjut</span>
+                  <span class="btn-arrow">→</span>
+                </a>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </Container>
+</section>
+
+<script>
+  function initMajorTabs() {
+    const tabButtons = document.querySelectorAll(".tab-btn");
+    const panels = document.querySelectorAll(".major-panel");
+
+    tabButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const targetCode = btn.getAttribute("data-major-code");
+        if (!targetCode) return;
+
+        // Deactivate all tabs & panels
+        tabButtons.forEach((b) => {
+          b.classList.remove("active");
+          b.setAttribute("aria-selected", "false");
+        });
+        panels.forEach((p) => p.classList.remove("active"));
+
+        // Activate selected tab & panel
+        btn.classList.add("active");
+        btn.setAttribute("aria-selected", "true");
+        const activePanel = document.getElementById(`panel-${targetCode}`);
+        if (activePanel) {
+          activePanel.classList.add("active");
+        }
+      });
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initMajorTabs);
+  } else {
+    initMajorTabs();
+  }
+</script>
+
+<style>
+  .jurusan-section {
+    padding: 4.5rem 0 6rem 0;
+    background-color: #ffffff;
+  }
+
+  .jurusan-inner {
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .jurusan-header {
+    text-align: center;
+    margin-bottom: 2.25rem;
+  }
+
+  .header-tagline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin-bottom: 0.875rem;
+  }
+
+  .tagline-dash {
+    display: inline-block;
+    width: 22px;
+    height: 2px;
+    background-color: #ed1e28;
+    border-radius: 1px;
+  }
+
+  .tagline-text {
+    font-family: var(--font-poppins);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: #ed1e28;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .jurusan-main-title {
+    font-family: var(--font-poppins);
+    font-size: 2.75rem;
+    font-weight: 800;
+    line-height: 1.15;
+    color: #111827;
+    letter-spacing: -0.025em;
+  }
+
+  /* Tab Bar */
+  .tab-bar-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .tab-bar {
+    display: inline-flex;
+    align-items: center;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 9999px;
+    padding: 0.375rem;
+    gap: 0.5rem;
+  }
+
+  .tab-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.5rem;
+    border-radius: 9999px;
+    background-color: transparent;
+    border: none;
+    color: #475569;
+    font-family: var(--font-jakarta);
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .tab-btn:hover {
+    color: #111827;
+  }
+
+  .tab-btn.active {
+    background-color: #ed1e28;
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(237, 30, 40, 0.28);
+  }
+
+  /* Panels */
+  .major-panel {
+    display: none;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 4.5rem;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .major-panel.active {
+    display: grid;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Left Visual */
+  .major-visual-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .visual-stack {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  .dashed-border-frame {
+    position: absolute;
+    top: -24px;
+    left: -24px;
+    width: 280px;
+    height: 380px;
+    border: 3.5px dashed #94a3b8;
+    border-radius: 20px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .red-backdrop-card {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    width: 300px;
+    height: 320px;
+    background-color: #ed1e28;
+    border-radius: 20px;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .major-student-img {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    height: auto;
+    max-height: 490px;
+    object-fit: contain;
+    object-position: bottom center;
+    display: block;
+    filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.12));
+  }
+
+  /* Right Details */
+  .major-detail-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .major-heading {
+    font-family: var(--font-poppins);
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.15;
+    color: #111827;
+    letter-spacing: -0.025em;
+    margin-bottom: 1.15rem;
+  }
+
+  .text-red {
+    color: #ed1e28;
+  }
+
+  .major-overview {
+    font-family: var(--font-jakarta);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: #4b5563;
+    margin-bottom: 1.75rem;
+  }
+
+  /* Pillars */
+  .pillars-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .pillar-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .pillar-icon-box {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #fef2f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .pillar-title {
+    font-family: var(--font-jakarta);
+    font-size: 0.9375rem;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 0.25rem;
+  }
+
+  .pillar-desc {
+    font-family: var(--font-jakarta);
+    font-size: 0.84375rem;
+    line-height: 1.6;
+    color: #64748b;
+    margin: 0;
+  }
+
+  /* Career Box */
+  .career-box {
+    margin-bottom: 2rem;
+  }
+
+  .career-label {
+    display: block;
+    font-family: var(--font-jakarta);
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #ed1e28;
+    margin-bottom: 0.25rem;
+  }
+
+  .career-text {
+    font-family: var(--font-jakarta);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: #4b5563;
+    margin: 0;
+  }
+
+  /* CTA Button */
+  .btn-learn-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #ed1e28;
+    color: #ffffff;
+    font-family: var(--font-jakarta);
+    font-size: 0.875rem;
+    font-weight: 700;
+    padding: 0.75rem 1.75rem;
+    border-radius: 9999px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(237, 30, 40, 0.3);
+    align-self: flex-start;
+    transition: all 0.2s ease;
+  }
+
+  .btn-learn-more:hover {
+    background-color: #dc1822;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(237, 30, 40, 0.4);
+  }
+
+  .btn-learn-more:hover .btn-arrow {
+    transform: translateX(3px);
+  }
+
+  .btn-arrow {
+    transition: transform 0.2s ease;
+  }
+
+  @media (max-width: 992px) {
+    .jurusan-main-title {
+      font-size: 2.15rem;
+    }
+
+    .major-panel {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .major-heading {
+      font-size: 2.15rem;
+    }
+
+    .visual-stack {
+      max-width: 360px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .jurusan-section {
+      padding: 3rem 0;
+    }
+
+    .jurusan-main-title {
+      font-size: 1.75rem;
+    }
+
+    .tab-bar {
+      flex-wrap: wrap;
+      justify-content: center;
+      border-radius: 16px;
+    }
+
+    .major-heading {
+      font-size: 1.85rem;
+    }
+  }
+</style>

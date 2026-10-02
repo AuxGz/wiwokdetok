@@ -1,0 +1,162 @@
+---
+import Container from "../Container.astro";
+
+const stats = [
+  {
+    number: "900+",
+    label: "Siswa aktif",
+  },
+  {
+    number: "4",
+    label: "Program keahlian",
+  },
+  {
+    number: "68+",
+    label: "Mitra industri",
+  },
+  {
+    number: "150",
+    label: "Prestasi",
+  },
+];
+---
+
+<section class="stats-section" id="stats">
+  <Container>
+    <div class="stats-bar-card">
+      {
+        stats.map((item) => (
+          <div class="stat-col-item">
+            <span class="red-dash"></span>
+            <div class="stat-num" data-value={item.number}>{item.number}</div>
+            <div class="stat-label">{item.label}</div>
+          </div>
+        ))
+      }
+    </div>
+  </Container>
+</section>
+
+<script>
+  const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!isReduced) {
+    const statCards = document.querySelectorAll(".stat-num");
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const numEl = entry.target as HTMLElement;
+          if (numEl && !numEl.classList.contains("counted")) {
+            numEl.classList.add("counted");
+            const rawVal = numEl.getAttribute("data-value") || "";
+            const target = parseInt(rawVal.replace(/\D/g, ""), 10);
+            const suffix = rawVal.replace(/[0-9]/g, "");
+            const duration = 650; // ms snappy count-up
+            let startTime: number | null = null;
+
+            const step = (now: number) => {
+              if (startTime === null) startTime = now;
+              const elapsed = now - startTime;
+              const progress = Math.max(0, Math.min(elapsed / duration, 1));
+              const ease = 1 - Math.pow(1 - progress, 3);
+              const current = Math.round(ease * target);
+              numEl.textContent = `${current.toLocaleString("id-ID")}${suffix}`;
+              if (progress < 1) {
+                requestAnimationFrame(step);
+              } else {
+                numEl.textContent = rawVal;
+              }
+            };
+            requestAnimationFrame(step);
+
+            // Safety timeout to ensure final values always display
+            setTimeout(() => {
+              numEl.textContent = rawVal;
+            }, duration + 50);
+          }
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    statCards.forEach((c) => observer.observe(c));
+  }
+</script>
+
+<style>
+  .stats-section {
+    padding: 1.5rem 0 4rem 0;
+    background-color: #ffffff;
+  }
+
+  .stats-bar-card {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    padding: 2.25rem 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+  }
+
+  .stat-col-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 2rem;
+    position: relative;
+  }
+
+  .stat-col-item:first-child {
+    padding-left: 0.5rem;
+  }
+
+  .stat-col-item:not(:last-child) {
+    border-right: 1px solid #f3f4f6;
+  }
+
+  .red-dash {
+    width: 20px;
+    height: 3px;
+    background-color: #ed1e28;
+    border-radius: 2px;
+    margin-bottom: 0.85rem;
+  }
+
+  .stat-num {
+    font-family: var(--font-poppins);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1e1e1e;
+    line-height: 1.1;
+    margin-bottom: 0.35rem;
+    letter-spacing: -0.02em;
+  }
+
+  .stat-label {
+    font-family: var(--font-jakarta);
+    font-size: 0.8125rem;
+    color: #6b7280;
+    font-weight: 500;
+  }
+
+  @media (max-width: 900px) {
+    .stats-bar-card {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      padding: 2rem 1.5rem;
+    }
+    .stat-col-item:not(:last-child) {
+      border-right: none;
+    }
+    .stat-col-item {
+      padding: 0;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .stats-bar-card {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

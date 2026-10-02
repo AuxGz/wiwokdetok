@@ -1,0 +1,218 @@
+---
+import Container from "../Container.astro";
+---
+
+<section class="about-section" id="about">
+  <Container>
+    <div class="about-grid">
+      <!-- Left Column: Copy -->
+      <div class="about-text-col">
+        <div class="about-tagline">
+          <span class="tagline-dash"></span>
+          <span>TENTANG KAMI</span>
+        </div>
+
+        <h2 class="about-title">
+          Apa itu <span class="text-red">SMK Telkom<br />Purwokerto</span>?
+        </h2>
+
+        <p class="about-desc">
+          SMK Telkom Purwokerto berada di bawah naungan Yayasan Pendidikan Telkom (YPT) dan menjadi bagian dari jaringan Telkom Schools. Sejak angkatan pertama, sekolah ini fokus mencetak lulusan siap kerja di bidang perangkat lunak, jaringan, dan industri kreatif.
+        </p>
+
+        <p class="about-desc">
+          Terdapat empat program keahlian — <strong>RPL</strong>, <strong>PG</strong>, <strong>TKJ</strong>, dan <strong>TJAT</strong> — masing-masing dengan laboratorium, sertifikasi, dan jalur karier yang jelas.
+        </p>
+      </div>
+
+      <!-- Right Column: Visual Photo Stack with Red Accent Card -->
+      <div class="about-visual-col">
+        <div class="about-photo-stack">
+          <!-- Red Accent Card Behind -->
+          <div class="red-accent-card" aria-hidden="true"></div>
+
+          <!-- Campus Building Photo -->
+          <img
+            src="/images/Container 1.png"
+            alt="Gedung SMK Telkom Purwokerto"
+            class="campus-photo-img"
+            width="607"
+            height="333"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>
+
+<style>
+  .about-section {
+    position: relative;
+    padding: 3rem 0 6rem 0;
+    background-color: #ffffff;
+    overflow: visible;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Left Column */
+  .about-text-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about-tagline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-family: var(--font-poppins);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: #ed1e28;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+  }
+
+  .tagline-dash {
+    display: inline-block;
+    width: 22px;
+    height: 2px;
+    background-color: #ed1e28;
+    border-radius: 1px;
+  }
+
+  .about-title {
+    font-family: var(--font-poppins);
+    font-size: 2.85rem;
+    font-weight: 800;
+    line-height: 1.12;
+    color: #111827;
+    letter-spacing: -0.025em;
+    margin-bottom: 1.35rem;
+  }
+
+  .text-red {
+    color: #ed1e28;
+  }
+
+  .about-desc {
+    font-family: var(--font-jakarta);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: #4b5563;
+    margin-bottom: 1.15rem;
+  }
+
+  .about-desc:last-child {
+    margin-bottom: 0;
+  }
+
+  .about-desc strong {
+    font-weight: 700;
+    color: #1f2937;
+  }
+
+  /* Right Column: Visual Photo Stack */
+  .about-visual-col {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: relative;
+  }
+
+  .about-photo-stack {
+    position: relative;
+    width: 100%;
+    max-width: 550px;
+    margin-left: auto;
+  }
+
+  /* Red Accent Card Behind */
+  .red-accent-card {
+    position: absolute;
+    top: 12%;
+    bottom: -26px;
+    left: 20.6%;
+    right: -24px;
+    background-color: #ed1e28;
+    border-radius: 20px;
+    z-index: 1;
+    pointer-events: none;
+    transition: transform 0.25s ease;
+  }
+
+  /* Campus Building Photo */
+  .campus-photo-img {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    display: block;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.16);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .about-photo-stack:hover .campus-photo-img {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.16);
+    }
+
+    .about-photo-stack:hover .red-accent-card {
+      transform: translate(2px, 2px);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 3.5rem;
+    }
+
+    .about-visual-col {
+      justify-content: center;
+    }
+
+    .about-photo-stack {
+      margin: 0 auto;
+      max-width: 480px;
+    }
+
+    .about-title {
+      font-size: 2.35rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .about-section {
+      padding: 2rem 0 4rem 0;
+    }
+
+    .about-title {
+      font-size: 2rem;
+    }
+
+    .red-accent-card {
+      top: 10.5%;
+      bottom: -14px;
+      left: 20.6%;
+      right: -12px;
+      border-radius: 16px;
+    }
+
+    .campus-photo-img {
+      border-radius: 16px;
+    }
+  }
+</style>

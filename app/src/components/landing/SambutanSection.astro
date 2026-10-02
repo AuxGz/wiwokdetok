@@ -1,0 +1,208 @@
+---
+import Container from "../Container.astro";
+---
+
+<section class="sambutan-section" id="sambutan">
+  <Container>
+    <div class="sambutan-grid">
+      <!-- Foto Kepala Sekolah dengan Red Card di Belakang -->
+      <div class="principal-visual">
+        <div class="photo-frame-wrapper">
+          <div class="red-bg-card" aria-hidden="true"></div>
+          <img
+            src="/images/kepalaSekolah.png"
+            alt="Kepala SMK Telkom Purwokerto - Aris Puji Santoso, S.Kom., M.M"
+            class="principal-photo-img"
+            width="530"
+            height="796"
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      <!-- Sambutan Copy -->
+      <div class="sambutan-content">
+        <div class="section-tagline">
+          <span class="tagline-dash"></span>
+          <span>SAMBUTAN</span>
+        </div>
+
+        <h2 class="sambutan-title">
+          <span class="text-red">Sambutan</span> Kepala Sekolah
+        </h2>
+
+        <p class="sambutan-desc">
+          Selamat datang di portal resmi SMK Telkom Purwokerto. Kami percaya pendidikan vokasi yang baik lahir dari kedekatan dengan dunia industri — karena itu setiap program keahlian dirancang bersama mitra kerja dan diuji langsung melalui praktik nyata.
+        </p>
+
+        <p class="sambutan-desc">
+          Melalui portal ini, seluruh layanan sekolah kami satukan agar siswa, orang tua, dan mitra industri mendapatkan informasi yang sama dan selalu terbarui.
+        </p>
+
+        <div class="principal-signoff">
+          <h3 class="principal-name">Aris Puji Santoso, S.Kom., M.M</h3>
+          <p class="principal-role">Kepala SMK Telkom Purwokerto</p>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>
+
+<style>
+  .sambutan-section {
+    padding: 5rem 0 0 0;
+    background-color: #f7f8f9;
+    border-top: 1px solid #eef0f2;
+    border-bottom: 1px solid #eef0f2;
+    overflow: visible;
+  }
+
+  .sambutan-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 4.5rem;
+    align-items: center;
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .principal-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .photo-frame-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 600px;
+  }
+
+  .red-bg-card {
+    position: absolute;
+    width: 420px;
+    height: 400px;
+    background-color: #ed1e28;
+    border-radius: 28px;
+    left: 45px;
+    top: 140px;
+    z-index: 1;
+  }
+
+  .principal-photo-img {
+    position: absolute;
+    z-index: 2;
+    width: 500px;
+    max-width: none;
+    height: auto;
+    left: 0;
+    top: -150px;
+    filter: drop-shadow(0 20px 36px rgba(0, 0, 0, 0.14));
+    transition: transform 0.25s ease;
+  }
+
+  .sambutan-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .section-tagline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-family: var(--font-poppins);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: #ed1e28;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+  }
+
+  .tagline-dash {
+    display: inline-block;
+    width: 22px;
+    height: 2px;
+    background-color: #ed1e28;
+    border-radius: 1px;
+  }
+
+  .sambutan-title {
+    font-family: var(--font-poppins);
+    font-size: 2.75rem;
+    font-weight: 800;
+    line-height: 1.15;
+    color: #111827;
+    letter-spacing: -0.025em;
+    margin-bottom: 1.5rem;
+  }
+
+  .text-red {
+    color: #ed1e28;
+  }
+
+  .sambutan-desc {
+    font-family: var(--font-jakarta);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: #4b5563;
+    margin-bottom: 1.25rem;
+  }
+
+  .sambutan-desc:last-of-type {
+    margin-bottom: 1.75rem;
+  }
+
+  .principal-signoff {
+    border-top: 1px solid #f3f4f6;
+    padding-top: 1.25rem;
+  }
+
+  .principal-name {
+    font-family: var(--font-jakarta);
+    font-size: 1.0625rem;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 0.25rem;
+  }
+
+  .principal-role {
+    font-family: var(--font-jakarta);
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin: 0;
+  }
+
+  @media (max-width: 992px) {
+    .sambutan-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .sambutan-title {
+      font-size: 2.25rem;
+    }
+
+    .photo-frame-wrapper {
+      max-width: 320px;
+    }
+
+    .red-bg-card {
+      width: 260px;
+      height: 280px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .sambutan-section {
+      padding: 3rem 0;
+    }
+
+    .sambutan-title {
+      font-size: 1.85rem;
+    }
+  }
+</style>

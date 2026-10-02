@@ -1,0 +1,301 @@
+---
+// Chatbot floating widget for interactive support
+---
+
+<div class="chatbot-container" id="chatbot-widget">
+  <!-- Popup Message Box -->
+  <div class="chatbot-popup" id="chatbot-popup" hidden>
+    <div class="popup-header">
+      <div class="popup-avatar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+        </svg>
+      </div>
+      <div>
+        <strong class="popup-name">Layanan Informasi Siswa</strong>
+        <span class="popup-status">Online • Respons Cepat</span>
+      </div>
+      <button type="button" class="close-popup" id="close-chat" aria-label="Tutup Obrolan">
+        <svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="popup-body">
+      <div class="chat-bubble">
+        Halo! 👋 Selamat datang di SMK Telkom Purwokerto. Ada yang bisa kami bantu mengenai informasi PPDB 2026 atau program keahlian?
+      </div>
+      <div class="quick-options">
+        <a href="#ppdb" class="quick-btn">Informasi PPDB 2026</a>
+        <a href="#jurusan" class="quick-btn">Pilihan Jurusan</a>
+        <a href="https://wa.me/6281229701800" target="_blank" rel="noopener" class="quick-btn-highlight">
+          <span>Hubungi via WhatsApp</span>
+          <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trigger Button -->
+  <button type="button" class="chat-trigger-btn" id="open-chat" aria-label="Buka Chatbot Layanan Sekolah">
+    <div class="pulse-ring"></div>
+    <svg class="chat-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+    </svg>
+  </button>
+</div>
+
+<script>
+  const openBtn = document.getElementById("open-chat");
+  const closeBtn = document.getElementById("close-chat");
+  const popup = document.getElementById("chatbot-popup");
+
+  function toggleChat(show?: boolean) {
+    if (!popup || !openBtn) return;
+    const isHidden = popup.hasAttribute("hidden");
+    const nextState = show !== undefined ? show : isHidden;
+
+    if (nextState) {
+      popup.removeAttribute("hidden");
+      openBtn.setAttribute("aria-expanded", "true");
+    } else {
+      popup.setAttribute("hidden", "");
+      openBtn.setAttribute("aria-expanded", "false");
+    }
+  }
+
+  if (openBtn && popup) {
+    openBtn.setAttribute("aria-expanded", "false");
+    openBtn.addEventListener("click", () => toggleChat());
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => toggleChat(false));
+  }
+
+  document.addEventListener("keydown", (e: KeyboardEvent) => {
+    if (e.key === "Escape" && popup && !popup.hasAttribute("hidden")) {
+      toggleChat(false);
+      openBtn?.focus();
+    }
+  });
+
+  // Klik di luar menutup popup
+  document.addEventListener("click", (e: MouseEvent) => {
+    if (popup && !popup.hasAttribute("hidden")) {
+      const widget = document.getElementById("chatbot-widget");
+      if (widget && !widget.contains(e.target as Node)) {
+        toggleChat(false);
+      }
+    }
+  });
+</script>
+
+<style>
+  .chatbot-container {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 99;
+  }
+
+  .chat-trigger-btn {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(237, 30, 40, 0.4);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+  }
+
+  .chat-trigger-btn:hover {
+    transform: scale(1.06);
+    background-color: var(--color-primary-dark);
+  }
+
+  .pulse-ring {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    border: 2px solid var(--color-primary);
+    animation: pulse 2s infinite ease-out;
+    pointer-events: none;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1.4);
+      opacity: 0;
+    }
+  }
+
+  .chatbot-popup {
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    width: 330px;
+    max-width: calc(100vw - 2.5rem);
+    background-color: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-neutral);
+    overflow: hidden;
+    animation: popupIn var(--duration-normal) var(--ease-out);
+    transform-origin: bottom right;
+    will-change: transform, opacity;
+  }
+
+  @media (max-width: 480px) {
+    .chatbot-container {
+      bottom: 1rem;
+      right: 1rem;
+    }
+    .chatbot-popup {
+      right: 0;
+      width: calc(100vw - 2rem);
+    }
+  }
+
+  @keyframes popupIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px) scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .popup-header {
+    background-color: var(--color-primary);
+    color: #ffffff;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .popup-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .popup-name {
+    display: block;
+    font-family: var(--font-poppins);
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .popup-status {
+    font-size: 0.6875rem;
+    color: #fee2e2;
+  }
+
+  .close-popup {
+    margin-left: auto;
+    color: #ffffff;
+    opacity: 0.8;
+    padding: 0.25rem;
+  }
+
+  .close-popup:hover {
+    opacity: 1;
+  }
+
+  .popup-body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: #f8fafc;
+  }
+
+  .chat-bubble {
+    background-color: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    border-top-left-radius: 2px;
+    padding: 0.875rem 1rem;
+    font-size: 0.875rem;
+    color: var(--color-text-main);
+    line-height: 1.5;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .quick-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .quick-btn {
+    display: block;
+    background-color: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 0.5rem 0.875rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-text-main);
+    transition: all 0.15s ease;
+  }
+
+  .quick-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background-color: var(--color-primary-light);
+  }
+
+  .quick-btn-highlight {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #22c55e;
+    color: #ffffff;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    padding: 0.625rem 0.875rem;
+    border-radius: 6px;
+    transition: background-color 0.15s ease;
+  }
+
+  .quick-btn-highlight:hover {
+    background-color: #16a34a;
+    color: #ffffff;
+  }
+
+  @media (max-width: 640px) {
+    .chatbot-container {
+      bottom: 1.25rem;
+      right: 1.25rem;
+    }
+    .chatbot-popup {
+      width: 290px;
+      right: 0;
+    }
+  }
+</style>

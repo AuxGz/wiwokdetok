@@ -1,0 +1,412 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/Container.astro";
+---
+
+<BaseLayout
+  title="School Tour Virtual | SMK Telkom Purwokerto"
+  description="Jelajahi fasilitas modern dan berteknologi tinggi di SMK Telkom Purwokerto secara virtual 360 derajat."
+>
+  <!-- Hero Banner Virtual Experience -->
+  <section class="tour-hero-section">
+    <div class="tour-banner-wrapper">
+      <div class="tour-hero-content">
+        <div class="tour-hero-tag">
+          <span class="tagline-dash"></span>
+          <span>VIRTUAL EXPERIENCE</span>
+          <span class="tagline-dash"></span>
+        </div>
+        <h1 class="tour-main-title">School Tour Virtual</h1>
+        <p class="tour-main-sub">
+          Jelajahi fasilitas modern dan lingkungan pembelajaran berteknologi tinggi di SMK Telkom Purwokerto secara interaktif.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tour Item 1: Lab Robotic -->
+  <section class="tour-item-section">
+    <Container>
+      <div class="tour-inner">
+        <div class="tour-header-block">
+          <div class="badge-imersif">
+            <span class="dot-red">●</span>
+            <span>PENGALAMAN IMERSIF</span>
+          </div>
+          <h2 class="tour-title">Tour Lab Robotic</h2>
+          <p class="tour-subtitle">
+            Nikmati pengalaman menjelajahi sekolah kami dari mana saja dengan teknologi Robotic
+          </p>
+        </div>
+
+        <div class="viewer-card">
+          <div class="vr-placeholder-view">
+            <div class="vr-grid-pattern"></div>
+            <div class="vr-hud-center">
+              <div class="compass-ring">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ed1e28" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                </svg>
+              </div>
+              <span class="vr-status-title">Laboratorium Robotika & IoT</span>
+              <span class="vr-status-desc">Mode Pratinjau Interaktif 360°</span>
+            </div>
+            <div class="vr-controls-overlay">
+              <span class="vr-badge">360° PANORAMA</span>
+              <span class="vr-badge">HD RESOLUTION</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Tour Item 2: Ruang Kelas -->
+  <section class="tour-item-section">
+    <Container>
+      <div class="tour-inner">
+        <div class="tour-header-block">
+          <div class="badge-imersif">
+            <span class="dot-red">●</span>
+            <span>PENGALAMAN IMERSIF</span>
+          </div>
+          <h2 class="tour-title">Tour Ruang Kelas</h2>
+          <p class="tour-subtitle">
+            Nikmati pengalaman menjelajahi ruang belajar modern dan multimedia kami
+          </p>
+        </div>
+
+        <div class="viewer-card">
+          <div class="vr-placeholder-view">
+            <div class="vr-grid-pattern"></div>
+            <div class="vr-hud-center">
+              <div class="compass-ring">
+                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ed1e28" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                </svg>
+              </div>
+              <span class="vr-status-title">Ruang Kelas Multimedia Modern</span>
+              <span class="vr-status-desc">Mode Pratinjau Interaktif 360°</span>
+            </div>
+            <div class="vr-controls-overlay">
+              <span class="vr-badge">360° PANORAMA</span>
+              <span class="vr-badge">HD RESOLUTION</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Hero Banner */
+  .tour-hero-section {
+    position: relative;
+    width: 100%;
+    background-color: #0b1120;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-top: -80px;
+    padding-top: 80px;
+  }
+
+  .tour-banner-wrapper {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+
+  .tour-hero-content {
+    padding: 5rem 2rem 4rem 2rem;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .tour-hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #ed1e28;
+    font-family: var(--font-poppins);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.25rem;
+  }
+
+  .tagline-dash {
+    display: inline-block;
+    width: 20px;
+    height: 2px;
+    background-color: #ed1e28;
+  }
+
+  .tour-main-title {
+    font-family: var(--font-poppins);
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.1;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .tour-main-sub {
+    font-family: var(--font-jakarta);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+  }
+
+  /* Tour Items */
+  .tour-item-section {
+    padding: 5rem 0;
+    background-color: #ffffff;
+  }
+
+  .tour-inner {
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .tour-header-block {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .badge-imersif {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #fef2f2;
+    color: #ed1e28;
+    font-family: var(--font-jakarta);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+    margin-bottom: 1rem;
+  }
+
+  .dot-red {
+    font-size: 0.625rem;
+  }
+
+  .tour-title {
+    font-family: var(--font-poppins);
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: #111827;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+  }
+
+  .tour-subtitle {
+    font-family: var(--font-jakarta);
+    font-size: 0.9375rem;
+    color: #64748b;
+    margin: 0;
+  }
+
+  .viewer-card {
+    position: relative;
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+  }
+
+  .vr-placeholder-view {
+    position: relative;
+    width: 100%;
+    min-height: 480px;
+    background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.5rem;
+    overflow: hidden;
+  }
+
+  .vr-grid-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+  }
+
+  .vr-hud-center {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .compass-ring {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background-color: rgba(237, 30, 40, 0.1);
+    border: 2px dashed rgba(237, 30, 40, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+    animation: pulseCompass 3s infinite ease-in-out;
+  }
+
+  @keyframes pulseCompass {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  .vr-status-title {
+    font-family: var(--font-poppins);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+  }
+
+  .vr-status-desc {
+    font-family: var(--font-jakarta);
+    font-size: 0.875rem;
+    color: #94a3b8;
+  }
+
+  .vr-controls-overlay {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    display: flex;
+    gap: 0.75rem;
+    z-index: 3;
+  }
+
+  .vr-badge {
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #f8fafc;
+    font-family: var(--font-jakarta);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    letter-spacing: 0.05em;
+  }
+
+  .viewer-tag {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(8px);
+    color: #ffffff;
+    font-family: var(--font-jakarta);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    padding: 0.45rem 1rem;
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 5;
+  }
+
+  .viewer-controls {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(8px);
+    padding: 0.35rem 0.5rem;
+    border-radius: 10px;
+    z-index: 5;
+  }
+
+  .ctrl-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    background-color: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 1.15rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .ctrl-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .ctrl-vr {
+    color: #ed1e28;
+  }
+
+  .viewer-compass {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+  }
+
+  .compass-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .compass-needle {
+    width: 3px;
+    height: 20px;
+    background: linear-gradient(180deg, #ed1e28 50%, #ffffff 50%);
+    border-radius: 2px;
+    transform: rotate(28deg);
+  }
+
+  @media (max-width: 768px) {
+    .tour-main-title {
+      font-size: 2.5rem;
+    }
+
+    .tour-hero-content {
+      margin-left: 1rem;
+    }
+  }
+</style>

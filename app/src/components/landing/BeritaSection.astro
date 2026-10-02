@@ -1,0 +1,276 @@
+---
+import Container from "../Container.astro";
+
+const newsList = [
+  {
+    badge: "PPDB",
+    date: "13 Agustus 2026",
+    title: "SMPB SMK Telkom Purwokerto 2027/2028 Jalur EASY Resmi dibuka!",
+    summary: "Kabar gembira! Pendaftaran SPMB SMK Telkom Purwokerto TA 2027/2028 Jalur EASY untuk calon peserta didik baru telah resmi dibuka.",
+  },
+  {
+    badge: "Prestasi",
+    date: "11 Agustus 2026",
+    title: "SMK Telkom Purwokerto: Menuju School of Global Technopreneur",
+    summary: "Program School of Global Technopreneur SMK Telkom Purwokerto dirancang untuk mencetak lulusan yang jago teknologi, berkarakter, dan siap menjadi wirausahawan di tingkat global.",
+  },
+  {
+    badge: "Kerjasama",
+    date: "28 Juli 2026",
+    title: "Siswa SMK Telkom Purwokerto meraih berbagai prestasi olahraga mulai dari tingkat kabupaten sampai internasional.",
+    summary: "Sepanjang Juni 2026, siswa SMK Telkom Purwokerto sukses memborong prestasi olahraga dari tingkat kabupaten hingga turnamen terbuka nasional dan internasional.",
+  },
+];
+---
+
+<section class="berita-section" id="berita">
+  <Container>
+    <div class="berita-inner">
+      <!-- Section Header -->
+      <div class="berita-header-row">
+        <div class="header-left">
+          <div class="section-tagline">
+            <span class="tagline-dash"></span>
+            <span>BERITA</span>
+          </div>
+          <h2 class="berita-title">Kabar terbaru dari sekolah.</h2>
+        </div>
+
+        <a href="#berita" class="btn-all-news">
+          <span>Semua berita</span>
+          <span class="btn-arrow">→</span>
+        </a>
+      </div>
+
+      <!-- News Cards Grid -->
+      <div class="news-grid">
+        {
+          newsList.map((item) => (
+            <article class="news-card">
+              <div class="news-image-wrap">
+                <span class="news-category-badge">{item.badge}</span>
+                <div class="news-header-bg">
+                  <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#ed1e28" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="news-bg-icon">
+                    <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"></path>
+                    <path d="M18 14h-8"></path>
+                    <path d="M15 18h-5"></path>
+                    <path d="M10 6h8v4h-8V6Z"></path>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="news-body">
+                <span class="news-date">{item.date}</span>
+                <h3 class="news-heading">
+                  <a href="#berita">{item.title}</a>
+                </h3>
+                <p class="news-summary">{item.summary}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </Container>
+</section>
+
+<style>
+  .berita-section {
+    padding: 5rem 0 6rem 0;
+    background-color: #ffffff;
+  }
+
+  .berita-inner {
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .berita-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3.5rem;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .section-tagline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-family: var(--font-poppins);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: #ed1e28;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 0.875rem;
+  }
+
+  .tagline-dash {
+    display: inline-block;
+    width: 22px;
+    height: 2px;
+    background-color: #ed1e28;
+    border-radius: 1px;
+  }
+
+  .berita-title {
+    font-family: var(--font-poppins);
+    font-size: 2.75rem;
+    font-weight: 800;
+    line-height: 1.15;
+    color: #111827;
+    letter-spacing: -0.025em;
+  }
+
+  .btn-all-news {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.5rem;
+    border-radius: 9999px;
+    border: 1px solid #e2e8f0;
+    background-color: #ffffff;
+    color: #111827;
+    font-family: var(--font-jakarta);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .btn-all-news:hover {
+    border-color: #ed1e28;
+    color: #ed1e28;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(237, 30, 40, 0.12);
+  }
+
+  .btn-arrow {
+    transition: transform 0.2s ease;
+  }
+
+  .btn-all-news:hover .btn-arrow {
+    transform: translateX(3px);
+  }
+
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .news-card {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+
+  .news-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.08);
+    border-color: #fca5a5;
+  }
+
+  .news-image-wrap {
+    position: relative;
+    width: 100%;
+    height: 160px;
+    background: linear-gradient(135deg, #fef2f2 0%, #f8fafc 100%);
+    border-bottom: 1px solid #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .news-header-bg {
+    opacity: 0.35;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .news-card:hover .news-header-bg {
+    transform: scale(1.1);
+    opacity: 0.6;
+  }
+
+  .news-category-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: 2;
+    background-color: #ed1e28;
+    color: #ffffff;
+    font-family: var(--font-jakarta);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.3rem 0.85rem;
+    border-radius: 9999px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .news-body {
+    padding: 1.75rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .news-date {
+    font-family: var(--font-jakarta);
+    font-size: 0.8125rem;
+    color: #94a3b8;
+    margin-bottom: 0.625rem;
+  }
+
+  .news-heading {
+    font-family: var(--font-jakarta);
+    font-size: 1.0625rem;
+    font-weight: 800;
+    line-height: 1.4;
+    color: #111827;
+    margin-bottom: 0.875rem;
+  }
+
+  .news-heading a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .news-heading a:hover {
+    color: #ed1e28;
+  }
+
+  .news-summary {
+    font-family: var(--font-jakarta);
+    font-size: 0.875rem;
+    color: #64748b;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  @media (max-width: 992px) {
+    .berita-title {
+      font-size: 2.25rem;
+    }
+
+    .news-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .berita-title {
+      font-size: 1.85rem;
+    }
+  }
+</style>
