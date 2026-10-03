@@ -12,3 +12,9 @@ Only an explicit choice of antislop during or after selects a session mode. A re
 If the mode is unresolved, ask during/after and end the response; wait for the answer before any UI review, planning, or concept. For read-only tasks, put the active-mode notice only at the start of the final answer, never in progress messages. For editing tasks, announce before the first edit and omit it from the final answer.
 To update antislop later: download `antislop.md` again, or run `npx antislop-ai --update` if it was installed as skill folders.
 <!-- antislop:end -->
+
+## Project Asset Rules
+
+- **Semua file di `app/public/images/` adalah milik user.** Jangan hapus, replace, atau overwrite file-file tersebut tanpa konfirmasi eksplisit dari user.
+- Jika user meminta "hapus gambar yang bukan dari aku", yang dimaksud adalah: gambar yang muncul di **website/kode** tapi **TIDAK ada file-nya** di folder `app/public/images/`. Bukan menghapus file yang ada di folder tersebut.
+- Sebelum melakukan operasi batch pada file aset (hapus, replace, rename), **selalu konfirmasi** daftar file yang akan diubah ke user terlebih dahulu.
