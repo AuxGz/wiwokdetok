@@ -20,20 +20,20 @@ const isInformasiActive = isBerita || isCvGen || isPkl;
 
 <header class="site-header sticky top-3.5 z-[100] py-2 bg-transparent">
   <Container>
-    <div class="header-pill bg-white/95 backdrop-blur-md rounded-full border border-black/[0.07] px-4 sm:px-6 md:px-7 h-[68px] shadow-[0_4px_20px_rgba(0,0,0,0.06),0_1px_3px_rgba(0,0,0,0.02)] flex items-center justify-between tablet:grid tablet:grid-cols-[1fr_auto_1fr] transition-all duration-200">
+    <div class="header-pill bg-white/95 backdrop-blur-md rounded-full border border-black/[0.07] px-4 sm:px-6 md:px-7 h-[68px] shadow-[0_4px_20px_rgba(0,0,0,0.06),0_1px_3px_rgba(0,0,0,0.02)] flex items-center justify-between xl:grid xl:grid-cols-[1fr_auto_1fr] transition-all duration-200">
       <!-- Brand Logo (Column 1: Left aligned) -->
-      <a href="/" class="brand-link flex items-center gap-2.5 sm:gap-3 no-underline justify-self-start" aria-label="Beranda SMK Telkom Purwokerto">
+      <a href="/" class="brand-link flex items-center gap-2.5 sm:gap-3 no-underline justify-self-start shrink-0" aria-label="Beranda SMK Telkom Purwokerto">
         <div class="brand-logo-wrap shrink-0 flex items-center justify-center">
           <img src="/images/brand/logo-telkom-schools.png" alt="Logo SMK Telkom Purwokerto" class="brand-logo-img w-[36px] h-[36px] sm:w-[40px] sm:h-[40px] object-contain block" width="40" height="40" />
         </div>
         <div class="brand-text-group flex flex-col justify-center">
-          <span class="brand-title font-poppins text-[1rem] sm:text-[1.0625rem] font-bold text-[#111827] leading-[1.15]">SMK Telkom Purwokerto</span>
-          <span class="brand-subtitle font-inter text-[0.75rem] font-semibold text-gray-400 tracking-[0.08em] leading-none mt-0.5">TELKOM SCHOOLS</span>
+          <span class="brand-title font-poppins text-[1rem] sm:text-[1.0625rem] font-bold text-[#111827] leading-[1.15] whitespace-nowrap">SMK Telkom Purwokerto</span>
+          <span class="brand-subtitle font-inter text-[0.75rem] font-semibold text-gray-400 tracking-[0.08em] leading-none mt-0.5 whitespace-nowrap">TELKOM SCHOOLS</span>
         </div>
       </a>
 
       <!-- Desktop Nav (Column 2: Centered) -->
-      <nav class="desktop-nav hidden tablet:flex items-center gap-5 lg:gap-6.5 justify-self-center" aria-label="Navigasi Utama">
+      <nav class="desktop-nav hidden tablet:flex items-center gap-[24px] lg:gap-[32px] xl:gap-[38px] 2xl:gap-[42px] justify-self-center" aria-label="Navigasi Utama">
         <a
           href="/"
           class={`nav-item font-jakarta text-[0.9375rem] lg:text-[1rem] py-2 relative cursor-pointer no-underline transition-colors duration-150 ${currentPath === "/" ? "font-bold text-[#ed1e28]" : "font-semibold text-[#374151] hover:text-[#111827]"}`}
