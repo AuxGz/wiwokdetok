@@ -7,7 +7,7 @@ const newsList = [
     date: "13 Agustus 2026",
     title: "SMPB SMK Telkom Purwokerto 2027/2028 Jalur EASY Resmi dibuka!",
     summary: "Kabar gembira! Pendaftaran SPMB SMK Telkom Purwokerto TA 2027/2028 Jalur EASY untuk calon peserta didik baru telah resmi dibuka.",
-    image: "/images/berita_spmb.png",
+    image: "/images/image 25.png",
     featured: false,
   },
   {
@@ -15,7 +15,7 @@ const newsList = [
     date: "11 Agustus 2026",
     title: "SMK Telkom Purwokerto: Menuju School of Global Technopreneur",
     summary: "Program School of Global Technopreneur SMK Telkom Purwokerto dirancang untuk mencetak lulusan yang jago teknologi, berkarakter, dan siap menjadi wirausahawan di tingkat global.",
-    image: "/images/berita_technopreneur.png",
+    image: "/images/image 24.png",
     featured: true,
   },
   {
@@ -23,61 +23,58 @@ const newsList = [
     date: "28 Juli 2026",
     title: "Siswa SMK Telkom Purwokerto meraih berbagai prestasi olahraga mulai dari tingkat kabupaten sampai internasional.",
     summary: "Sepanjang Juni 2026, siswa SMK Telkom Purwokerto sukses memborong prestasi olahraga dari tingkat kabupaten hingga turnamen terbuka nasional dan internasional.",
-    image: "/images/berita_prestasi.png",
+    image: "/images/image 26.png",
     featured: false,
   },
 ];
 ---
 
-<section class="berita-section" id="berita">
+<section class="py-12 sm:py-16 lg:pt-20 lg:pb-24 bg-white" id="berita">
   <Container>
-    <div class="berita-inner">
+    <div class="max-w-[1140px] mx-auto">
       <!-- Section Header -->
-      <div class="berita-header-row">
-        <div class="header-left">
-          <div class="section-tagline">
-            <span class="tagline-dash"></span>
-            <span>BERITA</span>
+      <div class="flex justify-between items-end mb-10 sm:mb-14 gap-6 flex-wrap">
+        <div class="flex flex-col">
+          <div class="inline-flex items-center gap-2.5 mb-3.5">
+            <span class="inline-block w-[22px] h-[2px] bg-[#ed1e28] rounded-[1px]"></span>
+            <span class="font-poppins text-[0.8125rem] font-bold text-[#ed1e28] tracking-[0.06em] uppercase">BERITA</span>
           </div>
-          <h2 class="berita-title">Kabar terbaru dari sekolah.</h2>
+          <h2 class="font-poppins text-3xl sm:text-[2.25rem] lg:text-[2.75rem] font-bold leading-[1.15] text-[#111827] tracking-[-0.025em]">
+            Kabar terbaru dari sekolah.
+          </h2>
         </div>
 
-        <div class="header-right-action">
-          <!-- Decorative concentric rings behind button matching Figma -->
-          <svg class="news-concentric-rings" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="80" cy="80" r="75" stroke="#ed1e28" stroke-width="1.2" stroke-opacity="0.28" />
-            <circle cx="80" cy="80" r="50" stroke="#ed1e28" stroke-width="1.2" stroke-opacity="0.38" />
-            <circle cx="80" cy="80" r="5" fill="#ed1e28" />
-          </svg>
-          <a href="#berita" class="btn-all-news">
+        <div class="relative flex items-center justify-center">
+          <a href="#berita" class="group inline-flex items-center gap-2 py-2.5 px-6 rounded-full border border-slate-200 bg-white text-[#111827] font-jakarta text-sm font-semibold shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:border-[#ed1e28] hover:text-[#ed1e28] hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(237,30,40,0.12)] transition-all duration-200">
             <span>Semua berita</span>
-            <span class="btn-arrow">→</span>
+            <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">→</span>
           </a>
         </div>
       </div>
 
       <!-- News Cards Grid -->
-      <div class="news-grid">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {
           newsList.map((item) => (
-            <article class={`news-card ${item.featured ? "featured-card" : ""}`}>
-              <div class="news-image-wrap">
+            <article class="group bg-white border border-[#e8ecf4] rounded-[20px] overflow-hidden flex flex-col shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:-translate-y-1 hover:shadow-[0_14px_28px_rgba(0,0,0,0.08)] transition-all duration-250">
+              <div class="relative w-full h-[215px] bg-slate-100 overflow-hidden">
+                <span class="absolute top-4 left-4 z-2 bg-[#ed1e28] text-white font-jakarta text-xs font-bold py-1.5 px-3.5 rounded-full tracking-[0.02em] shadow-[0_2px_8px_rgba(0,0,0,0.2)]">{item.badge}</span>
                 <img
                   src={item.image}
                   alt={item.title}
-                  class="news-cover-img"
+                  class="w-full h-full object-cover object-top block transition-transform duration-300 group-hover:scale-105"
                   width="380"
-                  height="190"
+                  height="220"
                   loading="lazy"
                 />
               </div>
 
-              <div class="news-body">
-                <span class="news-date">{item.date}</span>
-                <h3 class="news-heading">
-                  <a href="#berita">{item.title}</a>
+              <div class="p-6 sm:p-7 flex flex-col flex-1">
+                <span class="font-jakarta text-[0.8125rem] text-slate-400 mb-2.5">{item.date}</span>
+                <h3 class="font-poppins text-lg font-bold leading-[1.45] text-[#111827] mb-3">
+                  <a href="#berita" class="hover:text-[#ed1e28] transition-colors duration-150">{item.title}</a>
                 </h3>
-                <p class="news-summary">{item.summary}</p>
+                <p class="font-jakarta text-sm text-[#64748b] leading-[1.6] m-0">{item.summary}</p>
               </div>
             </article>
           ))
@@ -86,226 +83,3 @@ const newsList = [
     </div>
   </Container>
 </section>
-
-<style>
-  .berita-section {
-    padding: 5rem 0 6rem 0;
-    background-color: #ffffff;
-  }
-
-  .berita-inner {
-    max-width: 1140px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .berita-header-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 3.5rem;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-  }
-
-  .section-tagline {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.625rem;
-    font-family: var(--font-poppins);
-    font-size: 0.8125rem;
-    font-weight: 700;
-    color: #ed1e28;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin-bottom: 0.875rem;
-  }
-
-  .tagline-dash {
-    display: inline-block;
-    width: 22px;
-    height: 2px;
-    background-color: #ed1e28;
-    border-radius: 1px;
-  }
-
-  .berita-title {
-    font-family: var(--font-poppins);
-    font-size: 2.75rem;
-    font-weight: 800;
-    line-height: 1.15;
-    color: #111827;
-    letter-spacing: -0.025em;
-  }
-
-  .header-right-action {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .news-concentric-rings {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 140px;
-    height: 140px;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .btn-all-news {
-    position: relative;
-    z-index: 1;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.65rem 1.5rem;
-    border-radius: 9999px;
-    border: 1px solid #e2e8f0;
-    background-color: #ffffff;
-    color: #111827;
-    font-family: var(--font-jakarta);
-    font-size: 0.875rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-  }
-
-  .btn-all-news:hover {
-    border-color: #ed1e28;
-    color: #ed1e28;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(237, 30, 40, 0.12);
-  }
-
-  .btn-arrow {
-    transition: transform 0.2s ease;
-  }
-
-  .btn-all-news:hover .btn-arrow {
-    transform: translateX(3px);
-  }
-
-  .news-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-  }
-
-  .news-card {
-    background-color: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 20px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
-    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-  }
-
-  .news-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.08);
-  }
-
-  .news-card.featured-card {
-    border: 2px solid #ed1e28;
-    box-shadow: 0 8px 24px rgba(237, 30, 40, 0.12);
-  }
-
-  .news-image-wrap {
-    position: relative;
-    width: 100%;
-    height: 190px;
-    background-color: #f1f5f9;
-    overflow: hidden;
-  }
-
-  .news-cover-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.3s ease;
-  }
-
-  .news-card:hover .news-cover-img {
-    transform: scale(1.04);
-  }
-
-  .news-category-badge {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    z-index: 2;
-    background-color: #ed1e28;
-    color: #ffffff;
-    font-family: var(--font-jakarta);
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 0.3rem 0.85rem;
-    border-radius: 9999px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  }
-
-  .news-body {
-    padding: 1.75rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-  }
-
-  .news-date {
-    font-family: var(--font-jakarta);
-    font-size: 0.8125rem;
-    color: #94a3b8;
-    margin-bottom: 0.625rem;
-  }
-
-  .news-heading {
-    font-family: var(--font-jakarta);
-    font-size: 1.0625rem;
-    font-weight: 800;
-    line-height: 1.4;
-    color: #111827;
-    margin-bottom: 0.875rem;
-  }
-
-  .news-heading a {
-    color: inherit;
-    text-decoration: none;
-    transition: color 0.15s ease;
-  }
-
-  .news-heading a:hover {
-    color: #ed1e28;
-  }
-
-  .news-summary {
-    font-family: var(--font-jakarta);
-    font-size: 0.875rem;
-    color: #64748b;
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  @media (max-width: 992px) {
-    .berita-title {
-      font-size: 2.25rem;
-    }
-
-    .news-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .berita-title {
-      font-size: 1.85rem;
-    }
-  }
-</style>

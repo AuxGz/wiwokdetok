@@ -12,30 +12,30 @@ const partners = [
 ];
 ---
 
-<section class="kerjasama-section" id="kerjasama">
+<section class="py-6 sm:py-7 bg-white border-y border-slate-100 overflow-hidden" id="kerjasama">
   <Container>
-    <div class="kerjasama-header">
-      <div class="header-left">
-        <span class="tagline-dash"></span>
-        <span class="kerjasama-label">KERJASAMA INDUSTRI</span>
-        <span class="tagline-dash"></span>
+    <div class="flex items-center justify-between flex-wrap gap-5 max-w-[1140px] mx-auto mb-3.5">
+      <div class="inline-flex items-center gap-3">
+        <span class="inline-block w-[26px] h-[2.5px] bg-[#ed1e28] rounded-[1px]"></span>
+        <span class="font-poppins text-sm sm:text-[0.9375rem] font-bold text-[#ed1e28] tracking-[0.08em] uppercase">KERJASAMA INDUSTRI</span>
+        <span class="inline-block w-[26px] h-[2.5px] bg-[#ed1e28] rounded-[1px]"></span>
       </div>
-      <p class="header-right">
+      <p class="font-jakarta text-sm sm:text-base text-slate-600 m-0">
         182 mitra aktif untuk PKL, kelas industri, dan penyaluran kerja.
       </p>
     </div>
   </Container>
 
   <!-- Infinite Scrolling Marquee Track from Right to Left -->
-  <div class="mitra-marquee-wrapper" id="mitra-marquee">
-    <div class="mitra-track" id="mitra-track">
+  <div class="relative w-full overflow-hidden py-1.5 [mask-image:linear-gradient(to_right,transparent_0%,black_8%,black_92%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_8%,black_92%,transparent_100%)]" id="mitra-marquee">
+    <div class="flex items-center gap-16 w-max animate-marquee will-change-transform" id="mitra-track">
       {
         [...partners, ...partners, ...partners, ...partners].map((partner, index) => (
-          <div class="partner-item" data-index={index} title={partner.name}>
+          <div class="shrink-0 flex items-center justify-center w-[175px] h-[62px] px-2" data-index={index} title={partner.name}>
             <img
               src={partner.logo}
               alt={partner.name}
-              class="partner-logo-img"
+              class="max-w-[150px] max-h-[52px] w-auto h-auto object-contain block select-none pointer-events-none [transform-origin:center] drop-shadow-[0_1px_3px_rgba(0,0,0,0.04)]"
               style={`transform: scale(${partner.scale});`}
               loading="eager"
               decoding="async"
@@ -46,155 +46,3 @@ const partners = [
     </div>
   </div>
 </section>
-
-<style>
-  .kerjasama-section {
-    padding: 1.5rem 0 1.75rem 0;
-    background-color: #ffffff;
-    border-top: 1px solid #f1f5f9;
-    border-bottom: 1px solid #f1f5f9;
-    overflow: hidden;
-  }
-
-  .kerjasama-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 0.875rem;
-    flex-wrap: wrap;
-    gap: 1.25rem;
-    max-width: 1140px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .header-left {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .tagline-dash {
-    display: inline-block;
-    width: 26px;
-    height: 2.5px;
-    background-color: #ed1e28;
-    border-radius: 1px;
-  }
-
-  .kerjasama-label {
-    font-family: var(--font-poppins);
-    font-size: 0.9375rem;
-    font-weight: 700;
-    color: #ed1e28;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .header-right {
-    font-family: var(--font-jakarta);
-    font-size: 1rem;
-    color: #475569;
-    margin: 0;
-  }
-
-  .mitra-marquee-wrapper {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    padding: 0.375rem 0;
-    mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-  }
-
-  .mitra-track {
-    display: flex;
-    align-items: center;
-    gap: 4rem;
-    width: max-content;
-    animation: marqueeScrollLeft 36s linear infinite;
-    will-change: transform;
-  }
-
-  /* Right to Left smooth continuous scroll */
-  @keyframes marqueeScrollLeft {
-    0% {
-      transform: translate3d(0, 0, 0);
-    }
-    100% {
-      transform: translate3d(-25%, 0, 0);
-    }
-  }
-
-  /* Uniform logo container bounding box */
-  .partner-item {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 175px;
-    height: 62px;
-    padding: 0 0.5rem;
-  }
-
-  /* Standardized, uniform logo display */
-  .partner-logo-img {
-    max-width: 150px;
-    max-height: 52px;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    display: block;
-    user-select: none;
-    pointer-events: none;
-    transform-origin: center center;
-    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.04));
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .mitra-track {
-      animation: none !important;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .mitra-track::-webkit-scrollbar {
-      display: none;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .kerjasama-section {
-      padding: 1.35rem 0 1.5rem 0;
-    }
-
-    .kerjasama-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.5rem;
-      margin-bottom: 0.875rem;
-    }
-
-    .kerjasama-label {
-      font-size: 0.875rem;
-    }
-
-    .header-right {
-      font-size: 0.9375rem;
-    }
-
-    .mitra-track {
-      gap: 2.5rem;
-      animation-duration: 28s;
-    }
-
-    .partner-item {
-      width: 135px;
-      height: 50px;
-    }
-
-    .partner-logo-img {
-      max-width: 118px;
-      max-height: 42px;
-    }
-  }
-</style>

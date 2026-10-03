@@ -21,33 +21,33 @@ const faqs = [
 ];
 ---
 
-<section class="faq-section" id="faq">
+<section class="py-14 sm:py-18 bg-white" id="faq">
   <Container>
-    <div class="faq-wrapper">
+    <div class="flex flex-col lg:flex-row justify-between items-start gap-9 lg:gap-14 max-w-[1140px] mx-auto">
       <!-- Left Column: Copy & Help Card -->
-      <div class="faq-left-col">
-        <div class="faq-tagline">
-          <span class="tagline-dash"></span>
-          <span class="tagline-text">FAQ</span>
+      <div class="w-full lg:w-[380px] shrink-0 flex flex-col">
+        <div class="flex items-center gap-2 mb-3.5">
+          <span class="inline-block w-[22px] h-[2px] bg-[#ed1e28] rounded-[2px]"></span>
+          <span class="font-poppins text-[11px] font-semibold text-[#ed1e28] tracking-[0.16em] uppercase">FAQ</span>
         </div>
 
-        <h2 class="faq-heading">
+        <h2 class="font-jakarta text-3xl sm:text-[2.25rem] font-bold leading-[1.2] tracking-[-0.015em] text-[#33343a] mb-3.5">
           Pertanyaan yang<br />Sering Diajukan
         </h2>
 
-        <p class="faq-description">
+        <p class="font-jakarta text-[0.9375rem] leading-[1.6] text-[#55565b] mb-7 max-w-[360px]">
           Temukan jawaban seputar proses pendaftaran, program keahlian, dan informasi penting lainnya di SMK Telkom Purwokerto.
         </p>
 
         <!-- Help Card matching Figma 1:1 -->
-        <div class="faq-help-card">
-          <div class="help-icon-wrap" aria-hidden="true">
-            <img src="/images/faq-support-icon.svg" alt="" width="24" height="24" class="help-svg" />
+        <div class="w-full max-w-[440px] lg:max-w-none p-5 sm:p-[22px_24px] bg-white border border-[#e7e8ea] rounded-[20px] shadow-[0px_6px_20px_0px_rgba(85,86,91,0.06)] flex flex-col gap-4">
+          <div class="w-12 h-12 bg-[#fdf1f2] rounded-[14px] flex items-center justify-center" aria-hidden="true">
+            <img src="/images/faq-support-icon.svg" alt="" width="24" height="24" class="block w-[22px] h-[22px]" />
           </div>
 
-          <div class="help-text-group">
-            <h3 class="help-title">Masih punya pertanyaan?</h3>
-            <p class="help-subtitle">
+          <div class="flex flex-col gap-1">
+            <h3 class="font-jakarta text-[1.0625rem] font-bold leading-[1.35] tracking-[0.002em] text-[#33343a] m-0">Masih punya pertanyaan?</h3>
+            <p class="font-jakarta text-[0.8125rem] leading-[1.5] tracking-[0.001em] text-[#55565b] m-0">
               Tim kami siap membantu menjawab pertanyaan seputar PPDB dan program sekolah.
             </p>
           </div>
@@ -56,48 +56,48 @@ const faqs = [
             href="https://wa.me/6281229701800?text=Halo%20Admin,%20saya%20ingin%20bertanya%20seputar%20SMK%20Telkom%20Purwokerto"
             target="_blank"
             rel="noopener noreferrer"
-            class="btn-hubungi-kami"
+            class="inline-flex items-center justify-center gap-2 py-[11px] px-[22px] bg-[#ed1e28] hover:bg-[#d81820] active:scale-[0.98] text-white font-jakarta text-sm font-bold leading-[1.5] rounded-full shadow-[0px_4px_14px_0px_rgba(237,30,40,0.22)] transition-all duration-150"
           >
             <span>Hubungi Kami</span>
-            <img src="/images/hubungi-arrow.svg" alt="" width="12" height="13" class="btn-arrow-icon" aria-hidden="true" />
+            <img src="/images/hubungi-arrow.svg" alt="" width="12" height="13" class="block" aria-hidden="true" />
           </a>
         </div>
       </div>
 
       <!-- Right Column: Accordion List matching Figma 1:1 -->
-      <div class="faq-right-col">
-        <div class="accordion-list">
+      <div class="w-full flex-1 min-w-0">
+        <div class="flex flex-col">
           {
             faqs.map((item, index) => (
-              <div class="faq-item-wrap">
-                <div class="faq-divider" aria-hidden="true"></div>
-                <div class={`faq-item ${index === 0 ? "active" : ""}`} data-index={index}>
+              <div class="flex flex-col">
+                <div class="h-px bg-[#e7e8ea] w-full" aria-hidden="true"></div>
+                <div class={`faq-item py-3.5 group/faq ${index === 0 ? "active" : ""}`} data-index={index}>
                   <button
                     type="button"
-                    class="faq-trigger"
+                    class="faq-trigger w-full min-h-[52px] py-2.5 px-4 bg-[#f7f7f8] hover:bg-[#eeeeef] focus-visible:outline-2 focus-visible:outline-[#ed1e28] focus-visible:outline-offset-2 border-0 rounded-[10px] flex justify-between items-center cursor-pointer text-left transition-colors duration-200"
                     aria-expanded={index === 0 ? "true" : "false"}
                     aria-controls={`faq-answer-${index}`}
                     id={`faq-btn-${index}`}
                   >
-                    <span class="faq-question">{item.question}</span>
-                    <span class="faq-toggle-circle" aria-hidden="true">
-                      <img src="/images/accordion-plus.svg" alt="" width="13" height="14" class="toggle-icon" />
+                    <span class="faq-question font-jakarta text-sm sm:text-[0.9375rem] font-bold leading-[1.4] text-[#33343a] pr-3">{item.question}</span>
+                    <span class="faq-toggle-circle w-8 h-8 rounded-full bg-white border border-[#e7e8ea] group-[.active]/faq:bg-[#fdf1f2] group-[.active]/faq:border-[#ed1e28] flex items-center justify-center shrink-0 transition-all duration-200" aria-hidden="true">
+                      <img src="/images/accordion-plus.svg" alt="" width="13" height="14" class="toggle-icon block w-[11px] h-[12px] transition-transform duration-250 group-[.active]/faq:rotate-45" />
                     </span>
                   </button>
                   <div
-                    class="faq-content"
+                    class="faq-content px-4 pt-3.5 pb-1.5"
                     id={`faq-answer-${index}`}
                     role="region"
                     aria-labelledby={`faq-btn-${index}`}
                     style={index === 0 ? "display: block;" : "display: none;"}
                   >
-                    <p class="faq-answer-text">{item.answer}</p>
+                    <p class="font-jakarta text-sm leading-[1.6] text-[#55565b] m-0">{item.answer}</p>
                   </div>
                 </div>
               </div>
             ))
           }
-          <div class="faq-divider" aria-hidden="true"></div>
+          <div class="h-px bg-[#e7e8ea] w-full" aria-hidden="true"></div>
         </div>
       </div>
     </div>
@@ -148,307 +148,3 @@ const faqs = [
     initFaqAccordion();
   }
 </script>
-
-<style>
-  .faq-section {
-    padding: 4.5rem 0;
-    background-color: #ffffff;
-  }
-
-  .faq-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 3.5rem;
-    max-width: 1140px;
-    margin: 0 auto;
-  }
-
-  /* Left Column */
-  .faq-left-col {
-    width: 380px;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .faq-tagline {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 0.875rem;
-  }
-
-  .tagline-dash {
-    display: inline-block;
-    width: 22px;
-    height: 2px;
-    background-color: #ed1e28;
-    border-radius: 2px;
-  }
-
-  .tagline-text {
-    font-family: var(--font-poppins);
-    font-size: 11px;
-    font-weight: 600;
-    color: #ed1e28;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-  }
-
-  .faq-heading {
-    font-family: var(--font-jakarta);
-    font-size: 2.25rem;
-    font-weight: 800;
-    line-height: 1.2;
-    letter-spacing: -0.015em;
-    color: #33343a;
-    margin: 0 0 0.875rem 0;
-  }
-
-  .faq-description {
-    font-family: var(--font-jakarta);
-    font-size: 0.9375rem;
-    line-height: 1.6;
-    color: #55565b;
-    margin: 0 0 1.75rem 0;
-    max-width: 360px;
-  }
-
-  /* Help Card */
-  .faq-help-card {
-    width: 100%;
-    padding: 22px 24px;
-    background-color: #ffffff;
-    border: 1px solid #e7e8ea;
-    border-radius: 20px;
-    box-shadow: 0px 6px 20px 0px rgba(85, 86, 91, 0.06);
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .help-icon-wrap {
-    width: 48px;
-    height: 48px;
-    background-color: #fdf1f2;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .help-svg {
-    display: block;
-    width: 22px;
-    height: 22px;
-  }
-
-  .help-text-group {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .help-title {
-    font-family: var(--font-jakarta);
-    font-size: 1.0625rem;
-    font-weight: 700;
-    line-height: 1.35;
-    letter-spacing: 0.002em;
-    color: #33343a;
-    margin: 0;
-  }
-
-  .help-subtitle {
-    font-family: var(--font-jakarta);
-    font-size: 0.8125rem;
-    line-height: 1.5;
-    letter-spacing: 0.001em;
-    color: #55565b;
-    margin: 0;
-  }
-
-  .btn-hubungi-kami {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 11px 22px;
-    background-color: #ed1e28;
-    color: #ffffff;
-    font-family: var(--font-jakarta);
-    font-size: 0.875rem;
-    font-weight: 700;
-    line-height: 1.5;
-    border-radius: 9999px;
-    text-decoration: none;
-    box-shadow: 0px 4px 14px 0px rgba(237, 30, 40, 0.22);
-    transition: background-color 0.2s ease, transform 0.15s ease;
-  }
-
-  .btn-hubungi-kami:hover {
-    background-color: #d81820;
-    transform: translateY(-1px);
-  }
-
-  .btn-hubungi-kami:active {
-    transform: scale(0.98);
-  }
-
-  .btn-arrow-icon {
-    display: block;
-  }
-
-  /* Right Column: Accordions */
-  .faq-right-col {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .accordion-list {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .faq-item-wrap {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .faq-divider {
-    height: 1px;
-    background-color: #e7e8ea;
-    width: 100%;
-  }
-
-  .faq-item {
-    padding: 14px 0;
-  }
-
-  .faq-trigger {
-    width: 100%;
-    min-height: 52px;
-    padding: 10px 16px;
-    background-color: #f7f7f8;
-    border: none;
-    border-radius: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    text-align: left;
-    transition: background-color 0.2s ease;
-  }
-
-  .faq-trigger:hover {
-    background-color: #eeeeef;
-  }
-
-  .faq-trigger:focus-visible {
-    outline: 2px solid #ed1e28;
-    outline-offset: 2px;
-  }
-
-  .faq-question {
-    font-family: var(--font-jakarta);
-    font-size: 0.9375rem;
-    font-weight: 700;
-    line-height: 1.4;
-    color: #33343a;
-    padding-right: 0.75rem;
-  }
-
-  .faq-toggle-circle {
-    width: 32px;
-    height: 32px;
-    border-radius: 9999px;
-    background-color: #ffffff;
-    border: 1px solid #e7e8ea;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease;
-  }
-
-  .toggle-icon {
-    display: block;
-    width: 11px;
-    height: 12px;
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .faq-item.active .faq-toggle-circle {
-    background-color: #fdf1f2;
-    border-color: #ed1e28;
-  }
-
-  .faq-item.active .toggle-icon {
-    transform: rotate(45deg);
-  }
-
-  .faq-content {
-    padding: 0.875rem 1rem 0.375rem 1rem;
-    animation: fadeIn 0.25s ease-out;
-  }
-
-  .faq-answer-text {
-    font-family: var(--font-jakarta);
-    font-size: 0.875rem;
-    line-height: 1.6;
-    color: #55565b;
-    margin: 0;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-4px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Responsive Breakpoints */
-  @media (max-width: 1024px) {
-    .faq-wrapper {
-      flex-direction: column;
-      gap: 36px;
-    }
-
-    .faq-left-col {
-      width: 100%;
-    }
-
-    .faq-help-card {
-      width: 100%;
-      max-width: 440px;
-    }
-
-    .faq-right-col {
-      width: 100%;
-      max-width: 100%;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .faq-section {
-      padding: 3.5rem 0;
-    }
-
-    .faq-heading {
-      font-size: 1.875rem;
-    }
-
-    .faq-question {
-      font-size: 0.875rem;
-    }
-
-    .faq-help-card {
-      padding: 18px 20px;
-    }
-  }
-</style>

@@ -6,29 +6,36 @@ const alumniList = [
     name: "PROF. DR. IR. MOH. KHAIRUDIN, M.T., PH.D.",
     role: "(Guru Besar Universitas Negeri Yogyakarta | Lulusan 1998)",
     quote: "Fondasi teknologi dan karakter yang saya dapatkan di SMK Telkom adalah pijakan awal kesuksesan. Kini saya bangga melihat almamater saya terus mencetak pemimpin masa depan.",
-    image: "/images/alumni_khairudin.png",
-    ringClass: "",
+    image: "/images/Image (Prof. Dr. Ir. Moh. Khairudin, M.T., Ph.D.).png",
+    ringClass: "border-white shadow-[0_4px_14px_rgba(0,0,0,0.12)]",
   },
   {
     name: "DR. TENIA WAHYUNINGRUM, S.KOM., M.T.",
     role: "(Direktur Telkom University Purwokerto | Lulusan 2001)",
     quote: "SMK Telkom Purwokerto adalah kawah candradimuka talenta digital. Lulusannya terbukti memiliki daya saing tinggi saat melanjutkan studi di Telkom University.",
-    image: "/images/alumni_tenia.png",
-    ringClass: "",
+    image: "/images/Image (Dr. Tenia Wahyuningrum, S.Kom., M.T.).png",
+    ringClass: "border-white shadow-[0_4px_14px_rgba(0,0,0,0.12)]",
   },
   {
     name: "ALFA PUTRA KURNIA",
     role: "(Co-founder & CEO Arkademy.com | Alumni TKJ)",
     quote: "Menghadapi dunia bisnis butuh skill, knowledge, dan attitude. Semua fondasi adaptasi dunia kerja itu saya dapatkan lengkap di SMK Telkom Purwokerto.",
-    image: "/images/alumni_alfa.png",
-    ringClass: "avatar-blue-ring",
+    image: "/images/Image (Alfa Putra Kurnia).png",
+    ringClass: "border-white shadow-[0_4px_14px_rgba(0,0,0,0.12)]",
+  },
+  {
+    name: "PRARIARGA MAOLANA B.",
+    role: "(Manager PT PLN (Persero) ULP Purwokerto Kota | Alumni)",
+    quote: "Menghadapi dunia bisnis dan perdagangan yang sangat kompleks dibutuhkan skill, knowledge, dan attitude. Semua bekal itu ada di SMK Telkom Purwokerto.",
+    image: "/images/Image (Prariarga Maolana B.).png",
+    ringClass: "border-white shadow-[0_4px_14px_rgba(0,0,0,0.12)]",
   },
 ];
 ---
 
-<section class="alumni-section" id="alumni">
+<section class="relative py-12 sm:py-16 lg:pt-20 lg:pb-24 bg-white overflow-hidden" id="alumni">
   <!-- Subtle Background Dot Grid Matrix matching Figma -->
-  <svg class="alumni-bg-dots" viewBox="0 0 1440 600" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1440 600" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <defs>
       <pattern id="alumni-dot-pat" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
         <circle cx="14" cy="14" r="2" fill="#ed1e28" fill-opacity="0.12" />
@@ -38,48 +45,91 @@ const alumniList = [
   </svg>
 
   <Container>
-    <div class="alumni-inner">
+    <div class="relative z-1 max-w-[1140px] mx-auto">
       <!-- Section Header -->
-      <div class="alumni-header">
-        <div class="alumni-eyebrow">
-          <span>Alumni</span> <span class="text-red">SMK Telkom Purwokerto</span>
+      <div class="text-center mb-10 sm:mb-14">
+        <div class="font-poppins text-base sm:text-lg font-bold text-[#111827] mb-1.5">
+          <span>Alumni</span> <span class="text-[#ed1e28]">SMK Telkom Purwokerto</span>
         </div>
-        <h2 class="alumni-title">Cerita Sukses Alumni</h2>
+        <h2 class="font-poppins text-3xl sm:text-[2.25rem] lg:text-[2.85rem] font-bold text-[#ed1e28] leading-[1.15] tracking-[-0.025em]">
+          Cerita Sukses Alumni
+        </h2>
       </div>
 
-      <!-- Carousel Wrap with Cards & Right Nav Button -->
-      <div class="alumni-carousel-container">
-        <div class="alumni-grid">
-          {
-            alumniList.map((item) => (
-              <div class="alumni-card">
-                <div class={`alumni-avatar-wrap ${item.ringClass}`}>
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    class="alumni-avatar-img"
-                    width="76"
-                    height="76"
-                    loading="lazy"
-                  />
-                </div>
+      <!-- Carousel Wrap with Cards & Left/Right Nav Buttons -->
+      <div class="relative flex items-center">
+        <!-- Prev Arrow Button (Left) -->
+        <button
+          type="button"
+          class="carousel-prev-btn hidden lg:flex absolute -left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white border border-slate-200 text-[#111827] items-center justify-center shadow-[0_4px_16px_rgba(0,0,0,0.1)] cursor-pointer hover:bg-[#ed1e28] hover:text-white hover:border-[#ed1e28] hover:-translate-y-1/2 hover:scale-105 active:scale-95 transition-all duration-200 z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ed1e28]"
+          aria-label="Alumni Sebelumnya"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
 
-                <blockquote class="alumni-quote">
-                  "{item.quote}"
-                </blockquote>
+        <!-- Viewport (Clips off-screen slides while providing padding for card elevation/shadows) -->
+        <div class="carousel-viewport overflow-hidden w-full py-4 -my-4 px-1 -mx-1">
+          <div class="carousel-track flex gap-7 will-change-transform">
+            {
+              alumniList.map((item) => (
+                <div class="alumni-card flex-none w-full md:w-[calc((100%-28px)/2)] lg:w-[calc((100%-56px)/3)] bg-white border border-black/[0.06] rounded-[20px] p-6 sm:p-8 lg:pt-11 lg:px-8 lg:pb-9 flex flex-col items-center text-center shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(0,0,0,0.08)] transition-all duration-250 select-none">
+                  <div class={`w-[76px] h-[76px] rounded-full overflow-hidden mb-7 border-[3px] flex items-center justify-center bg-slate-100 shrink-0 ${item.ringClass}`}>
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      class="w-full h-full object-cover block rounded-full pointer-events-none"
+                      width="76"
+                      height="76"
+                      loading="lazy"
+                      draggable="false"
+                    />
+                  </div>
 
-                <div class="alumni-info">
-                  <h3 class="alumni-name">{item.name}</h3>
-                  <p class="alumni-role">{item.role}</p>
+                  <blockquote class="font-jakarta text-[0.9375rem] leading-[1.65] text-[#4b5563] m-0 mb-8 flex-1">
+                    "{item.quote}"
+                  </blockquote>
+
+                  <div class="mt-auto">
+                    <h3 class="font-jakarta text-sm font-extrabold text-[#111827] mb-1 tracking-[0.02em] leading-[1.3]">{item.name}</h3>
+                    <p class="font-jakarta text-xs text-[#64748b] m-0 leading-[1.4]">{item.role}</p>
+                  </div>
                 </div>
-              </div>
-            ))
-          }
+              ))
+            }
+          </div>
         </div>
 
-        <!-- Next Arrow Button -->
-        <button type="button" class="carousel-next-btn" aria-label="Alumni Berikutnya">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Next Arrow Button (Right) -->
+        <button
+          type="button"
+          class="carousel-next-btn hidden lg:flex absolute -right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white border border-slate-200 text-[#111827] items-center justify-center shadow-[0_4px_16px_rgba(0,0,0,0.1)] cursor-pointer hover:bg-[#ed1e28] hover:text-white hover:border-[#ed1e28] hover:-translate-y-1/2 hover:scale-105 active:scale-95 transition-all duration-200 z-10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ed1e28]"
+          aria-label="Alumni Berikutnya"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Navigation Controls (< lg) -->
+      <div class="flex lg:hidden justify-center items-center gap-4 mt-6">
+        <button
+          type="button"
+          class="carousel-prev-btn-mobile w-11 h-11 rounded-full bg-white border border-slate-200 text-[#111827] flex items-center justify-center shadow-[0_4px_14px_rgba(0,0,0,0.08)] active:bg-[#ed1e28] active:text-white active:border-[#ed1e28] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ed1e28]"
+          aria-label="Alumni Sebelumnya"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button
+          type="button"
+          class="carousel-next-btn-mobile w-11 h-11 rounded-full bg-white border border-slate-200 text-[#111827] flex items-center justify-center shadow-[0_4px_14px_rgba(0,0,0,0.08)] active:bg-[#ed1e28] active:text-white active:border-[#ed1e28] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ed1e28]"
+          aria-label="Alumni Berikutnya"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <polyline points="9 18 15 12 9 6"></polyline>
           </svg>
         </button>
@@ -90,21 +140,134 @@ const alumniList = [
 
 <script>
   function initAlumniCarousel() {
-    const nextBtn = document.querySelector(".carousel-next-btn");
-    const grid = document.querySelector(".alumni-grid");
-    if (!nextBtn || !grid) return;
+    const track = document.querySelector(".carousel-track") as HTMLElement | null;
+    const prevBtns = document.querySelectorAll(".carousel-prev-btn, .carousel-prev-btn-mobile");
+    const nextBtns = document.querySelectorAll(".carousel-next-btn, .carousel-next-btn-mobile");
+    if (!track) return;
 
-    nextBtn.addEventListener("click", () => {
-      const firstCard = grid.firstElementChild;
-      if (firstCard) {
-        grid.style.opacity = "0.6";
-        grid.style.transition = "opacity 0.15s ease";
-        setTimeout(() => {
-          grid.appendChild(firstCard);
-          grid.style.opacity = "1";
-        }, 150);
+    let isAnimating = false;
+    const duration = 320;
+    const ease = "cubic-bezier(0.23, 1, 0.32, 1)";
+
+    function getStep(): number {
+      const firstCard = track?.firstElementChild as HTMLElement | null;
+      if (!firstCard || !track) return 389;
+      const cardRect = firstCard.getBoundingClientRect();
+      const style = window.getComputedStyle(track);
+      const gap = parseFloat(style.columnGap || style.gap || "28") || 28;
+      return cardRect.width + gap;
+    }
+
+    function slideNext() {
+      if (isAnimating || !track || track.children.length <= 1) return;
+      isAnimating = true;
+
+      const step = getStep();
+      const firstCard = track.firstElementChild as HTMLElement;
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (prefersReducedMotion) {
+        track.appendChild(firstCard);
+        isAnimating = false;
+        return;
       }
-    });
+
+      track.style.transition = `transform ${duration}ms ${ease}`;
+      track.style.transform = `translateX(-${step}px)`;
+
+      const onTransitionEnd = (e: TransitionEvent) => {
+        if (e.target !== track || e.propertyName !== "transform") return;
+        track.removeEventListener("transitionend", onTransitionEnd);
+        track.style.transition = "none";
+        track.appendChild(firstCard);
+        track.style.transform = "translateX(0)";
+        void track.offsetHeight;
+        isAnimating = false;
+      };
+
+      track.addEventListener("transitionend", onTransitionEnd);
+
+      setTimeout(() => {
+        if (isAnimating) {
+          track.removeEventListener("transitionend", onTransitionEnd);
+          track.style.transition = "none";
+          track.appendChild(firstCard);
+          track.style.transform = "translateX(0)";
+          void track.offsetHeight;
+          isAnimating = false;
+        }
+      }, duration + 50);
+    }
+
+    function slidePrev() {
+      if (isAnimating || !track || track.children.length <= 1) return;
+      isAnimating = true;
+
+      const step = getStep();
+      const lastCard = track.lastElementChild as HTMLElement;
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (prefersReducedMotion) {
+        track.insertBefore(lastCard, track.firstElementChild);
+        isAnimating = false;
+        return;
+      }
+
+      track.style.transition = "none";
+      track.insertBefore(lastCard, track.firstElementChild);
+      track.style.transform = `translateX(-${step}px)`;
+      void track.offsetHeight;
+
+      track.style.transition = `transform ${duration}ms ${ease}`;
+      track.style.transform = "translateX(0)";
+
+      const onTransitionEnd = (e: TransitionEvent) => {
+        if (e.target !== track || e.propertyName !== "transform") return;
+        track.removeEventListener("transitionend", onTransitionEnd);
+        track.style.transition = "none";
+        isAnimating = false;
+      };
+
+      track.addEventListener("transitionend", onTransitionEnd);
+
+      setTimeout(() => {
+        if (isAnimating) {
+          track.removeEventListener("transitionend", onTransitionEnd);
+          track.style.transition = "none";
+          isAnimating = false;
+        }
+      }, duration + 50);
+    }
+
+    nextBtns.forEach((btn) => btn.addEventListener("click", slideNext));
+    prevBtns.forEach((btn) => btn.addEventListener("click", slidePrev));
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    track.addEventListener(
+      "touchstart",
+      (e: TouchEvent) => {
+        touchStartX = e.changedTouches[0].screenX;
+      },
+      { passive: true }
+    );
+
+    track.addEventListener(
+      "touchend",
+      (e: TouchEvent) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchEndX - touchStartX;
+        if (Math.abs(diff) > 40) {
+          if (diff < 0) {
+            slideNext();
+          } else {
+            slidePrev();
+          }
+        }
+      },
+      { passive: true }
+    );
   }
 
   if (document.readyState === "loading") {
@@ -113,198 +276,3 @@ const alumniList = [
     initAlumniCarousel();
   }
 </script>
-
-<style>
-  .alumni-section {
-    position: relative;
-    padding: 5rem 0 6rem 0;
-    background-color: #ffffff;
-    overflow: hidden;
-  }
-
-  .alumni-bg-dots {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .alumni-inner {
-    position: relative;
-    z-index: 1;
-    max-width: 1140px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .alumni-header {
-    text-align: center;
-    margin-bottom: 3.5rem;
-  }
-
-  .alumni-eyebrow {
-    font-family: var(--font-poppins);
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: #111827;
-    margin-bottom: 0.35rem;
-  }
-
-  .text-red {
-    color: #ed1e28;
-  }
-
-  .alumni-title {
-    font-family: var(--font-poppins);
-    font-size: 2.85rem;
-    font-weight: 800;
-    color: #ed1e28;
-    line-height: 1.15;
-    letter-spacing: -0.025em;
-  }
-
-  .alumni-carousel-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-  }
-
-  .alumni-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.75rem;
-    width: 100%;
-  }
-
-  .alumni-card {
-    background-color: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    border-radius: 20px;
-    padding: 2.75rem 2rem 2.25rem 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-  }
-
-  .alumni-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
-  }
-
-  .alumni-avatar-wrap {
-    width: 76px;
-    height: 76px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-bottom: 1.75rem;
-    border: 3px solid #ffffff;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f1f5f9;
-    flex-shrink: 0;
-  }
-
-  .avatar-blue-ring {
-    border: 3px solid #0284c7;
-    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.25);
-  }
-
-  .alumni-avatar-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    border-radius: 50%;
-  }
-
-  .alumni-quote {
-    font-family: var(--font-jakarta);
-    font-size: 0.9375rem;
-    line-height: 1.65;
-    color: #4b5563;
-    margin: 0 0 2rem 0;
-    flex: 1;
-  }
-
-  .alumni-info {
-    margin-top: auto;
-  }
-
-  .alumni-name {
-    font-family: var(--font-jakarta);
-    font-size: 0.875rem;
-    font-weight: 800;
-    color: #111827;
-    margin-bottom: 0.25rem;
-    letter-spacing: 0.02em;
-    line-height: 1.3;
-  }
-
-  .alumni-role {
-    font-family: var(--font-jakarta);
-    font-size: 0.75rem;
-    color: #64748b;
-    margin: 0;
-    line-height: 1.4;
-  }
-
-  /* Carousel Next Arrow */
-  .carousel-next-btn {
-    position: absolute;
-    right: -24px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background-color: #ffffff;
-    border: 1px solid #e2e8f0;
-    color: #111827;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    z-index: 5;
-  }
-
-  .carousel-next-btn:hover {
-    background-color: #ed1e28;
-    color: #ffffff;
-    border-color: #ed1e28;
-    transform: translateY(-50%) scale(1.05);
-  }
-
-  @media (max-width: 992px) {
-    .alumni-title {
-      font-size: 2.25rem;
-    }
-
-    .alumni-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .carousel-next-btn {
-      display: none;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .alumni-title {
-      font-size: 1.85rem;
-    }
-
-    .alumni-card {
-      padding: 2rem 1.5rem;
-    }
-  }
-</style>

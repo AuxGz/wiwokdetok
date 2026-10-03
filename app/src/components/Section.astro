@@ -7,12 +7,6 @@ interface Props {
 const { className = "", id } = Astro.props;
 ---
 
-<section id={id} class={`section ${className}`.trim()}>
+<section id={id} class={`py-12 sm:py-16 lg:py-20 relative w-full ${className}`.trim()}>
   <slot />
 </section>
-
-<style>
-  .section {
-    padding: 3rem 0;
-  }
-</style>

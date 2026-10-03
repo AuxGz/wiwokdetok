@@ -91,7 +91,7 @@ const majorsData = [
       },
       {
         title: "Wireless & Cellular Technology",
-        desc: "Memahami sistem komunikasi radio, gelombang mikro (microwave), dan teknologi seluler termasuk perangkat pada menara telekomunikasi (BTS).",
+        desc: "Memahami sistem komunikasi radio, gelombang microwave, dan teknologi seluler termasuk perangkat pada menara telekomunikasi (BTS).",
         icon: "antenna",
       },
       {
@@ -103,12 +103,18 @@ const majorsData = [
     careers: "Teknisi Fiber Optik (Splicer), Teknisi Instalasi (Installer), Drive Tester, Rigger (Teknisi Menara BTS), dan Network Access Engineer.",
   },
 ];
+
+const studentPositionMap: Record<string, string> = {
+  PG: "h-[370px] sm:h-[450px] lg:h-[540px] left-[calc(50%+16px)] sm:left-[calc(50%+20px)] lg:left-[calc(50%+25px)] -translate-x-1/2 bottom-0",
+  RPL: "h-[370px] sm:h-[450px] lg:h-[540px] left-[calc(50%-8px)] sm:left-[calc(50%-10px)] lg:left-[calc(50%-12px)] -translate-x-1/2 bottom-[-2px]",
+  TKJ: "h-[395px] sm:h-[480px] lg:h-[570px] left-[calc(50%-7px)] sm:left-[calc(50%-8px)] lg:left-[calc(50%-10px)] -translate-x-1/2 bottom-0",
+  TJA: "h-[400px] sm:h-[485px] lg:h-[575px] left-[calc(50%+5px)] sm:left-[calc(50%+6px)] lg:left-[calc(50%+8px)] -translate-x-1/2 bottom-0",
+};
 ---
 
-<section class="jurusan-section" id="jurusan">
+<section class="relative py-12 sm:py-16 lg:pt-18 lg:pb-24 bg-white overflow-hidden" id="jurusan">
   <!-- Framing decorative background dashed curves matching Figma -->
-  <svg class="jurusan-bg-arcs" viewBox="0 0 1440 1030" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <!-- Top-Left framing arc -->
+  <svg class="hidden lg:block absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible" viewBox="0 0 1440 1030" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <path
       d="M 278 -50 L 278 175 C 278 245 220 286 140 286 L -1500 286"
       stroke="#94a3b8"
@@ -118,7 +124,6 @@ const majorsData = [
       stroke-opacity="0.8"
       vector-effect="non-scaling-stroke"
     />
-    <!-- Bottom curve flowing continuously behind student card matching Figma -->
     <path
       d="M 36 1500 L 36 965 C 36 885 155 770 225 770 C 320 700 520 750 520 893 L 520 1500"
       stroke="#94a3b8"
@@ -128,7 +133,6 @@ const majorsData = [
       stroke-opacity="0.8"
       vector-effect="non-scaling-stroke"
     />
-    <!-- Top-Right framing bowl arc -->
     <path
       d="M 1180 -50 C 1145 60 1145 180 1225 285 C 1285 360 1375 355 1440 330 L 3000 200"
       stroke="#94a3b8"
@@ -138,7 +142,6 @@ const majorsData = [
       stroke-opacity="0.8"
       vector-effect="non-scaling-stroke"
     />
-    <!-- Bottom-Right framing corner arc -->
     <path
       d="M 1224 1500 L 1224 920 C 1224 835 1285 800 1360 800 L 3000 800"
       stroke="#94a3b8"
@@ -151,48 +154,48 @@ const majorsData = [
   </svg>
 
   <Container>
-    <div class="jurusan-inner">
+    <div class="relative z-1 max-w-[1200px] mx-auto">
       <!-- Section Header -->
-      <div class="jurusan-header">
-        <div class="header-tagline">
-          <span class="tagline-dash"></span>
-          <span class="tagline-text">PROGRAM KEAHLIAN</span>
-          <span class="tagline-dash"></span>
+      <div class="text-center mb-9">
+        <div class="inline-flex items-center gap-2.5 mb-3.5">
+          <span class="inline-block w-[22px] h-[2px] bg-[#ed1e28] rounded-[1px]"></span>
+          <span class="font-poppins text-[0.8125rem] font-bold text-[#ed1e28] tracking-[0.08em] uppercase">PROGRAM KEAHLIAN</span>
+          <span class="inline-block w-[22px] h-[2px] bg-[#ed1e28] rounded-[1px]"></span>
         </div>
-        <h2 class="jurusan-main-title">
+        <h2 class="font-poppins text-3xl sm:text-[2.15rem] lg:text-[2.75rem] font-bold leading-[1.15] text-[#111827] tracking-[-0.025em]">
           Pilih jurusan di SMK Telkom<br />Purwokerto
         </h2>
       </div>
 
       <!-- Tab Switcher Bar -->
-      <div class="tab-bar-wrap">
-        <div class="tab-bar" role="tablist">
-          <span class="tab-indicator" id="tabIndicator" aria-hidden="true"></span>
+      <div class="flex justify-center mb-10 sm:mb-14">
+        <div class="relative inline-flex items-center bg-[#f8fafc] border border-slate-200 rounded-full p-1 sm:p-1.5 gap-1 sm:gap-1.5 shadow-[0_2px_10px_rgba(0,0,0,0.03)]" role="tablist">
+          <span class="tab-indicator absolute top-1 sm:top-1.5 left-0 h-[calc(100%-0.5rem)] sm:h-[calc(100%-0.75rem)] bg-gradient-to-br from-[#ed1e28] to-[#dc2626] rounded-full shadow-[0_4px_14px_rgba(237,30,40,0.32)] pointer-events-none z-1 will-change-transform" id="tabIndicator" aria-hidden="true"></span>
           {
             majorsData.map((m, idx) => (
               <button
                 type="button"
                 role="tab"
-                class={`tab-btn ${idx === 0 ? "active" : ""}`}
+                class={`tab-btn relative z-2 inline-flex items-center gap-1.5 sm:gap-2 py-2 sm:py-2.5 px-3.5 sm:px-6 rounded-full bg-transparent border-0 text-[#475569] [&.active]:text-white font-jakarta text-[0.8125rem] sm:text-sm font-bold cursor-pointer transition-colors duration-250 outline-none select-none ${idx === 0 ? "active" : ""}`}
                 data-major-code={m.code}
                 id={`tab-${m.code}`}
                 aria-selected={idx === 0 ? "true" : "false"}
               >
                 {m.code === "PG" && (
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg class="w-3.5 h-3.5 sm:w-[18px] sm:h-[18px] transition-transform duration-250" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
                     <polyline points="2 17 12 22 22 17"></polyline>
                     <polyline points="2 12 12 17 22 12"></polyline>
                   </svg>
                 )}
                 {m.code === "RPL" && (
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg class="w-3.5 h-3.5 sm:w-[18px] sm:h-[18px] transition-transform duration-250" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="16 18 22 12 16 6"></polyline>
                     <polyline points="8 6 2 12 8 18"></polyline>
                   </svg>
                 )}
                 {m.code === "TKJ" && (
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg class="w-3.5 h-3.5 sm:w-[18px] sm:h-[18px] transition-transform duration-250" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
                     <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
                     <line x1="6" y1="6" x2="6.01" y2="6"></line>
@@ -200,7 +203,7 @@ const majorsData = [
                   </svg>
                 )}
                 {m.code === "TJA" && (
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <svg class="w-3.5 h-3.5 sm:w-[18px] sm:h-[18px] transition-transform duration-250" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="2"></circle>
                     <path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49"></path>
                   </svg>
@@ -213,21 +216,21 @@ const majorsData = [
       </div>
 
       <!-- Major Content Panels -->
-      <div class="major-panels-wrap">
+      <div>
         {
           majorsData.map((m, idx) => (
             <div
-              class={`major-panel ${idx === 0 ? "active" : ""}`}
+              class={`major-panel hidden [&.active]:grid grid-cols-1 lg:grid-cols-[1fr_1.15fr] gap-12 lg:gap-[4.5rem] items-center ${idx === 0 ? "active" : ""}`}
               id={`panel-${m.code}`}
               role="tabpanel"
               aria-labelledby={`tab-${m.code}`}
             >
               <!-- Left Visual: Photo with Authentic Red Organic Backdrop -->
-              <div class="major-visual-col">
-                <div class="visual-stack">
+              <div class="animate-major-visual will-change-transform flex justify-center items-center">
+                <div class="relative w-full max-w-[300px] sm:max-w-[360px] lg:max-w-[440px] flex justify-center items-end h-[420px] sm:h-[500px] lg:h-[580px]">
                   <!-- Red Backdrop Card matching Figma -->
-                  <div class="jurusan-red-shape" aria-hidden="true">
-                    <svg class="jurusan-shape-rings" viewBox="0 0 330 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[265px] sm:w-[320px] lg:w-[380px] h-[275px] sm:h-[330px] lg:h-[390px] bg-gradient-to-br from-[#ed1e28] via-[#dc2626] to-[#c41d24] rounded-[42px] sm:rounded-[50px] lg:rounded-[60px] overflow-hidden pointer-events-none z-1" aria-hidden="true">
+                    <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 330 340" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <circle cx="165" cy="170" r="85" stroke="rgba(255, 255, 255, 0.08)" stroke-width="24" />
                       <circle cx="165" cy="170" r="145" stroke="rgba(255, 255, 255, 0.07)" stroke-width="24" />
                       <circle cx="165" cy="170" r="205" stroke="rgba(255, 255, 255, 0.05)" stroke-width="24" />
@@ -238,7 +241,7 @@ const majorsData = [
                   <img
                     src={m.studentImg}
                     alt={`Siswa Jurusan ${m.code}`}
-                    class={`major-student-img student-${m.code.toLowerCase()}`}
+                    class={`absolute z-2 w-auto object-contain object-bottom block ${studentPositionMap[m.code]}`}
                     width="478"
                     height="660"
                     loading="eager"
@@ -248,18 +251,18 @@ const majorsData = [
               </div>
 
               <!-- Right Details: Copy & Pillars -->
-              <div class="major-detail-col">
-                <h3 class="major-heading">
-                  <span class="text-red">{m.titleRed}</span> {m.titleDark}
+              <div class="flex flex-col">
+                <h3 class="animate-major-heading will-change-transform font-poppins text-3xl sm:text-[2.15rem] lg:text-[2.5rem] font-bold leading-[1.15] text-[#111827] tracking-[-0.025em] mb-4.5">
+                  <span class="text-[#ed1e28]">{m.titleRed}</span> {m.titleDark}
                 </h3>
 
-                <p class="major-overview">{m.desc}</p>
+                <p class="animate-major-desc will-change-transform font-jakarta text-[0.9375rem] leading-[1.7] text-[#4b5563] mb-7">{m.desc}</p>
 
                 <!-- Pillars -->
-                <div class="pillars-list">
+                <div class="animate-major-pillars will-change-transform flex flex-col gap-5 mb-7">
                   {m.pillars.map((pillar) => (
-                    <div class="pillar-item">
-                      <div class="pillar-icon-box">
+                    <div class="flex items-start gap-4">
+                      <div class="w-10 h-10 rounded-[10px] bg-[#fef2f2] flex items-center justify-center shrink-0 mt-0.5">
                         {pillar.icon === "cog" && (
                           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ed1e28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="3"></circle>
@@ -335,25 +338,26 @@ const majorsData = [
                           </svg>
                         )}
                       </div>
-                      <div class="pillar-text">
-                        <h4 class="pillar-title">{pillar.title}</h4>
-                        <p class="pillar-desc">{pillar.desc}</p>
+                      <div class="flex flex-col">
+                        <h4 class="font-jakarta text-[0.9375rem] font-extrabold text-[#111827] mb-1">{pillar.title}</h4>
+                        <p class="font-jakarta text-[0.84375rem] leading-[1.6] text-[#64748b] m-0">{pillar.desc}</p>
                       </div>
                     </div>
                   ))}
                 </div>
 
-                <!-- Career Section -->
-                <div class="career-box">
-                  <span class="career-label">Prospek Kerja:</span>
-                  <p class="career-text">{m.careers}</p>
-                </div>
+                <!-- Career Section & Action Button -->
+                <div class="animate-major-footer will-change-transform">
+                  <div class="mb-8">
+                    <span class="block font-jakarta text-sm font-bold text-[#ed1e28] mb-1">Prospek Kerja:</span>
+                    <p class="font-jakarta text-sm leading-[1.6] text-[#4b5563] m-0">{m.careers}</p>
+                  </div>
 
-                <!-- Action Button -->
-                <a href="#ppdb" class="btn-learn-more">
-                  <span>Pelajari lebih lanjut</span>
-                  <span class="btn-arrow">→</span>
-                </a>
+                  <a href="#ppdb" class="group inline-flex items-center gap-2 bg-[#ed1e28] text-white font-jakarta text-sm font-bold py-3 px-7 rounded-full shadow-[0_4px_14px_rgba(237,30,40,0.3)] self-start hover:bg-[#dc1822] hover:-translate-y-0.5 hover:shadow-[0_6px_18px_rgba(237,30,40,0.4)] transition-all duration-200">
+                    <span>Pelajari lebih lanjut</span>
+                    <span class="transition-transform duration-200 group-hover:translate-x-1">→</span>
+                  </a>
+                </div>
               </div>
             </div>
           ))
@@ -369,7 +373,7 @@ const majorsData = [
     const panels = document.querySelectorAll(".major-panel");
     const indicator = document.getElementById("tabIndicator");
 
-    function updateIndicator(btn, animate = true) {
+    function updateIndicator(btn: Element | null, animate = true) {
       if (!indicator || !btn) return;
       const bar = btn.parentElement;
       if (!bar) return;
@@ -396,6 +400,7 @@ const majorsData = [
 
     tabButtons.forEach((btn) => {
       btn.addEventListener("click", () => {
+        if (btn.classList.contains("active")) return;
         const targetCode = btn.getAttribute("data-major-code");
         if (!targetCode) return;
 
@@ -413,6 +418,14 @@ const majorsData = [
 
         const activePanel = document.getElementById(`panel-${targetCode}`);
         if (activePanel) {
+          const animElements = activePanel.querySelectorAll(
+            ".animate-major-visual, .animate-major-heading, .animate-major-desc, .animate-major-pillars, .animate-major-footer"
+          );
+          animElements.forEach((el) => {
+            (el as HTMLElement).style.animation = "none";
+            void (el as HTMLElement).offsetHeight;
+            (el as HTMLElement).style.animation = "";
+          });
           activePanel.classList.add("active");
         }
       });
@@ -432,508 +445,3 @@ const majorsData = [
     initMajorTabs();
   }
 </script>
-
-<style>
-  .jurusan-section {
-    position: relative;
-    padding: 4.5rem 0 6rem 0;
-    background-color: #ffffff;
-    overflow: hidden;
-  }
-
-  /* Decorative Background Dashed Arcs */
-  .jurusan-bg-arcs {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-    overflow: visible;
-  }
-
-  @media (max-width: 1024px) {
-    .jurusan-bg-arcs {
-      display: none;
-    }
-  }
-
-  .jurusan-inner {
-    position: relative;
-    z-index: 1;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .jurusan-header {
-    text-align: center;
-    margin-bottom: 2.25rem;
-  }
-
-  .header-tagline {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.625rem;
-    margin-bottom: 0.875rem;
-  }
-
-  .tagline-dash {
-    display: inline-block;
-    width: 22px;
-    height: 2px;
-    background-color: #ed1e28;
-    border-radius: 1px;
-  }
-
-  .tagline-text {
-    font-family: var(--font-poppins);
-    font-size: 0.8125rem;
-    font-weight: 700;
-    color: #ed1e28;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .jurusan-main-title {
-    font-family: var(--font-poppins);
-    font-size: 2.75rem;
-    font-weight: 800;
-    line-height: 1.15;
-    color: #111827;
-    letter-spacing: -0.025em;
-  }
-
-  /* Tab Bar */
-  .tab-bar-wrap {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 3.5rem;
-  }
-
-  .tab-bar {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    background-color: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 9999px;
-    padding: 0.375rem;
-    gap: 0.375rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
-  }
-
-  .tab-indicator {
-    position: absolute;
-    top: 0.375rem;
-    left: 0;
-    height: calc(100% - 0.75rem);
-    background: linear-gradient(135deg, #ed1e28 0%, #dc2626 100%);
-    border-radius: 9999px;
-    box-shadow: 0 4px 14px rgba(237, 30, 40, 0.32);
-    pointer-events: none;
-    z-index: 1;
-    transition: transform 0.32s cubic-bezier(0.2, 0, 0, 1), width 0.32s cubic-bezier(0.2, 0, 0, 1);
-    will-change: transform, width;
-  }
-
-  .tab-btn {
-    position: relative;
-    z-index: 2;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.625rem 1.5rem;
-    border-radius: 9999px;
-    background-color: transparent;
-    border: none;
-    color: #475569;
-    font-family: var(--font-jakarta);
-    font-size: 0.875rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: color 0.25s ease;
-    outline: none;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  .tab-btn:hover {
-    color: #111827;
-  }
-
-  .tab-btn.active {
-    color: #ffffff;
-  }
-
-  .tab-btn svg {
-    transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1);
-  }
-
-  .tab-btn.active svg {
-    transform: scale(1.08);
-  }
-
-  /* Panels */
-  .major-panel {
-    display: none;
-    grid-template-columns: 1fr 1.15fr;
-    gap: 4.5rem;
-    align-items: center;
-  }
-
-  .major-panel.active {
-    display: grid;
-  }
-
-  .major-panel.active .major-visual-col {
-    animation: majorVisualIn 0.36s cubic-bezier(0.16, 1, 0.3, 1) both;
-  }
-
-  .major-panel.active .major-detail-col {
-    animation: majorDetailIn 0.36s cubic-bezier(0.16, 1, 0.3, 1) both;
-  }
-
-  @keyframes majorVisualIn {
-    0% {
-      opacity: 0;
-      transform: translateY(14px) scale(0.97);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-
-  @keyframes majorDetailIn {
-    0% {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Left Visual */
-  .major-visual-col {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .visual-stack {
-    position: relative;
-    width: 100%;
-    max-width: 440px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    height: 480px;
-  }
-
-  .jurusan-red-shape {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 330px;
-    height: 340px;
-    background: linear-gradient(157deg, #ed1e28 0%, #dc2626 52%, #c41d24 100%);
-    border-radius: 95px 75px 70px 105px;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 1;
-    box-shadow: 0 16px 36px rgba(237, 30, 40, 0.22);
-  }
-
-  .jurusan-shape-rings {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-  }
-
-  .major-student-img {
-    position: absolute;
-    bottom: 0;
-    z-index: 2;
-    width: auto;
-    object-fit: contain;
-    object-position: bottom center;
-    display: block;
-    filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.16));
-  }
-
-  /* Per-major sizing & horizontal positioning matching Figma 1:1 */
-  .student-pg {
-    height: 405px;
-    left: calc(50% - 12px);
-    transform: translateX(-50%);
-  }
-
-  .student-rpl {
-    height: 405px;
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: -1px;
-  }
-
-  .student-tkj {
-    height: 450px;
-    left: calc(50% + 8px);
-    transform: translateX(-50%);
-  }
-
-  .student-tja {
-    height: 455px;
-    left: calc(50% + 6px);
-    transform: translateX(-50%);
-  }
-
-  /* Right Details */
-  .major-detail-col {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .major-heading {
-    font-family: var(--font-poppins);
-    font-size: 2.5rem;
-    font-weight: 800;
-    line-height: 1.15;
-    color: #111827;
-    letter-spacing: -0.025em;
-    margin-bottom: 1.15rem;
-  }
-
-  .text-red {
-    color: #ed1e28;
-  }
-
-  .major-overview {
-    font-family: var(--font-jakarta);
-    font-size: 0.9375rem;
-    line-height: 1.7;
-    color: #4b5563;
-    margin-bottom: 1.75rem;
-  }
-
-  /* Pillars */
-  .pillars-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    margin-bottom: 1.75rem;
-  }
-
-  .pillar-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-
-  .pillar-icon-box {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background-color: #fef2f2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  .pillar-title {
-    font-family: var(--font-jakarta);
-    font-size: 0.9375rem;
-    font-weight: 800;
-    color: #111827;
-    margin-bottom: 0.25rem;
-  }
-
-  .pillar-desc {
-    font-family: var(--font-jakarta);
-    font-size: 0.84375rem;
-    line-height: 1.6;
-    color: #64748b;
-    margin: 0;
-  }
-
-  /* Career Box */
-  .career-box {
-    margin-bottom: 2rem;
-  }
-
-  .career-label {
-    display: block;
-    font-family: var(--font-jakarta);
-    font-size: 0.875rem;
-    font-weight: 700;
-    color: #ed1e28;
-    margin-bottom: 0.25rem;
-  }
-
-  .career-text {
-    font-family: var(--font-jakarta);
-    font-size: 0.875rem;
-    line-height: 1.6;
-    color: #4b5563;
-    margin: 0;
-  }
-
-  /* CTA Button */
-  .btn-learn-more {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background-color: #ed1e28;
-    color: #ffffff;
-    font-family: var(--font-jakarta);
-    font-size: 0.875rem;
-    font-weight: 700;
-    padding: 0.75rem 1.75rem;
-    border-radius: 9999px;
-    text-decoration: none;
-    box-shadow: 0 4px 14px rgba(237, 30, 40, 0.3);
-    align-self: flex-start;
-    transition: all 0.2s ease;
-  }
-
-  .btn-learn-more:hover {
-    background-color: #dc1822;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(237, 30, 40, 0.4);
-  }
-
-  .btn-learn-more:hover .btn-arrow {
-    transform: translateX(3px);
-  }
-
-  .btn-arrow {
-    transition: transform 0.2s ease;
-  }
-
-  @media (max-width: 992px) {
-    .jurusan-main-title {
-      font-size: 2.15rem;
-    }
-
-    .major-panel {
-      grid-template-columns: 1fr;
-      gap: 3rem;
-      align-items: center;
-    }
-
-    .major-heading {
-      font-size: 2.15rem;
-    }
-
-    .visual-stack {
-      max-width: 360px;
-      height: 410px;
-    }
-
-    .jurusan-red-shape {
-      width: 275px;
-      height: 285px;
-      border-radius: 78px 62px 58px 86px;
-    }
-
-    .student-pg {
-      height: 340px;
-      left: calc(50% - 10px);
-    }
-
-    .student-rpl {
-      height: 340px;
-      left: 50%;
-      bottom: -1px;
-    }
-
-    .student-tkj {
-      height: 380px;
-      left: calc(50% + 6px);
-    }
-
-    .student-tja {
-      height: 385px;
-      left: calc(50% + 5px);
-    }
-  }
-
-  @media (max-width: 640px) {
-    .jurusan-section {
-      padding: 3rem 0;
-    }
-
-    .jurusan-main-title {
-      font-size: 1.75rem;
-    }
-
-    .tab-bar-wrap {
-      margin-bottom: 2.5rem;
-    }
-
-    .tab-bar {
-      gap: 0.25rem;
-      padding: 0.25rem;
-    }
-
-    .tab-btn {
-      padding: 0.5rem 0.875rem;
-      font-size: 0.8125rem;
-      gap: 0.375rem;
-    }
-
-    .tab-btn svg {
-      width: 15px;
-      height: 15px;
-    }
-
-    .tab-indicator {
-      top: 0.25rem;
-      height: calc(100% - 0.5rem);
-    }
-
-    .major-heading {
-      font-size: 1.85rem;
-    }
-
-    .visual-stack {
-      max-width: 300px;
-      height: 340px;
-    }
-
-    .jurusan-red-shape {
-      width: 230px;
-      height: 240px;
-      border-radius: 64px 50px 48px 72px;
-    }
-
-    .student-pg {
-      height: 285px;
-      left: calc(50% - 8px);
-    }
-
-    .student-rpl {
-      height: 285px;
-      left: 50%;
-      bottom: -1px;
-    }
-
-    .student-tkj {
-      height: 315px;
-      left: calc(50% + 5px);
-    }
-
-    .student-tja {
-      height: 320px;
-      left: calc(50% + 4px);
-    }
-  }
-</style>

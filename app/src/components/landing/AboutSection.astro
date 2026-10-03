@@ -2,34 +2,34 @@
 import Container from "../Container.astro";
 ---
 
-<section class="about-section" id="about">
+<section class="relative py-12 lg:pt-12 lg:pb-24 bg-white overflow-visible" id="about">
   <Container>
-    <div class="about-grid">
+    <div class="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-14 lg:gap-16 items-center max-w-[1140px] mx-auto">
       <!-- Left Column: Copy -->
-      <div class="about-text-col">
-        <div class="about-tagline">
-          <span class="tagline-dash"></span>
+      <div class="flex flex-col">
+        <div class="inline-flex items-center gap-2.5 font-poppins text-[0.8125rem] font-bold text-[#ed1e28] tracking-[0.06em] uppercase mb-5">
+          <span class="inline-block w-[22px] h-[2px] bg-[#ed1e28] rounded-[1px]"></span>
           <span>TENTANG KAMI</span>
         </div>
 
-        <h2 class="about-title">
-          Apa itu <span class="text-red">SMK Telkom<br />Purwokerto</span>?
+        <h2 class="font-poppins text-3xl sm:text-4xl lg:text-[2.85rem] font-bold leading-[1.12] text-[#111827] tracking-[-0.025em] mb-5.5">
+          Apa itu <span class="text-[#ed1e28]">SMK Telkom<br />Purwokerto</span>?
         </h2>
 
-        <p class="about-desc">
+        <p class="font-jakarta text-[0.9375rem] leading-[1.7] text-[#4b5563] mb-4.5">
           SMK Telkom Purwokerto berada di bawah naungan Yayasan Pendidikan Telkom (YPT) dan menjadi bagian dari jaringan Telkom Schools. Sejak angkatan pertama, sekolah ini fokus mencetak lulusan siap kerja di bidang perangkat lunak, jaringan, dan industri kreatif.
         </p>
 
-        <p class="about-desc">
+        <p class="font-jakarta text-[0.9375rem] leading-[1.7] text-[#4b5563] [&_strong]:font-bold [&_strong]:text-[#1f2937]">
           Terdapat empat program keahlian: <strong>RPL</strong>, <strong>PG</strong>, <strong>TKJ</strong>, dan <strong>TJAT</strong>, masing-masing dengan laboratorium, sertifikasi, dan jalur karier yang jelas.
         </p>
       </div>
 
       <!-- Right Column: Visual Photo Stack with Red Accent Card -->
-      <div class="about-visual-col">
-        <div class="about-photo-stack">
+      <div class="flex justify-center lg:justify-end items-center relative">
+        <div class="group relative w-full max-w-[480px] lg:max-w-[550px] mx-auto lg:ml-auto">
           <!-- Red Dot Grid Matrix Decoration -->
-          <svg class="dot-grid-matrix" width="220" height="170" viewBox="0 0 220 170" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <svg class="absolute -top-[55px] -right-[45px] z-0 pointer-events-none opacity-85" width="220" height="170" viewBox="0 0 220 170" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <defs>
               <pattern id="about-dot-pattern" x="0" y="0" width="26" height="26" patternUnits="userSpaceOnUse">
                 <circle cx="13" cy="13" r="2.5" fill="#ed1e28" fill-opacity="0.45" />
@@ -39,13 +39,13 @@ import Container from "../Container.astro";
           </svg>
 
           <!-- Red Accent Card Behind -->
-          <div class="red-accent-card" aria-hidden="true"></div>
+          <div class="absolute top-[10.5%] sm:top-[12%] -bottom-3.5 sm:-bottom-[26px] left-[20.6%] -right-3 sm:-right-[24px] bg-[#ed1e28] rounded-2xl sm:rounded-[20px] z-1 pointer-events-none transition-transform duration-250 group-hover:translate-x-0.5 group-hover:translate-y-0.5" aria-hidden="true"></div>
 
           <!-- Campus Building Photo -->
           <img
             src="/images/Container 1.png"
             alt="Gedung SMK Telkom Purwokerto"
-            class="campus-photo-img"
+            class="relative z-2 w-full h-auto rounded-2xl sm:rounded-[20px] block shadow-[0_16px_36px_rgba(0,0,0,0.16)] transition-all duration-250 group-hover:-translate-y-0.5 group-hover:shadow-[0_18px_38px_rgba(0,0,0,0.16)]"
             width="607"
             height="333"
             loading="lazy"
@@ -55,184 +55,3 @@ import Container from "../Container.astro";
     </div>
   </Container>
 </section>
-
-<style>
-  .about-section {
-    position: relative;
-    padding: 3rem 0 6rem 0;
-    background-color: #ffffff;
-    overflow: visible;
-  }
-
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: 4rem;
-    align-items: center;
-    max-width: 1140px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  /* Left Column */
-  .about-text-col {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .about-tagline {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.625rem;
-    font-family: var(--font-poppins);
-    font-size: 0.8125rem;
-    font-weight: 700;
-    color: #ed1e28;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin-bottom: 1.25rem;
-  }
-
-  .tagline-dash {
-    display: inline-block;
-    width: 22px;
-    height: 2px;
-    background-color: #ed1e28;
-    border-radius: 1px;
-  }
-
-  .about-title {
-    font-family: var(--font-poppins);
-    font-size: 2.85rem;
-    font-weight: 800;
-    line-height: 1.12;
-    color: #111827;
-    letter-spacing: -0.025em;
-    margin-bottom: 1.35rem;
-  }
-
-  .text-red {
-    color: #ed1e28;
-  }
-
-  .about-desc {
-    font-family: var(--font-jakarta);
-    font-size: 0.9375rem;
-    line-height: 1.7;
-    color: #4b5563;
-    margin-bottom: 1.15rem;
-  }
-
-  .about-desc:last-child {
-    margin-bottom: 0;
-  }
-
-  .about-desc strong {
-    font-weight: 700;
-    color: #1f2937;
-  }
-
-  /* Right Column: Visual Photo Stack */
-  .about-visual-col {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    position: relative;
-  }
-
-  .about-photo-stack {
-    position: relative;
-    width: 100%;
-    max-width: 550px;
-    margin-left: auto;
-  }
-
-  /* Red Dot Grid Matrix Decoration */
-  .dot-grid-matrix {
-    position: absolute;
-    top: -55px;
-    right: -45px;
-    z-index: 0;
-    pointer-events: none;
-    opacity: 0.85;
-  }
-
-  /* Red Accent Card Behind */
-  .red-accent-card {
-    position: absolute;
-    top: 12%;
-    bottom: -26px;
-    left: 20.6%;
-    right: -24px;
-    background-color: #ed1e28;
-    border-radius: 20px;
-    z-index: 1;
-    pointer-events: none;
-    transition: transform 0.25s ease;
-  }
-
-  /* Campus Building Photo */
-  .campus-photo-img {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    height: auto;
-    border-radius: 20px;
-    display: block;
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.16);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    .about-photo-stack:hover .campus-photo-img {
-      transform: translateY(-2px);
-      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.16);
-    }
-
-    .about-photo-stack:hover .red-accent-card {
-      transform: translate(2px, 2px);
-    }
-  }
-
-  @media (max-width: 1024px) {
-    .about-grid {
-      grid-template-columns: 1fr;
-      gap: 3.5rem;
-    }
-
-    .about-visual-col {
-      justify-content: center;
-    }
-
-    .about-photo-stack {
-      margin: 0 auto;
-      max-width: 480px;
-    }
-
-    .about-title {
-      font-size: 2.35rem;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .about-section {
-      padding: 2rem 0 4rem 0;
-    }
-
-    .about-title {
-      font-size: 2rem;
-    }
-
-    .red-accent-card {
-      top: 10.5%;
-      bottom: -14px;
-      left: 20.6%;
-      right: -12px;
-      border-radius: 16px;
-    }
-
-    .campus-photo-img {
-      border-radius: 16px;
-    }
-  }
-</style>

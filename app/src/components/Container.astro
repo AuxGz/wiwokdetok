@@ -6,24 +6,6 @@ interface Props {
 const { className = "" } = Astro.props;
 ---
 
-<div class={`container ${className}`.trim()}>
+<div class={`w-full max-w-[1560px] mx-auto px-5 sm:px-8 lg:px-11 ${className}`.trim()}>
   <slot />
 </div>
-
-<style>
-  .container {
-    width: 100%;
-    max-width: 1560px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: clamp(1.25rem, 2.5vw, 2.75rem);
-    padding-right: clamp(1.25rem, 2.5vw, 2.75rem);
-  }
-
-  @media (max-width: 640px) {
-    .container {
-      padding-left: 1rem;
-      padding-right: 1rem;
-    }
-  }
-</style>

@@ -25,14 +25,14 @@ const stats = [
 ];
 ---
 
-<section class="stats-section" id="stats">
+<section class="pt-6 pb-16 bg-white" id="stats">
   <Container>
-    <div class="stats-bar-card">
+    <div class="bg-white border border-black/[0.06] rounded-[20px] shadow-[0_10px_30px_rgba(0,0,0,0.05)] py-8 sm:py-10 px-6 sm:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 items-center">
       {
         stats.map((item) => (
-          <div class="stat-col-item">
-            <div class="stat-num" data-value={item.display}>{item.display}</div>
-            <div class="stat-label">{item.label}</div>
+          <div class="flex flex-col items-start px-0 lg:px-8 first:lg:pl-4 relative lg:[&:not(:last-child)]:border-r lg:[&:not(:last-child)]:border-slate-100">
+            <div class="stat-num font-poppins text-4xl sm:text-[2.75rem] font-extrabold text-[#111827] leading-[1.1] mb-1.5 tracking-[-0.02em] [font-variant-numeric:tabular-nums]" data-value={item.display}>{item.display}</div>
+            <div class="font-jakarta text-[0.8125rem] text-gray-500 font-medium">{item.label}</div>
           </div>
         ))
       }
@@ -92,75 +92,3 @@ const stats = [
     statCards.forEach((c) => observer.observe(c));
   }
 </script>
-
-<style>
-  .stats-section {
-    padding: 1.5rem 0 4rem 0;
-    background-color: #ffffff;
-  }
-
-  .stats-bar-card {
-    background-color: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    padding: 2.5rem 2rem;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    align-items: center;
-  }
-
-  .stat-col-item {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0 2rem;
-    position: relative;
-  }
-
-  .stat-col-item:first-child {
-    padding-left: 1rem;
-  }
-
-  .stat-col-item:not(:last-child) {
-    border-right: 1px solid #f1f5f9;
-  }
-
-  .stat-num {
-    font-family: var(--font-poppins);
-    font-size: 2.75rem;
-    font-weight: 800;
-    color: #111827;
-    line-height: 1.1;
-    margin-bottom: 0.35rem;
-    letter-spacing: -0.02em;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .stat-label {
-    font-family: var(--font-jakarta);
-    font-size: 0.8125rem;
-    color: #6b7280;
-    font-weight: 500;
-  }
-
-  @media (max-width: 900px) {
-    .stats-bar-card {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
-      padding: 2rem 1.5rem;
-    }
-    .stat-col-item:not(:last-child) {
-      border-right: none;
-    }
-    .stat-col-item {
-      padding: 0;
-    }
-  }
-
-  @media (max-width: 500px) {
-    .stats-bar-card {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>

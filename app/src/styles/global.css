@@ -1,3 +1,41 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #ed1e28;
+  --color-primary-dark: #dc2626;
+  --color-primary-hover: #c41d24;
+  --color-primary-light: #fef2f2;
+  --color-secondary: #1e3a8a;
+  --color-bg-secondary: #f7f8f9;
+  --color-bg-muted: #f5f5f5;
+  --color-text-main: #2b2c31;
+  --color-text-title: #111827;
+  --color-text-muted: #4b5563;
+  --color-text-subtle: #6b7280;
+  --color-text-light: #9ca3af;
+  --color-border: #e7e8ea;
+  --color-border-dark: #d1d5db;
+
+  --font-poppins: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-jakarta: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-inter: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-tablet: 992px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1440px;
+  --breakpoint-container: 1560px;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+}
+
 :root {
   --color-primary: #ed1e28;
   --color-primary-dark: #dc2626;
@@ -38,45 +76,45 @@
   --duration-slow: 320ms;
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
 
-html {
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-}
+  html {
+    scroll-behavior: smooth;
+    overflow-x: clip;
+  }
 
-body {
-  font-family: var(--font-jakarta);
-  background-color: var(--color-bg);
-  color: var(--color-text-main);
-  line-height: 1.6;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
+  body {
+    font-family: var(--font-jakarta);
+    background-color: var(--color-bg);
+    color: var(--color-text-main);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
 
-a {
-  color: inherit;
-  text-decoration: none;
-  transition: color var(--duration-fast) var(--ease-out), opacity var(--duration-fast) var(--ease-out);
-}
+  a {
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-out), opacity var(--duration-fast) var(--ease-out);
+  }
 
-img, svg {
-  display: block;
-  max-width: 100%;
-}
+  img, svg {
+    display: block;
+    max-width: 100%;
+  }
 
-button {
-  font-family: inherit;
-  cursor: pointer;
-  border: none;
-  background: none;
+  button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+  }
 }
 
 .btn {
@@ -211,6 +249,102 @@ button {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
+}
+
+/* Custom Animations */
+@keyframes float-soft {
+  0%, 100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -4px;
+  }
+}
+
+@keyframes marqueeScrollLeft {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-25%, 0, 0);
+  }
+}
+
+.animate-float-soft {
+  animation: float-soft 4s ease-in-out infinite;
+}
+
+.animate-marquee {
+  animation: marqueeScrollLeft 36s linear infinite;
+}
+
+/* Scroll Reveal Utilities - Emil Kowalski /animate */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 550ms cubic-bezier(0.23, 1, 0.32, 1), transform 550ms cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: opacity, transform;
+}
+
+.is-visible .reveal-on-scroll,
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 80ms; }
+.reveal-delay-2 { transition-delay: 160ms; }
+.reveal-delay-3 { transition-delay: 240ms; }
+.reveal-delay-4 { transition-delay: 320ms; }
+
+#why-us.animation-done .reveal-on-scroll {
+  opacity: 1;
+  transform: none;
+  transition: none;
+  will-change: auto;
+}
+
+/* Jurusan Tab Switch Animations - Emil Kowalski /animate */
+@keyframes majorVisualEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.975);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes majorFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.major-panel.active .animate-major-visual {
+  animation: majorVisualEnter 320ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+.major-panel.active .animate-major-heading {
+  animation: majorFadeUp 300ms 40ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+.major-panel.active .animate-major-desc {
+  animation: majorFadeUp 300ms 80ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+.major-panel.active .animate-major-pillars {
+  animation: majorFadeUp 300ms 120ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+.major-panel.active .animate-major-footer {
+  animation: majorFadeUp 300ms 160ms cubic-bezier(0.23, 1, 0.32, 1) both;
 }
 
 /* Reduced Motion Override - Emil Kowalski Rule #7 */

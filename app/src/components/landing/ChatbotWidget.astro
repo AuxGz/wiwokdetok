@@ -2,32 +2,32 @@
 // Chatbot floating widget for interactive support
 ---
 
-<div class="chatbot-container" id="chatbot-widget">
+<div class="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-50" id="chatbot-widget">
   <!-- Popup Message Box -->
-  <div class="chatbot-popup" id="chatbot-popup" hidden>
-    <div class="popup-header">
-      <div class="popup-avatar">
+  <div class="chatbot-popup absolute bottom-[70px] right-0 w-[290px] sm:w-[330px] max-w-[calc(100vw-2rem)] bg-white border border-[#e7e8ea] rounded-2xl shadow-[0_8px_16px_rgba(85,86,91,0.12)] overflow-hidden [transform-origin:bottom_right]" id="chatbot-popup" hidden>
+    <div class="bg-[#ed1e28] text-white py-4 px-5 flex items-center gap-3">
+      <div class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center shrink-0">
         <img src="/images/chatbot-avatar.png" alt="" width="22" height="20" />
       </div>
       <div>
-        <strong class="popup-name">Layanan Informasi Siswa</strong>
-        <span class="popup-status">Online • Respons Cepat</span>
+        <strong class="block font-poppins text-sm font-bold leading-tight">Layanan Informasi Siswa</strong>
+        <span class="text-[0.6875rem] text-[#fee2e2]">Online • Respons Cepat</span>
       </div>
-      <button type="button" class="close-popup" id="close-chat" aria-label="Tutup Obrolan">
+      <button type="button" class="ml-auto text-white/80 hover:text-white p-1 cursor-pointer" id="close-chat" aria-label="Tutup Obrolan">
         <svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
     </div>
 
-    <div class="popup-body">
-      <div class="chat-bubble">
+    <div class="p-5 flex flex-col gap-4 bg-[#f8fafc]">
+      <div class="bg-white border border-[#e7e8ea] rounded-xl rounded-tl-sm p-3.5 sm:px-4 text-sm text-[#2b2c31] leading-relaxed shadow-sm">
         Halo! 👋 Selamat datang di SMK Telkom Purwokerto. Ada yang bisa kami bantu mengenai informasi PPDB 2026 atau program keahlian?
       </div>
-      <div class="quick-options">
-        <a href="#ppdb" class="quick-btn">Informasi PPDB 2026</a>
-        <a href="#jurusan" class="quick-btn">Pilihan Jurusan</a>
-        <a href="https://wa.me/6281229701800" target="_blank" rel="noopener" class="quick-btn-highlight">
+      <div class="flex flex-col gap-2">
+        <a href="#ppdb" class="block bg-white border border-[#e7e8ea] rounded-md py-2 px-3.5 text-[0.8125rem] font-medium text-[#2b2c31] hover:border-[#ed1e28] hover:text-[#ed1e28] hover:bg-[#fef2f2] transition-colors duration-150">Informasi PPDB 2026</a>
+        <a href="#jurusan" class="block bg-white border border-[#e7e8ea] rounded-md py-2 px-3.5 text-[0.8125rem] font-medium text-[#2b2c31] hover:border-[#ed1e28] hover:text-[#ed1e28] hover:bg-[#fef2f2] transition-colors duration-150">Pilihan Jurusan</a>
+        <a href="https://wa.me/6281229701800" target="_blank" rel="noopener" class="flex items-center justify-between bg-[#22c55e] hover:bg-[#16a34a] text-white text-[0.8125rem] font-semibold py-2.5 px-3.5 rounded-md transition-colors duration-150">
           <span>Hubungi via WhatsApp</span>
           <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -38,9 +38,9 @@
   </div>
 
   <!-- Trigger Button -->
-  <button type="button" class="chat-trigger-btn" id="open-chat" aria-label="Buka Chatbot Layanan Sekolah">
-    <div class="pulse-ring"></div>
-    <img src="/images/chatbot-avatar.png" alt="" class="chat-icon-img" width="36" height="33" />
+  <button type="button" class="group relative w-14 h-14 rounded-full bg-[#ed1e28] hover:bg-[#dc2626] text-white flex items-center justify-center shadow-[0_8px_24px_rgba(237,30,40,0.4)] hover:scale-105 transition-all duration-200 cursor-pointer" id="open-chat" aria-label="Buka Chatbot Layanan Sekolah">
+    <div class="absolute inset-0 rounded-full border-2 border-[#ed1e28] animate-ping opacity-75 pointer-events-none"></div>
+    <img src="/images/chatbot-avatar.png" alt="" class="w-9 h-auto block select-none pointer-events-none" width="36" height="33" />
   </button>
 </div>
 
@@ -89,209 +89,3 @@
     }
   });
 </script>
-
-<style>
-  .chatbot-container {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    z-index: 99;
-  }
-
-  .chat-trigger-btn {
-    position: relative;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background-color: var(--color-primary);
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 8px 24px rgba(237, 30, 40, 0.4);
-    transition: transform 0.2s ease, background-color 0.2s ease;
-  }
-
-  .chat-trigger-btn:hover {
-    transform: scale(1.06);
-    background-color: var(--color-primary-dark);
-  }
-
-  .pulse-ring {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 50%;
-    border: 2px solid var(--color-primary);
-    animation: pulse 2s infinite ease-out;
-    pointer-events: none;
-  }
-
-  @keyframes pulse {
-    0% {
-      transform: scale(1);
-      opacity: 0.8;
-    }
-    100% {
-      transform: scale(1.4);
-      opacity: 0;
-    }
-  }
-
-  .chatbot-popup {
-    position: absolute;
-    bottom: 70px;
-    right: 0;
-    width: 330px;
-    max-width: calc(100vw - 2.5rem);
-    background-color: #ffffff;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-neutral);
-    overflow: hidden;
-    animation: popupIn var(--duration-normal) var(--ease-out);
-    transform-origin: bottom right;
-    will-change: transform, opacity;
-  }
-
-  @media (max-width: 480px) {
-    .chatbot-container {
-      bottom: 1rem;
-      right: 1rem;
-    }
-    .chatbot-popup {
-      right: 0;
-      width: calc(100vw - 2rem);
-    }
-  }
-
-  @keyframes popupIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px) scale(0.96);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-
-  .popup-header {
-    background-color: var(--color-primary);
-    color: #ffffff;
-    padding: 1rem 1.25rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .popup-avatar {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .popup-name {
-    display: block;
-    font-family: var(--font-poppins);
-    font-size: 0.875rem;
-    font-weight: 700;
-    line-height: 1.2;
-  }
-
-  .popup-status {
-    font-size: 0.6875rem;
-    color: #fee2e2;
-  }
-
-  .close-popup {
-    margin-left: auto;
-    color: #ffffff;
-    opacity: 0.8;
-    padding: 0.25rem;
-  }
-
-  .close-popup:hover {
-    opacity: 1;
-  }
-
-  .popup-body {
-    padding: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    background-color: #f8fafc;
-  }
-
-  .chat-bubble {
-    background-color: #ffffff;
-    border: 1px solid var(--color-border);
-    border-radius: 12px;
-    border-top-left-radius: 2px;
-    padding: 0.875rem 1rem;
-    font-size: 0.875rem;
-    color: var(--color-text-main);
-    line-height: 1.5;
-    box-shadow: var(--shadow-sm);
-  }
-
-  .quick-options {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .quick-btn {
-    display: block;
-    background-color: #ffffff;
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-    padding: 0.5rem 0.875rem;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: var(--color-text-main);
-    transition: all 0.15s ease;
-  }
-
-  .quick-btn:hover {
-    border-color: var(--color-primary);
-    color: var(--color-primary);
-    background-color: var(--color-primary-light);
-  }
-
-  .quick-btn-highlight {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #22c55e;
-    color: #ffffff;
-    font-size: 0.8125rem;
-    font-weight: 600;
-    padding: 0.625rem 0.875rem;
-    border-radius: 6px;
-    transition: background-color 0.15s ease;
-  }
-
-  .quick-btn-highlight:hover {
-    background-color: #16a34a;
-    color: #ffffff;
-  }
-
-  @media (max-width: 640px) {
-    .chatbot-container {
-      bottom: 1.25rem;
-      right: 1.25rem;
-    }
-    .chatbot-popup {
-      width: 290px;
-      right: 0;
-    }
-  }
-</style>
