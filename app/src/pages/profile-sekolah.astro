@@ -1,0 +1,530 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/Container.astro";
+---
+
+<BaseLayout
+  title="Profile Sekolah | SMK Telkom Purwokerto"
+  description="Profil resmi SMK Telkom Purwokerto - School of Global Technopreneur di bawah naungan Yayasan Pendidikan Telkom."
+>
+  <!-- 1. HERO SECTION -->
+  <section class="relative pt-6 pb-20 sm:pb-28 bg-[#fdfdfd] overflow-hidden" id="hero-profile">
+    <Container>
+      <div class="relative bg-gradient-to-br from-[#d62730] via-[#cd1820] to-[#c41d24] rounded-[24px] sm:rounded-[36px] pt-12 sm:pt-16 pb-12 sm:pb-20 px-6 sm:px-10 lg:px-16 shadow-[0_24px_48px_-12px_rgba(214,39,48,0.32)] overflow-hidden text-center">
+        <!-- Watermark Concentric Circles matching Figma exactly -->
+        <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1440 600" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <circle cx="220" cy="200" r="140" stroke="rgba(0, 0, 0, 0.065)" stroke-width="42" />
+          <circle cx="220" cy="200" r="260" stroke="rgba(0, 0, 0, 0.055)" stroke-width="42" />
+          <circle cx="220" cy="200" r="380" stroke="rgba(0, 0, 0, 0.045)" stroke-width="42" />
+          
+          <circle cx="720" cy="350" r="150" stroke="rgba(0, 0, 0, 0.05)" stroke-width="42" />
+          <circle cx="720" cy="350" r="280" stroke="rgba(0, 0, 0, 0.04)" stroke-width="42" />
+
+          <circle cx="1220" cy="180" r="140" stroke="rgba(0, 0, 0, 0.065)" stroke-width="42" />
+          <circle cx="1220" cy="180" r="260" stroke="rgba(0, 0, 0, 0.055)" stroke-width="42" />
+          <circle cx="1220" cy="180" r="380" stroke="rgba(0, 0, 0, 0.045)" stroke-width="42" />
+        </svg>
+
+        <div class="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
+          <!-- White Dash Accent -->
+          <div class="w-12 h-1 bg-white/80 rounded-full mb-6"></div>
+
+          <!-- Main Heading -->
+          <h1 class="font-poppins text-white font-bold text-3xl sm:text-4xl lg:text-[3.25rem] leading-[1.18] tracking-tight mb-4">
+            Mencetak Inovator Masa Depan Dalam Ekosistem Telkom Indonesia.
+          </h1>
+
+          <!-- Subtitle -->
+          <p class="font-jakarta text-white/90 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl mb-10">
+            Lebih dari sekadar sekolah kejuruan, kami adalah School of Global Technopreneur yang berfokus pada pembentukan karakter, kreativitas, dan kepemimpinan di bidang teknologi.
+          </p>
+
+          <!-- Video Player Showcase Card -->
+          <div class="w-full max-w-3xl relative rounded-2xl sm:rounded-3xl p-2.5 sm:p-3.5 bg-white/10 backdrop-blur-md border border-white/30 shadow-[0_20px_50px_rgba(0,0,0,0.28)]">
+            <div class="relative aspect-video rounded-xl sm:rounded-2xl overflow-hidden bg-black/60 shadow-inner group">
+              <!-- Video Thumbnail -->
+              <img
+                src="/images/profile/hero_video_thumb_clean.png"
+                alt="Video Profil SMK Telkom Purwokerto"
+                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 block"
+                loading="eager"
+              />
+
+              <!-- Overlay Gradient -->
+              <div class="absolute inset-0 bg-black/25 group-hover:bg-black/35 transition-colors duration-300"></div>
+
+              <!-- Brand Logos on Video -->
+              <div class="absolute top-3 left-4 flex items-center gap-2 pointer-events-none">
+                <span class="text-white text-xs font-semibold tracking-wide drop-shadow-sm">Yayasan Pendidikan Telkom</span>
+              </div>
+              <div class="absolute top-3 right-4 flex items-center gap-2 pointer-events-none">
+                <span class="text-white text-xs font-bold tracking-wide drop-shadow-sm">SMK TELKOM PURWOKERTO</span>
+              </div>
+
+              <!-- Purple Play Button (Modal Trigger) -->
+              <button
+                type="button"
+                id="play-video-btn"
+                class="absolute inset-0 m-auto w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-[#6366f1] hover:bg-[#4f46e5] text-white flex items-center justify-center shadow-[0_10px_25px_rgba(99,102,241,0.5)] hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer border-0"
+                aria-label="Putar Video Profil SMK Telkom Purwokerto"
+              >
+                <svg class="w-7 h-7 sm:w-8 sm:h-8 ml-1" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Video Modal -->
+  <div id="video-modal" class="fixed inset-0 z-[200] bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="relative w-full max-w-4xl bg-black rounded-2xl overflow-hidden shadow-2xl aspect-video">
+      <button
+        id="close-video-btn"
+        class="absolute top-3 right-3 z-10 w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center border-0 cursor-pointer transition-colors"
+        aria-label="Tutup Video"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <iframe
+        id="video-frame"
+        class="w-full h-full border-0"
+        src=""
+        title="Video Profil SMK Telkom Purwokerto"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+
+  <!-- 2. SECTION: BAGIAN DARI EKOSISTEM RAKSASA TELKOM INDONESIA -->
+  <section class="py-16 sm:py-24 bg-white" id="ekosistem">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <!-- Left Column -->
+        <div class="flex flex-col">
+          <div class="flex items-center gap-2 mb-3">
+            <span class="w-8 h-1 bg-[#ed1e28] rounded-full inline-block"></span>
+            <span class="font-jakarta text-xs sm:text-sm font-bold text-[#ed1e28] tracking-wider uppercase">SMK TELKOM PURWOKERTO</span>
+          </div>
+
+          <h2 class="font-poppins text-2xl sm:text-3xl lg:text-[2.25rem] font-bold text-[#111827] leading-[1.2] mb-5">
+            Bagian Dari Ekosistem Raksasa Telkom Indonesia.
+          </h2>
+
+          <p class="font-jakarta text-gray-600 text-sm sm:text-base leading-relaxed mb-8">
+            SMK Telkom Purwokerto hadir untuk menjawab tantangan dunia digital. Kami tidak mencetak "pekerja" atau "tukang servis", melainkan Kreator dan Inovator. Di sini, siswa dididik untuk menjadi pemimpin masa depan yang mampu menciptakan solusi digital untuk dunia.
+          </p>
+
+          <!-- Modern Coworking / Lab Image -->
+          <div class="rounded-2xl overflow-hidden border border-gray-100 shadow-[0_8px_30px_rgba(0,0,0,0.06)] group">
+            <img
+              src="/images/profile/indoor_coworking.png"
+              alt="Ruang Belajar dan Coworking Space SMK Telkom Purwokerto"
+              class="w-full h-[260px] sm:h-[300px] object-cover group-hover:scale-102 transition-transform duration-300 block"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="flex flex-col gap-8">
+          <!-- Visi Card -->
+          <div class="flex flex-col">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-10 h-10 rounded-full bg-red-50 text-[#ed1e28] flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
+                  <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
+                  <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
+                  <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
+                </svg>
+              </div>
+              <h3 class="font-poppins font-bold text-lg sm:text-xl text-[#ed1e28]">
+                Visi: "School Of Global Technopreneur"
+              </h3>
+            </div>
+
+            <!-- School Entrance Building Image -->
+            <div class="rounded-2xl overflow-hidden border border-gray-100 shadow-[0_8px_30px_rgba(0,0,0,0.06)] group mb-4">
+              <img
+                src="/images/Container 1.png"
+                alt="Gedung Depan SMK Telkom Purwokerto"
+                class="w-full h-[220px] sm:h-[260px] object-cover group-hover:scale-102 transition-transform duration-300 block"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          <!-- Misi Card -->
+          <div class="p-6 rounded-2xl bg-[#fafafa] border border-gray-100 shadow-sm flex flex-col">
+            <div class="flex items-center gap-3 mb-2">
+              <div class="w-10 h-10 rounded-full bg-red-50 text-[#ed1e28] flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <circle cx="12" cy="12" r="6"></circle>
+                  <circle cx="12" cy="12" r="2"></circle>
+                </svg>
+              </div>
+              <h3 class="font-poppins font-bold text-lg sm:text-xl text-[#ed1e28]">
+                Misi:
+              </h3>
+            </div>
+            <p class="font-jakarta text-gray-700 text-sm sm:text-base leading-relaxed pl-13">
+              Menyelenggarakan pendidikan berbasis industri yang adaptif, inovatif, dan berkarakter unggul untuk membangun peradaban Society 5.0.
+            </p>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- 3. SECTION: AKREDITASI SMK TELKOM PURWOKERTO -->
+  <section class="py-16 sm:py-24 bg-[#fafbfc] border-y border-gray-100" id="akreditasi">
+    <Container>
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <h2 class="font-poppins text-2xl sm:text-3xl lg:text-4xl font-bold text-[#111827]">
+          Akreditasi SMK Telkom Purwokerto
+        </h2>
+        <div class="w-12 h-1 bg-[#ed1e28] rounded-full mx-auto my-3"></div>
+        <p class="font-jakarta text-gray-600 text-sm sm:text-base leading-relaxed">
+          SMK Telkom Purwokerto didirikan oleh Yayasan Sandhykara Putra Telkom pada 30 Januari 1993 berdasarkan persetujuan Kanwil Depdikbud Jawa Tengah, dan diresmikan langsung oleh Menparpostel Soesilo Soedarman.
+        </p>
+      </div>
+
+      <!-- Row 1: Certificate & Accreditation Achievement -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center mb-12">
+        <!-- Certificate Card with Floating Badge -->
+        <div class="relative">
+          <div class="rounded-2xl overflow-hidden border border-gray-200 bg-white p-2.5 sm:p-3 shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
+            <img
+              src="/images/profile/sertifikat_akreditasi.png"
+              alt="Sertifikat Akreditasi A Unggul SMK Telkom Purwokerto"
+              class="w-full h-auto rounded-xl object-contain block"
+              loading="lazy"
+            />
+          </div>
+
+          <!-- Floating Badge -->
+          <div class="absolute -bottom-4 right-4 sm:right-6 bg-white border border-gray-200 rounded-2xl px-4 py-2.5 shadow-[0_8px_20px_rgba(0,0,0,0.08)] flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-red-50 text-[#ed1e28] flex items-center justify-center shrink-0">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-jakarta text-xs font-bold text-[#111827] leading-tight">Certified Quality</span>
+              <span class="font-jakarta text-[0.6875rem] text-gray-500 leading-tight">BAN-SM National Standards</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Content -->
+        <div class="flex flex-col items-start lg:pl-4">
+          <!-- Red Pill Badge -->
+          <div class="inline-flex items-center gap-2 bg-[#ed1e28] text-white px-4 py-2 rounded-xl shadow-[0_4px_12px_rgba(237,30,40,0.25)] mb-4">
+            <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+            </svg>
+            <span class="font-jakarta text-xs sm:text-sm font-bold tracking-wide">Terakreditasi A (UNGGUL) — Nilai 97</span>
+          </div>
+
+          <h3 class="font-poppins font-bold text-2xl sm:text-3xl text-[#111827] leading-tight mb-4">
+            Bukti Nyata Kualitas Lulusan Kami
+          </h3>
+
+          <p class="font-jakarta text-gray-600 text-sm sm:text-base leading-relaxed">
+            Dapatkan jaminan masa depan di School of Global Technopreneur. Kami mencetak kreator dan inovator lewat kurikulum standar industri, fasilitas lab canggih ala startup, serta bimbingan mentor praktisi untuk membangun portofolio nyatamu.
+          </p>
+        </div>
+      </div>
+
+      <!-- Row 2: 4 Stats Cards + Table Image -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+        <!-- 2x2 Stats Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+          <!-- Stat 1 -->
+          <div class="bg-white border border-gray-200/90 rounded-2xl p-6 text-center shadow-sm hover:border-[#ed1e28]/40 hover:shadow-md transition-all duration-200">
+            <span class="font-poppins font-extrabold text-3xl sm:text-4xl text-[#ed1e28] block mb-2">1.200+</span>
+            <span class="font-jakarta text-xs sm:text-sm font-medium text-gray-700 leading-snug">Siswa Aktif Terbina</span>
+          </div>
+
+          <!-- Stat 2 -->
+          <div class="bg-white border border-gray-200/90 rounded-2xl p-6 text-center shadow-sm hover:border-[#ed1e28]/40 hover:shadow-md transition-all duration-200">
+            <span class="font-poppins font-extrabold text-3xl sm:text-4xl text-[#ed1e28] block mb-2">150+</span>
+            <span class="font-jakarta text-xs sm:text-sm font-medium text-gray-700 leading-snug">Prestasi Nasional & Internasional di Tahun 2025</span>
+          </div>
+
+          <!-- Stat 3 -->
+          <div class="bg-white border border-gray-200/90 rounded-2xl p-6 text-center shadow-sm hover:border-[#ed1e28]/40 hover:shadow-md transition-all duration-200">
+            <span class="font-poppins font-extrabold text-3xl sm:text-4xl text-[#ed1e28] block mb-2">24</span>
+            <span class="font-jakarta text-xs sm:text-sm font-medium text-gray-700 leading-snug">Ruang Kelas & Laboratorium Berstandar Industri</span>
+          </div>
+
+          <!-- Stat 4 -->
+          <div class="bg-white border border-gray-200/90 rounded-2xl p-6 text-center shadow-sm hover:border-[#ed1e28]/40 hover:shadow-md transition-all duration-200">
+            <span class="font-poppins font-extrabold text-3xl sm:text-4xl text-[#ed1e28] block mb-2">100%</span>
+            <span class="font-jakarta text-xs sm:text-sm font-medium text-gray-700 leading-snug">Guru Profesional 100% Tersertifikasi Kompetensi & 72% Asesor</span>
+          </div>
+        </div>
+
+        <!-- Table Image Card -->
+        <div class="rounded-2xl overflow-hidden border border-gray-200 bg-white p-2.5 sm:p-3 shadow-[0_10px_30px_rgba(0,0,0,0.06)]">
+          <img
+            src="/images/profile/tabel_akreditasi.png"
+            alt="Tabel Nilai Akreditasi SMK Telkom Purwokerto"
+            class="w-full h-auto rounded-xl object-contain block"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- 4. SECTION: EKOSISTEM SMART SCHOOL MODERN & ADAPTIF -->
+  <section class="py-16 sm:py-24 bg-white" id="smart-school">
+    <Container>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+        <!-- Left Column -->
+        <div class="flex flex-col">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="font-jakarta text-xs sm:text-sm font-bold text-[#ed1e28] tracking-wider uppercase">METODE PEMBELAJARAN INOVATIF</span>
+          </div>
+
+          <h2 class="font-poppins text-2xl sm:text-3xl lg:text-[2.25rem] font-bold text-[#111827] leading-[1.2] mb-3">
+            Ekosistem "Smart School"<br class="hidden sm:block" /> Modern & Adaptif
+          </h2>
+          <div class="w-12 h-1 bg-[#1e293b] rounded-full mb-8"></div>
+
+          <!-- Card 1: Playing, Living, & Studying with Image -->
+          <div class="rounded-2xl border border-gray-100 overflow-hidden bg-white shadow-[0_8px_30px_rgba(0,0,0,0.06)] group">
+            <div class="overflow-hidden">
+              <img
+                src="/images/profile/smart_school_1.png"
+                alt="Siswa SMK Telkom Purwokerto Mempresentasikan Proyek"
+                class="w-full h-[240px] sm:h-[280px] object-cover group-hover:scale-102 transition-transform duration-300 block"
+                loading="lazy"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="font-poppins font-bold text-lg sm:text-xl text-[#111827] mb-2">
+                Playing, Living, & Studying
+              </h3>
+              <p class="font-jakarta text-gray-600 text-sm sm:text-base leading-relaxed">
+                Belajar tidak membosankan! Kami menerapkan Project-Based Learning yang mengasah hardskill, softskill, dan karakter unggul.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="flex flex-col gap-6 lg:pt-8">
+          <!-- Card 2: Three-Year Digital Talent Pathway -->
+          <div class="p-6 sm:p-7 rounded-2xl bg-white border border-gray-100 shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
+            <h3 class="font-poppins font-bold text-lg sm:text-xl text-[#111827] mb-2">
+              Three-Year Digital Talent Pathway
+            </h3>
+            <p class="font-jakarta text-gray-600 text-sm sm:text-base leading-relaxed">
+              Peta jalan jelas. Kelas X (Fundamental), Kelas XI (Sertifikasi & Proyek Industri), Kelas XII (Capstone Project, Magang, & Portofolio Global).
+            </p>
+          </div>
+
+          <!-- Card 3: Fasilitas Smart Digital with Image -->
+          <div class="rounded-2xl border border-gray-100 overflow-hidden bg-white shadow-[0_8px_30px_rgba(0,0,0,0.06)] group">
+            <div class="overflow-hidden">
+              <img
+                src="/images/profile/smart_school_2.png"
+                alt="Fasilitas Smart Digital Lab SMK Telkom Purwokerto"
+                class="w-full h-[200px] sm:h-[220px] object-cover group-hover:scale-102 transition-transform duration-300 block"
+                loading="lazy"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="font-poppins font-bold text-lg sm:text-xl text-[#111827] mb-2">
+                Fasilitas Smart Digital
+              </h3>
+              <p class="font-jakarta text-gray-600 text-sm sm:text-base leading-relaxed">
+                Didukung penuh oleh aplikasi cerdas buatan ekosistem sendiri seperti LMS, JUARA (Jurnal Asesmen), LIONS (Literasi Online), hingga DIITA.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- 5. SECTION: STEMATEL NEXT PATHWAY (PROSPEK LULUSAN) -->
+  <section class="py-16 sm:py-24 bg-[#fafbfc] border-t border-gray-100" id="pathway">
+    <Container>
+      <!-- Section Header -->
+      <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-6 lg:gap-12 items-end mb-14">
+        <div>
+          <span class="font-jakarta text-xs sm:text-sm font-bold text-[#ed1e28] tracking-wider uppercase">PROSPEK LULUSAN</span>
+          <h2 class="font-poppins text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#111827] mt-1 mb-2">
+            STEMATEL NEXT PATHWAY
+          </h2>
+          <div class="w-12 h-1 bg-[#1e293b] rounded-full"></div>
+        </div>
+
+        <p class="font-jakarta text-gray-600 text-sm sm:text-base leading-relaxed">
+          Investasi pendidikan terbaik untuk masa depan digital. Kami memetakan minat siswa sejak dini untuk memilih satu dari tiga jalur kesuksesan di tahun terakhir.
+        </p>
+      </div>
+
+      <!-- 3 Pathway Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+        <!-- Card 1: The Founder -->
+        <div class="relative bg-gradient-to-b from-[#ed1e28] to-[#c41d24] text-white rounded-3xl p-6 sm:p-7 pt-8 overflow-hidden flex flex-col justify-between shadow-[0_16px_36px_rgba(237,30,40,0.28)] hover:-translate-y-1 transition-transform duration-300">
+          <!-- Watermark Rings -->
+          <svg class="absolute inset-0 w-full h-full pointer-events-none opacity-10" viewBox="0 0 300 400" fill="none">
+            <circle cx="150" cy="200" r="100" stroke="#ffffff" stroke-width="30" />
+            <circle cx="150" cy="200" r="180" stroke="#ffffff" stroke-width="30" />
+          </svg>
+
+          <div class="relative z-10 flex flex-col items-center text-center">
+            <!-- White Pill Badge -->
+            <span class="bg-white text-[#111827] font-jakarta font-bold text-xs sm:text-sm px-4 py-1.5 rounded-full inline-block shadow-sm mb-2">
+              The Founder
+            </span>
+            <span class="text-white/90 text-xs sm:text-sm font-medium mb-3">
+              (Technopreneur Incubator)
+            </span>
+            <h3 class="font-poppins font-extrabold text-lg sm:text-xl text-white tracking-wide mb-3">
+              MEMBANGUN STARTUP SENDIRI
+            </h3>
+            <p class="font-jakarta text-white/90 text-xs sm:text-sm leading-relaxed mb-6">
+              Jalur bagi kreator yang ingin memiliki bisnis digital. Siswa mendapatkan pendampingan magang intensif 6 bulan di industri, pembuatan legalitas usaha, financial projection, hingga presentasi bisnis di depan investor. Goal: Lulus langsung punya Startup sendiri.
+            </p>
+          </div>
+
+          <!-- Student Graphic -->
+          <div class="relative z-10 mt-auto pt-4 flex justify-center">
+            <img
+              src="/images/profile/pathway_founder.png"
+              alt="The Founder Pathway Siswa SMK Telkom Purwokerto"
+              class="w-full max-w-[200px] h-auto object-contain block drop-shadow-md"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+        <!-- Card 2: The Scholar -->
+        <div class="relative bg-gradient-to-b from-[#ed1e28] to-[#c41d24] text-white rounded-3xl p-6 sm:p-7 pt-8 overflow-hidden flex flex-col justify-between shadow-[0_16px_36px_rgba(237,30,40,0.28)] hover:-translate-y-1 transition-transform duration-300">
+          <!-- Watermark Rings -->
+          <svg class="absolute inset-0 w-full h-full pointer-events-none opacity-10" viewBox="0 0 300 400" fill="none">
+            <circle cx="150" cy="200" r="100" stroke="#ffffff" stroke-width="30" />
+            <circle cx="150" cy="200" r="180" stroke="#ffffff" stroke-width="30" />
+          </svg>
+
+          <div class="relative z-10 flex flex-col items-center text-center">
+            <!-- White Pill Badge -->
+            <span class="bg-white text-[#111827] font-jakarta font-bold text-xs sm:text-sm px-4 py-1.5 rounded-full inline-block shadow-sm mb-2">
+              The Scholar
+            </span>
+            <span class="text-white/90 text-xs sm:text-sm font-medium mb-3">
+              (Scholar Acceleration)
+            </span>
+            <h3 class="font-poppins font-extrabold text-lg sm:text-xl text-white tracking-wide mb-3">
+              MENEMBUS UNIVERSITAS TOP
+            </h3>
+            <p class="font-jakarta text-white/90 text-xs sm:text-sm leading-relaxed mb-6">
+              Persiapan intensif masuk Perguruan Tinggi favorit Nasional dan global. Fokus pada bimbingan UTBK, persiapan TOEFL/IELTS, serta pendampingan penulisan Esai Motivasi untuk tembus ke kampus impian seperti Telkom University, UGM, ITB, hingga Universitas Luar Negeri.
+            </p>
+          </div>
+
+          <!-- Student Graphic -->
+          <div class="relative z-10 mt-auto pt-4 flex justify-center">
+            <img
+              src="/images/profile/pathway_scholar.png"
+              alt="The Scholar Pathway Siswi SMK Telkom Purwokerto"
+              class="w-full max-w-[200px] h-auto object-contain block drop-shadow-md"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+        <!-- Card 3: Profesional -->
+        <div class="relative bg-gradient-to-b from-[#ed1e28] to-[#c41d24] text-white rounded-3xl p-6 sm:p-7 pt-8 overflow-hidden flex flex-col justify-between shadow-[0_16px_36px_rgba(237,30,40,0.28)] hover:-translate-y-1 transition-transform duration-300">
+          <!-- Watermark Rings -->
+          <svg class="absolute inset-0 w-full h-full pointer-events-none opacity-10" viewBox="0 0 300 400" fill="none">
+            <circle cx="150" cy="200" r="100" stroke="#ffffff" stroke-width="30" />
+            <circle cx="150" cy="200" r="180" stroke="#ffffff" stroke-width="30" />
+          </svg>
+
+          <div class="relative z-10 flex flex-col items-center text-center">
+            <!-- White Pill Badge -->
+            <span class="bg-white text-[#111827] font-jakarta font-bold text-xs sm:text-sm px-4 py-1.5 rounded-full inline-block shadow-sm mb-2">
+              Profesional
+            </span>
+            <span class="text-white/90 text-xs sm:text-sm font-medium mb-3">
+              (Career Accelerator)
+            </span>
+            <h3 class="font-poppins font-extrabold text-lg sm:text-xl text-white tracking-wide mb-3">
+              LANGSUNG TERSERAP INDUSTRI
+            </h3>
+            <p class="font-jakarta text-white/90 text-xs sm:text-sm leading-relaxed mb-6">
+              Langkah cepat menjadi tenaga ahli profesional. Berbekal sertifikasi kompetensi standar dunia (Cisco/Mikrotik) dan portofolio karya nyata, lulusan kami siap diserap langsung oleh ekosistem Telkom Indonesia, BUMN, serta Startup Unicorn seperti Tokopedia dan Bukalapak.
+            </p>
+          </div>
+
+          <!-- Student Graphic -->
+          <div class="relative z-10 mt-auto pt-4 flex justify-center">
+            <img
+              src="/images/profile/pathway_profesional.png"
+              alt="Profesional Pathway Siswa SMK Telkom Purwokerto"
+              class="w-full max-w-[200px] h-auto object-contain block drop-shadow-md"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
+
+<script>
+  // Video Modal Interactivity
+  const playBtn = document.getElementById("play-video-btn");
+  const videoModal = document.getElementById("video-modal");
+  const closeBtn = document.getElementById("close-video-btn");
+  const videoFrame = document.getElementById("video-frame") as HTMLIFrameElement | null;
+
+  // Official SMK Telkom Purwokerto Video
+  const videoUrl = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"; // fallback or official video id
+
+  if (playBtn && videoModal && closeBtn && videoFrame) {
+    playBtn.addEventListener("click", () => {
+      // Use official Telkom Schools Purwokerto profile video if available, or embed
+      videoFrame.src = "https://www.youtube.com/embed/Z0bZ2g-z_bM?autoplay=1";
+      videoModal.classList.remove("hidden");
+      videoModal.classList.add("flex");
+      document.body.style.overflow = "hidden";
+    });
+
+    const closeModal = () => {
+      videoFrame.src = "";
+      videoModal.classList.add("hidden");
+      videoModal.classList.remove("flex");
+      document.body.style.overflow = "";
+    };
+
+    closeBtn.addEventListener("click", closeModal);
+    videoModal.addEventListener("click", (e) => {
+      if (e.target === videoModal) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !videoModal.classList.contains("hidden")) {
+        closeModal();
+      }
+    });
+  }
+</script>

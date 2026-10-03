@@ -3,6 +3,7 @@ import Container from "./Container.astro";
 
 const currentPath = Astro.url.pathname;
 const isProfileGuru = currentPath.includes("profile-guru") || currentPath.includes("profil-guru");
+const isProfileSekolah = currentPath.includes("profile-sekolah") || currentPath.includes("profil-sekolah");
 const isSchoolTour = currentPath.includes("school-tour");
 ---
 
@@ -32,7 +33,7 @@ const isSchoolTour = currentPath.includes("school-tour");
         <!-- Dropdown Tentang -->
         <div class="nav-item dropdown relative group">
           <button
-            class={`dropdown-trigger flex items-center gap-1.5 font-jakarta text-[0.875rem] lg:text-[0.9125rem] bg-transparent border-0 cursor-pointer p-0 py-2 transition-colors duration-150 ${isProfileGuru ? "font-bold text-[#ed1e28]" : "font-medium text-[#4b5563] hover:text-[#111827] group-hover:text-[#111827]"}`}
+            class={`dropdown-trigger flex items-center gap-1.5 font-jakarta text-[0.875rem] lg:text-[0.9125rem] bg-transparent border-0 cursor-pointer p-0 py-2 transition-colors duration-150 ${isProfileGuru || isProfileSekolah ? "font-bold text-[#ed1e28]" : "font-medium text-[#4b5563] hover:text-[#111827] group-hover:text-[#111827]"}`}
             type="button"
             aria-expanded="false"
           >
@@ -42,7 +43,7 @@ const isSchoolTour = currentPath.includes("school-tour");
             </svg>
           </button>
           <div class="dropdown-menu absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 translate-y-1.5 min-w-[220px] bg-white border border-gray-100 rounded-xl shadow-[0_12px_30px_rgba(0,0,0,0.08),0_4px_10px_rgba(0,0,0,0.04)] py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-200 z-[100] before:content-[''] before:absolute before:-top-3 before:left-0 before:w-full before:h-3">
-            <a href="/#about" class="dropdown-link block px-4 py-2 font-jakarta text-[0.8125rem] text-gray-700 no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-primary">Profile Sekolah</a>
+            <a href="/profile-sekolah" class={`dropdown-link block px-4 py-2 font-jakarta text-[0.8125rem] no-underline transition-colors duration-150 ${isProfileSekolah ? "bg-red-50 text-[#ed1e28] font-semibold" : "text-gray-700 hover:bg-gray-50 hover:text-primary"}`}>Profile Sekolah</a>
             <a href="/profile-guru" class={`dropdown-link block px-4 py-2 font-jakarta text-[0.8125rem] no-underline transition-colors duration-150 ${isProfileGuru ? "bg-red-50 text-[#ed1e28] font-semibold" : "text-gray-700 hover:bg-gray-50 hover:text-primary"}`}>Profile Guru</a>
             <a href="/#about" class="dropdown-link block px-4 py-2 font-jakarta text-[0.8125rem] text-gray-700 no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-primary">Fasilitas</a>
             <a href="/#stats" class="dropdown-link block px-4 py-2 font-jakarta text-[0.8125rem] text-gray-700 no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-primary">Prestasi</a>
@@ -126,7 +127,7 @@ const isSchoolTour = currentPath.includes("school-tour");
     <div id="mobile-menu" class="mobile-menu border border-gray-200 rounded-2xl bg-white p-5 mt-3 shadow-[0_10px_25px_rgba(0,0,0,0.08)]" hidden>
       <nav class="mobile-nav-links flex flex-col gap-3">
         <a href="/" class="mobile-nav-link font-jakarta text-[0.9375rem] font-medium text-gray-700 px-2 py-1.5 no-underline rounded-sm transition-colors hover:bg-gray-100 hover:text-primary">Beranda</a>
-        <a href="#about" class="mobile-nav-link font-jakarta text-[0.9375rem] font-medium text-gray-700 px-2 py-1.5 no-underline rounded-sm transition-colors hover:bg-gray-100 hover:text-primary">Tentang Sekolah</a>
+        <a href="/profile-sekolah" class="mobile-nav-link font-jakarta text-[0.9375rem] font-medium text-gray-700 px-2 py-1.5 no-underline rounded-sm transition-colors hover:bg-gray-100 hover:text-primary">Profile Sekolah</a>
         <a href="/profile-guru" class="mobile-nav-link font-jakarta text-[0.9375rem] font-medium text-gray-700 px-2 py-1.5 no-underline rounded-sm transition-colors hover:bg-gray-100 hover:text-primary">Profile Guru</a>
         <a href="#sambutan" class="mobile-nav-link font-jakarta text-[0.9375rem] font-medium text-gray-700 px-2 py-1.5 no-underline rounded-sm transition-colors hover:bg-gray-100 hover:text-primary">Sambutan Kepala Sekolah</a>
         <a href="#jurusan" class="mobile-nav-link font-jakarta text-[0.9375rem] font-medium text-gray-700 px-2 py-1.5 no-underline rounded-sm transition-colors hover:bg-gray-100 hover:text-primary">Program Keahlian</a>
