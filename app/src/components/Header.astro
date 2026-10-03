@@ -60,10 +60,30 @@ const isInformasiActive = isBerita || isCvGen || isPkl;
             </svg>
           </button>
           <div class="dropdown-menu absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 translate-y-1.5 min-w-[220px] bg-white border border-gray-100 rounded-2xl shadow-[0_12px_30px_rgba(0,0,0,0.08),0_4px_10px_rgba(0,0,0,0.04)] p-1.5 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-200 z-[100] before:content-[''] before:absolute before:-top-3 before:left-0 before:w-full before:h-3">
-            <a href="/profile-sekolah" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Profile Sekolah</a>
-            <a href="/profile-guru" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Profile Guru</a>
-            <a href="/fasilitas" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Fasilitas Sekolah</a>
-            <a href="/prestasi" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Prestasi Siswa</a>
+            <a href="/profile-sekolah" class="dropdown-link group/item block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">
+              <span class="relative inline-block">
+                <span>Profile Sekolah</span>
+                <span class="nav-underline absolute -bottom-0.5 left-0 w-full h-[2px] bg-[#ed1e28] rounded-full origin-left scale-x-0 group-hover/item:scale-x-100 transition-transform duration-250 ease-out"></span>
+              </span>
+            </a>
+            <a href="/profile-guru" class="dropdown-link group/item block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">
+              <span class="relative inline-block">
+                <span>Profile Guru</span>
+                <span class="nav-underline absolute -bottom-0.5 left-0 w-full h-[2px] bg-[#ed1e28] rounded-full origin-left scale-x-0 group-hover/item:scale-x-100 transition-transform duration-250 ease-out"></span>
+              </span>
+            </a>
+            <a href="/fasilitas" class="dropdown-link group/item block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">
+              <span class="relative inline-block">
+                <span>Fasilitas Sekolah</span>
+                <span class="nav-underline absolute -bottom-0.5 left-0 w-full h-[2px] bg-[#ed1e28] rounded-full origin-left scale-x-0 group-hover/item:scale-x-100 transition-transform duration-250 ease-out"></span>
+              </span>
+            </a>
+            <a href="/prestasi" class="dropdown-link group/item block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">
+              <span class="relative inline-block">
+                <span>Prestasi Siswa</span>
+                <span class="nav-underline absolute -bottom-0.5 left-0 w-full h-[2px] bg-[#ed1e28] rounded-full origin-left scale-x-0 group-hover/item:scale-x-100 transition-transform duration-250 ease-out"></span>
+              </span>
+            </a>
           </div>
         </div>
 
@@ -83,13 +103,43 @@ const isInformasiActive = isBerita || isCvGen || isPkl;
             </svg>
           </button>
           <div class="dropdown-menu absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 translate-y-1.5 min-w-[250px] bg-white border border-gray-100 rounded-2xl shadow-[0_12px_30px_rgba(0,0,0,0.08),0_4px_10px_rgba(0,0,0,0.04)] p-1.5 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-200 z-[100] before:content-[''] before:absolute before:-top-3 before:left-0 before:w-full before:h-3">
-            <a href="/jurusan" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Semua Program Keahlian</a>
-            <a href="/jurusan#profil-jurusan" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Pengembangan Gim (PG)</a>
-            <a href="/jurusan#profil-jurusan" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Rekayasa Perangkat Lunak (RPL)</a>
-            <a href="/jurusan#profil-jurusan" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Teknik Komputer & Jaringan (TKJ)</a>
-            <a href="/jurusan#profil-jurusan" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Teknik Jaringan Akses (TJA)</a>
+            <a href="/jurusan" class="dropdown-link group/item block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">
+              <span class="relative inline-block">
+                <span>Semua Program Keahlian</span>
+                <span class="nav-underline absolute -bottom-0.5 left-0 w-full h-[2px] bg-[#ed1e28] rounded-full origin-left scale-x-0 group-hover/item:scale-x-100 transition-transform duration-250 ease-out"></span>
+              </span>
+            </a>
+            <a href="/jurusan#profil-jurusan" class="dropdown-link group/item block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">
+              <span class="relative inline-block">
+                <span>Pengembangan Gim (PG)</span>
+                <span class="nav-underline absolute -bottom-0.5 left-0 w-full h-[2px] bg-[#ed1e28] rounded-full origin-left scale-x-0 group-hover/item:scale-x-100 transition-transform duration-250 ease-out"></span>
+              </span>
+            </a>
+            <a href="/jurusan#profil-jurusan" class="dropdown-link group/item block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">
+              <span class="relative inline-block">
+                <span>Rekayasa Perangkat Lunak (RPL)</span>
+                <span class="nav-underline absolute -bottom-0.5 left-0 w-full h-[2px] bg-[#ed1e28] rounded-full origin-left scale-x-0 group-hover/item:scale-x-100 transition-transform duration-250 ease-out"></span>
+              </span>
+            </a>
+            <a href="/jurusan#profil-jurusan" class="dropdown-link group/item block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">
+              <span class="relative inline-block">
+                <span>Teknik Komputer & Jaringan (TKJ)</span>
+                <span class="nav-underline absolute -bottom-0.5 left-0 w-full h-[2px] bg-[#ed1e28] rounded-full origin-left scale-x-0 group-hover/item:scale-x-100 transition-transform duration-250 ease-out"></span>
+              </span>
+            </a>
+            <a href="/jurusan#profil-jurusan" class="dropdown-link group/item block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">
+              <span class="relative inline-block">
+                <span>Teknik Jaringan Akses (TJA)</span>
+                <span class="nav-underline absolute -bottom-0.5 left-0 w-full h-[2px] bg-[#ed1e28] rounded-full origin-left scale-x-0 group-hover/item:scale-x-100 transition-transform duration-250 ease-out"></span>
+              </span>
+            </a>
             <div class="my-1 border-t border-gray-100 mx-1"></div>
-            <a href="/ekstrakurikuler" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Ekstrakurikuler</a>
+            <a href="/ekstrakurikuler" class="dropdown-link group/item block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">
+              <span class="relative inline-block">
+                <span>Ekstrakurikuler</span>
+                <span class="nav-underline absolute -bottom-0.5 left-0 w-full h-[2px] bg-[#ed1e28] rounded-full origin-left scale-x-0 group-hover/item:scale-x-100 transition-transform duration-250 ease-out"></span>
+              </span>
+            </a>
           </div>
         </div>
 
@@ -109,11 +159,36 @@ const isInformasiActive = isBerita || isCvGen || isPkl;
             </svg>
           </button>
           <div class="dropdown-menu absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 translate-y-1.5 min-w-[220px] bg-white border border-gray-100 rounded-2xl shadow-[0_12px_30px_rgba(0,0,0,0.08),0_4px_10px_rgba(0,0,0,0.04)] p-1.5 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-200 z-[100] before:content-[''] before:absolute before:-top-3 before:left-0 before:w-full before:h-3">
-            <a href="/berita" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Berita & Agenda</a>
-            <a href="/pkl-matching" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">AI PKL Matching</a>
-            <a href="/cv-generator" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">CV Generator ATS</a>
-            <a href="/#faq" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">FAQ</a>
-            <a href="/#alumni" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Cerita Alumni</a>
+            <a href="/berita" class="dropdown-link group/item block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">
+              <span class="relative inline-block">
+                <span>Berita & Agenda</span>
+                <span class="nav-underline absolute -bottom-0.5 left-0 w-full h-[2px] bg-[#ed1e28] rounded-full origin-left scale-x-0 group-hover/item:scale-x-100 transition-transform duration-250 ease-out"></span>
+              </span>
+            </a>
+            <a href="/pkl-matching" class="dropdown-link group/item block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">
+              <span class="relative inline-block">
+                <span>AI PKL Matching</span>
+                <span class="nav-underline absolute -bottom-0.5 left-0 w-full h-[2px] bg-[#ed1e28] rounded-full origin-left scale-x-0 group-hover/item:scale-x-100 transition-transform duration-250 ease-out"></span>
+              </span>
+            </a>
+            <a href="/cv-generator" class="dropdown-link group/item block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">
+              <span class="relative inline-block">
+                <span>CV Generator ATS</span>
+                <span class="nav-underline absolute -bottom-0.5 left-0 w-full h-[2px] bg-[#ed1e28] rounded-full origin-left scale-x-0 group-hover/item:scale-x-100 transition-transform duration-250 ease-out"></span>
+              </span>
+            </a>
+            <a href="/#faq" class="dropdown-link group/item block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">
+              <span class="relative inline-block">
+                <span>FAQ</span>
+                <span class="nav-underline absolute -bottom-0.5 left-0 w-full h-[2px] bg-[#ed1e28] rounded-full origin-left scale-x-0 group-hover/item:scale-x-100 transition-transform duration-250 ease-out"></span>
+              </span>
+            </a>
+            <a href="/#alumni" class="dropdown-link group/item block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">
+              <span class="relative inline-block">
+                <span>Cerita Alumni</span>
+                <span class="nav-underline absolute -bottom-0.5 left-0 w-full h-[2px] bg-[#ed1e28] rounded-full origin-left scale-x-0 group-hover/item:scale-x-100 transition-transform duration-250 ease-out"></span>
+              </span>
+            </a>
           </div>
         </div>
 
@@ -158,17 +233,72 @@ const isInformasiActive = isBerita || isCvGen || isPkl;
     <!-- Mobile Drawer -->
     <div id="mobile-menu" class="mobile-menu border border-gray-200 rounded-2xl bg-white p-5 mt-3 shadow-[0_10px_25px_rgba(0,0,0,0.08)]" hidden>
       <nav class="mobile-nav-links flex flex-col gap-2">
-        <a href="/" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827]">Beranda</a>
-        <a href="/profile-sekolah" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827]">Profile Sekolah</a>
-        <a href="/profile-guru" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827]">Profile Guru</a>
-        <a href="/jurusan" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827]">Program Keahlian</a>
-        <a href="/ekstrakurikuler" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827]">Ekstrakurikuler</a>
-        <a href="/fasilitas" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827]">Fasilitas Sekolah</a>
-        <a href="/prestasi" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827]">Prestasi Siswa</a>
-        <a href="/berita" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827]">Berita & Agenda</a>
-        <a href="/pkl-matching" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827]">AI PKL Matching</a>
-        <a href="/cv-generator" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827]">CV Generator ATS</a>
-        <a href="/school-tour" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827]">School Tour</a>
+        <a href="/" class="mobile-nav-link group/mob font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827] flex items-center">
+          <span class="relative inline-block">
+            <span>Beranda</span>
+            <span class="nav-underline absolute -bottom-0.5 left-0 w-full h-[2px] bg-[#ed1e28] rounded-full origin-left scale-x-0 group-hover/mob:scale-x-100 transition-transform duration-250 ease-out"></span>
+          </span>
+        </a>
+        <a href="/profile-sekolah" class="mobile-nav-link group/mob font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827] flex items-center">
+          <span class="relative inline-block">
+            <span>Profile Sekolah</span>
+            <span class="nav-underline absolute -bottom-0.5 left-0 w-full h-[2px] bg-[#ed1e28] rounded-full origin-left scale-x-0 group-hover/mob:scale-x-100 transition-transform duration-250 ease-out"></span>
+          </span>
+        </a>
+        <a href="/profile-guru" class="mobile-nav-link group/mob font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827] flex items-center">
+          <span class="relative inline-block">
+            <span>Profile Guru</span>
+            <span class="nav-underline absolute -bottom-0.5 left-0 w-full h-[2px] bg-[#ed1e28] rounded-full origin-left scale-x-0 group-hover/mob:scale-x-100 transition-transform duration-250 ease-out"></span>
+          </span>
+        </a>
+        <a href="/jurusan" class="mobile-nav-link group/mob font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827] flex items-center">
+          <span class="relative inline-block">
+            <span>Program Keahlian</span>
+            <span class="nav-underline absolute -bottom-0.5 left-0 w-full h-[2px] bg-[#ed1e28] rounded-full origin-left scale-x-0 group-hover/mob:scale-x-100 transition-transform duration-250 ease-out"></span>
+          </span>
+        </a>
+        <a href="/ekstrakurikuler" class="mobile-nav-link group/mob font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827] flex items-center">
+          <span class="relative inline-block">
+            <span>Ekstrakurikuler</span>
+            <span class="nav-underline absolute -bottom-0.5 left-0 w-full h-[2px] bg-[#ed1e28] rounded-full origin-left scale-x-0 group-hover/mob:scale-x-100 transition-transform duration-250 ease-out"></span>
+          </span>
+        </a>
+        <a href="/fasilitas" class="mobile-nav-link group/mob font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827] flex items-center">
+          <span class="relative inline-block">
+            <span>Fasilitas Sekolah</span>
+            <span class="nav-underline absolute -bottom-0.5 left-0 w-full h-[2px] bg-[#ed1e28] rounded-full origin-left scale-x-0 group-hover/mob:scale-x-100 transition-transform duration-250 ease-out"></span>
+          </span>
+        </a>
+        <a href="/prestasi" class="mobile-nav-link group/mob font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827] flex items-center">
+          <span class="relative inline-block">
+            <span>Prestasi Siswa</span>
+            <span class="nav-underline absolute -bottom-0.5 left-0 w-full h-[2px] bg-[#ed1e28] rounded-full origin-left scale-x-0 group-hover/mob:scale-x-100 transition-transform duration-250 ease-out"></span>
+          </span>
+        </a>
+        <a href="/berita" class="mobile-nav-link group/mob font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827] flex items-center">
+          <span class="relative inline-block">
+            <span>Berita & Agenda</span>
+            <span class="nav-underline absolute -bottom-0.5 left-0 w-full h-[2px] bg-[#ed1e28] rounded-full origin-left scale-x-0 group-hover/mob:scale-x-100 transition-transform duration-250 ease-out"></span>
+          </span>
+        </a>
+        <a href="/pkl-matching" class="mobile-nav-link group/mob font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827] flex items-center">
+          <span class="relative inline-block">
+            <span>AI PKL Matching</span>
+            <span class="nav-underline absolute -bottom-0.5 left-0 w-full h-[2px] bg-[#ed1e28] rounded-full origin-left scale-x-0 group-hover/mob:scale-x-100 transition-transform duration-250 ease-out"></span>
+          </span>
+        </a>
+        <a href="/cv-generator" class="mobile-nav-link group/mob font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827] flex items-center">
+          <span class="relative inline-block">
+            <span>CV Generator ATS</span>
+            <span class="nav-underline absolute -bottom-0.5 left-0 w-full h-[2px] bg-[#ed1e28] rounded-full origin-left scale-x-0 group-hover/mob:scale-x-100 transition-transform duration-250 ease-out"></span>
+          </span>
+        </a>
+        <a href="/school-tour" class="mobile-nav-link group/mob font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827] flex items-center">
+          <span class="relative inline-block">
+            <span>School Tour</span>
+            <span class="nav-underline absolute -bottom-0.5 left-0 w-full h-[2px] bg-[#ed1e28] rounded-full origin-left scale-x-0 group-hover/mob:scale-x-100 transition-transform duration-250 ease-out"></span>
+          </span>
+        </a>
         <div class="mobile-ppdb-wrap mt-3 pt-3 border-t border-gray-200">
           <a href="https://ppdb.smktelkom-pwt.sch.id" target="_blank" rel="noopener noreferrer" class="btn-ppdb-header block text-center bg-primary hover:bg-[#d81820] text-white font-jakarta text-[1rem] font-bold px-8 py-3 rounded-full no-underline shadow-[0_4px_14px_rgba(237,30,40,0.35)]">Daftar PPDB 2026</a>
         </div>
