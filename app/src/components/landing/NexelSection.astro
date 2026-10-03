@@ -223,15 +223,6 @@ import Container from "../Container.astro";
                 </button>
               </div>
             </div>
-
-            <!-- Floating red badge on bottom-right of chat card -->
-            <button
-              type="button"
-              class="nexel-floating-badge absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#ed1e28] text-white flex items-center justify-center shadow-[0_10px_25px_rgba(237,30,40,0.5)] border-[3px] border-white p-2.5 sm:p-3 hover:scale-105 active:scale-95 transition-transform duration-200 cursor-pointer z-10"
-              aria-label="Buka Chat Nexel"
-            >
-              <img src="/images/brand/chatbot-avatar.png" alt="" width="26" height="24" class="block object-contain pointer-events-none select-none" />
-            </button>
           </div>
         </div>
       </div>
@@ -250,7 +241,7 @@ import Container from "../Container.astro";
 
   document.getElementById("btn-open-nexel-chat")?.addEventListener("click", openChatbot);
 
-  document.querySelectorAll(".nexel-floating-badge, .nexel-trigger-icon").forEach((el) => {
+  document.querySelectorAll(".nexel-trigger-icon").forEach((el) => {
     el.addEventListener("click", openChatbot);
   });
 
