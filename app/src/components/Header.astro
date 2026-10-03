@@ -6,47 +6,37 @@ const isProfileGuru = currentPath.includes("profile-guru") || currentPath.includ
 const isProfileSekolah = currentPath.includes("profile-sekolah") || currentPath.includes("profil-sekolah");
 const isSchoolTour = currentPath.includes("school-tour");
 const isJurusan = currentPath.includes("jurusan");
-const isFasilitas = currentPath.includes("fasilitas");
-const isPrestasi = currentPath.includes("prestasi");
 const isEkskul = currentPath.includes("ekstrakurikuler");
+const isPrestasi = currentPath.includes("prestasi");
+const isFasilitas = currentPath.includes("fasilitas");
 const isBerita = currentPath.includes("berita");
-const isCVGen = currentPath.includes("cv-generator");
-const isPKL = currentPath.includes("pkl-matching");
+const isCvGen = currentPath.includes("cv-generator");
+const isPkl = currentPath.includes("pkl-matching");
 
-const isTentangActive = isProfileGuru || isProfileSekolah || isFasilitas || isPrestasi || isEkskul;
-const isProgramActive = isJurusan;
-const isInformasiActive = isBerita || isPKL || isCVGen;
+const isTentangActive = isProfileGuru || isProfileSekolah || isFasilitas || isPrestasi;
+const isProgramActive = isJurusan || isEkskul;
+const isInformasiActive = isBerita || isCvGen || isPkl;
 ---
 
-<header class="site-header sticky top-0 left-0 w-full z-[100] bg-white/90 backdrop-blur-md border-b border-black/[0.06] transition-all duration-200">
+<header class="site-header sticky top-3.5 z-[100] py-2 bg-transparent">
   <Container>
-    <div class="header-inner flex items-center justify-between h-[68px] sm:h-[72px] tablet:grid tablet:grid-cols-[1fr_auto_1fr]">
+    <div class="header-pill bg-white/95 backdrop-blur-md rounded-full border border-black/[0.07] px-4 sm:px-6 md:px-7 h-[64px] shadow-[0_4px_20px_rgba(0,0,0,0.06),0_1px_3px_rgba(0,0,0,0.02)] flex items-center justify-between tablet:grid tablet:grid-cols-[1fr_auto_1fr] transition-all duration-200">
       <!-- Brand Logo (Column 1: Left aligned) -->
-      <a href="/" class="brand-link flex items-center gap-2.5 sm:gap-3 no-underline justify-self-start group py-1" aria-label="Beranda SMK Telkom Purwokerto">
+      <a href="/" class="brand-link flex items-center gap-2.5 sm:gap-3 no-underline justify-self-start" aria-label="Beranda SMK Telkom Purwokerto">
         <div class="brand-logo-wrap shrink-0 flex items-center justify-center">
-          <img
-            src="/images/brand/logo-telkom-schools.png"
-            alt="Logo SMK Telkom Purwokerto"
-            class="brand-logo-img w-[34px] h-[34px] sm:w-[38px] sm:h-[38px] object-contain block transition-transform duration-200 group-hover:scale-105"
-            width="38"
-            height="38"
-          />
+          <img src="/images/brand/logo-telkom-schools.png" alt="Logo SMK Telkom Purwokerto" class="brand-logo-img w-[34px] h-[34px] sm:w-[36px] sm:h-[36px] object-contain block" width="36" height="36" />
         </div>
         <div class="brand-text-group flex flex-col justify-center">
-          <span class="brand-title font-poppins text-[0.9375rem] sm:text-[1rem] font-bold text-[#111827] leading-[1.15] tracking-tight group-hover:text-[#ed1e28] transition-colors duration-150">
-            SMK Telkom Purwokerto
-          </span>
-          <span class="brand-subtitle font-inter text-[0.6875rem] font-semibold text-gray-400 tracking-[0.08em] leading-none mt-0.5">
-            TELKOM SCHOOLS
-          </span>
+          <span class="brand-title font-poppins text-[0.9375rem] sm:text-[1rem] font-bold text-[#111827] leading-[1.15]">SMK Telkom Purwokerto</span>
+          <span class="brand-subtitle font-inter text-[0.6875rem] font-semibold text-gray-400 tracking-[0.08em] leading-none mt-0.5">TELKOM SCHOOLS</span>
         </div>
       </a>
 
       <!-- Desktop Nav (Column 2: Centered) -->
-      <nav class="desktop-nav hidden tablet:flex items-center gap-6 lg:gap-8 justify-self-center" aria-label="Navigasi Utama">
+      <nav class="desktop-nav hidden tablet:flex items-center gap-6 lg:gap-7 justify-self-center" aria-label="Navigasi Utama">
         <a
           href="/"
-          class={`nav-item font-jakarta text-[0.875rem] lg:text-[0.9125rem] py-2 relative cursor-pointer no-underline transition-colors duration-150 ${currentPath === "/" ? "font-bold text-[#ed1e28]" : "font-medium text-[#374151] hover:text-[#111827]"}`}
+          class={`nav-item font-jakarta text-[0.875rem] lg:text-[0.9125rem] py-2 relative cursor-pointer no-underline transition-colors duration-150 ${currentPath === "/" ? "font-bold text-[#ed1e28]" : "font-medium text-[#4b5563] hover:text-[#111827]"}`}
         >
           Beranda
         </a>
@@ -54,81 +44,83 @@ const isInformasiActive = isBerita || isPKL || isCVGen;
         <!-- Dropdown Tentang -->
         <div class="nav-item dropdown relative group">
           <button
-            class={`dropdown-trigger flex items-center gap-1.5 font-jakarta text-[0.875rem] lg:text-[0.9125rem] bg-transparent border-0 cursor-pointer p-0 py-2 transition-colors duration-150 ${isTentangActive ? "font-bold text-[#ed1e28]" : "font-medium text-[#374151] hover:text-[#111827] group-hover:text-[#111827]"}`}
+            class={`dropdown-trigger flex items-center gap-1.5 font-jakarta text-[0.875rem] lg:text-[0.9125rem] bg-transparent border-0 cursor-pointer p-0 py-2 transition-colors duration-150 ${isTentangActive ? "font-bold text-[#ed1e28]" : "font-medium text-[#4b5563] hover:text-[#111827] group-hover:text-[#111827]"}`}
             type="button"
             aria-expanded="false"
           >
             <span>Tentang</span>
-            <svg class={`chevron-icon transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180 ${isTentangActive ? "text-[#ed1e28]" : "text-gray-400 group-hover:text-[#111827]"}`} width="12" height="12" viewBox="0 0 20 20" fill="currentColor">
+            <svg class={`chevron-icon transition-transform duration-200 ${isTentangActive ? "text-[#ed1e28]" : "text-gray-400"} group-hover:rotate-180 group-focus-within:rotate-180`} width="12" height="12" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
             </svg>
           </button>
-          <div class="dropdown-menu absolute top-[calc(100%+6px)] left-1/2 -translate-x-1/2 translate-y-1 min-w-[220px] bg-white/95 backdrop-blur-xl border border-black/[0.06] rounded-2xl shadow-[0_12px_36px_rgba(0,0,0,0.08),0_4px_12px_rgba(0,0,0,0.03)] p-1.5 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-200 z-[100] before:content-[''] before:absolute before:-top-3 before:left-0 before:w-full before:h-3">
-            <a href="/profile-sekolah" class={`dropdown-link block px-3.5 py-2 rounded-xl font-jakarta text-[0.8125rem] no-underline transition-colors duration-150 ${isProfileSekolah ? "bg-red-50 text-[#ed1e28] font-semibold" : "text-[#374151] hover:bg-gray-50 hover:text-[#111827] font-medium"}`}>Profile Sekolah</a>
-            <a href="/profile-guru" class={`dropdown-link block px-3.5 py-2 rounded-xl font-jakarta text-[0.8125rem] no-underline transition-colors duration-150 ${isProfileGuru ? "bg-red-50 text-[#ed1e28] font-semibold" : "text-[#374151] hover:bg-gray-50 hover:text-[#111827] font-medium"}`}>Profile Guru</a>
-            <a href="/fasilitas" class={`dropdown-link block px-3.5 py-2 rounded-xl font-jakarta text-[0.8125rem] no-underline transition-colors duration-150 ${isFasilitas ? "bg-red-50 text-[#ed1e28] font-semibold" : "text-[#374151] hover:bg-gray-50 hover:text-[#111827] font-medium"}`}>Fasilitas Sekolah</a>
-            <a href="/prestasi" class={`dropdown-link block px-3.5 py-2 rounded-xl font-jakarta text-[0.8125rem] no-underline transition-colors duration-150 ${isPrestasi ? "bg-red-50 text-[#ed1e28] font-semibold" : "text-[#374151] hover:bg-gray-50 hover:text-[#111827] font-medium"}`}>Prestasi Siswa</a>
-            <a href="/ekstrakurikuler" class={`dropdown-link block px-3.5 py-2 rounded-xl font-jakarta text-[0.8125rem] no-underline transition-colors duration-150 ${isEkskul ? "bg-red-50 text-[#ed1e28] font-semibold" : "text-[#374151] hover:bg-gray-50 hover:text-[#111827] font-medium"}`}>Ekstrakurikuler</a>
+          <div class="dropdown-menu absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 translate-y-1.5 min-w-[220px] bg-white border border-gray-100 rounded-xl shadow-[0_12px_30px_rgba(0,0,0,0.08),0_4px_10px_rgba(0,0,0,0.04)] py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-200 z-[100] before:content-[''] before:absolute before:-top-3 before:left-0 before:w-full before:h-3">
+            <a href="/profile-sekolah" class={`dropdown-link block px-4 py-2 font-jakarta text-[0.8125rem] no-underline transition-colors duration-150 ${isProfileSekolah ? "bg-red-50 text-[#ed1e28] font-semibold" : "text-gray-700 hover:bg-gray-50 hover:text-primary"}`}>Profile Sekolah</a>
+            <a href="/profile-guru" class={`dropdown-link block px-4 py-2 font-jakarta text-[0.8125rem] no-underline transition-colors duration-150 ${isProfileGuru ? "bg-red-50 text-[#ed1e28] font-semibold" : "text-gray-700 hover:bg-gray-50 hover:text-primary"}`}>Profile Guru</a>
+            <a href="/fasilitas" class={`dropdown-link block px-4 py-2 font-jakarta text-[0.8125rem] no-underline transition-colors duration-150 ${isFasilitas ? "bg-red-50 text-[#ed1e28] font-semibold" : "text-gray-700 hover:bg-gray-50 hover:text-primary"}`}>Fasilitas Sekolah</a>
+            <a href="/prestasi" class={`dropdown-link block px-4 py-2 font-jakarta text-[0.8125rem] no-underline transition-colors duration-150 ${isPrestasi ? "bg-red-50 text-[#ed1e28] font-semibold" : "text-gray-700 hover:bg-gray-50 hover:text-primary"}`}>Prestasi Siswa</a>
           </div>
         </div>
 
         <!-- Dropdown Program -->
         <div class="nav-item dropdown relative group">
           <button
-            class={`dropdown-trigger flex items-center gap-1.5 font-jakarta text-[0.875rem] lg:text-[0.9125rem] bg-transparent border-0 cursor-pointer p-0 py-2 transition-colors duration-150 ${isProgramActive ? "font-bold text-[#ed1e28]" : "font-medium text-[#374151] hover:text-[#111827] group-hover:text-[#111827]"}`}
+            class={`dropdown-trigger flex items-center gap-1.5 font-jakarta text-[0.875rem] lg:text-[0.9125rem] bg-transparent border-0 cursor-pointer p-0 py-2 transition-colors duration-150 ${isProgramActive ? "font-bold text-[#ed1e28]" : "font-medium text-[#4b5563] hover:text-[#111827] group-hover:text-[#111827]"}`}
             type="button"
             aria-expanded="false"
           >
             <span>Program</span>
-            <svg class={`chevron-icon transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180 ${isProgramActive ? "text-[#ed1e28]" : "text-gray-400 group-hover:text-[#111827]"}`} width="12" height="12" viewBox="0 0 20 20" fill="currentColor">
+            <svg class={`chevron-icon transition-transform duration-200 ${isProgramActive ? "text-[#ed1e28]" : "text-gray-400"} group-hover:rotate-180 group-focus-within:rotate-180`} width="12" height="12" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
             </svg>
           </button>
-          <div class="dropdown-menu absolute top-[calc(100%+6px)] left-1/2 -translate-x-1/2 translate-y-1 min-w-[250px] bg-white/95 backdrop-blur-xl border border-black/[0.06] rounded-2xl shadow-[0_12px_36px_rgba(0,0,0,0.08),0_4px_12px_rgba(0,0,0,0.03)] p-1.5 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-200 z-[100] before:content-[''] before:absolute before:-top-3 before:left-0 before:w-full before:h-3">
-            <a href="/jurusan" class={`dropdown-link block px-3.5 py-2 rounded-xl font-jakarta text-[0.8125rem] no-underline transition-colors duration-150 ${isJurusan ? "bg-red-50 text-[#ed1e28] font-bold" : "text-[#374151] hover:bg-gray-50 hover:text-[#111827] font-semibold"}`}>Semua Program Keahlian</a>
-            <div class="h-px bg-gray-100 my-1"></div>
-            <a href="/jurusan#pg" class="dropdown-link block px-3.5 py-1.5 rounded-xl font-jakarta text-[0.8125rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Pengembangan Game (PG)</a>
-            <a href="/jurusan#rpl" class="dropdown-link block px-3.5 py-1.5 rounded-xl font-jakarta text-[0.8125rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Rekayasa Perangkat Lunak (RPL)</a>
-            <a href="/jurusan#tkj" class="dropdown-link block px-3.5 py-1.5 rounded-xl font-jakarta text-[0.8125rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Teknik Komputer & Jaringan (TKJ)</a>
-            <a href="/jurusan#tja" class="dropdown-link block px-3.5 py-1.5 rounded-xl font-jakarta text-[0.8125rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Teknik Jaringan Akses (TJA)</a>
+          <div class="dropdown-menu absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 translate-y-1.5 min-w-[240px] bg-white border border-gray-100 rounded-xl shadow-[0_12px_30px_rgba(0,0,0,0.08),0_4px_10px_rgba(0,0,0,0.04)] py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-200 z-[100] before:content-[''] before:absolute before:-top-3 before:left-0 before:w-full before:h-3">
+            <a href="/jurusan" class={`dropdown-link block px-4 py-2 font-jakarta text-[0.8125rem] no-underline transition-colors duration-150 ${isJurusan ? "bg-red-50 text-[#ed1e28] font-semibold" : "text-gray-700 hover:bg-gray-50 hover:text-primary"}`}>Semua Program Keahlian</a>
+            <a href="/jurusan#profil-jurusan" class="dropdown-link block px-4 py-2 font-jakarta text-[0.8125rem] text-gray-700 no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-primary">Pengembangan Gim (PG)</a>
+            <a href="/jurusan#profil-jurusan" class="dropdown-link block px-4 py-2 font-jakarta text-[0.8125rem] text-gray-700 no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-primary">Rekayasa Perangkat Lunak (RPL)</a>
+            <a href="/jurusan#profil-jurusan" class="dropdown-link block px-4 py-2 font-jakarta text-[0.8125rem] text-gray-700 no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-primary">Teknik Komputer & Jaringan (TKJ)</a>
+            <a href="/jurusan#profil-jurusan" class="dropdown-link block px-4 py-2 font-jakarta text-[0.8125rem] text-gray-700 no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-primary">Teknik Jaringan Akses (TJA)</a>
+            <div class="my-1 border-t border-gray-100"></div>
+            <a href="/ekstrakurikuler" class={`dropdown-link block px-4 py-2 font-jakarta text-[0.8125rem] no-underline transition-colors duration-150 ${isEkskul ? "bg-red-50 text-[#ed1e28] font-semibold" : "text-gray-700 hover:bg-gray-50 hover:text-primary"}`}>Ekstrakurikuler</a>
           </div>
         </div>
 
         <!-- Dropdown Informasi -->
         <div class="nav-item dropdown relative group">
           <button
-            class={`dropdown-trigger flex items-center gap-1.5 font-jakarta text-[0.875rem] lg:text-[0.9125rem] bg-transparent border-0 cursor-pointer p-0 py-2 transition-colors duration-150 ${isInformasiActive ? "font-bold text-[#ed1e28]" : "font-medium text-[#374151] hover:text-[#111827] group-hover:text-[#111827]"}`}
+            class={`dropdown-trigger flex items-center gap-1.5 font-jakarta text-[0.875rem] lg:text-[0.9125rem] bg-transparent border-0 cursor-pointer p-0 py-2 transition-colors duration-150 ${isInformasiActive ? "font-bold text-[#ed1e28]" : "font-medium text-[#4b5563] hover:text-[#111827] group-hover:text-[#111827]"}`}
             type="button"
             aria-expanded="false"
           >
             <span>Informasi</span>
-            <svg class={`chevron-icon transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180 ${isInformasiActive ? "text-[#ed1e28]" : "text-gray-400 group-hover:text-[#111827]"}`} width="12" height="12" viewBox="0 0 20 20" fill="currentColor">
+            <svg class={`chevron-icon transition-transform duration-200 ${isInformasiActive ? "text-[#ed1e28]" : "text-gray-400"} group-hover:rotate-180 group-focus-within:rotate-180`} width="12" height="12" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
             </svg>
           </button>
-          <div class="dropdown-menu absolute top-[calc(100%+6px)] left-1/2 -translate-x-1/2 translate-y-1 min-w-[230px] bg-white/95 backdrop-blur-xl border border-black/[0.06] rounded-2xl shadow-[0_12px_36px_rgba(0,0,0,0.08),0_4px_12px_rgba(0,0,0,0.03)] p-1.5 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-200 z-[100] before:content-[''] before:absolute before:-top-3 before:left-0 before:w-full before:h-3">
-            <a href="/berita" class={`dropdown-link block px-3.5 py-2 rounded-xl font-jakarta text-[0.8125rem] no-underline transition-colors duration-150 ${isBerita ? "bg-red-50 text-[#ed1e28] font-semibold" : "text-[#374151] hover:bg-gray-50 hover:text-[#111827] font-medium"}`}>Berita & Agenda</a>
-            <a href="/pkl-matching" class={`dropdown-link block px-3.5 py-2 rounded-xl font-jakarta text-[0.8125rem] no-underline transition-colors duration-150 ${isPKL ? "bg-red-50 text-[#ed1e28] font-semibold" : "text-[#374151] hover:bg-gray-50 hover:text-[#111827] font-medium"}`}>Info Magang (PKL)</a>
-            <a href="/cv-generator" class={`dropdown-link block px-3.5 py-2 rounded-xl font-jakarta text-[0.8125rem] no-underline transition-colors duration-150 ${isCVGen ? "bg-red-50 text-[#ed1e28] font-semibold" : "text-[#374151] hover:bg-gray-50 hover:text-[#111827] font-medium"}`}>CV Generator</a>
-            <a href="/#alumni" class="dropdown-link block px-3.5 py-2 rounded-xl font-jakarta text-[0.8125rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Cerita Alumni</a>
-            <a href="/#faq" class="dropdown-link block px-3.5 py-2 rounded-xl font-jakarta text-[0.8125rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">FAQ</a>
+          <div class="dropdown-menu absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 translate-y-1.5 min-w-[220px] bg-white border border-gray-100 rounded-xl shadow-[0_12px_30px_rgba(0,0,0,0.08),0_4px_10px_rgba(0,0,0,0.04)] py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-200 z-[100] before:content-[''] before:absolute before:-top-3 before:left-0 before:w-full before:h-3">
+            <a href="/berita" class={`dropdown-link block px-4 py-2 font-jakarta text-[0.8125rem] no-underline transition-colors duration-150 ${isBerita ? "bg-red-50 text-[#ed1e28] font-semibold" : "text-gray-700 hover:bg-gray-50 hover:text-primary"}`}>Berita & Agenda</a>
+            <a href="/pkl-matching" class={`dropdown-link block px-4 py-2 font-jakarta text-[0.8125rem] no-underline transition-colors duration-150 ${isPkl ? "bg-red-50 text-[#ed1e28] font-semibold" : "text-gray-700 hover:bg-gray-50 hover:text-primary"}`}>AI PKL Matching</a>
+            <a href="/cv-generator" class={`dropdown-link block px-4 py-2 font-jakarta text-[0.8125rem] no-underline transition-colors duration-150 ${isCvGen ? "bg-red-50 text-[#ed1e28] font-semibold" : "text-gray-700 hover:bg-gray-50 hover:text-primary"}`}>CV Generator ATS</a>
+            <a href="/#faq" class="dropdown-link block px-4 py-2 font-jakarta text-[0.8125rem] text-gray-700 no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-primary">FAQ</a>
+            <a href="/#alumni" class="dropdown-link block px-4 py-2 font-jakarta text-[0.8125rem] text-gray-700 no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-primary">Cerita Alumni</a>
           </div>
         </div>
 
         <!-- School Tour -->
         <a
           href="/school-tour"
-          class={`nav-item font-jakarta text-[0.875rem] lg:text-[0.9125rem] py-2 relative cursor-pointer no-underline transition-colors duration-150 ${isSchoolTour ? "font-bold text-[#ed1e28]" : "font-medium text-[#374151] hover:text-[#111827]"}`}
+          class={`nav-item font-jakarta text-[0.875rem] lg:text-[0.9125rem] py-2 relative cursor-pointer no-underline transition-colors duration-150 ${isSchoolTour ? "font-bold text-[#ed1e28]" : "font-medium text-[#4b5563] hover:text-[#111827]"}`}
         >
           School Tour
         </a>
       </nav>
 
-      <!-- Action Button & Mobile Toggle (Column 3: Right aligned) -->
-      <div class="header-actions flex items-center gap-3 justify-self-end">
+      <!-- Action Button (Column 3: Right aligned) -->
+      <div class="header-actions flex items-center gap-2 sm:gap-3 justify-self-end">
         <a
-          href="/#ppdb"
-          class="btn-ppdb-header hidden sm:inline-flex bg-[#ed1e28] hover:bg-[#d81820] active:scale-[0.97] text-white font-jakarta text-[0.84rem] lg:text-[0.875rem] font-bold px-5 py-2 sm:py-2.5 rounded-full no-underline shadow-[0_2px_8px_rgba(237,30,40,0.22)] hover:shadow-[0_4px_14px_rgba(237,30,40,0.32)] hover:-translate-y-px transition-all duration-200 tracking-[0.015em] items-center justify-center shrink-0"
+          href="https://ppdb.smktelkom-pwt.sch.id"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-ppdb-header hidden sm:inline-flex bg-[#ed1e28] hover:bg-[#d81820] active:scale-[0.97] text-white font-jakarta text-[0.875rem] font-bold px-5 py-2.5 rounded-full no-underline shadow-[0_4px_14px_rgba(237,30,40,0.35)] hover:shadow-[0_6px_18px_rgba(237,30,40,0.45)] hover:-translate-y-px transition-all duration-200 tracking-[0.02em] items-center justify-center shrink-0"
         >
           PPDB 2026
         </a>
@@ -136,118 +128,61 @@ const isInformasiActive = isBerita || isPKL || isCVGen;
         <!-- Mobile Menu Toggle Button -->
         <button
           id="mobile-toggle"
-          class="mobile-toggle flex tablet:hidden items-center justify-center text-[#111827] hover:text-[#ed1e28] bg-transparent border-0 cursor-pointer p-2 rounded-lg hover:bg-black/5 transition-colors shrink-0"
+          class="mobile-toggle flex tablet:hidden items-center justify-center text-[#111827] hover:text-[#ed1e28] bg-transparent border-0 cursor-pointer p-2 rounded-full hover:bg-black/5 transition-colors shrink-0"
           type="button"
           aria-label="Buka Menu Navigasi"
           aria-expanded="false"
         >
-          <!-- Hamburger Icon -->
-          <svg id="icon-menu" class="w-6 h-6 block" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" fill="none">
+          <svg class="menu-icon" width="24" height="24" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" fill="none">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-          <!-- Close Icon -->
-          <svg id="icon-close" class="w-6 h-6 hidden" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" fill="none">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
     </div>
-  </Container>
 
-  <!-- Mobile Drawer Menu (Attached edge-to-edge under header) -->
-  <div id="mobile-menu" class="mobile-menu hidden w-full bg-white/98 backdrop-blur-xl border-t border-gray-100 shadow-[0_20px_40px_rgba(0,0,0,0.08)] py-4 max-h-[calc(100vh-72px)] overflow-y-auto">
-    <Container>
-      <nav class="mobile-nav-links flex flex-col gap-1.5">
-        <a href="/" class={`mobile-nav-link font-jakarta text-[0.9375rem] px-3.5 py-2.5 rounded-xl no-underline transition-colors ${currentPath === "/" ? "bg-red-50 text-[#ed1e28] font-bold" : "font-medium text-gray-800 hover:bg-gray-100 hover:text-[#ed1e28]"}`}>Beranda</a>
-        <a href="/profile-sekolah" class={`mobile-nav-link font-jakarta text-[0.9375rem] px-3.5 py-2.5 rounded-xl no-underline transition-colors ${isProfileSekolah ? "bg-red-50 text-[#ed1e28] font-bold" : "font-medium text-gray-800 hover:bg-gray-100 hover:text-[#ed1e28]"}`}>Profile Sekolah</a>
-        <a href="/profile-guru" class={`mobile-nav-link font-jakarta text-[0.9375rem] px-3.5 py-2.5 rounded-xl no-underline transition-colors ${isProfileGuru ? "bg-red-50 text-[#ed1e28] font-bold" : "font-medium text-gray-800 hover:bg-gray-100 hover:text-[#ed1e28]"}`}>Profile Guru</a>
-        <a href="/jurusan" class={`mobile-nav-link font-jakarta text-[0.9375rem] px-3.5 py-2.5 rounded-xl no-underline transition-colors ${isJurusan ? "bg-red-50 text-[#ed1e28] font-bold" : "font-medium text-gray-800 hover:bg-gray-100 hover:text-[#ed1e28]"}`}>Program Keahlian</a>
-        <a href="/fasilitas" class={`mobile-nav-link font-jakarta text-[0.9375rem] px-3.5 py-2.5 rounded-xl no-underline transition-colors ${isFasilitas ? "bg-red-50 text-[#ed1e28] font-bold" : "font-medium text-gray-800 hover:bg-gray-100 hover:text-[#ed1e28]"}`}>Fasilitas Sekolah</a>
-        <a href="/prestasi" class={`mobile-nav-link font-jakarta text-[0.9375rem] px-3.5 py-2.5 rounded-xl no-underline transition-colors ${isPrestasi ? "bg-red-50 text-[#ed1e28] font-bold" : "font-medium text-gray-800 hover:bg-gray-100 hover:text-[#ed1e28]"}`}>Prestasi Siswa</a>
-        <a href="/ekstrakurikuler" class={`mobile-nav-link font-jakarta text-[0.9375rem] px-3.5 py-2.5 rounded-xl no-underline transition-colors ${isEkskul ? "bg-red-50 text-[#ed1e28] font-bold" : "font-medium text-gray-800 hover:bg-gray-100 hover:text-[#ed1e28]"}`}>Ekstrakurikuler</a>
-        <a href="/berita" class={`mobile-nav-link font-jakarta text-[0.9375rem] px-3.5 py-2.5 rounded-xl no-underline transition-colors ${isBerita ? "bg-red-50 text-[#ed1e28] font-bold" : "font-medium text-gray-800 hover:bg-gray-100 hover:text-[#ed1e28]"}`}>Berita & Agenda</a>
-        <a href="/pkl-matching" class={`mobile-nav-link font-jakarta text-[0.9375rem] px-3.5 py-2.5 rounded-xl no-underline transition-colors ${isPKL ? "bg-red-50 text-[#ed1e28] font-bold" : "font-medium text-gray-800 hover:bg-gray-100 hover:text-[#ed1e28]"}`}>Info Magang (PKL)</a>
-        <a href="/cv-generator" class={`mobile-nav-link font-jakarta text-[0.9375rem] px-3.5 py-2.5 rounded-xl no-underline transition-colors ${isCVGen ? "bg-red-50 text-[#ed1e28] font-bold" : "font-medium text-gray-800 hover:bg-gray-100 hover:text-[#ed1e28]"}`}>CV Generator</a>
-        <a href="/school-tour" class={`mobile-nav-link font-jakarta text-[0.9375rem] px-3.5 py-2.5 rounded-xl no-underline transition-colors ${isSchoolTour ? "bg-red-50 text-[#ed1e28] font-bold" : "font-medium text-gray-800 hover:bg-gray-100 hover:text-[#ed1e28]"}`}>School Tour</a>
-        
-        <div class="mobile-ppdb-wrap mt-3 pt-3 border-t border-gray-100">
-          <a href="/#ppdb" class="btn-ppdb-mobile block text-center bg-[#ed1e28] hover:bg-[#d81820] text-white font-jakarta text-[0.9375rem] font-bold px-6 py-3 rounded-full no-underline shadow-[0_4px_12px_rgba(237,30,40,0.28)]">
-            Daftar PPDB 2026
-          </a>
+    <!-- Mobile Drawer -->
+    <div id="mobile-menu" class="mobile-menu border border-gray-200 rounded-2xl bg-white p-5 mt-3 shadow-[0_10px_25px_rgba(0,0,0,0.08)]" hidden>
+      <nav class="mobile-nav-links flex flex-col gap-3">
+        <a href="/" class="mobile-nav-link font-jakarta text-[0.9375rem] font-medium text-gray-700 px-2 py-1.5 no-underline rounded-sm transition-colors hover:bg-gray-100 hover:text-primary">Beranda</a>
+        <a href="/profile-sekolah" class="mobile-nav-link font-jakarta text-[0.9375rem] font-medium text-gray-700 px-2 py-1.5 no-underline rounded-sm transition-colors hover:bg-gray-100 hover:text-primary">Profile Sekolah</a>
+        <a href="/profile-guru" class="mobile-nav-link font-jakarta text-[0.9375rem] font-medium text-gray-700 px-2 py-1.5 no-underline rounded-sm transition-colors hover:bg-gray-100 hover:text-primary">Profile Guru</a>
+        <a href="/jurusan" class="mobile-nav-link font-jakarta text-[0.9375rem] font-medium text-gray-700 px-2 py-1.5 no-underline rounded-sm transition-colors hover:bg-gray-100 hover:text-primary">Program Keahlian</a>
+        <a href="/ekstrakurikuler" class="mobile-nav-link font-jakarta text-[0.9375rem] font-medium text-gray-700 px-2 py-1.5 no-underline rounded-sm transition-colors hover:bg-gray-100 hover:text-primary">Ekstrakurikuler</a>
+        <a href="/fasilitas" class="mobile-nav-link font-jakarta text-[0.9375rem] font-medium text-gray-700 px-2 py-1.5 no-underline rounded-sm transition-colors hover:bg-gray-100 hover:text-primary">Fasilitas Sekolah</a>
+        <a href="/prestasi" class="mobile-nav-link font-jakarta text-[0.9375rem] font-medium text-gray-700 px-2 py-1.5 no-underline rounded-sm transition-colors hover:bg-gray-100 hover:text-primary">Prestasi Siswa</a>
+        <a href="/berita" class="mobile-nav-link font-jakarta text-[0.9375rem] font-medium text-gray-700 px-2 py-1.5 no-underline rounded-sm transition-colors hover:bg-gray-100 hover:text-primary">Berita & Agenda</a>
+        <a href="/pkl-matching" class="mobile-nav-link font-jakarta text-[0.9375rem] font-medium text-gray-700 px-2 py-1.5 no-underline rounded-sm transition-colors hover:bg-gray-100 hover:text-primary">AI PKL Matching</a>
+        <a href="/cv-generator" class="mobile-nav-link font-jakarta text-[0.9375rem] font-medium text-gray-700 px-2 py-1.5 no-underline rounded-sm transition-colors hover:bg-gray-100 hover:text-primary">CV Generator ATS</a>
+        <a href="/school-tour" class="mobile-nav-link font-jakarta text-[0.9375rem] font-medium text-gray-700 px-2 py-1.5 no-underline rounded-sm transition-colors hover:bg-gray-100 hover:text-primary">School Tour</a>
+        <div class="mobile-ppdb-wrap mt-3 pt-3 border-t border-gray-200">
+          <a href="https://ppdb.smktelkom-pwt.sch.id" target="_blank" rel="noopener noreferrer" class="btn-ppdb-header block text-center bg-primary hover:bg-[#d81820] text-white font-jakarta text-[0.9375rem] font-bold px-8 py-3 rounded-full no-underline shadow-[0_4px_14px_rgba(237,30,40,0.35)]">Daftar PPDB 2026</a>
         </div>
       </nav>
-    </Container>
-  </div>
+    </div>
+  </Container>
 </header>
 
 <script>
-  const header = document.querySelector(".site-header");
   const toggleBtn = document.getElementById("mobile-toggle");
   const mobileMenu = document.getElementById("mobile-menu");
-  const iconMenu = document.getElementById("icon-menu");
-  const iconClose = document.getElementById("icon-close");
-
-  // Dynamic Scroll Elevation Shadow
-  if (header) {
-    const handleScroll = () => {
-      if (window.scrollY > 12) {
-        header.classList.add("shadow-[0_4px_20px_rgba(0,0,0,0.06)]");
-      } else {
-        header.classList.remove("shadow-[0_4px_20px_rgba(0,0,0,0.06)]");
-      }
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-  }
-
-  function openMobileMenu() {
-    if (!mobileMenu || !toggleBtn) return;
-    mobileMenu.classList.remove("hidden");
-    toggleBtn.setAttribute("aria-expanded", "true");
-    iconMenu?.classList.add("hidden");
-    iconClose?.classList.remove("hidden");
-  }
-
-  function closeMobileMenu() {
-    if (!mobileMenu || !toggleBtn) return;
-    mobileMenu.classList.add("hidden");
-    toggleBtn.setAttribute("aria-expanded", "false");
-    iconMenu?.classList.remove("hidden");
-    iconClose?.classList.add("hidden");
-  }
 
   if (toggleBtn && mobileMenu) {
-    toggleBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const isClosed = mobileMenu.classList.contains("hidden");
-      if (isClosed) {
-        openMobileMenu();
+    toggleBtn.addEventListener("click", () => {
+      const isHidden = mobileMenu.hasAttribute("hidden");
+      if (isHidden) {
+        mobileMenu.removeAttribute("hidden");
+        toggleBtn.setAttribute("aria-expanded", "true");
       } else {
-        closeMobileMenu();
+        mobileMenu.setAttribute("hidden", "");
+        toggleBtn.setAttribute("aria-expanded", "false");
       }
     });
 
     mobileMenu.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", () => {
-        closeMobileMenu();
+        mobileMenu.setAttribute("hidden", "");
+        toggleBtn.setAttribute("aria-expanded", "false");
       });
-    });
-
-    // Close on click outside header
-    document.addEventListener("click", (e) => {
-      const target = e.target as HTMLElement | null;
-      if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
-        if (!header?.contains(target)) {
-          closeMobileMenu();
-        }
-      }
-    });
-
-    // Close on escape key
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && !mobileMenu.classList.contains("hidden")) {
-        closeMobileMenu();
-      }
     });
   }
 </script>
