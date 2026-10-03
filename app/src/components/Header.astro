@@ -53,11 +53,11 @@ const isInformasiActive = isBerita || isCvGen || isPkl;
               <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
             </svg>
           </button>
-          <div class="dropdown-menu absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 translate-y-1.5 min-w-[230px] bg-white border border-gray-100 rounded-xl shadow-[0_12px_30px_rgba(0,0,0,0.08),0_4px_10px_rgba(0,0,0,0.04)] py-2.5 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-200 z-[100] before:content-[''] before:absolute before:-top-3 before:left-0 before:w-full before:h-3">
-            <a href="/profile-sekolah" class={`dropdown-link block px-4 py-2 font-jakarta text-[0.875rem] no-underline transition-colors duration-150 ${isProfileSekolah ? "bg-red-50 text-[#ed1e28] font-semibold" : "text-gray-700 hover:bg-gray-50 hover:text-primary"}`}>Profile Sekolah</a>
-            <a href="/profile-guru" class={`dropdown-link block px-4 py-2 font-jakarta text-[0.875rem] no-underline transition-colors duration-150 ${isProfileGuru ? "bg-red-50 text-[#ed1e28] font-semibold" : "text-gray-700 hover:bg-gray-50 hover:text-primary"}`}>Profile Guru</a>
-            <a href="/fasilitas" class={`dropdown-link block px-4 py-2 font-jakarta text-[0.875rem] no-underline transition-colors duration-150 ${isFasilitas ? "bg-red-50 text-[#ed1e28] font-semibold" : "text-gray-700 hover:bg-gray-50 hover:text-primary"}`}>Fasilitas Sekolah</a>
-            <a href="/prestasi" class={`dropdown-link block px-4 py-2 font-jakarta text-[0.875rem] no-underline transition-colors duration-150 ${isPrestasi ? "bg-red-50 text-[#ed1e28] font-semibold" : "text-gray-700 hover:bg-gray-50 hover:text-primary"}`}>Prestasi Siswa</a>
+          <div class="dropdown-menu absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 translate-y-1.5 min-w-[220px] bg-white border border-gray-100 rounded-2xl shadow-[0_12px_30px_rgba(0,0,0,0.08),0_4px_10px_rgba(0,0,0,0.04)] p-1.5 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-200 z-[100] before:content-[''] before:absolute before:-top-3 before:left-0 before:w-full before:h-3">
+            <a href="/profile-sekolah" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Profile Sekolah</a>
+            <a href="/profile-guru" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Profile Guru</a>
+            <a href="/fasilitas" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Fasilitas Sekolah</a>
+            <a href="/prestasi" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Prestasi Siswa</a>
           </div>
         </div>
 
@@ -73,14 +73,14 @@ const isInformasiActive = isBerita || isCvGen || isPkl;
               <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
             </svg>
           </button>
-          <div class="dropdown-menu absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 translate-y-1.5 min-w-[250px] bg-white border border-gray-100 rounded-xl shadow-[0_12px_30px_rgba(0,0,0,0.08),0_4px_10px_rgba(0,0,0,0.04)] py-2.5 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-200 z-[100] before:content-[''] before:absolute before:-top-3 before:left-0 before:w-full before:h-3">
-            <a href="/jurusan" class={`dropdown-link block px-4 py-2 font-jakarta text-[0.875rem] no-underline transition-colors duration-150 ${isJurusan ? "bg-red-50 text-[#ed1e28] font-semibold" : "text-gray-700 hover:bg-gray-50 hover:text-primary"}`}>Semua Program Keahlian</a>
-            <a href="/jurusan#profil-jurusan" class="dropdown-link block px-4 py-2 font-jakarta text-[0.875rem] text-gray-700 no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-primary">Pengembangan Gim (PG)</a>
-            <a href="/jurusan#profil-jurusan" class="dropdown-link block px-4 py-2 font-jakarta text-[0.875rem] text-gray-700 no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-primary">Rekayasa Perangkat Lunak (RPL)</a>
-            <a href="/jurusan#profil-jurusan" class="dropdown-link block px-4 py-2 font-jakarta text-[0.875rem] text-gray-700 no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-primary">Teknik Komputer & Jaringan (TKJ)</a>
-            <a href="/jurusan#profil-jurusan" class="dropdown-link block px-4 py-2 font-jakarta text-[0.875rem] text-gray-700 no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-primary">Teknik Jaringan Akses (TJA)</a>
-            <div class="my-1 border-t border-gray-100"></div>
-            <a href="/ekstrakurikuler" class={`dropdown-link block px-4 py-2 font-jakarta text-[0.875rem] no-underline transition-colors duration-150 ${isEkskul ? "bg-red-50 text-[#ed1e28] font-semibold" : "text-gray-700 hover:bg-gray-50 hover:text-primary"}`}>Ekstrakurikuler</a>
+          <div class="dropdown-menu absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 translate-y-1.5 min-w-[250px] bg-white border border-gray-100 rounded-2xl shadow-[0_12px_30px_rgba(0,0,0,0.08),0_4px_10px_rgba(0,0,0,0.04)] p-1.5 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-200 z-[100] before:content-[''] before:absolute before:-top-3 before:left-0 before:w-full before:h-3">
+            <a href="/jurusan" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Semua Program Keahlian</a>
+            <a href="/jurusan#profil-jurusan" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Pengembangan Gim (PG)</a>
+            <a href="/jurusan#profil-jurusan" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Rekayasa Perangkat Lunak (RPL)</a>
+            <a href="/jurusan#profil-jurusan" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Teknik Komputer & Jaringan (TKJ)</a>
+            <a href="/jurusan#profil-jurusan" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Teknik Jaringan Akses (TJA)</a>
+            <div class="my-1 border-t border-gray-100 mx-1"></div>
+            <a href="/ekstrakurikuler" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Ekstrakurikuler</a>
           </div>
         </div>
 
@@ -96,12 +96,12 @@ const isInformasiActive = isBerita || isCvGen || isPkl;
               <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
             </svg>
           </button>
-          <div class="dropdown-menu absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 translate-y-1.5 min-w-[230px] bg-white border border-gray-100 rounded-xl shadow-[0_12px_30px_rgba(0,0,0,0.08),0_4px_10px_rgba(0,0,0,0.04)] py-2.5 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-200 z-[100] before:content-[''] before:absolute before:-top-3 before:left-0 before:w-full before:h-3">
-            <a href="/berita" class={`dropdown-link block px-4 py-2 font-jakarta text-[0.875rem] no-underline transition-colors duration-150 ${isBerita ? "bg-red-50 text-[#ed1e28] font-semibold" : "text-gray-700 hover:bg-gray-50 hover:text-primary"}`}>Berita & Agenda</a>
-            <a href="/pkl-matching" class={`dropdown-link block px-4 py-2 font-jakarta text-[0.875rem] no-underline transition-colors duration-150 ${isPkl ? "bg-red-50 text-[#ed1e28] font-semibold" : "text-gray-700 hover:bg-gray-50 hover:text-primary"}`}>AI PKL Matching</a>
-            <a href="/cv-generator" class={`dropdown-link block px-4 py-2 font-jakarta text-[0.875rem] no-underline transition-colors duration-150 ${isCvGen ? "bg-red-50 text-[#ed1e28] font-semibold" : "text-gray-700 hover:bg-gray-50 hover:text-primary"}`}>CV Generator ATS</a>
-            <a href="/#faq" class="dropdown-link block px-4 py-2 font-jakarta text-[0.875rem] text-gray-700 no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-primary">FAQ</a>
-            <a href="/#alumni" class="dropdown-link block px-4 py-2 font-jakarta text-[0.875rem] text-gray-700 no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-primary">Cerita Alumni</a>
+          <div class="dropdown-menu absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 translate-y-1.5 min-w-[220px] bg-white border border-gray-100 rounded-2xl shadow-[0_12px_30px_rgba(0,0,0,0.08),0_4px_10px_rgba(0,0,0,0.04)] p-1.5 opacity-0 invisible group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-200 z-[100] before:content-[''] before:absolute before:-top-3 before:left-0 before:w-full before:h-3">
+            <a href="/berita" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Berita & Agenda</a>
+            <a href="/pkl-matching" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">AI PKL Matching</a>
+            <a href="/cv-generator" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">CV Generator ATS</a>
+            <a href="/#faq" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">FAQ</a>
+            <a href="/#alumni" class="dropdown-link block px-3.5 py-2.5 rounded-xl font-jakarta text-[0.875rem] text-[#374151] font-medium no-underline transition-colors duration-150 hover:bg-gray-50 hover:text-[#111827]">Cerita Alumni</a>
           </div>
         </div>
 
@@ -142,18 +142,18 @@ const isInformasiActive = isBerita || isCvGen || isPkl;
 
     <!-- Mobile Drawer -->
     <div id="mobile-menu" class="mobile-menu border border-gray-200 rounded-2xl bg-white p-5 mt-3 shadow-[0_10px_25px_rgba(0,0,0,0.08)]" hidden>
-      <nav class="mobile-nav-links flex flex-col gap-3">
-        <a href="/" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3 py-2 no-underline rounded-lg transition-colors hover:bg-gray-100 hover:text-primary">Beranda</a>
-        <a href="/profile-sekolah" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3 py-2 no-underline rounded-lg transition-colors hover:bg-gray-100 hover:text-primary">Profile Sekolah</a>
-        <a href="/profile-guru" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3 py-2 no-underline rounded-lg transition-colors hover:bg-gray-100 hover:text-primary">Profile Guru</a>
-        <a href="/jurusan" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3 py-2 no-underline rounded-lg transition-colors hover:bg-gray-100 hover:text-primary">Program Keahlian</a>
-        <a href="/ekstrakurikuler" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3 py-2 no-underline rounded-lg transition-colors hover:bg-gray-100 hover:text-primary">Ekstrakurikuler</a>
-        <a href="/fasilitas" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3 py-2 no-underline rounded-lg transition-colors hover:bg-gray-100 hover:text-primary">Fasilitas Sekolah</a>
-        <a href="/prestasi" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3 py-2 no-underline rounded-lg transition-colors hover:bg-gray-100 hover:text-primary">Prestasi Siswa</a>
-        <a href="/berita" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3 py-2 no-underline rounded-lg transition-colors hover:bg-gray-100 hover:text-primary">Berita & Agenda</a>
-        <a href="/pkl-matching" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3 py-2 no-underline rounded-lg transition-colors hover:bg-gray-100 hover:text-primary">AI PKL Matching</a>
-        <a href="/cv-generator" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3 py-2 no-underline rounded-lg transition-colors hover:bg-gray-100 hover:text-primary">CV Generator ATS</a>
-        <a href="/school-tour" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3 py-2 no-underline rounded-lg transition-colors hover:bg-gray-100 hover:text-primary">School Tour</a>
+      <nav class="mobile-nav-links flex flex-col gap-2">
+        <a href="/" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827]">Beranda</a>
+        <a href="/profile-sekolah" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827]">Profile Sekolah</a>
+        <a href="/profile-guru" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827]">Profile Guru</a>
+        <a href="/jurusan" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827]">Program Keahlian</a>
+        <a href="/ekstrakurikuler" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827]">Ekstrakurikuler</a>
+        <a href="/fasilitas" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827]">Fasilitas Sekolah</a>
+        <a href="/prestasi" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827]">Prestasi Siswa</a>
+        <a href="/berita" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827]">Berita & Agenda</a>
+        <a href="/pkl-matching" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827]">AI PKL Matching</a>
+        <a href="/cv-generator" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827]">CV Generator ATS</a>
+        <a href="/school-tour" class="mobile-nav-link font-jakarta text-[1rem] font-semibold text-gray-700 px-3.5 py-2.5 no-underline rounded-xl transition-colors hover:bg-gray-100 hover:text-[#111827]">School Tour</a>
         <div class="mobile-ppdb-wrap mt-3 pt-3 border-t border-gray-200">
           <a href="https://ppdb.smktelkom-pwt.sch.id" target="_blank" rel="noopener noreferrer" class="btn-ppdb-header block text-center bg-primary hover:bg-[#d81820] text-white font-jakarta text-[1rem] font-bold px-8 py-3 rounded-full no-underline shadow-[0_4px_14px_rgba(237,30,40,0.35)]">Daftar PPDB 2026</a>
         </div>
