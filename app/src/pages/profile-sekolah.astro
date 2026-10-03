@@ -36,68 +36,23 @@ import Container from "../components/Container.astro";
             Lebih dari sekadar sekolah kejuruan, kami adalah School of Global Technopreneur yang <br class="hidden sm:inline" />berfokus pada pembentukan karakter, kreativitas, dan kepemimpinan di bidang teknologi.
           </p>
 
-          <!-- Video Player Showcase Card -->
-          <div class="w-full max-w-3xl relative rounded-2xl sm:rounded-3xl p-2.5 sm:p-3.5 bg-white/10 backdrop-blur-md border border-white/30 shadow-[0_20px_50px_rgba(0,0,0,0.28)]">
-            <div class="relative aspect-video rounded-xl sm:rounded-2xl overflow-hidden bg-black/60 shadow-inner group">
-              <!-- Video Thumbnail -->
-              <img
-                src="/images/profile/hero-video-thumb.png"
-                alt="Video Profil SMK Telkom Purwokerto"
-                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 block"
+          <!-- Video Player Showcase Card (Direct Autoplay Embed) -->
+          <div class="w-full max-w-3xl relative rounded-2xl sm:rounded-3xl p-2 sm:p-3 bg-white/15 backdrop-blur-md border border-white/30 shadow-[0_20px_50px_rgba(0,0,0,0.28)]">
+            <div class="relative aspect-video rounded-xl sm:rounded-2xl overflow-hidden bg-black shadow-inner">
+              <iframe
+                class="w-full h-full border-0 block"
+                src="https://www.youtube-nocookie.com/embed/w68QaEXd7iw?autoplay=1&mute=1&loop=1&playlist=w68QaEXd7iw&controls=1&rel=0&modestbranding=1"
+                title="Video Profil SMK Telkom Purwokerto"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
                 loading="eager"
-              />
-
-              <!-- Overlay Gradient -->
-              <div class="absolute inset-0 bg-black/25 group-hover:bg-black/35 transition-colors duration-300"></div>
-
-              <!-- Brand Logos on Video -->
-              <div class="absolute top-3 left-4 flex items-center gap-2 pointer-events-none">
-                <span class="text-white text-xs font-semibold tracking-wide drop-shadow-sm">Yayasan Pendidikan Telkom</span>
-              </div>
-              <div class="absolute top-3 right-4 flex items-center gap-2 pointer-events-none">
-                <span class="text-white text-xs font-bold tracking-wide drop-shadow-sm">SMK TELKOM PURWOKERTO</span>
-              </div>
-
-              <!-- Purple Play Button (Modal Trigger) -->
-              <button
-                type="button"
-                id="play-video-btn"
-                class="absolute inset-0 m-auto w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-[#6366f1] hover:bg-[#4f46e5] text-white flex items-center justify-center shadow-[0_10px_25px_rgba(99,102,241,0.5)] hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer border-0"
-                aria-label="Putar Video Profil SMK Telkom Purwokerto"
-              >
-                <svg class="w-7 h-7 sm:w-8 sm:h-8 ml-1" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </button>
+              ></iframe>
             </div>
           </div>
         </div>
       </div>
     </Container>
   </section>
-
-  <!-- Video Modal -->
-  <div id="video-modal" class="fixed inset-0 z-[200] bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
-    <div class="relative w-full max-w-4xl bg-black rounded-2xl overflow-hidden shadow-2xl aspect-video">
-      <button
-        id="close-video-btn"
-        class="absolute top-3 right-3 z-10 w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center border-0 cursor-pointer transition-colors"
-        aria-label="Tutup Video"
-      >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-      <iframe
-        id="video-frame"
-        class="w-full h-full border-0"
-        src=""
-        title="Video Profil SMK Telkom Purwokerto"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      ></iframe>
-    </div>
-  </div>
 
   <!-- 2. SECTION: BAGIAN DARI EKOSISTEM RAKSASA TELKOM INDONESIA -->
   <section class="py-16 sm:py-24 bg-white" id="ekosistem">
@@ -484,43 +439,3 @@ import Container from "../components/Container.astro";
     </Container>
   </section>
 </BaseLayout>
-
-<script>
-  // Video Modal Interactivity
-  const playBtn = document.getElementById("play-video-btn");
-  const videoModal = document.getElementById("video-modal");
-  const closeBtn = document.getElementById("close-video-btn");
-  const videoFrame = document.getElementById("video-frame") as HTMLIFrameElement | null;
-
-  // Official SMK Telkom Purwokerto Video
-  const videoUrl = "https://www.youtube-nocookie.com/embed/w68QaEXd7iw?autoplay=1&rel=0";
-
-  if (playBtn && videoModal && closeBtn && videoFrame) {
-    playBtn.addEventListener("click", () => {
-      videoFrame.src = videoUrl;
-      videoModal.classList.remove("hidden");
-      videoModal.classList.add("flex");
-      document.body.style.overflow = "hidden";
-    });
-
-    const closeModal = () => {
-      videoFrame.src = "";
-      videoModal.classList.add("hidden");
-      videoModal.classList.remove("flex");
-      document.body.style.overflow = "";
-    };
-
-    closeBtn.addEventListener("click", closeModal);
-    videoModal.addEventListener("click", (e) => {
-      if (e.target === videoModal) {
-        closeModal();
-      }
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && !videoModal.classList.contains("hidden")) {
-        closeModal();
-      }
-    });
-  }
-</script>
