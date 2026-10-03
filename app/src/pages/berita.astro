@@ -1,0 +1,250 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/Container.astro";
+
+const stats = [
+  { value: "128+", label: "Siswa Berprestasi" },
+  { value: "64", label: "Kegiatan Tahun Ini" },
+  { value: "35", label: "Mitra Industri Aktif" },
+  { value: "210+", label: "Prestasi Terkumpul" },
+];
+
+const categories = [
+  { id: "all", name: "Semua" },
+  { id: "prestasi", name: "Prestasi" },
+  { id: "kegiatan", name: "Kegiatan Sekolah" },
+  { id: "kerjasama", name: "Kerjasama Industri" },
+  { id: "pengumuman", name: "Pengumuman" },
+  { id: "inovasi", name: "Karya Inovasi Siswa" },
+];
+
+const articles = [
+  {
+    category: "prestasi",
+    categoryName: "PRESTASI",
+    date: "18 Februari 2026",
+    title: "Siswa SMK Telkom Raih Juara 1 Lomba Kompetensi Siswa Tingkat Provinsi",
+    excerpt: "Tim jurusan Teknik Jaringan Komputer dan Telekomunikasi berhasil membawa pulang medali emas dalam ajang LKS tingkat Provinsi Jawa Tengah 2026, mengalahkan puluhan sekolah vokasi lain di bidang instalasi jaringan.",
+    image: "/images/berita/lks-juara.png",
+    featured: true,
+  },
+  {
+    category: "kegiatan",
+    categoryName: "KEGIATAN SEKOLAH",
+    date: "12 Februari 2026",
+    title: "330 Siswa SMK Telkom Purwokerto Belajar Langsung di Malang Creative Center",
+    excerpt: "Wujud nyata School of Global Technopreneur, ratusan siswa mengikuti program industri dan kunjungan kreatif langsung ke pusat inovasi digital.",
+    image: "/images/berita/kunjungan-industri.png",
+    featured: false,
+  },
+  {
+    category: "pengumuman",
+    categoryName: "PENGUMUMAN",
+    date: "05 Februari 2026",
+    title: "SPMB SMK Telkom Purwokerto 2026/2027 Jalur EASY Resmi Dibuka",
+    excerpt: "Raih kesempatan mendaftar lebih awal dengan bonus eksklusif perlengkapan sekolah dan beasiswa pendidikan bagi calon siswa berprestasi.",
+    image: "/images/berita/ppdb-banner.png",
+    featured: false,
+  },
+  {
+    category: "kerjasama",
+    categoryName: "KERJASAMA INDUSTRI",
+    date: "28 Januari 2026",
+    title: "Penandatanganan MoU Kelas Industri Bersama Game Studio Nasional",
+    excerpt: "Jurusan Pengembangan Game (PG) memperkuat kemitraan strategis kurikulum dan magang industri bersama studio game terkemuka.",
+    image: "/images/berita/mou-industri.png",
+    featured: false,
+  },
+  {
+    category: "inovasi",
+    categoryName: "KARYA INOVASI SISWA",
+    date: "20 Januari 2026",
+    title: "Inovasi Pengolahan Sampah Plastik Berbasis IoT Raih Pendanaan Riset",
+    excerpt: "Karya siswa gabungan jurusan RPL dan TKJ berhasil mengembangkan alat pemilah sampah cerdas terkoneksi cloud dashboard.",
+    image: "/images/berita/iot-project.png",
+    featured: false,
+  },
+  {
+    category: "kegiatan",
+    categoryName: "KEGIATAN SEKOLAH",
+    date: "15 Januari 2026",
+    title: "Semangat Hari Pramuka Menggema di SMK Telkom Purwokerto",
+    excerpt: "Pembukaan Penerimaan Tamu Ambalan (PTA) sekaligus pengukuhan anggota baru gugus depan dengan serangkaian kegiatan kepanduan bernilai karakter.",
+    image: "/images/berita/pramuka.png",
+    featured: false,
+  },
+];
+---
+
+<BaseLayout
+  title="Berita, Kegiatan & Pengumuman | SMK Telkom Purwokerto"
+  description="Kumpulan berita resmi, kegiatan sekolah, agenda akademik, karya inovasi, dan prestasi terkini SMK Telkom Purwokerto."
+>
+  <!-- 1. HERO SECTION -->
+  <section class="relative pt-6 pb-16 sm:pb-24 bg-[#fdfdfd] overflow-hidden" id="hero-berita">
+    <Container>
+      <div class="relative bg-gradient-to-br from-[#d62730] via-[#cd1820] to-[#c41d24] rounded-[24px] sm:rounded-[36px] pt-12 sm:pt-16 pb-12 sm:pb-16 px-6 sm:px-10 lg:px-16 shadow-[0_24px_48px_-12px_rgba(214,39,48,0.32)] overflow-hidden text-center">
+        <!-- Concentric rings watermark -->
+        <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1440 480" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <circle cx="200" cy="180" r="140" stroke="rgba(0, 0, 0, 0.065)" stroke-width="42" />
+          <circle cx="200" cy="180" r="280" stroke="rgba(0, 0, 0, 0.045)" stroke-width="42" />
+          <circle cx="1200" cy="200" r="150" stroke="rgba(0, 0, 0, 0.06)" stroke-width="42" />
+          <circle cx="1200" cy="200" r="300" stroke="rgba(0, 0, 0, 0.04)" stroke-width="42" />
+        </svg>
+
+        <div class="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
+          <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md px-4 py-1.5 rounded-full text-white text-xs font-jakarta font-semibold tracking-wider uppercase mb-5 border border-white/20">
+            <span>UPDATE TERBARU</span>
+          </div>
+
+          <h1 class="font-poppins text-white font-bold text-3xl sm:text-5xl lg:text-[3.25rem] leading-[1.15] tracking-tight mb-5">
+            Berita & Kegiatan Sekolah
+          </h1>
+
+          <p class="font-jakarta text-white/92 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl mb-6">
+            Informasi terkini seputar kegiatan akademik, prestasi siswa, kerjasama industri, dan pengumuman resmi SMK Telkom Purwokerto.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- 2. STATS BANNER FROM FIGMA -->
+  <section class="py-8 bg-white border-b border-gray-100">
+    <Container>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+        {stats.map((s) => (
+          <div class="flex flex-col items-center text-center p-3 rounded-xl bg-gray-50/60 border border-gray-100">
+            <span class="font-poppins text-3xl sm:text-4xl font-extrabold text-[#ed1e28] mb-0.5">
+              {s.value}
+            </span>
+            <span class="font-jakarta text-xs sm:text-sm font-semibold text-gray-700">
+              {s.label}
+            </span>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- 3. FEATURED & ARTICLES LIST -->
+  <section class="py-12 sm:py-20 bg-white" id="daftar-artikel">
+    <Container>
+      <!-- Filter Categories -->
+      <div class="flex items-center justify-center gap-2 sm:gap-3 flex-wrap mb-12" id="berita-filter">
+        {categories.map((cat, idx) => (
+          <button
+            type="button"
+            data-filter={cat.id}
+            class={`berita-filter-btn font-jakarta text-xs sm:text-sm font-semibold px-4 sm:px-5 py-2 rounded-full cursor-pointer transition-all duration-200 ${idx === 0 ? "bg-[#ed1e28] text-white shadow-sm" : "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
+          >
+            {cat.name}
+          </button>
+        ))}
+      </div>
+
+      <!-- Articles Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="berita-grid">
+        {articles.map((art) => (
+          <article
+            data-category={art.category}
+            class={`article-card border border-gray-200 rounded-2xl overflow-hidden bg-white hover:border-[#ed1e28]/40 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between ${art.featured ? "md:col-span-2 lg:col-span-3 bg-gradient-to-r from-red-50/30 to-white border-red-100" : ""}`}
+          >
+            <div class={art.featured ? "p-6 sm:p-10 lg:grid lg:grid-cols-2 lg:gap-10 items-center" : "p-6"}>
+              <div>
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="bg-[#ed1e28] text-white font-jakarta text-[0.6875rem] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">
+                    {art.categoryName}
+                  </span>
+                  <span class="font-jakarta text-xs text-gray-400 font-medium">
+                    {art.date}
+                  </span>
+                </div>
+
+                <h2 class={`font-poppins font-bold text-[#111827] leading-snug mb-3 ${art.featured ? "text-xl sm:text-3xl" : "text-lg"}`}>
+                  {art.title}
+                </h2>
+
+                <p class="font-jakarta text-[#4b5563] text-sm leading-relaxed mb-6">
+                  {art.excerpt}
+                </p>
+              </div>
+
+              {art.featured && (
+                <div class="rounded-xl overflow-hidden bg-gray-100 aspect-16/10 border border-gray-200 flex items-center justify-center p-6 text-center text-gray-400 text-sm">
+                  <span>Liputan Utama • SMK Telkom Purwokerto</span>
+                </div>
+              )}
+            </div>
+
+            <div class="px-6 pb-6 pt-2">
+              <span class="text-[#ed1e28] font-jakarta text-sm font-bold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all">
+                <span>Baca Selengkapnya</span>
+                <span>→</span>
+              </span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- 4. BOTTOM CTA -->
+  <section class="py-14 sm:py-20 bg-[#f8fafc] border-t border-gray-100 text-center">
+    <Container>
+      <div class="max-w-2xl mx-auto flex flex-col items-center">
+        <h2 class="font-poppins text-2xl sm:text-3xl font-bold text-[#111827] mb-4">
+          Ingin Terus Terhubung dengan Kegiatan Kami?
+        </h2>
+        <p class="font-jakarta text-[#64748b] text-sm sm:text-base leading-relaxed mb-8">
+          Ikuti media sosial resmi SMK Telkom Purwokerto untuk mendapatkan dokumentasi kegiatan dan kabar terbaru setiap hari.
+        </p>
+        <div class="flex items-center gap-3.5 flex-wrap justify-center">
+          <a
+            href="https://www.instagram.com/smktelkompurwokerto/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-[#ed1e28] hover:bg-[#d81820] text-white font-jakarta text-sm font-bold px-6 py-3 rounded-full no-underline shadow-sm hover:-translate-y-0.5 transition-all duration-200"
+          >
+            Instagram Resmi
+          </a>
+          <a
+            href="https://www.youtube.com/@smktelkompurwokerto"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-white hover:bg-gray-50 border border-gray-200 text-gray-800 font-jakarta text-sm font-semibold px-6 py-3 rounded-full no-underline shadow-xs hover:-translate-y-0.5 transition-all duration-200"
+          >
+            Kanal YouTube
+          </a>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
+
+<script>
+  const filterBtns = document.querySelectorAll(".berita-filter-btn");
+  const articles = document.querySelectorAll(".article-card");
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const filter = btn.getAttribute("data-filter");
+
+      filterBtns.forEach((b) => {
+        b.classList.remove("bg-[#ed1e28]", "text-white", "shadow-sm");
+        b.classList.add("bg-gray-100", "text-gray-700");
+      });
+      btn.classList.add("bg-[#ed1e28]", "text-white", "shadow-sm");
+      btn.classList.remove("bg-gray-100", "text-gray-700");
+
+      articles.forEach((art) => {
+        const cat = art.getAttribute("data-category");
+        if (filter === "all" || cat === filter) {
+          (art as HTMLElement).style.display = "flex";
+        } else {
+          (art as HTMLElement).style.display = "none";
+        }
+      });
+    });
+  });
+</script>

@@ -1,0 +1,185 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/Container.astro";
+
+const stats = [
+  { value: "150+", label: "Juara Nasional", desc: "Ajang lomba resmi kementerian & industri" },
+  { value: "12", label: "Ajang Internasional", desc: "Kompetisi teknologi & sains global" },
+  { value: "45", label: "Medali Emas 2024/2025", desc: "Torehan medali emas tahun terakhir" },
+  { value: "500+", label: "Sertifikasi Industri", desc: "Siswa tersertifikasi Cisco, Mikrotik, Oracle" },
+];
+
+const achievements = [
+  {
+    category: "Internasional",
+    title: "Awardee Fully Funded Green Environment Leadership",
+    event: "International Green Summit 2025",
+    desc: "Inovasi sistem pemantauan dan pengolahan sampah plastik berbasis Internet of Things (IoT) yang berhasil memikat dewan juri internasional.",
+    year: "2025",
+    level: "Internasional",
+  },
+  {
+    category: "Nasional",
+    title: "Juara 1 Lomba Kompetensi Siswa (LKS) Tingkat Nasional",
+    event: "LKS SMK Kemendikbudristek Bidang IT Network Systems",
+    desc: "Meraih medali emas setelah menyelesaikan skenario konfigurasi jaringan enterprise, routing kompleks, dan sistem pertahanan siber.",
+    year: "2024",
+    level: "Nasional",
+  },
+  {
+    category: "Nasional",
+    title: "Juara 1 National Game Development Championship",
+    event: "Indie Game Festival Nasional",
+    desc: "Tim jurusan Pengembangan Game (PG) dinobatkan sebagai Game Edukasi Terbaik dengan mekanik gameplay 3D yang interaktif.",
+    year: "2024",
+    level: "Nasional",
+  },
+  {
+    category: "Provinsi",
+    title: "Medali Emas LKS Tingkat Provinsi Jawa Tengah",
+    event: "LKS Jawa Tengah Bidang Web Technologies",
+    desc: "Membangun platform aplikasi web responsif berkecepatan tinggi dengan integrasi API cloud dan arsitektur database modern.",
+    year: "2025",
+    level: "Provinsi",
+  },
+  {
+    category: "Nasional",
+    title: "Juara 1 Hackathon Pelajar Telkom DigiTalent",
+    event: "Telkom Digital Innovation Challenge",
+    desc: "Menciptakan solusi aplikasi kesehatan digital terintegrasi untuk masyarakat pedesaan berbasis cloud computing.",
+    year: "2024",
+    level: "Nasional",
+  },
+  {
+    category: "Regional",
+    title: "Juara Umum Festival Robotika Pelajar se-Jawa",
+    event: "Jawa Robotics Open Series",
+    desc: "Menyapu bersih podium kategori Autonomous Maze Runner dan Line Follower Microcontroller.",
+    year: "2024",
+    level: "Regional",
+  },
+];
+---
+
+<BaseLayout
+  title="Prestasi & Rekam Jejak Keunggulan | SMK Telkom Purwokerto"
+  description="Daftar prestasi bergengsi siswa-siswi SMK Telkom Purwokerto di tingkat regional, nasional, hingga internasional."
+>
+  <!-- 1. HERO SECTION -->
+  <section class="relative pt-6 pb-16 sm:pb-24 bg-[#fdfdfd] overflow-hidden" id="hero-prestasi">
+    <Container>
+      <div class="relative bg-gradient-to-br from-[#d62730] via-[#cd1820] to-[#c41d24] rounded-[24px] sm:rounded-[36px] pt-12 sm:pt-16 pb-12 sm:pb-16 px-6 sm:px-10 lg:px-16 shadow-[0_24px_48px_-12px_rgba(214,39,48,0.32)] overflow-hidden text-center">
+        <!-- Concentric rings watermark -->
+        <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1440 480" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <circle cx="200" cy="180" r="140" stroke="rgba(0, 0, 0, 0.065)" stroke-width="42" />
+          <circle cx="200" cy="180" r="280" stroke="rgba(0, 0, 0, 0.045)" stroke-width="42" />
+          <circle cx="1200" cy="200" r="150" stroke="rgba(0, 0, 0, 0.06)" stroke-width="42" />
+          <circle cx="1200" cy="200" r="300" stroke="rgba(0, 0, 0, 0.04)" stroke-width="42" />
+        </svg>
+
+        <div class="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
+          <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md px-4 py-1.5 rounded-full text-white text-xs font-jakarta font-semibold tracking-wider uppercase mb-5 border border-white/20">
+            <span>School Of Global Technopreneur</span>
+          </div>
+
+          <h1 class="font-poppins text-white font-bold text-3xl sm:text-5xl lg:text-[3.25rem] leading-[1.15] tracking-tight mb-5">
+            Prestasi & Rekam Jejak Keunggulan
+          </h1>
+
+          <p class="font-jakarta text-white/92 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl mb-6">
+            Dedikasi tanpa henti untuk meraih keunggulan. Telusuri jejak keberhasilan siswa-siswi SMK Telkom Purwokerto dalam berbagai ajang kompetisi tingkat Nasional dan Internasional.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- 2. STATS BAR -->
+  <section class="py-10 bg-white border-b border-gray-100" id="stats-prestasi">
+    <Container>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+        {stats.map((s) => (
+          <div class="flex flex-col items-center text-center p-4 rounded-2xl bg-gray-50/70 border border-gray-100">
+            <span class="font-poppins text-3xl sm:text-4xl font-extrabold text-[#ed1e28] mb-1">
+              {s.value}
+            </span>
+            <strong class="font-poppins text-sm sm:text-base font-bold text-[#111827]">
+              {s.label}
+            </strong>
+            <span class="font-jakarta text-xs text-gray-500 mt-1 leading-normal">
+              {s.desc}
+            </span>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- 3. HIGHLIGHT AWARDS GRID -->
+  <section class="py-12 sm:py-20 bg-white" id="daftar-prestasi">
+    <Container>
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="font-poppins text-2xl sm:text-3xl font-bold text-[#111827] mb-3">
+          Sorotan Prestasi Terkini
+        </h2>
+        <p class="font-jakarta text-[#64748b] text-sm sm:text-base leading-relaxed">
+          Bukti nyata komitmen SMK Telkom Purwokerto dalam melahirkan talenta digital yang kompetitif di kancah nasional dan global.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        {achievements.map((item) => (
+          <div class="border border-gray-200 rounded-2xl p-6 bg-white hover:border-[#ed1e28]/40 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-4">
+                <span class="bg-red-50 text-[#ed1e28] font-jakarta text-xs font-bold px-2.5 py-1 rounded-md">
+                  {item.category}
+                </span>
+                <span class="font-jakarta text-xs font-semibold text-gray-400">
+                  Tahun {item.year}
+                </span>
+              </div>
+
+              <h3 class="font-poppins text-lg font-bold text-[#111827] leading-snug mb-2">
+                {item.title}
+              </h3>
+
+              <span class="block font-jakarta text-xs font-semibold text-[#ed1e28] mb-3">
+                {item.event}
+              </span>
+
+              <p class="font-jakarta text-[#4b5563] text-sm leading-relaxed mb-6">
+                {item.desc}
+              </p>
+            </div>
+
+            <div class="pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-jakarta text-gray-500">
+              <span>Tingkat: <strong class="text-gray-800">{item.level}</strong></span>
+              <span class="text-[#ed1e28] font-bold">★ Terverifikasi</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- 4. BOTTOM CTA -->
+  <section class="py-14 sm:py-20 bg-[#f8fafc] border-t border-gray-100 text-center">
+    <Container>
+      <div class="max-w-2xl mx-auto flex flex-col items-center">
+        <h2 class="font-poppins text-2xl sm:text-3xl font-bold text-[#111827] mb-4">
+          Ingin Menjadi Juara Berikutnya?
+        </h2>
+        <p class="font-jakarta text-[#64748b] text-sm sm:text-base leading-relaxed mb-8">
+          Dapatkan bimbingan intensif dari guru bersertifikasi dan mentor industri untuk mengasah potensimu hingga ke panggung juara.
+        </p>
+        <a
+          href="/#ppdb"
+          class="bg-[#ed1e28] hover:bg-[#d81820] text-white font-jakarta text-sm font-bold px-7 py-3.5 rounded-full no-underline shadow-[0_4px_14px_rgba(237,30,40,0.3)] hover:-translate-y-0.5 transition-all duration-200"
+        >
+          Daftar PPDB 2026
+        </a>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

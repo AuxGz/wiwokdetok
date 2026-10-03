@@ -1,0 +1,222 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/Container.astro";
+
+const stats = [
+  { value: "12+", label: "Fasilitas Unggulan", desc: "Sarana belajar & praktik modern" },
+  { value: "1200+", label: "Siswa Aktif", desc: "Didukung infrastruktur terintegrasi" },
+  { value: "4", label: "Klaster Lab Kejuruan", desc: "Berstandar industri teknologi" },
+  { value: "100%", label: "Koneksi Fiber Optik", desc: "Akses internet Telkom kecepatan tinggi" },
+];
+
+const facilities = [
+  {
+    name: "Smart Millenial Classroom",
+    tagline: "Startup Vibe & Collaborative Learning",
+    desc: "Ruang kelas berpendingin udara dengan smart screen interaktif, layout fleksibel, dan pencahayaan ergonomis untuk kenyamanan belajar tingkat tinggi.",
+    category: "Ruang Teori & Kolaborasi",
+  },
+  {
+    name: "Laboratorium Software Development",
+    tagline: "Software House Simulation Environment",
+    desc: "Komputer spesifikasi developer untuk pemrograman web, mobile apps, database relational, dan software architecture simulation.",
+    category: "Lab Kejuruan",
+  },
+  {
+    name: "Laboratorium Cisco & Jaringan Enterprise",
+    tagline: "Industrial Networking Equipment",
+    desc: "Dilengkapi rack server, switch manageable, router Cisco & MikroTik, serta patch panel untuk simulasi jaringan enterprise nyata.",
+    category: "Lab Kejuruan",
+  },
+  {
+    name: "Laboratorium Game Development & 3D",
+    tagline: "High-Performance Graphics Workstations",
+    desc: "Unit PC workstation bertenaga GPU modern untuk kebutuhan rendering 3D Blender, game development Unity/Unreal, dan motion graphics.",
+    category: "Lab Kejuruan",
+  },
+  {
+    name: "Laboratorium Fiber Optik & FTTH",
+    tagline: "Kerjasama Resmi Telkom Akses",
+    desc: "Peralatan splicing serat optik presisi, Optical Time-Domain Reflectometer (OTDR), Optical Power Meter (OPM), dan Optical Distribution Cabinet (ODC).",
+    category: "Lab Kejuruan",
+  },
+  {
+    name: "Digital Library & Learning Resource Center",
+    tagline: "Ribuan Koleksi E-Book & Akses Jurnal",
+    desc: "Perpustakaan modern dengan katalog digital terotomasi, bilik baca privat, akses e-book teknologi, dan suasana tenang untuk riset.",
+    category: "Pusat Pembelajaran",
+  },
+  {
+    name: "Siswa Coworking & Maker Space",
+    tagline: "Ruang Diskusi & Inkubasi Proyek Siswa",
+    desc: "Area terbuka untuk brainstorming, pengerjaan tugas proyek akhir, hackathon internal, dan diskusi tim layaknya inkubator startup.",
+    category: "Ruang Kolaborasi",
+  },
+  {
+    name: "Studio Multimedia & Audio-Visual",
+    tagline: "Peralatan Produksi Konten Standar Profesional",
+    desc: "Studio kedap suara dengan green screen, tata lampu broadcast, microphone studio, dan kamera resolusi tinggi untuk produksi konten kreatif.",
+    category: "Media & Kreatif",
+  },
+  {
+    name: "Gelanggang Olahraga & Lapangan Terpadu",
+    tagline: "Sarana Kebugaran & Sportivitas Siswa",
+    desc: "Lapangan multifungsi untuk cabang olahraga futsal, basket, voli, dan bulu tangkis dengan standar keselamatan prima.",
+    category: "Olahraga & Kesehatan",
+  },
+  {
+    name: "Masjid Sekolah & Sarana Ibadah",
+    tagline: "Pusat Pembinaan Karakter Spiritual",
+    desc: "Tempat ibadah yang bersih, luas, dan representatif untuk pembinaan karakter moral, sholat berjamaah, dan kegiatan keagamaan.",
+    category: "Spiritual & Karakter",
+  },
+  {
+    name: "Asrama Siswa Berfasilitas Lengkap",
+    tagline: "Hunian Nyaman, Aman, & Terpantau",
+    desc: "Disediakan bagi siswa dari luar kota dengan sistem pembinaan disiplin terpadu, kamar bersih, pengamanan 24 jam, dan lingkungan ramah.",
+    category: "Fasilitas Hunian",
+  },
+  {
+    name: "Kantin Sehat & Cafetaria Telkom",
+    tagline: "Higienis, Nyaman, & Menu Beragam",
+    desc: "Pusat kuliner sekolah yang menjaga standar higienitas makanan, pembayaran digital terintegrasi, dan area santai saat jeda istirahat.",
+    category: "Layanan Siswa",
+  },
+];
+---
+
+<BaseLayout
+  title="Fasilitas & Sarana Prasarana | SMK Telkom Purwokerto"
+  description="Fasilitas modern berstandar industri digital di SMK Telkom Purwokerto: Smart Classroom, Lab Canggih, Coworking Space, dan sarana olahraga."
+>
+  <!-- 1. HERO SECTION -->
+  <section class="relative pt-6 pb-16 sm:pb-24 bg-[#fdfdfd] overflow-hidden" id="hero-fasilitas">
+    <Container>
+      <div class="relative bg-gradient-to-br from-[#d62730] via-[#cd1820] to-[#c41d24] rounded-[24px] sm:rounded-[36px] pt-12 sm:pt-16 pb-12 sm:pb-16 px-6 sm:px-10 lg:px-16 shadow-[0_24px_48px_-12px_rgba(214,39,48,0.32)] overflow-hidden text-center">
+        <!-- Concentric rings watermark -->
+        <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1440 480" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <circle cx="200" cy="180" r="140" stroke="rgba(0, 0, 0, 0.065)" stroke-width="42" />
+          <circle cx="200" cy="180" r="280" stroke="rgba(0, 0, 0, 0.045)" stroke-width="42" />
+          <circle cx="1200" cy="200" r="150" stroke="rgba(0, 0, 0, 0.06)" stroke-width="42" />
+          <circle cx="1200" cy="200" r="300" stroke="rgba(0, 0, 0, 0.04)" stroke-width="42" />
+        </svg>
+
+        <div class="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
+          <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md px-4 py-1.5 rounded-full text-white text-xs font-jakarta font-semibold tracking-wider uppercase mb-5 border border-white/20">
+            <span>Startup Vibe</span>
+          </div>
+
+          <h1 class="font-poppins text-white font-bold text-3xl sm:text-5xl lg:text-[3.25rem] leading-[1.15] tracking-tight mb-5">
+            Smart Millenial Classroom <br class="hidden sm:inline" />& Lab Canggih
+          </h1>
+
+          <p class="font-jakarta text-white/92 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl mb-8">
+            Ruang kelas dan fasilitas kami dirancang dengan konsep modern yang suportif, aman, dan nyaman—memberikan suasana belajar layaknya bekerja di kantor industri teknologi digital.
+          </p>
+
+          <a
+            href="/school-tour"
+            class="bg-white text-[#ed1e28] hover:bg-gray-100 font-jakarta text-sm font-bold px-6 py-3 rounded-full no-underline shadow-md hover:-translate-y-0.5 transition-all duration-200 inline-flex items-center gap-2"
+          >
+            <span>Jelajahi School Tour Virtual 360°</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- 2. STATS SECTION -->
+  <section class="py-10 bg-white border-b border-gray-100">
+    <Container>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+        {stats.map((s) => (
+          <div class="flex flex-col items-center text-center p-4 rounded-2xl bg-gray-50/70 border border-gray-100">
+            <span class="font-poppins text-3xl sm:text-4xl font-extrabold text-[#ed1e28] mb-1">
+              {s.value}
+            </span>
+            <strong class="font-poppins text-sm sm:text-base font-bold text-[#111827]">
+              {s.label}
+            </strong>
+            <span class="font-jakarta text-xs text-gray-500 mt-1 leading-normal">
+              {s.desc}
+            </span>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- 3. FACILITIES GRID -->
+  <section class="py-12 sm:py-20 bg-white" id="katalog-fasilitas">
+    <Container>
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="font-poppins text-2xl sm:text-3xl font-bold text-[#111827] mb-3">
+          Katalog Fasilitas Sekolah
+        </h2>
+        <p class="font-jakarta text-[#64748b] text-sm sm:text-base leading-relaxed">
+          Dirancang untuk memberikan ekosistem belajar yang menyeluruh antara pemahaman teori, praktik laboratorium, dan pengembangan bakat.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        {facilities.map((fac) => (
+          <div class="border border-gray-200 rounded-2xl p-6 bg-white hover:border-[#ed1e28]/40 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between">
+            <div>
+              <span class="inline-block bg-gray-100 text-gray-700 font-jakarta text-[0.6875rem] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider mb-3">
+                {fac.category}
+              </span>
+
+              <h3 class="font-poppins text-lg font-bold text-[#111827] leading-snug mb-1">
+                {fac.name}
+              </h3>
+
+              <span class="block font-jakarta text-xs font-semibold text-[#ed1e28] mb-3">
+                {fac.tagline}
+              </span>
+
+              <p class="font-jakarta text-[#4b5563] text-sm leading-relaxed mb-6">
+                {fac.desc}
+              </p>
+            </div>
+
+            <div class="pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-jakarta text-gray-500">
+              <span class="text-emerald-600 font-semibold">● Beroperasi Penuh</span>
+              <a href="/school-tour" class="text-[#ed1e28] font-bold hover:underline">
+                Lihat Tour 360° →
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- 4. BOTTOM CTA -->
+  <section class="py-14 sm:py-20 bg-[#f8fafc] border-t border-gray-100 text-center">
+    <Container>
+      <div class="max-w-2xl mx-auto flex flex-col items-center">
+        <h2 class="font-poppins text-2xl sm:text-3xl font-bold text-[#111827] mb-4">
+          Rasakan Pengalaman Belajar di Lingkungan Terbaik
+        </h2>
+        <p class="font-jakarta text-[#64748b] text-sm sm:text-base leading-relaxed mb-8">
+          Kunjungi sekolah secara langsung atau ikuti tur virtual 360 derajat untuk melihat fasilitas unggulan kami.
+        </p>
+        <div class="flex items-center gap-4 flex-wrap justify-center">
+          <a
+            href="/school-tour"
+            class="bg-[#ed1e28] hover:bg-[#d81820] text-white font-jakarta text-sm font-bold px-7 py-3.5 rounded-full no-underline shadow-[0_4px_14px_rgba(237,30,40,0.3)] hover:-translate-y-0.5 transition-all duration-200"
+          >
+            Buka School Tour Virtual
+          </a>
+          <a
+            href="/#ppdb"
+            class="bg-white hover:bg-gray-50 border border-gray-200 text-gray-800 font-jakarta text-sm font-semibold px-7 py-3.5 rounded-full no-underline shadow-xs hover:-translate-y-0.5 transition-all duration-200"
+          >
+            Daftar PPDB 2026
+          </a>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

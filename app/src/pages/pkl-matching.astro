@@ -1,0 +1,231 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/Container.astro";
+
+const pklList = [
+  {
+    company: "PT Telkom Indonesia (Persero) Tbk",
+    division: "Divisi Enterprise & Cloud Architecture",
+    location: "Jakarta / Bandung / Hybrid",
+    jurusan: ["RPL", "TKJ"],
+    quota: "15 Siswa",
+    period: "6 Bulan (Semester 5)",
+    badge: "BUMN & Telkom Group",
+    desc: "Mendukung pengelolaan infrastruktur cloud, automasi deployment, dan pengembangan sistem aplikasi internal skala nasional.",
+  },
+  {
+    company: "PT Telkom Akses",
+    division: "Operations & Maintenance Regional Jateng",
+    location: "Purwokerto / Semarang",
+    jurusan: ["TJA", "TKJ"],
+    quota: "20 Siswa",
+    period: "6 Bulan (Semester 5)",
+    badge: "Official Telkom Schools Partner",
+    desc: "Praktik langsung di lapangan mengenai instalasi kabel fiber optik, penyambungan core, pengukuran OTDR, dan troubleshooting jaringan FTTH.",
+  },
+  {
+    company: "Digital Game Studio Nusantara",
+    division: "Creative Game Development & 3D Art",
+    location: "Yogyakarta / Remote",
+    jurusan: ["PG", "RPL"],
+    quota: "8 Siswa",
+    period: "6 Bulan (Semester 5)",
+    badge: "Studio Game Nasional",
+    desc: "Terlibat dalam proyek pembuatan asset 3D Blender, level design, dan pemrograman logika gameplay menggunakan engine Unity.",
+  },
+  {
+    company: "PT Telekomunikasi Selular (Telkomsel)",
+    division: "Radio Access Network & Transmission",
+    location: "Semarang / Purwokerto",
+    jurusan: ["TKJ", "TJA"],
+    quota: "10 Siswa",
+    period: "6 Bulan (Semester 5)",
+    badge: "Operator Telekomunikasi No. 1",
+    desc: "Pemantauan Base Transceiver Station (BTS), manajemen bandwidth, dan optimasi performa jaringan seluler generasi terkini.",
+  },
+  {
+    company: "Nusantara Software House",
+    division: "Frontend & Mobile Application Team",
+    location: "Bandung / Hybrid",
+    jurusan: ["RPL"],
+    quota: "12 Siswa",
+    period: "6 Bulan (Semester 5)",
+    badge: "Tech Agency",
+    desc: "Pembangunan fitur aplikasi mobile (Flutter) dan web app berbasis React serta integrasi API microservices bersama senior software engineer.",
+  },
+  {
+    company: "Cyber Defense Solution",
+    division: "Security Operations Center (SOC)",
+    location: "Jakarta",
+    jurusan: ["TKJ"],
+    quota: "6 Siswa",
+    period: "6 Bulan (Semester 5)",
+    badge: "Cyber Security Specialist",
+    desc: "Simulasi monitoring ancaman keamanan siber, analisis log firewall, dan asistensi penanganan insiden jaringan keamanan.",
+  },
+];
+---
+
+<BaseLayout
+  title="Portal Penempatan PKL & Magang Industri | SMK Telkom Purwokerto"
+  description="Layanan informasi dan penempatan Praktik Kerja Lapangan (PKL) resmi SMK Telkom Purwokerto bersama ratusan mitra industri terkemuka."
+>
+  <!-- 1. HERO SECTION -->
+  <section class="relative pt-6 pb-16 sm:pb-24 bg-[#fdfdfd] overflow-hidden" id="hero-pkl">
+    <Container>
+      <div class="relative bg-gradient-to-br from-[#d62730] via-[#cd1820] to-[#c41d24] rounded-[24px] sm:rounded-[36px] pt-12 sm:pt-16 pb-12 sm:pb-16 px-6 sm:px-10 lg:px-16 shadow-[0_24px_48px_-12px_rgba(214,39,48,0.32)] overflow-hidden text-center">
+        <!-- Concentric rings watermark -->
+        <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1440 480" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <circle cx="200" cy="180" r="140" stroke="rgba(0, 0, 0, 0.065)" stroke-width="42" />
+          <circle cx="200" cy="180" r="280" stroke="rgba(0, 0, 0, 0.045)" stroke-width="42" />
+          <circle cx="1200" cy="200" r="150" stroke="rgba(0, 0, 0, 0.06)" stroke-width="42" />
+          <circle cx="1200" cy="200" r="300" stroke="rgba(0, 0, 0, 0.04)" stroke-width="42" />
+        </svg>
+
+        <div class="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
+          <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md px-4 py-1.5 rounded-full text-white text-xs font-jakarta font-semibold tracking-wider uppercase mb-5 border border-white/20">
+            <span>Kerjasama Industri & Karir</span>
+          </div>
+
+          <h1 class="font-poppins text-white font-bold text-3xl sm:text-5xl lg:text-[3.25rem] leading-[1.15] tracking-tight mb-5">
+            Portal Penempatan PKL & Magang Industri
+          </h1>
+
+          <p class="font-jakarta text-white/92 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl mb-6">
+            Menghubungkan siswa dengan ratusan perusahaan teknologi terkemuka dan ekosistem industri Telkom Group untuk penempatan Praktik Kerja Lapangan (PKL) yang berkualitas dan terarah.
+          </p>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- 2. SEARCH & LISTINGS -->
+  <section class="py-12 sm:py-20 bg-white" id="lowongan-pkl">
+    <Container>
+      <!-- Search & Filters -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-10 pb-6 border-b border-gray-100">
+        <div>
+          <h2 class="font-poppins text-xl sm:text-2xl font-bold text-[#111827]">
+            Daftar Mitra & Peluang PKL
+          </h2>
+          <p class="font-jakarta text-xs sm:text-sm text-gray-500">
+            Pilihan penempatan resmi terakreditasi untuk siswa Tahun Ajaran 2025/2026
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2 flex-wrap">
+          <button type="button" data-jurusan="ALL" class="pkl-filter-btn bg-[#ed1e28] text-white text-xs font-jakarta font-bold px-3.5 py-1.5 rounded-full cursor-pointer transition-all">
+            Semua Jurusan
+          </button>
+          <button type="button" data-jurusan="RPL" class="pkl-filter-btn bg-gray-100 text-gray-700 text-xs font-jakarta font-semibold px-3.5 py-1.5 rounded-full cursor-pointer hover:bg-gray-200 transition-all">
+            RPL
+          </button>
+          <button type="button" data-jurusan="TKJ" class="pkl-filter-btn bg-gray-100 text-gray-700 text-xs font-jakarta font-semibold px-3.5 py-1.5 rounded-full cursor-pointer hover:bg-gray-200 transition-all">
+            TKJ
+          </button>
+          <button type="button" data-jurusan="PG" class="pkl-filter-btn bg-gray-100 text-gray-700 text-xs font-jakarta font-semibold px-3.5 py-1.5 rounded-full cursor-pointer hover:bg-gray-200 transition-all">
+            PG
+          </button>
+          <button type="button" data-jurusan="TJA" class="pkl-filter-btn bg-gray-100 text-gray-700 text-xs font-jakarta font-semibold px-3.5 py-1.5 rounded-full cursor-pointer hover:bg-gray-200 transition-all">
+            TJA
+          </button>
+        </div>
+      </div>
+
+      <!-- Listings Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" id="pkl-grid">
+        {pklList.map((item) => (
+          <div
+            data-jurusan-list={item.jurusan.join(",")}
+            class="pkl-card border border-gray-200 rounded-2xl p-6 bg-white hover:border-[#ed1e28]/40 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+          >
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="bg-gray-100 text-gray-700 font-jakarta text-[0.6875rem] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">
+                  {item.badge}
+                </span>
+                <span class="text-xs font-jakarta font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">
+                  {item.quota}
+                </span>
+              </div>
+
+              <h3 class="font-poppins text-lg font-bold text-[#111827] leading-snug mb-1">
+                {item.company}
+              </h3>
+
+              <span class="block font-jakarta text-xs font-semibold text-[#ed1e28] mb-3">
+                {item.division}
+              </span>
+
+              <p class="font-jakarta text-[#4b5563] text-sm leading-relaxed mb-6">
+                {item.desc}
+              </p>
+            </div>
+
+            <div class="pt-4 border-t border-gray-100 flex flex-col gap-2">
+              <div class="flex items-center justify-between text-xs font-jakarta text-gray-500">
+                <span>Lokasi: <strong class="text-gray-700">{item.location}</strong></span>
+                <span>Durasi: <strong class="text-gray-700">{item.period}</strong></span>
+              </div>
+              <div class="flex items-center gap-1.5 mt-2">
+                <span class="text-xs font-jakarta text-gray-400 font-medium">Jurusan Terbuka:</span>
+                {item.jurusan.map((j) => (
+                  <span class="bg-red-50 text-[#ed1e28] font-jakarta text-[0.6875rem] font-bold px-2 py-0.5 rounded">
+                    {j}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- 3. BOTTOM CTA -->
+  <section class="py-14 sm:py-20 bg-[#f8fafc] border-t border-gray-100 text-center">
+    <Container>
+      <div class="max-w-2xl mx-auto flex flex-col items-center">
+        <h2 class="font-poppins text-2xl sm:text-3xl font-bold text-[#111827] mb-4">
+          Perusahaan Anda Ingin Bermitra dengan Kami?
+        </h2>
+        <p class="font-jakarta text-[#64748b] text-sm sm:text-base leading-relaxed mb-8">
+          SMK Telkom Purwokerto terbuka menjalin kolaborasi penempatan magang, rekrutmen lulusan, dan pembinaan kelas industri bersama dunia usaha dan dunia industri.
+        </p>
+        <a
+          href="mailto:hubin@smktelkom-pwt.sch.id"
+          class="bg-[#ed1e28] hover:bg-[#d81820] text-white font-jakarta text-sm font-bold px-7 py-3.5 rounded-full no-underline shadow-[0_4px_14px_rgba(237,30,40,0.3)] hover:-translate-y-0.5 transition-all duration-200"
+        >
+          Hubungi Tim Hubungan Industri (Hubin)
+        </a>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
+
+<script>
+  const filterBtns = document.querySelectorAll(".pkl-filter-btn");
+  const cards = document.querySelectorAll(".pkl-card");
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const filter = btn.getAttribute("data-jurusan");
+
+      filterBtns.forEach((b) => {
+        b.classList.remove("bg-[#ed1e28]", "text-white");
+        b.classList.add("bg-gray-100", "text-gray-700");
+      });
+      btn.classList.add("bg-[#ed1e28]", "text-white");
+      btn.classList.remove("bg-gray-100", "text-gray-700");
+
+      cards.forEach((card) => {
+        const list = card.getAttribute("data-jurusan-list")?.split(",") || [];
+        if (filter === "ALL" || (filter && list.includes(filter))) {
+          (card as HTMLElement).style.display = "flex";
+        } else {
+          (card as HTMLElement).style.display = "none";
+        }
+      });
+    });
+  });
+</script>

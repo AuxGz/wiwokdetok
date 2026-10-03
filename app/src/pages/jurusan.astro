@@ -1,0 +1,248 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/Container.astro";
+
+const jurusanList = [
+  {
+    id: "pg",
+    code: "PG",
+    name: "Pengembangan Game",
+    tagline: "Game Developer, 3D Artist & Interactive Media Specialist",
+    desc: "Mempelajari desain dan pemrograman game dari tahap konseptual, pemodelan 3D, animasi, game engine (Unity & Unreal), hingga publikasi game komersial lintas platform.",
+    badge: "Kelas Industri Game",
+    color: "from-purple-600 to-indigo-600",
+    stats: [
+      { label: "Durasi Belajar", value: "3 Tahun" },
+      { label: "Sertifikasi", value: "Unity Certified" },
+      { label: "Lab Praktik", value: "Game Dev Lab" },
+    ],
+    skills: ["Game Mechanics & Logic", "3D Modeling (Blender)", "Unity & C# Scripting", "Level Design & UI/UX", "Sound & Audio FX"],
+    prospects: ["Game Programmer", "3D Animator", "Technical Artist", "Game Designer", "AR/VR Developer"],
+    image: "/images/jurusan/pg.png",
+  },
+  {
+    id: "rpl",
+    code: "RPL",
+    name: "Rekayasa Perangkat Lunak",
+    tagline: "Full-Stack Software Engineer & Mobile App Creator",
+    desc: "Fokus mendalam pada rekayasa perangkat lunak modern, web engineering, mobile development (Flutter/Android), arsitektur cloud, database relational, dan metodologi Agile Scrum.",
+    badge: "Mitra Telkom Digital",
+    color: "from-blue-600 to-cyan-600",
+    stats: [
+      { label: "Durasi Belajar", value: "3 Tahun" },
+      { label: "Sertifikasi", value: "Oracle & BNSP" },
+      { label: "Lab Praktik", value: "Software House" },
+    ],
+    skills: ["Web Dev (Node/React)", "Mobile App (Flutter)", "Database & SQL/NoSQL", "Cloud & Docker Basics", "Clean Architecture"],
+    prospects: ["Full-Stack Web Dev", "Mobile App Engineer", "Backend Developer", "QA Automation", "Tech Entrepreneur"],
+    image: "/images/jurusan/rpl.png",
+  },
+  {
+    id: "tkj",
+    code: "TKJ",
+    name: "Teknik Komputer & Jaringan",
+    tagline: "Cybersecurity, Network Engineering & Cloud Infrastructure",
+    desc: "Mempersiapkan tenaga ahli infrastruktur jaringan komputer, routing & switching skala enterprise, virtualisasi server, administrasi Linux, dan keamanan siber (cybersecurity).",
+    badge: "MikroTik Academy",
+    color: "from-rose-600 to-red-600",
+    stats: [
+      { label: "Durasi Belajar", value: "3 Tahun" },
+      { label: "Sertifikasi", value: "CCNA & MTCNA" },
+      { label: "Lab Praktik", value: "Cisco Enterprise" },
+    ],
+    skills: ["Routing & Switching", "Network Security", "Linux Server Admin", "Virtualization (Proxmox)", "Cloud Computing (AWS/GCP)"],
+    prospects: ["Network Engineer", "System Administrator", "Cybersecurity Analyst", "Cloud Operator", "IT Support Specialist"],
+    image: "/images/jurusan/tkj.png",
+  },
+  {
+    id: "tja",
+    code: "TJA",
+    name: "Teknik Jaringan Akses",
+    tagline: "Telecommunication Infrastructure & Fiber Optics Specialist",
+    desc: "Program kejuruan unggulan khas Telkom Schools yang mempelajari instalasi, pemeliharaan, dan optimalisasi jaringan kabel serat optik (fiber optics), transmisi nirkabel, dan telekomunikasi seluler.",
+    badge: "Telkom Akses Certified",
+    color: "from-amber-600 to-orange-600",
+    stats: [
+      { label: "Durasi Belajar", value: "3 Tahun" },
+      { label: "Sertifikasi", value: "FTTH & BNSP" },
+      { label: "Lab Praktik", value: "Lab Fiber Optik" },
+    ],
+    skills: ["Penyambungan Serat Optik", "Pengukuran OTDR & OPM", "FTTH Installation", "Cellular Transmission", "Site Management"],
+    prospects: ["Fiber Optic Specialist", "Telco Project Leader", "Transmission Engineer", "Field Access Tech", "Quality Assurance Telco"],
+    image: "/images/jurusan/tja.png",
+  },
+];
+---
+
+<BaseLayout
+  title="Program Keahlian & Jurusan | SMK Telkom Purwokerto"
+  description="Daftar 4 Program Keahlian Unggulan SMK Telkom Purwokerto: Pengembangan Game, Rekayasa Perangkat Lunak, Teknik Komputer & Jaringan, dan Teknik Jaringan Akses."
+>
+  <!-- 1. HERO SECTION -->
+  <section class="relative pt-6 pb-16 sm:pb-24 bg-[#fdfdfd] overflow-hidden" id="hero-jurusan">
+    <Container>
+      <div class="relative bg-gradient-to-br from-[#d62730] via-[#cd1820] to-[#c41d24] rounded-[24px] sm:rounded-[36px] pt-12 sm:pt-16 pb-12 sm:pb-16 px-6 sm:px-10 lg:px-16 shadow-[0_24px_48px_-12px_rgba(214,39,48,0.32)] overflow-hidden text-center">
+        <!-- Background concentric rings watermark -->
+        <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1440 480" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <circle cx="200" cy="180" r="140" stroke="rgba(0, 0, 0, 0.065)" stroke-width="42" />
+          <circle cx="200" cy="180" r="280" stroke="rgba(0, 0, 0, 0.045)" stroke-width="42" />
+          <circle cx="1200" cy="200" r="150" stroke="rgba(0, 0, 0, 0.06)" stroke-width="42" />
+          <circle cx="1200" cy="200" r="300" stroke="rgba(0, 0, 0, 0.04)" stroke-width="42" />
+        </svg>
+
+        <div class="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
+          <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md px-4 py-1.5 rounded-full text-white text-xs font-jakarta font-semibold tracking-wider uppercase mb-5 border border-white/20">
+            <span>Program Keahlian / Jurusan Unggulan</span>
+          </div>
+
+          <h1 class="font-poppins text-white font-bold text-3xl sm:text-5xl lg:text-[3.25rem] leading-[1.15] tracking-tight mb-5">
+            Kurikulum Industri <br class="hidden sm:inline" />Untuk Masa Depan
+          </h1>
+
+          <p class="font-jakarta text-white/92 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl mb-8">
+            Kami memadukan kurikulum nasional dengan kebutuhan industri teknologi terkini (AI, Cloud Computing, Cybersecurity, dan Software Development) melalui 4 program keahlian berstandar internasional.
+          </p>
+
+          <!-- Quick Jump Buttons -->
+          <div class="flex items-center justify-center gap-2.5 sm:gap-3 flex-wrap">
+            {jurusanList.map((j) => (
+              <a
+                href={`#${j.id}`}
+                class="bg-white/10 hover:bg-white text-white hover:text-[#ed1e28] border border-white/30 font-jakarta text-xs sm:text-sm font-semibold px-4 py-2 rounded-full transition-all duration-200 backdrop-blur-sm"
+              >
+                {j.code} • {j.name}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- 2. JURUSAN DETAIL SECTIONS -->
+  <section class="py-12 sm:py-20 bg-white" id="daftar-jurusan">
+    <Container>
+      <div class="flex flex-col gap-16 sm:gap-24">
+        {jurusanList.map((j, index) => (
+          <div
+            id={j.id}
+            class="scroll-mt-24 border border-gray-100 rounded-3xl p-6 sm:p-10 lg:p-12 bg-[#fafbfc] hover:bg-white transition-colors duration-300 shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_40px_rgba(0,0,0,0.06)]"
+          >
+            <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-8 lg:gap-14 items-center">
+              <!-- Left Column: Information -->
+              <div class="flex flex-col items-start">
+                <div class="flex items-center gap-3 mb-4 flex-wrap">
+                  <span class="bg-[#ed1e28] text-white font-poppins text-xs font-bold px-3 py-1 rounded-md tracking-wider">
+                    {j.code}
+                  </span>
+                  <span class="bg-gray-100 text-gray-700 font-jakarta text-xs font-semibold px-3 py-1 rounded-md border border-gray-200">
+                    {j.badge}
+                  </span>
+                </div>
+
+                <h2 class="font-poppins text-2xl sm:text-4xl font-bold text-[#111827] leading-tight mb-3">
+                  {j.name}
+                </h2>
+
+                <p class="font-jakarta text-[#ed1e28] font-semibold text-sm sm:text-base mb-4">
+                  {j.tagline}
+                </p>
+
+                <p class="font-jakarta text-[#4b5563] text-sm sm:text-base leading-relaxed mb-8">
+                  {j.desc}
+                </p>
+
+                <!-- Quick Stats Grid -->
+                <div class="grid grid-cols-3 gap-3 sm:gap-4 w-full mb-8 pt-6 border-t border-gray-200">
+                  {j.stats.map((s) => (
+                    <div class="flex flex-col">
+                      <span class="font-jakarta text-xs text-gray-400 font-medium">{s.label}</span>
+                      <strong class="font-poppins text-sm sm:text-base font-bold text-[#111827] mt-0.5">{s.value}</strong>
+                    </div>
+                  ))}
+                </div>
+
+                <!-- Skills & Competencies -->
+                <div class="w-full mb-8">
+                  <h3 class="font-jakarta text-xs font-bold text-[#111827] uppercase tracking-wider mb-3">Kompetensi Utama</h3>
+                  <div class="flex flex-wrap gap-2">
+                    {j.skills.map((skill) => (
+                      <span class="bg-white border border-gray-200 text-gray-700 font-jakarta text-xs px-3 py-1.5 rounded-lg font-medium shadow-xs">
+                        ✓ {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <!-- Career Prospects -->
+                <div class="w-full mb-8">
+                  <h3 class="font-jakarta text-xs font-bold text-[#111827] uppercase tracking-wider mb-3">Peluang Karier Lulusan</h3>
+                  <div class="flex flex-wrap gap-2">
+                    {j.prospects.map((career) => (
+                      <span class="bg-red-50 text-[#ed1e28] font-jakarta text-xs px-3 py-1 rounded-md font-semibold">
+                        • {career}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <a
+                  href="/#ppdb"
+                  class="bg-[#ed1e28] hover:bg-[#d81820] text-white font-jakarta text-sm font-bold px-6 py-3 rounded-full no-underline shadow-[0_4px_12px_rgba(237,30,40,0.25)] hover:-translate-y-0.5 transition-all duration-200 inline-flex items-center gap-2"
+                >
+                  <span>Daftar Jurusan {j.code}</span>
+                  <span>→</span>
+                </a>
+              </div>
+
+              <!-- Right Column: Visual Showcase -->
+              <div class="flex flex-col items-center justify-center">
+                <div class="relative w-full aspect-4/3 rounded-2xl overflow-hidden border border-gray-200 shadow-md bg-gray-100 flex items-center justify-center group">
+                  <img
+                    src={j.image}
+                    alt={`Program Keahlian ${j.name} SMK Telkom Purwokerto`}
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-6">
+                    <span class="text-white font-poppins font-bold text-lg">{j.name} Telkom Schools</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+
+  <!-- 3. BOTTOM CTA SECTION -->
+  <section class="py-14 sm:py-20 bg-[#f8fafc] border-t border-gray-100 text-center">
+    <Container>
+      <div class="max-w-2xl mx-auto flex flex-col items-center">
+        <h2 class="font-poppins text-2xl sm:text-3xl font-bold text-[#111827] mb-4">
+          Tertarik Bergabung dengan SMK Telkom Purwokerto?
+        </h2>
+        <p class="font-jakarta text-[#64748b] text-sm sm:text-base leading-relaxed mb-8">
+          Konsultasikan pemilihan jurusan yang paling sesuai dengan minat dan potensi digital Anda bersama tim admisi sekolah kami.
+        </p>
+        <div class="flex items-center gap-4 flex-wrap justify-center">
+          <a
+            href="/#ppdb"
+            class="bg-[#ed1e28] hover:bg-[#d81820] text-white font-jakarta text-sm font-bold px-7 py-3.5 rounded-full no-underline shadow-[0_4px_14px_rgba(237,30,40,0.3)] hover:-translate-y-0.5 transition-all duration-200"
+          >
+            Daftar PPDB 2026 Sekarang
+          </a>
+          <a
+            href="https://wa.me/6281229701800"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-white hover:bg-gray-50 border border-gray-200 text-gray-800 font-jakarta text-sm font-semibold px-7 py-3.5 rounded-full no-underline shadow-xs hover:-translate-y-0.5 transition-all duration-200"
+          >
+            Konsultasi Jurusan via WhatsApp
+          </a>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
