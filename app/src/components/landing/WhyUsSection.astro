@@ -5,8 +5,8 @@ import Container from "../Container.astro";
 <section class="py-14 sm:py-20 lg:pt-22 lg:pb-20 bg-white" id="why-us">
   <Container>
     <div class="max-w-[1140px] mx-auto">
-      <!-- Section Header with Scroll Reveal -->
-      <div class="why-us-header reveal-on-scroll">
+      <!-- Section Header -->
+      <div class="why-us-header why-us-item delay-header">
         <div class="inline-flex items-center gap-2.5 font-poppins text-[0.8125rem] font-bold text-[#ed1e28] tracking-[0.06em] uppercase mb-5">
           <span class="inline-block w-[22px] h-[2px] bg-[#ed1e28] rounded-[1px]"></span>
           <span>MENGAPA MEMILIH KAMI</span>
@@ -22,8 +22,8 @@ import Container from "../Container.astro";
         <div class="flex flex-col gap-7">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-7">
             <!-- Card 1: Kelas Industri -->
-            <div class="group bg-[#f8fafc] rounded-[20px] p-6 sm:p-8 lg:p-9 flex flex-col border border-black/[0.04] shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:-translate-y-1.5 hover:shadow-[0_18px_40px_rgba(0,0,0,0.08)] hover:border-[#ed1e28]/16 transition-all duration-250 reveal-on-scroll reveal-delay-1">
-              <div class="w-11 h-11 rounded-full bg-white border border-[#fee2e2] flex items-center justify-center mb-6 shadow-[0_2px_6px_rgba(0,0,0,0.04)] group-hover:scale-110 group-hover:rotate-4 group-hover:border-[#fca5a5] group-hover:bg-[#fef2f2] group-hover:shadow-[0_6px_16px_rgba(237,30,40,0.16)] transition-all duration-250">
+            <div class="group bg-[#f8fafc] rounded-[20px] p-6 sm:p-8 lg:p-9 flex flex-col border border-black/[0.04] shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:-translate-y-1.5 hover:shadow-[0_18px_40px_rgba(0,0,0,0.08)] hover:border-[#ed1e28]/16 why-us-item delay-card-1">
+              <div class="why-us-badge w-11 h-11 rounded-full bg-white border border-[#fee2e2] flex items-center justify-center mb-6 shadow-[0_2px_6px_rgba(0,0,0,0.04)] group-hover:scale-110 group-hover:rotate-4 group-hover:border-[#fca5a5] group-hover:bg-[#fef2f2] group-hover:shadow-[0_6px_16px_rgba(237,30,40,0.16)]">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ed1e28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                 </svg>
@@ -35,8 +35,8 @@ import Container from "../Container.astro";
             </div>
 
             <!-- Card 2: Sertifikasi Kompetensi -->
-            <div class="group bg-[#f8fafc] rounded-[20px] p-6 sm:p-8 lg:p-9 flex flex-col border border-black/[0.04] shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:-translate-y-1.5 hover:shadow-[0_18px_40px_rgba(0,0,0,0.08)] hover:border-[#ed1e28]/16 transition-all duration-250 reveal-on-scroll reveal-delay-2">
-              <div class="w-11 h-11 rounded-full bg-white border border-[#fee2e2] flex items-center justify-center mb-6 shadow-[0_2px_6px_rgba(0,0,0,0.04)] group-hover:scale-110 group-hover:rotate-4 group-hover:border-[#fca5a5] group-hover:bg-[#fef2f2] group-hover:shadow-[0_6px_16px_rgba(237,30,40,0.16)] transition-all duration-250">
+            <div class="group bg-[#f8fafc] rounded-[20px] p-6 sm:p-8 lg:p-9 flex flex-col border border-black/[0.04] shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:-translate-y-1.5 hover:shadow-[0_18px_40px_rgba(0,0,0,0.08)] hover:border-[#ed1e28]/16 why-us-item delay-card-2">
+              <div class="why-us-badge w-11 h-11 rounded-full bg-white border border-[#fee2e2] flex items-center justify-center mb-6 shadow-[0_2px_6px_rgba(0,0,0,0.04)] group-hover:scale-110 group-hover:rotate-4 group-hover:border-[#fca5a5] group-hover:bg-[#fef2f2] group-hover:shadow-[0_6px_16px_rgba(237,30,40,0.16)]">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ed1e28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                 </svg>
@@ -49,8 +49,8 @@ import Container from "../Container.astro";
           </div>
 
           <!-- Card 4: 4 Program Keahlian & Pembinaan Karakter -->
-          <div class="group bg-[#f8fafc] rounded-[20px] p-6 sm:p-8 lg:p-9 flex flex-col flex-1 border border-black/[0.04] shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:-translate-y-1.5 hover:shadow-[0_18px_40px_rgba(0,0,0,0.08)] hover:border-[#ed1e28]/16 transition-all duration-250 reveal-on-scroll reveal-delay-3">
-            <div class="w-11 h-11 rounded-full bg-white border border-[#fee2e2] flex items-center justify-center mb-6 shadow-[0_2px_6px_rgba(0,0,0,0.04)] group-hover:scale-110 group-hover:rotate-4 group-hover:border-[#fca5a5] group-hover:bg-[#fef2f2] group-hover:shadow-[0_6px_16px_rgba(237,30,40,0.16)] transition-all duration-250">
+          <div class="group bg-[#f8fafc] rounded-[20px] p-6 sm:p-8 lg:p-9 flex flex-col flex-1 border border-black/[0.04] shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:-translate-y-1.5 hover:shadow-[0_18px_40px_rgba(0,0,0,0.08)] hover:border-[#ed1e28]/16 why-us-item delay-card-wide">
+            <div class="why-us-badge w-11 h-11 rounded-full bg-white border border-[#fee2e2] flex items-center justify-center mb-6 shadow-[0_2px_6px_rgba(0,0,0,0.04)] group-hover:scale-110 group-hover:rotate-4 group-hover:border-[#fca5a5] group-hover:bg-[#fef2f2] group-hover:shadow-[0_6px_16px_rgba(237,30,40,0.16)]">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ed1e28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
                 <polyline points="2 17 12 22 22 17"></polyline>
@@ -65,7 +65,7 @@ import Container from "../Container.astro";
         </div>
 
         <!-- Right Side: Card 3 - Visi & Misi Kami (Red Card) -->
-        <div class="group relative bg-[#ed1e28] rounded-[20px] p-7 sm:p-9 lg:p-11 text-white overflow-hidden flex flex-col shadow-[0_14px_36px_rgba(237,30,40,0.22)] hover:-translate-y-1.5 hover:shadow-[0_24px_52px_rgba(237,30,40,0.32)] transition-all duration-250 reveal-on-scroll reveal-delay-2">
+        <div class="group relative bg-[#ed1e28] rounded-[20px] p-7 sm:p-9 lg:p-11 text-white overflow-hidden flex flex-col shadow-[0_14px_36px_rgba(237,30,40,0.22)] hover:-translate-y-1.5 hover:shadow-[0_24px_52px_rgba(237,30,40,0.32)] why-us-item delay-card-red">
           <!-- Concentric Ring Background Texture -->
           <svg class="absolute inset-0 w-full h-full pointer-events-none z-1 opacity-90 transition-transform duration-500 group-hover:scale-105" viewBox="0 0 400 600" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <circle cx="200" cy="180" r="160" stroke="rgba(255, 255, 255, 0.08)" stroke-width="32" />
@@ -74,7 +74,7 @@ import Container from "../Container.astro";
           </svg>
 
           <div class="relative z-2 flex flex-col h-full">
-            <div class="w-11 h-11 rounded-full bg-white/18 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:-rotate-4 group-hover:bg-white/28 transition-all duration-250">
+            <div class="why-us-badge w-11 h-11 rounded-full bg-white/18 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:-rotate-4 group-hover:bg-white/28">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                 <line x1="9" y1="9" x2="15" y2="9"></line>
@@ -104,28 +104,97 @@ import Container from "../Container.astro";
   </Container>
 </section>
 
+<style>
+  /* Base state before entering */
+  .why-us-item {
+    opacity: 0;
+    transform: translateY(34px) scale(0.975);
+    transition: opacity 650ms cubic-bezier(0.16, 1, 0.3, 1),
+                transform 650ms cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+  }
+
+  .why-us-badge {
+    opacity: 0;
+    transform: scale(0.65);
+    transition: opacity 500ms cubic-bezier(0.34, 1.56, 0.64, 1),
+                transform 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* Triggered load animation state */
+  :global(#why-us.is-visible) .why-us-item {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  :global(#why-us.is-visible) .why-us-badge {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Stagger delays */
+  .delay-header { transition-delay: 30ms; }
+  .delay-card-1 { transition-delay: 110ms; }
+  .delay-card-2 { transition-delay: 190ms; }
+  .delay-card-red { transition-delay: 270ms; }
+  .delay-card-wide { transition-delay: 350ms; }
+
+  /* Badge stagger delays */
+  :global(#why-us.is-visible) .delay-card-1 .why-us-badge { transition-delay: 230ms; }
+  :global(#why-us.is-visible) .delay-card-2 .why-us-badge { transition-delay: 310ms; }
+  :global(#why-us.is-visible) .delay-card-red .why-us-badge { transition-delay: 390ms; }
+  :global(#why-us.is-visible) .delay-card-wide .why-us-badge { transition-delay: 470ms; }
+
+  /* After load animation completes: enable fluid hover states */
+  :global(#why-us.animation-done) .why-us-item {
+    transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 250ms ease,
+                border-color 250ms ease;
+    transition-delay: 0ms !important;
+    will-change: transform, box-shadow;
+  }
+
+  :global(#why-us.animation-done) .why-us-badge {
+    transition: transform 220ms ease,
+                background-color 220ms ease,
+                border-color 220ms ease,
+                box-shadow 220ms ease;
+    transition-delay: 0ms !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .why-us-item,
+    .why-us-badge {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+</style>
+
 <script>
   const whyUsSection = document.getElementById("why-us");
   if (whyUsSection) {
     const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (isReduced) {
-      whyUsSection.classList.add("is-visible");
+      whyUsSection.classList.add("is-visible", "animation-done");
     } else {
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            if (entry.isIntersecting) {
+            // Trigger ketika sekitar 25% dari konten seksi telah masuk ke layar
+            if (entry.isIntersecting || entry.intersectionRatio >= 0.25) {
               whyUsSection.classList.add("is-visible");
               observer.unobserve(entry.target);
               setTimeout(() => {
                 whyUsSection.classList.add("animation-done");
-              }, 850);
+              }, 950);
             }
           });
         },
         {
-          threshold: 0.15,
-          rootMargin: "0px 0px -40px 0px",
+          threshold: 0.25,
+          rootMargin: "0px",
         }
       );
       observer.observe(whyUsSection);

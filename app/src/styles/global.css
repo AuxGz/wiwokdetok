@@ -297,13 +297,6 @@
 .reveal-delay-3 { transition-delay: 240ms; }
 .reveal-delay-4 { transition-delay: 320ms; }
 
-#why-us.animation-done .reveal-on-scroll {
-  opacity: 1;
-  transform: none;
-  transition: none;
-  will-change: auto;
-}
-
 /* Jurusan Tab Switch Animations - Emil Kowalski /animate */
 @keyframes majorVisualEnter {
   0% {
