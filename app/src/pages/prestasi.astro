@@ -10,7 +10,6 @@ const prestasiItems = [
     meta: "2023 • Teknologi Informasi",
     title: "Lomba Kompetensi Siswa (LKS) Nasional 2023 - Cyber Security",
     desc: "Tim Cyber SMK Telkom Purwokerto berhasil mengamankan peringkat pertama dalam ajang bergengsi LKS Nasional.",
-    image: "/images/berita/berita-prestasi.png",
   },
   {
     category: "akademik",
@@ -18,7 +17,6 @@ const prestasiItems = [
     meta: "2024 • Global Innovation",
     title: "Global Student Tech Innovation - Singapore",
     desc: "Mengembangkan aplikasi solusi lingkungan berbasis AI yang mendapatkan apresiasi di tingkat Asia Tenggara.",
-    image: "/images/berita/berita-technopreneur.png",
   },
   {
     category: "non-akademik",
@@ -26,7 +24,6 @@ const prestasiItems = [
     meta: "2023 • Olahraga",
     title: "Popda Jawa Tengah - Cabang Olahraga Basket",
     desc: "Tim Basket putra SMK Telkom Purwokerto menunjukkan sportivitas dan performa luar biasa di tingkat provinsi.",
-    image: "/images/kegiatan/kegiatan-basket.png",
   },
   {
     category: "akademik",
@@ -34,7 +31,6 @@ const prestasiItems = [
     meta: "2024 • Robotics",
     title: "Kontes Robot Indonesia (KRI) Wilayah 2",
     desc: "Inovasi desain mekanik robot pencari korban bencana mendapatkan penghargaan desain terbaik.",
-    image: "/images/profile/smart-school-playing.png",
   },
   {
     category: "non-akademik",
@@ -42,7 +38,6 @@ const prestasiItems = [
     meta: "2023 • Multimedia",
     title: "Animasi Pendek FLS2N Jawa Tengah",
     desc: "Karya animasi 3D siswa meraih apresiasi tertinggi kategori kreativitas visual tingkat regional.",
-    image: "/images/jurusan/siswa-game.png",
   },
   {
     category: "akademik",
@@ -50,7 +45,6 @@ const prestasiItems = [
     meta: "2024 • Networking",
     title: "Mikrotik Certified Student Competition 2024",
     desc: "Kompetisi konfigurasi router dan troubleshooting jaringan komputer tingkat nasional.",
-    image: "/images/profile/smart-school-fasilitas.png",
   },
 ];
 ---
@@ -189,40 +183,31 @@ const prestasiItems = [
         </div>
 
         <!-- 6 Prestasi Cards Grid (Figma #1006:2211: radius 24px) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-[1260px] mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-[1260px] mx-auto">
           {prestasiItems.map((item) => (
             <div
               data-category={item.category}
-              class="prestasi-card group bg-white border border-[#EDEEF0] rounded-[24px] overflow-hidden shadow-sm hover:shadow-xl hover:border-[#ED1E28]/20 transition-all duration-300 flex flex-col justify-between"
+              class="prestasi-card group bg-white border border-[#EDEEF0] rounded-[24px] p-6 sm:p-8 shadow-sm hover:shadow-xl hover:border-[#ED1E28]/30 transition-all duration-300 flex flex-col justify-between"
             >
-              <!-- Card Image & Badge Container -->
-              <div class="relative w-full aspect-[16/10] overflow-hidden bg-neutral-100">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
-                {item.badge && (
-                  <div class="absolute top-4 left-4 px-3.5 py-1 rounded-full bg-[#ED1E28] text-white text-xs font-bold shadow-md">
-                    {item.badge}
-                  </div>
-                )}
-              </div>
-
-              <!-- Card Body -->
-              <div class="p-6 sm:p-7 space-y-3 flex-1 flex flex-col justify-between">
-                <div class="space-y-2">
-                  <p class="text-xs font-semibold text-[#959597]">
+              <div class="space-y-4">
+                <div class="flex items-center justify-between gap-3 flex-wrap">
+                  <span class="text-xs font-semibold text-[#959597]">
                     {item.meta}
-                  </p>
-                  <h3 class="font-bold text-lg sm:text-xl text-[#2B2C31] group-hover:text-[#ED1E28] transition-colors leading-snug">
-                    {item.title}
-                  </h3>
-                  <p class="text-[#959597] text-sm leading-relaxed pt-1">
-                    {item.desc}
-                  </p>
+                  </span>
+                  {item.badge && (
+                    <span class="px-3 py-1 rounded-full bg-[#ED1E28] text-white text-xs font-bold shadow-sm">
+                      {item.badge}
+                    </span>
+                  )}
                 </div>
+
+                <h3 class="font-bold text-lg sm:text-xl text-[#2B2C31] group-hover:text-[#ED1E28] transition-colors leading-snug">
+                  {item.title}
+                </h3>
+
+                <p class="text-[#959597] text-sm leading-relaxed">
+                  {item.desc}
+                </p>
               </div>
             </div>
           ))}
