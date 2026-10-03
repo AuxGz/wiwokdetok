@@ -1,0 +1,201 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Container from "../components/Container.astro";
+
+const stats = [
+  {
+    number: "60+",
+    display: "60+",
+    title: "Guru Bersertifikat",
+    desc: "Tenaga pengajar profesional tersertifikasi",
+  },
+  {
+    number: "4",
+    display: "4",
+    title: "Jurusan Unggulan",
+    desc: "Program studi berstandar industri nasional",
+  },
+  {
+    number: "100%",
+    display: "100%",
+    title: "Tingkat Kelulusan",
+    desc: "Rata-rata kelulusan siswa setiap tahun",
+  },
+  {
+    number: "50+",
+    display: "50+",
+    title: "Penghargaan Nasional",
+    desc: "Prestasi tingkat nasional dan regional",
+  },
+];
+---
+
+<BaseLayout
+  title="Profile Guru & Struktur Organisasi | SMK Telkom Purwokerto"
+  description="Profil pimpinan, struktur organisasi, dan tenaga pendidik profesional SMK Telkom Purwokerto Tahun Ajaran 2025/2026."
+>
+  <!-- Hero Section: Profil Kepala Sekolah -->
+  <section class="relative pt-8 sm:pt-14 pb-14 sm:pb-20 bg-white overflow-hidden" id="kepala-sekolah">
+    <Container>
+      <div class="max-w-[1140px] mx-auto grid grid-cols-1 lg:grid-cols-[1.18fr_0.82fr] gap-10 lg:gap-14 items-center">
+        <!-- Left Column: Copy & Identity -->
+        <div class="flex flex-col items-start text-left z-2">
+          <!-- Red Pill Tag -->
+          <div class="inline-flex items-center bg-[#ed1e28] text-white font-poppins text-xs font-bold py-1.5 px-4 rounded-full mb-6 tracking-[0.06em] shadow-[0_2px_8px_rgba(237,30,40,0.25)]">
+            <span>Kepala Sekolah</span>
+          </div>
+
+          <!-- Main Name -->
+          <h1 class="font-poppins text-3xl sm:text-5xl lg:text-[3.5rem] font-bold text-[#111827] leading-[1.12] tracking-[-0.025em] mb-6">
+            Aris Puji Santoso,<br />S.Kom., M.M
+          </h1>
+
+          <!-- Vision Quote -->
+          <p class="font-jakarta text-base sm:text-lg text-[#64748b] leading-[1.7] max-w-[540px]">
+            "Mendidik generasi unggul dengan karakter kuat, kompetensi teknologi, dan semangat kebangsaan yang tak tergoyahkan."
+          </p>
+        </div>
+
+        <!-- Right Column: Photo Card with Red Accent Frame -->
+        <div class="flex justify-center lg:justify-end items-center z-2">
+          <div class="relative w-[280px] sm:w-[320px] lg:w-[340px]">
+            <!-- Decorative Red Offset Card Behind -->
+            <div class="absolute -top-2.5 -right-2.5 w-full h-full bg-[#fef2f2] border-2 border-[#ed1e28] rounded-[24px] pointer-events-none -z-1" aria-hidden="true"></div>
+
+            <!-- Main White Card Container -->
+            <div class="relative bg-white border-2 border-[#ed1e28] rounded-[22px] overflow-hidden shadow-[0_16px_36px_rgba(237,30,40,0.08)] flex flex-col items-center">
+              <div class="w-full pt-4 px-4 flex justify-center items-end h-[360px] sm:h-[410px]">
+                <img
+                  src="/images/kepalaSekolah.png"
+                  alt="Aris Puji Santoso, S.Kom., M.M - Kepala Sekolah SMK Telkom Purwokerto"
+                  class="h-full w-auto object-contain object-bottom block"
+                  width="530"
+                  height="796"
+                  loading="eager"
+                />
+              </div>
+
+              <!-- Bottom Red Banner Label -->
+              <div class="w-full bg-[#ed1e28] py-2.5 text-center">
+                <span class="font-poppins text-xs font-bold text-white tracking-[0.14em] uppercase block">
+                  KEPALA SEKOLAH
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- Struktur Organisasi Section -->
+  <section class="relative pt-6 pb-0 bg-gradient-to-b from-white from-60% to-[#fafafa] overflow-hidden" id="struktur-organisasi">
+    <!-- Interactive Notice for Mobile (Scroll horizontally) -->
+    <div class="flex lg:hidden justify-center mb-4 px-4">
+      <div class="inline-flex items-center gap-2 text-xs font-jakarta text-[#64748b] bg-white border border-slate-200 py-1.5 px-3.5 rounded-full shadow-xs">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+        <span>Geser horizontal untuk melihat bagan lengkap</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Chart Container with Scroll Viewport (100% width up to 1440px for edge-to-edge wave) -->
+    <div class="w-full overflow-x-auto scrollbar-none">
+      <div class="min-w-[960px] lg:min-w-full flex justify-center">
+        <img
+          src="/images/image 29.png"
+          alt="Struktur Organisasi SMK Telkom Purwokerto Tahun Ajaran 2025/2026"
+          class="w-full max-w-[1440px] h-auto block object-contain select-none"
+          width="1440"
+          height="1376"
+          loading="eager"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section (Below Red Wave Ribbon) -->
+  <section class="relative pt-10 sm:pt-14 pb-16 sm:pb-24 bg-[#fafafa] overflow-hidden" id="stats-guru">
+    <!-- Subtle Dot Grid Matrix matching landing page theme -->
+    <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1440 400" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <pattern id="stats-guru-dot-pat" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+          <circle cx="14" cy="14" r="1.8" fill="#ed1e28" fill-opacity="0.08" />
+        </pattern>
+      </defs>
+      <rect width="1440" height="400" fill="url(#stats-guru-dot-pat)" />
+    </svg>
+
+    <Container>
+      <div class="relative z-1 max-w-[1140px] mx-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {
+            stats.map((item) => (
+              <div class="bg-white border border-black/[0.06] rounded-[22px] p-6 sm:p-7 shadow-[0_8px_24px_rgba(0,0,0,0.04)] hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(0,0,0,0.08)] transition-all duration-200 text-center flex flex-col items-center justify-center">
+                <div class="stat-num font-poppins text-3xl sm:text-[2.5rem] font-bold text-[#ed1e28] leading-[1.1] mb-2 [font-variant-numeric:tabular-nums]" data-value={item.display}>
+                  {item.display}
+                </div>
+                <h3 class="font-jakarta text-sm sm:text-base font-bold text-[#111827] mb-1">
+                  {item.title}
+                </h3>
+                <p class="font-jakarta text-xs sm:text-[0.8125rem] text-[#64748b] leading-[1.5] m-0 max-w-[200px]">
+                  {item.desc}
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>
+
+<script>
+  const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!isReduced) {
+    const statCards = document.querySelectorAll("#stats-guru .stat-num");
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const numEl = entry.target as HTMLElement;
+            if (numEl && !numEl.classList.contains("counted")) {
+              numEl.classList.add("counted");
+              const rawVal = numEl.getAttribute("data-value") || "";
+              const target = parseInt(rawVal.replace(/\D/g, ""), 10);
+              const suffix = rawVal.replace(/[0-9]/g, "");
+              const duration = 1800;
+              let startTime: number | null = null;
+
+              numEl.textContent = `0${suffix}`;
+
+              const step = (now: number) => {
+                if (startTime === null) startTime = now;
+                const elapsed = now - startTime;
+                const progress = Math.max(0, Math.min(elapsed / duration, 1));
+                const ease = 1 - Math.pow(1 - progress, 3);
+                const current = Math.round(ease * target);
+                numEl.textContent = `${current.toLocaleString("id-ID")}${suffix}`;
+                if (progress < 1) {
+                  requestAnimationFrame(step);
+                } else {
+                  numEl.textContent = rawVal;
+                }
+              };
+              requestAnimationFrame(step);
+            }
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    statCards.forEach((c) => observer.observe(c));
+  }
+</script>
