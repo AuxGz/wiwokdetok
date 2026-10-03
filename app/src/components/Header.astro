@@ -36,19 +36,25 @@ const isInformasiActive = isBerita || isCvGen || isPkl;
       <nav class="desktop-nav hidden tablet:flex items-center gap-[24px] lg:gap-[32px] xl:gap-[38px] 2xl:gap-[42px] justify-self-center" aria-label="Navigasi Utama">
         <a
           href="/"
-          class={`nav-item font-jakarta text-[0.9375rem] lg:text-[1rem] py-2 relative cursor-pointer no-underline transition-colors duration-150 ${currentPath === "/" ? "font-bold text-[#ed1e28]" : "font-semibold text-[#374151] hover:text-[#111827]"}`}
+          class={`nav-item group relative py-2 font-jakarta text-[0.9375rem] lg:text-[1rem] cursor-pointer no-underline transition-colors duration-150 inline-flex items-center ${currentPath === "/" ? "font-bold text-[#ed1e28]" : "font-semibold text-[#374151] hover:text-[#111827]"}`}
         >
-          Beranda
+          <span class="relative">
+            <span>Beranda</span>
+            <span class={`nav-underline absolute -bottom-1 left-0 w-full h-[2.5px] bg-[#ed1e28] rounded-full origin-left transition-transform duration-250 ease-out ${currentPath === "/" ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}></span>
+          </span>
         </a>
 
         <!-- Dropdown Tentang -->
         <div class="nav-item dropdown relative group">
           <button
-            class={`dropdown-trigger flex items-center gap-1.5 font-jakarta text-[0.9375rem] lg:text-[1rem] bg-transparent border-0 cursor-pointer p-0 py-2 transition-colors duration-150 ${isTentangActive ? "font-bold text-[#ed1e28]" : "font-semibold text-[#374151] hover:text-[#111827] group-hover:text-[#111827]"}`}
+            class={`dropdown-trigger flex items-center gap-1.5 font-jakarta text-[0.9375rem] lg:text-[1rem] bg-transparent border-0 cursor-pointer p-0 py-2 transition-colors duration-150 relative ${isTentangActive ? "font-bold text-[#ed1e28]" : "font-semibold text-[#374151] hover:text-[#111827] group-hover:text-[#111827]"}`}
             type="button"
             aria-expanded="false"
           >
-            <span>Tentang</span>
+            <span class="relative">
+              <span>Tentang</span>
+              <span class={`nav-underline absolute -bottom-1 left-0 w-full h-[2.5px] bg-[#ed1e28] rounded-full origin-left transition-transform duration-250 ease-out ${isTentangActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}></span>
+            </span>
             <svg class={`chevron-icon transition-transform duration-200 ${isTentangActive ? "text-[#ed1e28]" : "text-gray-400"} group-hover:rotate-180 group-focus-within:rotate-180`} width="13" height="13" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
             </svg>
@@ -64,11 +70,14 @@ const isInformasiActive = isBerita || isCvGen || isPkl;
         <!-- Dropdown Program -->
         <div class="nav-item dropdown relative group">
           <button
-            class={`dropdown-trigger flex items-center gap-1.5 font-jakarta text-[0.9375rem] lg:text-[1rem] bg-transparent border-0 cursor-pointer p-0 py-2 transition-colors duration-150 ${isProgramActive ? "font-bold text-[#ed1e28]" : "font-semibold text-[#374151] hover:text-[#111827] group-hover:text-[#111827]"}`}
+            class={`dropdown-trigger flex items-center gap-1.5 font-jakarta text-[0.9375rem] lg:text-[1rem] bg-transparent border-0 cursor-pointer p-0 py-2 transition-colors duration-150 relative ${isProgramActive ? "font-bold text-[#ed1e28]" : "font-semibold text-[#374151] hover:text-[#111827] group-hover:text-[#111827]"}`}
             type="button"
             aria-expanded="false"
           >
-            <span>Program</span>
+            <span class="relative">
+              <span>Program</span>
+              <span class={`nav-underline absolute -bottom-1 left-0 w-full h-[2.5px] bg-[#ed1e28] rounded-full origin-left transition-transform duration-250 ease-out ${isProgramActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}></span>
+            </span>
             <svg class={`chevron-icon transition-transform duration-200 ${isProgramActive ? "text-[#ed1e28]" : "text-gray-400"} group-hover:rotate-180 group-focus-within:rotate-180`} width="13" height="13" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
             </svg>
@@ -87,11 +96,14 @@ const isInformasiActive = isBerita || isCvGen || isPkl;
         <!-- Dropdown Informasi -->
         <div class="nav-item dropdown relative group">
           <button
-            class={`dropdown-trigger flex items-center gap-1.5 font-jakarta text-[0.9375rem] lg:text-[1rem] bg-transparent border-0 cursor-pointer p-0 py-2 transition-colors duration-150 ${isInformasiActive ? "font-bold text-[#ed1e28]" : "font-semibold text-[#374151] hover:text-[#111827] group-hover:text-[#111827]"}`}
+            class={`dropdown-trigger flex items-center gap-1.5 font-jakarta text-[0.9375rem] lg:text-[1rem] bg-transparent border-0 cursor-pointer p-0 py-2 transition-colors duration-150 relative ${isInformasiActive ? "font-bold text-[#ed1e28]" : "font-semibold text-[#374151] hover:text-[#111827] group-hover:text-[#111827]"}`}
             type="button"
             aria-expanded="false"
           >
-            <span>Informasi</span>
+            <span class="relative">
+              <span>Informasi</span>
+              <span class={`nav-underline absolute -bottom-1 left-0 w-full h-[2.5px] bg-[#ed1e28] rounded-full origin-left transition-transform duration-250 ease-out ${isInformasiActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}></span>
+            </span>
             <svg class={`chevron-icon transition-transform duration-200 ${isInformasiActive ? "text-[#ed1e28]" : "text-gray-400"} group-hover:rotate-180 group-focus-within:rotate-180`} width="13" height="13" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
             </svg>
@@ -108,9 +120,12 @@ const isInformasiActive = isBerita || isCvGen || isPkl;
         <!-- School Tour -->
         <a
           href="/school-tour"
-          class={`nav-item font-jakarta text-[0.9375rem] lg:text-[1rem] py-2 relative cursor-pointer no-underline transition-colors duration-150 ${isSchoolTour ? "font-bold text-[#ed1e28]" : "font-semibold text-[#374151] hover:text-[#111827]"}`}
+          class={`nav-item group relative py-2 font-jakarta text-[0.9375rem] lg:text-[1rem] cursor-pointer no-underline transition-colors duration-150 inline-flex items-center ${isSchoolTour ? "font-bold text-[#ed1e28]" : "font-semibold text-[#374151] hover:text-[#111827]"}`}
         >
-          School Tour
+          <span class="relative">
+            <span>School Tour</span>
+            <span class={`nav-underline absolute -bottom-1 left-0 w-full h-[2.5px] bg-[#ed1e28] rounded-full origin-left transition-transform duration-250 ease-out ${isSchoolTour ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"}`}></span>
+          </span>
         </a>
       </nav>
 
@@ -186,3 +201,11 @@ const isInformasiActive = isBerita || isCvGen || isPkl;
     });
   }
 </script>
+
+<style>
+  @media (prefers-reduced-motion: reduce) {
+    .nav-underline {
+      transition: none !important;
+    }
+  }
+</style>
