@@ -2,11 +2,11 @@
 import Container from "../Container.astro";
 ---
 
-<section class="py-14 sm:py-20 lg:pt-22 lg:pb-20 bg-white" id="why-us">
+<section class="py-14 sm:py-20 lg:pt-22 lg:pb-20 bg-white overflow-hidden" id="why-us">
   <Container>
     <div class="max-w-[1140px] mx-auto">
-      <!-- Section Header -->
-      <div class="why-us-header why-us-item delay-header">
+      <!-- Section Header: Slide from Top -->
+      <div class="why-us-header why-us-item slide-from-top delay-header">
         <div class="inline-flex items-center gap-2.5 font-poppins text-[0.8125rem] font-bold text-[#ed1e28] tracking-[0.06em] uppercase mb-5">
           <span class="inline-block w-[22px] h-[2px] bg-[#ed1e28] rounded-[1px]"></span>
           <span>MENGAPA MEMILIH KAMI</span>
@@ -21,8 +21,8 @@ import Container from "../Container.astro";
         <!-- Left Bento Cluster: 2 Small Cards + 1 Wide Bottom Card -->
         <div class="flex flex-col gap-7">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-7">
-            <!-- Card 1: Kelas Industri -->
-            <div class="group bg-[#f8fafc] rounded-[20px] p-6 sm:p-8 lg:p-9 flex flex-col border border-black/[0.04] shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:-translate-y-1.5 hover:shadow-[0_18px_40px_rgba(0,0,0,0.08)] hover:border-[#ed1e28]/16 why-us-item delay-card-1">
+            <!-- Card 1: Slide from Left -->
+            <div class="group bg-[#f8fafc] rounded-[20px] p-6 sm:p-8 lg:p-9 flex flex-col border border-black/[0.04] shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:-translate-y-1.5 hover:shadow-[0_18px_40px_rgba(0,0,0,0.08)] hover:border-[#ed1e28]/16 why-us-item slide-from-left delay-card-1">
               <div class="why-us-badge w-11 h-11 rounded-full bg-white border border-[#fee2e2] flex items-center justify-center mb-6 shadow-[0_2px_6px_rgba(0,0,0,0.04)] group-hover:scale-110 group-hover:rotate-4 group-hover:border-[#fca5a5] group-hover:bg-[#fef2f2] group-hover:shadow-[0_6px_16px_rgba(237,30,40,0.16)]">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ed1e28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
@@ -34,8 +34,8 @@ import Container from "../Container.astro";
               </p>
             </div>
 
-            <!-- Card 2: Sertifikasi Kompetensi -->
-            <div class="group bg-[#f8fafc] rounded-[20px] p-6 sm:p-8 lg:p-9 flex flex-col border border-black/[0.04] shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:-translate-y-1.5 hover:shadow-[0_18px_40px_rgba(0,0,0,0.08)] hover:border-[#ed1e28]/16 why-us-item delay-card-2">
+            <!-- Card 2: Slide from Top (Desktop) / Right (Mobile) -->
+            <div class="group bg-[#f8fafc] rounded-[20px] p-6 sm:p-8 lg:p-9 flex flex-col border border-black/[0.04] shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:-translate-y-1.5 hover:shadow-[0_18px_40px_rgba(0,0,0,0.08)] hover:border-[#ed1e28]/16 why-us-item slide-from-top-card delay-card-2">
               <div class="why-us-badge w-11 h-11 rounded-full bg-white border border-[#fee2e2] flex items-center justify-center mb-6 shadow-[0_2px_6px_rgba(0,0,0,0.04)] group-hover:scale-110 group-hover:rotate-4 group-hover:border-[#fca5a5] group-hover:bg-[#fef2f2] group-hover:shadow-[0_6px_16px_rgba(237,30,40,0.16)]">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ed1e28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
@@ -48,8 +48,8 @@ import Container from "../Container.astro";
             </div>
           </div>
 
-          <!-- Card 4: 4 Program Keahlian & Pembinaan Karakter -->
-          <div class="group bg-[#f8fafc] rounded-[20px] p-6 sm:p-8 lg:p-9 flex flex-col flex-1 border border-black/[0.04] shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:-translate-y-1.5 hover:shadow-[0_18px_40px_rgba(0,0,0,0.08)] hover:border-[#ed1e28]/16 why-us-item delay-card-wide">
+          <!-- Card 4: Slide from Bottom (Wide Card) -->
+          <div class="group bg-[#f8fafc] rounded-[20px] p-6 sm:p-8 lg:p-9 flex flex-col flex-1 border border-black/[0.04] shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:-translate-y-1.5 hover:shadow-[0_18px_40px_rgba(0,0,0,0.08)] hover:border-[#ed1e28]/16 why-us-item slide-from-bottom delay-card-wide">
             <div class="why-us-badge w-11 h-11 rounded-full bg-white border border-[#fee2e2] flex items-center justify-center mb-6 shadow-[0_2px_6px_rgba(0,0,0,0.04)] group-hover:scale-110 group-hover:rotate-4 group-hover:border-[#fca5a5] group-hover:bg-[#fef2f2] group-hover:shadow-[0_6px_16px_rgba(237,30,40,0.16)]">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ed1e28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
@@ -64,8 +64,8 @@ import Container from "../Container.astro";
           </div>
         </div>
 
-        <!-- Right Side: Card 3 - Visi & Misi Kami (Red Card) -->
-        <div class="group relative bg-[#ed1e28] rounded-[20px] p-7 sm:p-9 lg:p-11 text-white overflow-hidden flex flex-col shadow-[0_14px_36px_rgba(237,30,40,0.22)] hover:-translate-y-1.5 hover:shadow-[0_24px_52px_rgba(237,30,40,0.32)] why-us-item delay-card-red">
+        <!-- Right Side: Card 3 - Slide from Right (Red Card) -->
+        <div class="group relative bg-[#ed1e28] rounded-[20px] p-7 sm:p-9 lg:p-11 text-white overflow-hidden flex flex-col shadow-[0_14px_36px_rgba(237,30,40,0.22)] hover:-translate-y-1.5 hover:shadow-[0_24px_52px_rgba(237,30,40,0.32)] why-us-item slide-from-right delay-card-red">
           <!-- Concentric Ring Background Texture -->
           <svg class="absolute inset-0 w-full h-full pointer-events-none z-1 opacity-90 transition-transform duration-500 group-hover:scale-105" viewBox="0 0 400 600" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <circle cx="200" cy="180" r="160" stroke="rgba(255, 255, 255, 0.08)" stroke-width="32" />
@@ -108,12 +108,39 @@ import Container from "../Container.astro";
   /* Base state before entering */
   .why-us-item {
     opacity: 0;
-    transform: translateY(34px) scale(0.975);
-    transition: opacity 650ms cubic-bezier(0.16, 1, 0.3, 1),
-                transform 650ms cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
+    transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+                transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
+  /* Multi-directional slide starting offsets */
+  .slide-from-top {
+    transform: translateY(-28px);
+  }
+
+  .slide-from-left {
+    transform: translateX(-48px) scale(0.97);
+  }
+
+  /* Card 2: slide from top on desktop, from right on mobile */
+  .slide-from-top-card {
+    transform: translateX(48px) scale(0.97);
+  }
+  @media (min-width: 640px) {
+    .slide-from-top-card {
+      transform: translateY(-40px) scale(0.97);
+    }
+  }
+
+  .slide-from-bottom {
+    transform: translateY(42px) scale(0.97);
+  }
+
+  .slide-from-right {
+    transform: translateX(54px) scale(0.97);
+  }
+
+  /* Icon badges inside cards */
   .why-us-badge {
     opacity: 0;
     transform: scale(0.65);
@@ -121,10 +148,10 @@ import Container from "../Container.astro";
                 transform 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
-  /* Triggered load animation state */
+  /* Triggered load animation: all glide smoothly into place */
   :global(#why-us.is-visible) .why-us-item {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translate(0, 0) scale(1);
   }
 
   :global(#why-us.is-visible) .why-us-badge {
@@ -133,17 +160,17 @@ import Container from "../Container.astro";
   }
 
   /* Stagger delays */
-  .delay-header { transition-delay: 30ms; }
-  .delay-card-1 { transition-delay: 110ms; }
-  .delay-card-2 { transition-delay: 190ms; }
-  .delay-card-red { transition-delay: 270ms; }
-  .delay-card-wide { transition-delay: 350ms; }
+  .delay-header { transition-delay: 20ms; }
+  .delay-card-1 { transition-delay: 90ms; }
+  .delay-card-2 { transition-delay: 170ms; }
+  .delay-card-red { transition-delay: 250ms; }
+  .delay-card-wide { transition-delay: 330ms; }
 
-  /* Badge stagger delays */
-  :global(#why-us.is-visible) .delay-card-1 .why-us-badge { transition-delay: 230ms; }
-  :global(#why-us.is-visible) .delay-card-2 .why-us-badge { transition-delay: 310ms; }
-  :global(#why-us.is-visible) .delay-card-red .why-us-badge { transition-delay: 390ms; }
-  :global(#why-us.is-visible) .delay-card-wide .why-us-badge { transition-delay: 470ms; }
+  /* Badge pop stagger delays */
+  :global(#why-us.is-visible) .delay-card-1 .why-us-badge { transition-delay: 220ms; }
+  :global(#why-us.is-visible) .delay-card-2 .why-us-badge { transition-delay: 300ms; }
+  :global(#why-us.is-visible) .delay-card-red .why-us-badge { transition-delay: 380ms; }
+  :global(#why-us.is-visible) .delay-card-wide .why-us-badge { transition-delay: 460ms; }
 
   /* After load animation completes: enable fluid hover states */
   :global(#why-us.animation-done) .why-us-item {
