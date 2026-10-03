@@ -11,7 +11,7 @@ const envSchema = z.object({
   PORT: z.coerce.number().default(3000),
   // Wajib disediakan dari environment (Docker Compose atau root .env), tanpa fallback kredensial palsu
   DATABASE_URL: z.string().min(1, "DATABASE_URL wajib diisi"),
-  DIRECTUS_URL: z.string().url("DIRECTUS_URL harus berupa URL valid").default("http://localhost:8055"),
+  DIRECTUS_URL: z.string().url("DIRECTUS_URL harus berupa URL valid").optional(),
   PUBLIC_SITE_URL: z.string().url("PUBLIC_SITE_URL harus berupa URL valid").default("http://localhost:4321"),
 });
 

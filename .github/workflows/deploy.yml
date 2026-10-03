@@ -1,0 +1,89 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  # ============================================================================
+  # Tahap 1: Pengujian, Linter & Validasi Build (CI)
+  # ============================================================================
+  test:
+    name: Lint, Test & Build Validation
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./app
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Runtime
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+          cache-dependency-path: './app/package-lock.json'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Generate Prisma Client
+        run: npm run prisma:generate
+
+      - name: Run Linter
+        run: npm run lint
+
+      - name: Run Unit Tests
+        run: npm run test
+
+      - name: Run Production Build
+        run: npm run build
+
+  # ============================================================================
+  # Tahap 2: Deployment ke VPS via SSH (CD)
+  # ============================================================================
+  deploy:
+    name: Deploy to Production VPS
+    needs: test
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Execute Deployment Commands via SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          port: ${{ secrets.VPS_PORT }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script_stop: true
+          script: |
+            set -e
+            DEPLOY_PATH="${{ secrets.VPS_DEPLOY_PATH }}"
+            DEPLOY_PATH="${DEPLOY_PATH:-/opt/web-jhic}"
+
+            echo "==> Berpindah ke direktori deployment: $DEPLOY_PATH..."
+            cd "$DEPLOY_PATH"
+
+            echo "==> Mengambil pembaruan dari repositori git..."
+            git fetch origin main
+            git reset --hard origin/main
+
+            echo "==> Membangun citra kontainer app..."
+            docker compose build app
+
+            echo "==> Menjalankan kontainer terbaru (zero-downtime)..."
+            docker compose up -d --remove-orphans
+
+            echo "==> Membersihkan image kontainer usang..."
+            docker image prune -f
+
+            echo "==> Status kontainer saat ini:"
+            docker compose ps

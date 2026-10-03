@@ -6,104 +6,113 @@ Dokumen ini memandu pengembang untuk menyiapkan lingkungan pengembangan lokal da
 
 ## Prasyarat Lingkungan
 
-- **Node.js**: Versi 24 LTS (direkomendasikan) atau 20+
-- **npm**: Versi 10+
-- **Docker & Docker Compose**: Untuk menjalankan database PostgreSQL dan Directus CMS
+- **Node.js**: Versi 22 LTS atau 24 LTS
+- **npm**: Versi 10 ke atas
+- **Docker & Docker Compose**: Untuk menjalankan basis data PostgreSQL lokal
 
 ---
 
-## 1. Konfigurasi Lingkungan (`.env`)
+## 1. Konfigurasi Variabel Lingkungan (`.env`)
 
-Repositori menggunakan **satu berkas kanonikal `.env`** di root repositori:
+Sistem menggunakan satu berkas konfigurasi `.env` yang diletakkan pada direktori root proyek:
 
 ```bash
 cp .env.example .env
 ```
 
-Buka berkas `.env` dan atur nilai kredensial.
+Buka berkas `.env` yang baru dibuat dan tentukan kredensial database.
 
 > [!WARNING]
-> **Aturan URL-Safe Password Database**:
-> Nilai password database wajib dibuat dalam format URL-safe agar tidak merusak parsing string koneksi `DATABASE_URL` (`postgresql://USER:PASSWORD@HOST:PORT/DB`).
-> Buat password acak dengan perintah:
+> **Format Password Database Wajib URL-Safe**:
+> Nilai password database diuraikan dalam format string URL (`postgresql://USER:PASSWORD@HOST:PORT/DB`). Hindari karakter khusus seperti `@`, `:`, `/`, atau `#`.
+> Gunakan string heksadesimal acak:
 > ```bash
 > openssl rand -hex 24
 > ```
 
 ---
 
-## 2. Menjalankan Database & CMS Lokal
+## 2. Menjalankan Basis Data PostgreSQL
 
-Jalankan container PostgreSQL dan Directus melalui Docker Compose:
+Jalankan kontainer database PostgreSQL melalui Docker Compose:
 ```bash
-docker compose up -d postgres directus
+docker compose up -d postgres
 ```
 
-Periksa status kesiapan database:
+Pastikan kontainer telah berstatus `healthy`:
 ```bash
 docker compose ps
 ```
 
+Skrip inisialisasi (`docker/postgres/init/01-init-databases.sh`) akan secara otomatis membuat basis data `app_db`, database bayangan `app_shadow_db`, serta mengaktifkan ekstensi `pgvector`.
+
 ---
 
-## 3. Instalasi Dependensi Aplikasi
+## 3. Instalasi Dependensi & Kode Klien Prisma
 
-Seluruh dependensi dikelola secara terpusat di dalam direktori `app/`:
+Seluruh dependensi frontend dan backend dikelola di dalam direktori `app/`:
 
 ```bash
 cd app
 npm install
 ```
 
-Perintah di atas akan membaca `package.json` dan memvalidasi integritas `package-lock.json`.
-
----
-
-## 4. Inisialisasi Skema & Migrasi Prisma
-
-Jalankan generasi client Prisma 7:
+Setelah dependensi terpasang, hasilkan tipe TypeScript dan modul klien Prisma:
 ```bash
 npm run prisma:generate
 ```
 
-### Alur Migrasi Pengembangan (`prisma migrate dev`)
-Alur kerja pengembangan skema menggunakan database shadow terpisah (`app_shadow_db`) yang secara otomatis diinisialisasi oleh skrip `docker/postgres/init/01-init-databases.sh`.
+---
 
-Jalankan perintah migrasi pengembangan di dalam kontainer `app` (di mana jaringan internal PostgreSQL dapat diakses langsung):
-```bash
-docker compose exec app npx prisma migrate dev --name <nama_migrasi>
-```
+## 4. Pengelolaan Skema & Migrasi Basis Data
 
-Atau jika dijalankan dari host lokal dengan port database terpetakan:
+Saat Anda menambahkan atau memodifikasi model tabel pada `app/prisma/schema.prisma`, jalankan migrasi pengembangan lokal:
+
 ```bash
 cd app
-npx prisma migrate dev --name <nama_migrasi>
+npx prisma migrate dev --name <nama_perubahan>
 ```
 
-> [!NOTE]
-> Shadow database `app_shadow_db` hanya digunakan selama proses pembuatan migrasi pengembangan (`prisma migrate dev`) dan **bukan** merupakan dependensi runtime produksi.
+Perintah ini akan:
+1. Membaca perubahan pada skema Prisma.
+2. Membandingkannya dengan database bayangan (`app_shadow_db`).
+3. Menghasilkan berkas migrasi SQL baru di `app/prisma/migrations/`.
+4. Menerapkan berkas migrasi tersebut ke basis data `app_db`.
+5. Memperbarui Prisma Client secara otomatis.
 
 ---
 
 ## 5. Menjalankan Server Pengembangan
 
-Jalankan alur kerja pengembangan konkruen:
+Jalankan alur kerja pengembangan konkuren:
 ```bash
+cd app
 npm run dev
 ```
 
-Output terminal akan menampilkan:
-- **Express API dev server**: `http://127.0.0.1:3000`
-- **Astro dev server**: `http://localhost:4321`
+Perintah di atas akan mengaktifkan dua layanan sekaligus:
+- **Express API dev server**: `http://127.0.0.1:3000` (berjalan menggunakan `tsx` dengan fitur *file watcher*)
+- **Astro dev server**: `http://localhost:4321` (berjalan dengan fitur *Vite Hot Module Replacement*)
 
-Buka `http://localhost:4321` di browser Anda untuk melihat antarmuka dengan fitur Hot Module Replacement (HMR). Panggilan ke `http://localhost:4321/api/health` akan otomatis diteruskan ke Express API.
+Buka peramban di `http://localhost:4321`. Seluruh pemanggilan rute API publik (`/api/*`) dari halaman Astro akan diteruskan secara otomatis oleh proxy internal Astro ke port `3000`.
 
 ---
 
-## 6. Pengujian Otomatis
+## 6. Pengujian Otomatis & Validasi Kualitas
 
-Untuk menjalankan unit test endpoint API tanpa koneksi database aktif:
-```bash
-cd app
-npm test
-```
+Sebelum mengajukan perubahan kode ke repositori, jalankan rangkaian pengujian berikut:
+
+1. **Pemeriksaan Linter (ESLint 9)**:
+   ```bash
+   npm run lint
+   ```
+
+2. **Unit Test API (Vitest & Supertest)**:
+   ```bash
+   npm run test
+   ```
+
+3. **Verifikasi Build Produksi (Prisma + Astro + Server)**:
+   ```bash
+   npm run build
+   ```

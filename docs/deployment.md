@@ -1,30 +1,38 @@
-# Panduan Deployment Produksi (NAT VPS Jagoan Hosting & Webuzo)
+# Panduan Deployment Produksi & CI/CD
 
-Panduan deployment sistem website sekolah ke VPS Jagoan Hosting berbasis Ubuntu dengan panel Webuzo dan integrasi Cloudflare.
+Panduan ini mendokumentasikan proses deployment sistem website sekolah ke VPS berbasis Ubuntu (dengan panel Webuzo) serta konfigurasi pipeline CI/CD otomatis menggunakan GitHub Actions.
 
 ---
 
 ## 1. Arsitektur Ingress Produksi
 
 ```text
-Internet / Browser Publik
-    ↓ (HTTPS: 443)
-Cloudflare (SSL/TLS: Full (Strict) + Origin CA Certificate)
-    ↓ (HTTPS Origin: 443)
-Jagoan Hosting Domain Forward (NAT Upstream)
+Pengguna / Peramban Publik
+    ↓ (HTTPS: Port 443)
+Cloudflare (Mode TLS: Full Strict + WAF)
+    ↓ (HTTPS Origin: Port 443)
+Jagoan Hosting Ingress / NAT
     ↓ (Port 443)
-Webuzo Host Web Server (Terminasi SSL via Cloudflare Origin CA)
+Webuzo Host Server (Terminasi SSL via Cloudflare Origin CA)
     ↓ (HTTP Reverse Proxy: 127.0.0.1:3000)
-Docker Container: app (Port 3000)
+Kontainer Docker: app (Port 3000)
+    ↓ (Koneksi Internal Docker)
+Kontainer Docker: postgres (Port 5432)
 ```
 
 ---
 
-## 2. Konfigurasi Webuzo Host
+## 2. Konfigurasi Awal di Server Webuzo
 
-1. Buat Domain / Virtual Host di Webuzo untuk domain sekolah (contoh: `www.sekolah.sch.id`).
-2. Pasang **Cloudflare Origin CA Certificate** dan Private Key di menu SSL Webuzo.
-3. Konfigurasikan Webuzo Reverse Proxy agar meneruskan seluruh permintaan ke loopback host:
+1. **Buat Domain / Virtual Host**:
+   Daftarkan domain atau subdomain sekolah pada menu Domain Management Webuzo.
+
+2. **Pasang Sertifikat SSL Cloudflare Origin CA**:
+   - Terbitkan Origin Certificate dari dashboard Cloudflare untuk domain terkait.
+   - Pasang sertifikat publik (.crt) dan kunci privat (.key) pada menu SSL di Webuzo.
+
+3. **Konfigurasi Reverse Proxy Nginx**:
+   Arahkan seluruh trafik HTTP dari domain host ke port loopback aplikasi (`127.0.0.1:3000`):
    ```nginx
    location / {
        proxy_pass http://127.0.0.1:3000;
@@ -41,71 +49,93 @@ Docker Container: app (Port 3000)
 
 ---
 
-## 3. Deployment Docker Compose
+## 3. Otomasi Deployment via GitHub Actions (CI/CD)
 
-1. Clone repositori ke VPS:
+Repositori ini telah dilengkapi pipeline terintegrasi pada `.github/workflows/deploy.yml`.
+
+### A. Tahapan Kerja Pipeline
+1. **Tahap Pengujian & Validasi Kualitas (CI)**:
+   - Dijalankan pada setiap pull request dan push ke branch `main`.
+   - Menguji instalasi dependensi (`npm ci`).
+   - Memvalidasi skema Prisma (`npm run prisma:generate`).
+   - Menjalankan analisis statis kode (`npm run lint`).
+   - Menjalankan pengujian otomatis (`npm run test`).
+   - Memastikan kompilasi aplikasi berhasil penuh (`npm run build`).
+
+2. **Tahap Deployment ke VPS (CD)**:
+   - Hanya dieksekusi jika tahap pengujian berhasil 100% dan perubahan terjadi pada branch `main` (atau dipicu manual melalui tombol *Run workflow* di GitHub Actions).
+   - Melakukan koneksi terenkripsi via SSH ke VPS.
+   - Memperbarui kode dari repositori Git (`git reset --hard origin/main`).
+   - Membangun citra kontainer `app` (`docker compose build app`).
+   - Menjalankan kontainer terbaru tanpa downtime (`docker compose up -d --remove-orphans`).
+   - Membersihkan citra kontainer usang (`docker image prune -f`).
+
+### B. Konfigurasi GitHub Repository Secrets
+Untuk mengaktifkan deployment otomatis, daftarkan variabel rahasia berikut pada menu **Settings > Secrets and variables > Actions** di repositori GitHub:
+
+| Nama Secret | Deskripsi | Contoh Nilai |
+| :--- | :--- | :--- |
+| `VPS_HOST` | Alamat IP publik atau domain SSH server VPS | `103.xxx.xxx.xxx` |
+| `VPS_PORT` | Port layanan SSH (sesuaikan jika server menggunakan NAT port forwarding) | `22` atau `2222` |
+| `VPS_USER` | Akun pengguna sistem dengan akses eksekusi Docker | `root` atau `deployer` |
+| `VPS_SSH_KEY` | Kunci privat SSH (format OpenSSH / PEM) untuk autentikasi tanpa password | `-----BEGIN OPENSSH PRIVATE KEY----- ...` |
+| `VPS_DEPLOY_PATH` | Path absolut direktori repositori di dalam server VPS | `/opt/web-jhic` atau `/home/deploy/web-jhic` |
+
+---
+
+## 4. Setup Awal di VPS (Deployment Manual Pertama Kali)
+
+Sebelum pipeline CI/CD dijalankan untuk pertama kali, inisialisasi repositori pada VPS:
+
+1. **Clone Repositori**:
    ```bash
-   git clone <URL_REPOSITORI> /home/<USER>/web-sekolah
-   cd /home/<USER>/web-sekolah
+   git clone <URL_REPOSITORI> /opt/web-jhic
+   cd /opt/web-jhic
    ```
 
-2. Buat berkas konfigurasi `.env` dari `.env.example`:
+2. **Konfigurasi Variabel Lingkungan Produksi**:
    ```bash
    cp .env.example .env
    ```
-
-3. Sesuaikan variabel lingkungan produksi di `.env`:
+   Edit berkas `.env` dan isi nilai produksi:
    - `NODE_ENV=production`
    - `PORT=3000`
    - `PUBLIC_SITE_URL=https://www.sekolah.sch.id`
-   - Buat password acak URL-safe untuk `POSTGRES_SUPERUSER_PASSWORD`, `APP_DB_PASSWORD`, dan `CMS_DB_PASSWORD`.
-   - `DIRECTUS_ADMIN_EMAIL` & `DIRECTUS_ADMIN_PASSWORD`: Kredensial admin CMS.
-   - `DIRECTUS_PUBLIC_URL`: Sesuaikan dengan mode akses (lihat bagian 4).
+   - Buat password acak URL-safe untuk `POSTGRES_SUPERUSER_PASSWORD` dan `APP_DB_PASSWORD`.
 
-4. Build citra dan jalankan kontainer:
+3. **Membangun dan Menjalankan Kontainer**:
    ```bash
    docker compose build --no-cache
    docker compose up -d
    ```
 
-   > [!NOTE]
-   > **Migrasi Otomatis Produksi (`prisma migrate deploy`)**:
-   > Saat kontainer `app` menyala, skrip `docker-entrypoint.sh` secara otomatis mengeksekusi `npx prisma migrate deploy` untuk menerapkan migrasi tertunda sebelum server Node.js dimulai.
-   > Jika ingin menjalankan migrasi secara manual:
-   > ```bash
-   > docker compose exec app npx prisma migrate deploy
-   > ```
-
-5. Periksa status ketiga kontainer:
+4. **Verifikasi Status Kontainer**:
    ```bash
    docker compose ps
    ```
-   Pastikan seluruh service berstatus `healthy`:
-   - `app`: healthy
-   - `directus`: healthy
-   - `postgres`: healthy
+   Pastikan layanan `postgres` dan `app` berstatus `healthy`.
 
 ---
 
-## 4. Akses Administrator Directus CMS di Produksi
+## 5. Mekanisme Migrasi Basis Data Produksi
 
-Port Directus (`8055`) terikat pada loopback host (`127.0.0.1:8055`) demi keamanan.
-
-### Mode A: Akses Melalui SSH Tunnel NAT-Aware (Sangat Direkomendasikan)
-Karena VPS Jagoan Hosting menggunakan NAT upstream, port SSH dialihkan ke port publik tertentu. Jalankan perintah ini di komputer administrator:
+Setiap kali kontainer `app` dimulai ulang, skrip `docker-entrypoint.sh` secara otomatis mengeksekusi perintah:
 ```bash
-ssh -L 8055:127.0.0.1:8055 -p <FORWARDED_SSH_PORT> <USER>@<SSH_HOST>
+npx prisma migrate deploy
 ```
-Lalu buka peramban lokal di:
-```text
-http://localhost:8055
-```
-Pada mode ini:
-`DIRECTUS_PUBLIC_URL=http://localhost:8055`
+Perintah ini menerapkan seluruh berkas migrasi SQL yang belum terpasang ke basis data produksi sebelum server Node.js menerima trafik pengguna.
 
-### Mode B: Subdomain Khusus (Contoh: `cms.sekolah.sch.id`)
-Jika admin ingin mengakses CMS melalui browser tanpa SSH tunnel:
-1. Buat subdomain di Webuzo yang memproksi `https://cms.sekolah.sch.id` ke `http://127.0.0.1:8055`.
-2. Lindungi subdomain tersebut menggunakan **Cloudflare Zero Trust / Access**.
-3. Setel di `.env`:
-   `DIRECTUS_PUBLIC_URL=https://cms.sekolah.sch.id`
+Jika ingin melakukan eksekusi migrasi secara manual:
+```bash
+docker compose exec app npx prisma migrate deploy
+```
+
+---
+
+## 6. Verifikasi & Pemeriksaan Kesehatan Sistem
+
+Layanan Express menyediakan endpoint diagnostik:
+- **Liveness probe**: `http://127.0.0.1:3000/api/health`
+  Mengembalikan status 200 jika proses server aktif.
+- **Readiness probe**: `http://127.0.0.1:3000/api/health/ready`
+  Memvalidasi kesiapan koneksi basis data PostgreSQL sebelum menerima permintaan data dinamis.
