@@ -4,244 +4,375 @@ import Container from "../components/Container.astro";
 ---
 
 <BaseLayout
-  title="CV Generator Siswa & Alumni | SMK Telkom Purwokerto"
-  description="Buat CV profesional standar industri secara instan dan gratis khusus siswa dan alumni SMK Telkom Purwokerto."
+  title="CV Generator - SMK Telkom Purwokerto"
+  description="Buat CV ATS-friendly profesional langsung di browsermu dengan preview interaktif dan ekspor PDF siap kirim."
 >
-  <!-- 1. HERO SECTION -->
-  <section class="relative pt-6 pb-12 sm:pb-16 bg-[#fdfdfd] overflow-hidden" id="hero-cv">
+  <div class="py-6 sm:py-10 bg-[#F7F8F9]">
     <Container>
-      <div class="relative bg-gradient-to-br from-[#d62730] via-[#cd1820] to-[#c41d24] rounded-[24px] sm:rounded-[36px] pt-10 sm:pt-14 pb-10 sm:pb-14 px-6 sm:px-10 lg:px-16 shadow-[0_24px_48px_-12px_rgba(214,39,48,0.32)] overflow-hidden text-center">
-        <!-- Concentric rings watermark -->
-        <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1440 400" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-          <circle cx="200" cy="160" r="140" stroke="rgba(0, 0, 0, 0.065)" stroke-width="42" />
-          <circle cx="1200" cy="180" r="150" stroke="rgba(0, 0, 0, 0.06)" stroke-width="42" />
-        </svg>
+      <!-- Section 1: Hero Card (Figma Section #1557:1627: radius 32px) -->
+      <div class="relative overflow-hidden rounded-[32px] bg-gradient-to-tr from-[#ED1E28] via-[#D0161F] to-[#B6252A] p-8 sm:p-12 md:p-16 text-white text-center shadow-xl mb-12">
+        <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-white/10 blur-[80px] pointer-events-none"></div>
+        <div class="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-black/20 blur-[80px] pointer-events-none"></div>
 
-        <div class="relative z-10 max-w-3xl mx-auto flex flex-col items-center">
-          <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md px-4 py-1.5 rounded-full text-white text-xs font-jakarta font-semibold tracking-wider uppercase mb-4 border border-white/20">
-            <span>Layanan Siswa & Alumni</span>
+        <div class="relative z-10 max-w-4xl mx-auto space-y-6">
+          <!-- Pill Badge (Figma #1557:1633) -->
+          <div class="inline-flex items-center px-5 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-xs sm:text-sm font-semibold tracking-wide">
+            CV GENERATOR
           </div>
 
-          <h1 class="font-poppins text-white font-bold text-3xl sm:text-4xl lg:text-5xl leading-[1.15] tracking-tight mb-4">
-            CV Generator Profesional
+          <!-- Heading 1 (Figma #1557:1638: ExtraBold 64px) -->
+          <h1 class="font-extrabold text-3xl sm:text-5xl md:text-6xl font-sans tracking-tight leading-[1.15]">
+            Buat CV Impianmu,<br class="hidden sm:inline" /> Langsung Lihat Hasilnya
           </h1>
 
-          <p class="font-jakarta text-white/92 text-sm sm:text-base leading-relaxed max-w-xl">
-            Buat curriculum vitae profesional berstandar industri dengan format modern ATS-friendly yang siap dikirim ke ratusan mitra industri teknologi.
+          <!-- Subtitle (Figma #1557:1642) -->
+          <p class="text-white/80 text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
+            Bukan sekadar formulir biasa, tapi ruang kerja pintar tempat setiap huruf yang kamu ketik langsung tampil sebagai desain nyata di layar sebelah kanan. Susun data diri, pendidikan, pengalaman, hingga keahlianmu tanpa perlu berpindah aplikasi, lalu ekspor hasilnya sebagai PDF rapi yang siap dikirim untuk mendaftar PKL, magang, maupun pekerjaan pertamamu.
           </p>
         </div>
       </div>
-    </Container>
-  </section>
 
-  <!-- 2. SPLIT BUILDER INTERACTION -->
-  <section class="py-10 sm:py-16 bg-white" id="cv-builder">
-    <Container>
+      <!-- Section 2: Split Screen Workspace (Figma #1557:1803 & #1562:1821) -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        <!-- LEFT: Form Input (7 Cols) -->
-        <div class="lg:col-span-6 xl:col-span-6 bg-gray-50/70 border border-gray-200 rounded-3xl p-6 sm:p-8">
-          <h2 class="font-poppins text-xl font-bold text-[#111827] mb-6 flex items-center justify-between">
-            <span>Isi Data Resume</span>
-            <span class="text-xs font-jakarta font-normal text-gray-400">Live Preview Real-time</span>
-          </h2>
+        <!-- Left Column: Form Builder (5 cols) -->
+        <div class="lg:col-span-5 space-y-6">
+          <!-- Card 1: Data Diri (Figma #1557:1803: radius 16px) -->
+          <div class="bg-white rounded-2xl p-6 sm:p-7 border border-[#E7E8EA] shadow-sm space-y-5">
+            <div class="flex items-center justify-between pb-3 border-b border-neutral-100">
+              <h2 class="font-bold text-lg sm:text-xl text-[#111827] font-sans">
+                Data Diri
+              </h2>
+              <span class="w-2 h-2 rounded-full bg-[#ED1E28]"></span>
+            </div>
 
-          <form id="cv-form" class="flex flex-col gap-6">
-            <!-- Data Diri -->
-            <div class="border-b border-gray-200 pb-5">
-              <h3 class="font-jakarta text-sm font-bold text-[#111827] uppercase tracking-wider mb-3">1. Data Diri</h3>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                <div>
-                  <label class="block font-jakarta text-xs font-medium text-gray-700 mb-1">Nama Lengkap</label>
-                  <input type="text" id="input-name" class="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2.5 text-sm font-jakarta focus:outline-none focus:border-[#ed1e28]" placeholder="contoh: Muhammad Rizky Pratama" value="Muhammad Rizky Pratama" />
-                </div>
-                <div>
-                  <label class="block font-jakarta text-xs font-medium text-gray-700 mb-1">Role / Keahlian</label>
-                  <input type="text" id="input-title" class="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2.5 text-sm font-jakarta focus:outline-none focus:border-[#ed1e28]" placeholder="contoh: Junior Web Developer" value="Junior Web Developer" />
-                </div>
-                <div>
-                  <label class="block font-jakarta text-xs font-medium text-gray-700 mb-1">Email</label>
-                  <input type="email" id="input-email" class="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2.5 text-sm font-jakarta focus:outline-none focus:border-[#ed1e28]" placeholder="email@domain.com" value="rizky.pratama@gmail.com" />
-                </div>
-                <div>
-                  <label class="block font-jakarta text-xs font-medium text-gray-700 mb-1">Nomor Telepon / WA</label>
-                  <input type="tel" id="input-phone" class="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2.5 text-sm font-jakarta focus:outline-none focus:border-[#ed1e28]" placeholder="081234567890" value="0812-3456-7890" />
-                </div>
+            <!-- Photo & Name Row -->
+            <div class="flex items-center gap-4">
+              <div class="w-14 h-14 rounded-full bg-[#F2F2F2] border border-neutral-200 flex flex-col items-center justify-center text-[10px] text-neutral-400 font-medium shrink-0">
+                <svg class="w-5 h-5 mb-0.5 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                Foto
+              </div>
+              <div class="flex-1">
+                <label class="block text-xs font-semibold text-[#555555] mb-1">Nama Lengkap</label>
+                <input
+                  type="text"
+                  id="input-name"
+                  placeholder="cth. Cresendo Assyabani Darmawan"
+                  value="Cresendo Assyabani Darmawan"
+                  class="w-full px-3.5 py-2.5 rounded-lg bg-[#F5F5F5] border border-neutral-200 text-sm text-[#111827] focus:bg-white focus:border-[#ED1E28] focus:outline-none transition-all"
+                />
               </div>
             </div>
 
-            <!-- Pendidikan & Jurusan -->
-            <div class="border-b border-gray-200 pb-5">
-              <h3 class="font-jakarta text-sm font-bold text-[#111827] uppercase tracking-wider mb-3">2. Jurusan & Pendidikan</h3>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                <div>
-                  <label class="block font-jakarta text-xs font-medium text-gray-700 mb-1">Program Keahlian</label>
-                  <select id="input-jurusan" class="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2.5 text-sm font-jakarta focus:outline-none focus:border-[#ed1e28]">
-                    <option value="Rekayasa Perangkat Lunak (RPL)" selected>Rekayasa Perangkat Lunak (RPL)</option>
-                    <option value="Teknik Komputer & Jaringan (TKJ)">Teknik Komputer & Jaringan (TKJ)</option>
-                    <option value="Pengembangan Game (PG)">Pengembangan Game (PG)</option>
-                    <option value="Teknik Jaringan Akses (TJA)">Teknik Jaringan Akses (TJA)</option>
-                  </select>
-                </div>
-                <div>
-                  <label class="block font-jakarta text-xs font-medium text-gray-700 mb-1">Tahun Kelulusan / Angkatan</label>
-                  <input type="text" id="input-year" class="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2.5 text-sm font-jakarta focus:outline-none focus:border-[#ed1e28]" value="2024 - 2027 (Kelas XI)" />
-                </div>
-              </div>
-            </div>
-
-            <!-- Ringkasan Profil -->
-            <div class="border-b border-gray-200 pb-5">
-              <h3 class="font-jakarta text-sm font-bold text-[#111827] uppercase tracking-wider mb-3">3. Ringkasan Pribadi (Summary)</h3>
-              <textarea id="input-summary" rows="3" class="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2.5 text-sm font-jakarta focus:outline-none focus:border-[#ed1e28]" placeholder="Ceritakan ketertarikan dan keahlian Anda secara ringkas...">Siswa jurusan Rekayasa Perangkat Lunak SMK Telkom Purwokerto yang memiliki ketertarikan tinggi pada pemrograman frontend dan backend. Memiliki pengalaman membangun proyek web berbasis modern stack dan aktif dalam kegiatan riset coding sekolah.</textarea>
-            </div>
-
-            <!-- Keahlian Teknis -->
-            <div class="border-b border-gray-200 pb-5">
-              <h3 class="font-jakarta text-sm font-bold text-[#111827] uppercase tracking-wider mb-3">4. Keahlian Teknis (Skills)</h3>
-              <input type="text" id="input-skills" class="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2.5 text-sm font-jakarta focus:outline-none focus:border-[#ed1e28]" placeholder="Pisahkan dengan koma" value="HTML, CSS, JavaScript, TypeScript, React, Tailwind CSS, Git & GitHub, REST API, SQL" />
-            </div>
-
-            <!-- Proyek & Pengalaman -->
+            <!-- Job Title / Headline -->
             <div>
-              <h3 class="font-jakarta text-sm font-bold text-[#111827] uppercase tracking-wider mb-3">5. Pengalaman Proyek Utama</h3>
-              <div class="flex flex-col gap-3">
-                <input type="text" id="input-project-title" class="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2.5 text-sm font-jakarta focus:outline-none focus:border-[#ed1e28]" value="Website E-Commerce Produk Siswa Telkom" />
-                <textarea id="input-project-desc" rows="2" class="w-full bg-white border border-gray-300 rounded-xl px-3.5 py-2.5 text-sm font-jakarta focus:outline-none focus:border-[#ed1e28]">Mengembangkan platform jual-beli karya kreatif siswa menggunakan stack modern dengan integrasi payment gateway dan panel admin terpusat.</textarea>
+              <label class="block text-xs font-semibold text-[#555555] mb-1">Target Profesi / Headline</label>
+              <input
+                type="text"
+                id="input-role"
+                placeholder="cth. Junior Full-Stack Developer & UI Designer"
+                value="Junior Full-Stack Developer & UI Designer"
+                class="w-full px-3.5 py-2.5 rounded-lg bg-[#F5F5F5] border border-neutral-200 text-sm text-[#111827] focus:bg-white focus:border-[#ED1E28] focus:outline-none transition-all"
+              />
+            </div>
+
+            <!-- Contact Row: Telp & Email -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-semibold text-[#555555] mb-1">No. Telepon</label>
+                <input
+                  type="text"
+                  id="input-phone"
+                  placeholder="0812xxxxxxx"
+                  value="0812-2970-1800"
+                  class="w-full px-3.5 py-2.5 rounded-lg bg-[#F5F5F5] border border-neutral-200 text-sm text-[#111827] focus:bg-white focus:border-[#ED1E28] focus:outline-none transition-all"
+                />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-[#555555] mb-1">Email</label>
+                <input
+                  type="email"
+                  id="input-email"
+                  placeholder="nama@gmail.com"
+                  value="cresendo@student.smktelkom-pwt.sch.id"
+                  class="w-full px-3.5 py-2.5 rounded-lg bg-[#F5F5F5] border border-neutral-200 text-sm text-[#111827] focus:bg-white focus:border-[#ED1E28] focus:outline-none transition-all"
+                />
               </div>
             </div>
-          </form>
+
+            <!-- Alamat -->
+            <div>
+              <label class="block text-xs font-semibold text-[#555555] mb-1">Alamat</label>
+              <input
+                type="text"
+                id="input-address"
+                placeholder="cth. Purwokerto, Jawa Tengah"
+                value="Purwokerto, Jawa Tengah"
+                class="w-full px-3.5 py-2.5 rounded-lg bg-[#F5F5F5] border border-neutral-200 text-sm text-[#111827] focus:bg-white focus:border-[#ED1E28] focus:outline-none transition-all"
+              />
+            </div>
+
+            <!-- Tentang Saya -->
+            <div>
+              <label class="block text-xs font-semibold text-[#555555] mb-1">Tentang Saya</label>
+              <textarea
+                id="input-about"
+                rows="3"
+                placeholder="Ceritakan singkat tentang dirimu, minat, dan tujuanmu..."
+                class="w-full px-3.5 py-2.5 rounded-lg bg-[#F5F5F5] border border-neutral-200 text-sm text-[#111827] focus:bg-white focus:border-[#ED1E28] focus:outline-none transition-all resize-none"
+              >Siswa SMK Telkom Purwokerto berfokus pada Rekayasa Perangkat Lunak dengan antusiasme tinggi pada web development modern, API design, dan antarmuka responsif yang ramah pengguna.</textarea>
+            </div>
+          </div>
+
+          <!-- Card 2: Riwayat Pendidikan (Figma #1586:1231: dashed container) -->
+          <div class="bg-white rounded-2xl p-6 sm:p-7 border border-[#E7E8EA] shadow-sm space-y-4">
+            <h2 class="font-bold text-lg sm:text-xl text-[#111827] font-sans">
+              Riwayat Pendidikan
+            </h2>
+            <div class="border-2 border-dashed border-[#BDBDBD] rounded-xl p-4 bg-neutral-50/50 space-y-3">
+              <input
+                type="text"
+                id="input-school"
+                placeholder="Nama Sekolah"
+                value="SMK Telkom Purwokerto"
+                class="w-full px-3 py-2 rounded-lg bg-white border border-neutral-200 text-sm text-[#111827] focus:border-[#ED1E28] focus:outline-none"
+              />
+              <input
+                type="text"
+                id="input-major"
+                placeholder="Program Keahlian / Jurusan"
+                value="Rekayasa Perangkat Lunak (RPL)"
+                class="w-full px-3 py-2 rounded-lg bg-white border border-neutral-200 text-sm text-[#111827] focus:border-[#ED1E28] focus:outline-none"
+              />
+              <input
+                type="text"
+                id="input-edu-year"
+                placeholder="Tahun (cth. 2023 - 2026)"
+                value="2023 - Sekarang"
+                class="w-full px-3 py-2 rounded-lg bg-white border border-neutral-200 text-sm text-[#111827] focus:border-[#ED1E28] focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <!-- Card 3: Pengalaman / Organisasi (Figma #1586:1329) -->
+          <div class="bg-white rounded-2xl p-6 sm:p-7 border border-[#E7E8EA] shadow-sm space-y-4">
+            <h2 class="font-bold text-lg sm:text-xl text-[#111827] font-sans">
+              Pengalaman / Organisasi
+            </h2>
+            <div class="border-2 border-dashed border-[#BDBDBD] rounded-xl p-4 bg-neutral-50/50 space-y-3">
+              <input
+                type="text"
+                id="input-exp-role"
+                placeholder="Posisi / Peran"
+                value="Ketua Divisi Coding & Web"
+                class="w-full px-3 py-2 rounded-lg bg-white border border-neutral-200 text-sm text-[#111827] focus:border-[#ED1E28] focus:outline-none"
+              />
+              <input
+                type="text"
+                id="input-exp-org"
+                placeholder="Nama Perusahaan / Organisasi"
+                value="Komunitas Pengembang Telkom (TelDev)"
+                class="w-full px-3 py-2 rounded-lg bg-white border border-neutral-200 text-sm text-[#111827] focus:border-[#ED1E28] focus:outline-none"
+              />
+              <input
+                type="text"
+                id="input-exp-year"
+                placeholder="Periode (cth. 2024 - 2025)"
+                value="2024 - 2025"
+                class="w-full px-3 py-2 rounded-lg bg-white border border-neutral-200 text-sm text-[#111827] focus:border-[#ED1E28] focus:outline-none"
+              />
+              <textarea
+                id="input-exp-desc"
+                rows="2"
+                placeholder="Deskripsi tugas dan kontribusi..."
+                class="w-full px-3 py-2 rounded-lg bg-white border border-neutral-200 text-sm text-[#111827] focus:border-[#ED1E28] focus:outline-none resize-none"
+              >Memimpin tim proyek beranggotakan 6 siswa untuk membangun sistem presensi berbasis QR-Code dan dashboard evaluasi kegiatan sekolah.</textarea>
+            </div>
+          </div>
+
+          <!-- Card 4: Keahlian (Figma #1586:1331) -->
+          <div class="bg-white rounded-2xl p-6 sm:p-7 border border-[#E7E8EA] shadow-sm space-y-4">
+            <h2 class="font-bold text-lg sm:text-xl text-[#111827] font-sans">
+              Keahlian
+            </h2>
+            <input
+              type="text"
+              id="input-skills"
+              placeholder="Pisahkan dengan koma (cth. React, Node.js, Git)"
+              value="JavaScript, TypeScript, React, Tailwind CSS, Node.js, Git & GitHub, UI/UX Design, REST APIs"
+              class="w-full px-3.5 py-2.5 rounded-lg bg-[#F5F5F5] border border-neutral-200 text-sm text-[#111827] focus:bg-white focus:border-[#ED1E28] focus:outline-none transition-all"
+            />
+          </div>
         </div>
 
-        <!-- RIGHT: Live Document Preview (6 Cols) -->
-        <div class="lg:col-span-6 xl:col-span-6 sticky top-24">
-          <div class="flex items-center justify-between mb-4">
-            <span class="font-jakarta text-xs font-semibold text-gray-500 uppercase tracking-wider">Format Standar Industri</span>
+        <!-- Right Column: Live ATS Resume Preview Canvas (7 cols) -->
+        <div class="lg:col-span-7 space-y-4 lg:sticky lg:top-24">
+          <!-- Top Action Bar (Figma #1562:1820) -->
+          <div class="flex items-center justify-between bg-white rounded-2xl p-4 border border-[#E7E8EA] shadow-sm">
+            <div class="flex items-center gap-2 text-xs font-semibold text-[#55565B]">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              Live Preview Terhubung
+            </div>
             <button
               type="button"
-              id="print-cv-btn"
-              class="bg-[#ed1e28] hover:bg-[#d81820] text-white font-jakarta text-xs font-bold px-4 py-2 rounded-full cursor-pointer shadow-xs transition-all flex items-center gap-1.5"
+              id="btn-print-cv"
+              class="px-6 py-2.5 rounded-full bg-[#ED1E28] hover:bg-[#d01620] text-white text-xs sm:text-sm font-bold shadow-md shadow-[#ED1E28]/25 transition-all flex items-center gap-2"
             >
-              <span>🖨️ Cetak / Unduh PDF</span>
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+              </svg>
+              Cetak / Ekspor PDF
             </button>
           </div>
 
-          <!-- Document Sheet Preview -->
-          <div id="cv-paper" class="bg-white border border-gray-300 rounded-2xl shadow-xl p-8 sm:p-10 text-gray-900 transition-all font-jakarta">
-            <!-- Header Bar -->
-            <div class="border-b-2 border-[#ed1e28] pb-5 mb-5">
-              <h1 id="preview-name" class="font-poppins font-extrabold text-2xl text-[#111827] leading-tight mb-1">
-                Muhammad Rizky Pratama
+          <!-- Document Canvas (Figma #1562:1821: width: 743px, shadow-xl) -->
+          <div
+            id="cv-paper-preview"
+            class="bg-white rounded-2xl shadow-xl border border-neutral-200 p-8 sm:p-12 text-[#111827] space-y-8 min-h-[900px]"
+          >
+            <!-- Header: Name, Role & Contact -->
+            <div class="border-b-2 border-[#ED1E28] pb-6 space-y-2">
+              <h1 id="pv-name" class="text-2xl sm:text-3xl font-extrabold text-[#111827] font-sans tracking-tight">
+                Cresendo Assyabani Darmawan
               </h1>
-              <p id="preview-title" class="text-sm font-semibold text-[#ed1e28] mb-2">
-                Junior Web Developer
+              <p id="pv-role" class="text-sm sm:text-base font-semibold text-[#ED1E28]">
+                Junior Full-Stack Developer & UI Designer
               </p>
-              <div class="flex items-center gap-3 text-xs text-gray-500 flex-wrap">
-                <span id="preview-email">rizky.pratama@gmail.com</span>
+              <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-neutral-500 pt-1">
+                <span id="pv-phone">0812-2970-1800</span>
                 <span>•</span>
-                <span id="preview-phone">0812-3456-7890</span>
+                <span id="pv-email">cresendo@student.smktelkom-pwt.sch.id</span>
                 <span>•</span>
-                <span>Purwokerto, Jawa Tengah</span>
+                <span id="pv-address">Purwokerto, Jawa Tengah</span>
               </div>
             </div>
 
-            <!-- Profile Summary -->
-            <div class="mb-5">
-              <h4 class="font-poppins text-xs font-bold uppercase tracking-wider text-gray-800 mb-1.5 border-b border-gray-100 pb-1">
-                Ringkasan Profesional
-              </h4>
-              <p id="preview-summary" class="text-xs text-gray-600 leading-relaxed">
-                Siswa jurusan Rekayasa Perangkat Lunak SMK Telkom Purwokerto yang memiliki ketertarikan tinggi pada pemrograman frontend dan backend. Memiliki pengalaman membangun proyek web berbasis modern stack dan aktif dalam kegiatan riset coding sekolah.
+            <!-- About Section -->
+            <div class="space-y-2">
+              <h3 class="text-xs font-bold text-[#ED1E28] uppercase tracking-widest">
+                Tentang Saya
+              </h3>
+              <p id="pv-about" class="text-sm leading-relaxed text-[#33343A]">
+                Siswa SMK Telkom Purwokerto berfokus pada Rekayasa Perangkat Lunak dengan antusiasme tinggi pada web development modern, API design, dan antarmuka responsif yang ramah pengguna.
               </p>
             </div>
 
-            <!-- Education -->
-            <div class="mb-5">
-              <h4 class="font-poppins text-xs font-bold uppercase tracking-wider text-gray-800 mb-1.5 border-b border-gray-100 pb-1">
-                Pendidikan
-              </h4>
-              <div class="flex justify-between items-start">
-                <div>
-                  <strong class="text-xs font-bold text-[#111827] block">SMK Telkom Purwokerto</strong>
-                  <span id="preview-jurusan" class="text-xs text-gray-600">Rekayasa Perangkat Lunak (RPL)</span>
+            <!-- Education Section -->
+            <div class="space-y-3">
+              <h3 class="text-xs font-bold text-[#ED1E28] uppercase tracking-widest">
+                Riwayat Pendidikan
+              </h3>
+              <div class="space-y-1">
+                <div class="flex items-center justify-between text-sm font-bold text-[#111827]">
+                  <span id="pv-school">SMK Telkom Purwokerto</span>
+                  <span id="pv-edu-year" class="text-xs font-normal text-neutral-400">2023 - Sekarang</span>
                 </div>
-                <span id="preview-year" class="text-[0.6875rem] text-gray-400 font-medium">2024 - 2027 (Kelas XI)</span>
+                <p id="pv-major" class="text-sm text-[#55565B]">
+                  Rekayasa Perangkat Lunak (RPL)
+                </p>
               </div>
             </div>
 
-            <!-- Skills -->
-            <div class="mb-5">
-              <h4 class="font-poppins text-xs font-bold uppercase tracking-wider text-gray-800 mb-1.5 border-b border-gray-100 pb-1">
-                Keahlian Teknis
-              </h4>
-              <p id="preview-skills" class="text-xs text-gray-600 leading-relaxed font-mono">
-                HTML, CSS, JavaScript, TypeScript, React, Tailwind CSS, Git & GitHub, REST API, SQL
-              </p>
+            <!-- Experience Section -->
+            <div class="space-y-3">
+              <h3 class="text-xs font-bold text-[#ED1E28] uppercase tracking-widest">
+                Pengalaman & Organisasi
+              </h3>
+              <div class="space-y-1">
+                <div class="flex items-center justify-between text-sm font-bold text-[#111827]">
+                  <span id="pv-exp-role">Ketua Divisi Coding & Web</span>
+                  <span id="pv-exp-year" class="text-xs font-normal text-neutral-400">2024 - 2025</span>
+                </div>
+                <p id="pv-exp-org" class="text-xs font-semibold text-[#ED1E28]">
+                  Komunitas Pengembang Telkom (TelDev)
+                </p>
+                <p id="pv-exp-desc" class="text-sm text-[#55565B] leading-relaxed pt-1">
+                  Memimpin tim proyek beranggotakan 6 siswa untuk membangun sistem presensi berbasis QR-Code dan dashboard evaluasi kegiatan sekolah.
+                </p>
+              </div>
             </div>
 
-            <!-- Projects -->
-            <div>
-              <h4 class="font-poppins text-xs font-bold uppercase tracking-wider text-gray-800 mb-1.5 border-b border-gray-100 pb-1">
-                Portofolio Proyek
-              </h4>
-              <strong id="preview-project-title" class="text-xs font-bold text-[#111827] block mb-0.5">
-                Website E-Commerce Produk Siswa Telkom
-              </strong>
-              <p id="preview-project-desc" class="text-xs text-gray-600 leading-relaxed">
-                Mengembangkan platform jual-beli karya kreatif siswa menggunakan stack modern dengan integrasi payment gateway dan panel admin terpusat.
-              </p>
+            <!-- Skills Section -->
+            <div class="space-y-3">
+              <h3 class="text-xs font-bold text-[#ED1E28] uppercase tracking-widest">
+                Keahlian & Kompetensi
+              </h3>
+              <div id="pv-skills-container" class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 rounded-md bg-neutral-100 text-xs font-medium text-neutral-700">JavaScript</span>
+                <span class="px-3 py-1 rounded-md bg-neutral-100 text-xs font-medium text-neutral-700">TypeScript</span>
+                <span class="px-3 py-1 rounded-md bg-neutral-100 text-xs font-medium text-neutral-700">React</span>
+                <span class="px-3 py-1 rounded-md bg-neutral-100 text-xs font-medium text-neutral-700">Tailwind CSS</span>
+                <span class="px-3 py-1 rounded-md bg-neutral-100 text-xs font-medium text-neutral-700">Node.js</span>
+                <span class="px-3 py-1 rounded-md bg-neutral-100 text-xs font-medium text-neutral-700">Git & GitHub</span>
+                <span class="px-3 py-1 rounded-md bg-neutral-100 text-xs font-medium text-neutral-700">UI/UX Design</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </Container>
-  </section>
+  </div>
+
+  <!-- Live Binding & Print Script -->
+  <script>
+    function setupCvLiveBinder() {
+      const inputs = [
+        { id: 'input-name', target: 'pv-name', fallback: 'Nama Lengkap' },
+        { id: 'input-role', target: 'pv-role', fallback: 'Headline Profesi' },
+        { id: 'input-phone', target: 'pv-phone', fallback: '-' },
+        { id: 'input-email', target: 'pv-email', fallback: '-' },
+        { id: 'input-address', target: 'pv-address', fallback: '-' },
+        { id: 'input-about', target: 'pv-about', fallback: '-' },
+        { id: 'input-school', target: 'pv-school', fallback: '-' },
+        { id: 'input-major', target: 'pv-major', fallback: '-' },
+        { id: 'input-edu-year', target: 'pv-edu-year', fallback: '-' },
+        { id: 'input-exp-role', target: 'pv-exp-role', fallback: '-' },
+        { id: 'input-exp-org', target: 'pv-exp-org', fallback: '-' },
+        { id: 'input-exp-year', target: 'pv-exp-year', fallback: '-' },
+        { id: 'input-exp-desc', target: 'pv-exp-desc', fallback: '-' },
+      ];
+
+      inputs.forEach(({ id, target, fallback }) => {
+        const inputEl = document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement | null;
+        const targetEl = document.getElementById(target);
+        if (inputEl && targetEl) {
+          inputEl.addEventListener('input', () => {
+            targetEl.textContent = inputEl.value.trim() || fallback;
+          });
+        }
+      });
+
+      // Skills tags live binding
+      const skillsInput = document.getElementById('input-skills') as HTMLInputElement | null;
+      const skillsContainer = document.getElementById('pv-skills-container');
+      if (skillsInput && skillsContainer) {
+        skillsInput.addEventListener('input', () => {
+          const raw = skillsInput.value;
+          const tags = raw.split(',').map(s => s.trim()).filter(Boolean);
+          skillsContainer.innerHTML = '';
+          tags.forEach(tag => {
+            const span = document.createElement('span');
+            span.className = 'px-3 py-1 rounded-md bg-neutral-100 text-xs font-medium text-neutral-700';
+            span.textContent = tag;
+            skillsContainer.appendChild(span);
+          });
+        });
+      }
+
+      // Print / PDF Button
+      const printBtn = document.getElementById('btn-print-cv');
+      if (printBtn) {
+        printBtn.addEventListener('click', () => {
+          window.print();
+        });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setupCvLiveBinder);
+    } else {
+      setupCvLiveBinder();
+    }
+  </script>
 </BaseLayout>
-
-<script>
-  const inputName = document.getElementById("input-name") as HTMLInputElement;
-  const inputTitle = document.getElementById("input-title") as HTMLInputElement;
-  const inputEmail = document.getElementById("input-email") as HTMLInputElement;
-  const inputPhone = document.getElementById("input-phone") as HTMLInputElement;
-  const inputJurusan = document.getElementById("input-jurusan") as HTMLSelectElement;
-  const inputYear = document.getElementById("input-year") as HTMLInputElement;
-  const inputSummary = document.getElementById("input-summary") as HTMLTextAreaElement;
-  const inputSkills = document.getElementById("input-skills") as HTMLInputElement;
-  const inputProjectTitle = document.getElementById("input-project-title") as HTMLInputElement;
-  const inputProjectDesc = document.getElementById("input-project-desc") as HTMLTextAreaElement;
-
-  const previewName = document.getElementById("preview-name");
-  const previewTitle = document.getElementById("preview-title");
-  const previewEmail = document.getElementById("preview-email");
-  const previewPhone = document.getElementById("preview-phone");
-  const previewJurusan = document.getElementById("preview-jurusan");
-  const previewYear = document.getElementById("preview-year");
-  const previewSummary = document.getElementById("preview-summary");
-  const previewSkills = document.getElementById("preview-skills");
-  const previewProjectTitle = document.getElementById("preview-project-title");
-  const previewProjectDesc = document.getElementById("preview-project-desc");
-
-  function bindInput(input: HTMLElement | null, preview: HTMLElement | null) {
-    if (!input || !preview) return;
-    input.addEventListener("input", () => {
-      preview.textContent = (input as HTMLInputElement).value || "—";
-    });
-  }
-
-  bindInput(inputName, previewName);
-  bindInput(inputTitle, previewTitle);
-  bindInput(inputEmail, previewEmail);
-  bindInput(inputPhone, previewPhone);
-  bindInput(inputJurusan, previewJurusan);
-  bindInput(inputYear, previewYear);
-  bindInput(inputSummary, previewSummary);
-  bindInput(inputSkills, previewSkills);
-  bindInput(inputProjectTitle, previewProjectTitle);
-  bindInput(inputProjectDesc, previewProjectDesc);
-
-  const printBtn = document.getElementById("print-cv-btn");
-  if (printBtn) {
-    printBtn.addEventListener("click", () => {
-      window.print();
-    });
-  }
-</script>

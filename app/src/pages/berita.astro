@@ -2,249 +2,266 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/Container.astro";
 
-const stats = [
-  { value: "128+", label: "Siswa Berprestasi" },
-  { value: "64", label: "Kegiatan Tahun Ini" },
-  { value: "35", label: "Mitra Industri Aktif" },
-  { value: "210+", label: "Prestasi Terkumpul" },
-];
+// Data Berita exact from Figma frame Berita #1663:14638
+const featuredNews = {
+  category: "PRESTASI",
+  date: "18 FEBRUARI 2026",
+  title: "Siswa SMK Telkom Raih Juara 1 Lomba Kompetensi Siswa Tingkat Provinsi",
+  desc: "Tim jurusan Teknik Jaringan Komputer dan Telekomunikasi berhasil membawa pulang medali emas dalam ajang LKS tingkat Provinsi Jawa Tengah 2026, mengalahkan puluhan sekolah vokasi lain di bidang instalasi jaringan.",
+  image: "/images/berita/berita-prestasi.png",
+};
 
-const categories = [
-  { id: "all", name: "Semua" },
-  { id: "prestasi", name: "Prestasi" },
-  { id: "kegiatan", name: "Kegiatan Sekolah" },
-  { id: "kerjasama", name: "Kerjasama Industri" },
-  { id: "pengumuman", name: "Pengumuman" },
-  { id: "inovasi", name: "Karya Inovasi Siswa" },
-];
-
-const articles = [
+const sideNews = [
   {
-    category: "prestasi",
-    categoryName: "PRESTASI",
-    date: "18 Februari 2026",
-    title: "Siswa SMK Telkom Raih Juara 1 Lomba Kompetensi Siswa Tingkat Provinsi",
-    excerpt: "Tim jurusan Teknik Jaringan Komputer dan Telekomunikasi berhasil membawa pulang medali emas dalam ajang LKS tingkat Provinsi Jawa Tengah 2026, mengalahkan puluhan sekolah vokasi lain di bidang instalasi jaringan.",
-    image: "/images/berita/lks-juara.png",
-    featured: true,
-  },
-  {
-    category: "kegiatan",
-    categoryName: "KEGIATAN SEKOLAH",
+    category: "KERJASAMA INDUSTRI",
+    title: "Telkomsel dan PT Telkom Indonesia Jalin MoU Praktik Kerja Lapangan",
     date: "12 Februari 2026",
-    title: "330 Siswa SMK Telkom Purwokerto Belajar Langsung di Malang Creative Center",
-    excerpt: "Wujud nyata School of Global Technopreneur, ratusan siswa mengikuti program industri dan kunjungan kreatif langsung ke pusat inovasi digital.",
-    image: "/images/berita/kunjungan-industri.png",
-    featured: false,
+    badgeColor: "bg-[#7A1216] text-white",
+    borderLeft: "border-l-4 border-l-[#E31E24]",
+    image: "/images/mitra/mitra-telkom.png",
   },
   {
-    category: "pengumuman",
-    categoryName: "PENGUMUMAN",
-    date: "05 Februari 2026",
-    title: "SPMB SMK Telkom Purwokerto 2026/2027 Jalur EASY Resmi Dibuka",
-    excerpt: "Raih kesempatan mendaftar lebih awal dengan bonus eksklusif perlengkapan sekolah dan beasiswa pendidikan bagi calon siswa berprestasi.",
-    image: "/images/berita/ppdb-banner.png",
-    featured: false,
+    category: "KEGIATAN SEKOLAH",
+    title: "Workshop AI & Machine Learning bersama Praktisi Industri Digital",
+    date: "5 Februari 2026",
+    badgeColor: "bg-white border border-[#E7E8EA] text-[#33343A]",
+    borderLeft: "border-l-4 border-l-[#33343A]",
+    image: "/images/berita/berita-technopreneur.png",
   },
   {
-    category: "kerjasama",
-    categoryName: "KERJASAMA INDUSTRI",
+    category: "TEKNOLOGI",
+    title: "Peresmian Laboratorium Cloud Computing Bantuan Kementerian Kominfo",
     date: "28 Januari 2026",
-    title: "Penandatanganan MoU Kelas Industri Bersama Game Studio Nasional",
-    excerpt: "Jurusan Pengembangan Game (PG) memperkuat kemitraan strategis kurikulum dan magang industri bersama studio game terkemuka.",
-    image: "/images/berita/mou-industri.png",
-    featured: false,
+    badgeColor: "bg-white border border-[#E7E8EA] text-[#33343A]",
+    borderLeft: "border-l-4 border-l-neutral-300",
+    image: "/images/profile/smart-school-fasilitas.png",
+  },
+];
+
+const secondaryNews = [
+  {
+    category: "PENGUMUMAN",
+    date: "22 JANUARI 2026",
+    title: "Jadwal Pendaftaran PPDB 2026 Gelombang Pertama Resmi Dibuka",
+    desc: "Pendaftar dapat mengajukan berkas melalui portal PPDB mulai 1 Maret hingga 30 April 2026.",
+    image: "/images/berita/berita-spmb.png",
   },
   {
-    category: "inovasi",
-    categoryName: "KARYA INOVASI SISWA",
-    date: "20 Januari 2026",
-    title: "Inovasi Pengolahan Sampah Plastik Berbasis IoT Raih Pendanaan Riset",
-    excerpt: "Karya siswa gabungan jurusan RPL dan TKJ berhasil mengembangkan alat pemilah sampah cerdas terkoneksi cloud dashboard.",
-    image: "/images/berita/iot-project.png",
-    featured: false,
-  },
-  {
-    category: "kegiatan",
-    categoryName: "KEGIATAN SEKOLAH",
-    date: "15 Januari 2026",
-    title: "Semangat Hari Pramuka Menggema di SMK Telkom Purwokerto",
-    excerpt: "Pembukaan Penerimaan Tamu Ambalan (PTA) sekaligus pengukuhan anggota baru gugus depan dengan serangkaian kegiatan kepanduan bernilai karakter.",
-    image: "/images/berita/pramuka.png",
-    featured: false,
+    category: "KUNJUNGAN INDUSTRI",
+    date: "15 JANUARI 2026",
+    title: "Kunjungan Industri ke Data Center PT Telkom Indonesia Regional Jateng",
+    desc: "40 siswa kelas XI melihat langsung pengelolaan server dan sistem keamanan data center berskala nasional.",
+    image: "/images/brand/gedung-sekolah.png",
   },
 ];
 ---
 
 <BaseLayout
-  title="Berita, Kegiatan & Pengumuman | SMK Telkom Purwokerto"
-  description="Kumpulan berita resmi, kegiatan sekolah, agenda akademik, karya inovasi, dan prestasi terkini SMK Telkom Purwokerto."
+  title="Berita & Agenda - SMK Telkom Purwokerto"
+  description="Kabar terkini, liputan kegiatan, pengumuman, dan prestasi civitas akademika SMK Telkom Purwokerto."
 >
-  <!-- 1. HERO SECTION -->
-  <section class="relative pt-6 pb-16 sm:pb-24 bg-[#fdfdfd] overflow-hidden" id="hero-berita">
+  <!-- Section 1: Hero Banner (Figma Section #1663:14735: bg: #33343A, height: ~540px) -->
+  <section class="relative bg-[#33343A] text-white py-16 sm:py-20 md:py-24 overflow-hidden">
+    <!-- Decorative Blurs & Gradients from Figma (#1663:14738, #1663:14739) -->
+    <div class="absolute -top-20 -left-20 w-80 h-80 rounded-full bg-[#E31E24] opacity-20 blur-[80px] pointer-events-none"></div>
+    <div class="absolute bottom-10 right-10 w-64 h-64 rounded-full bg-[#E31E24] opacity-25 blur-[90px] pointer-events-none"></div>
+
     <Container>
-      <div class="relative bg-gradient-to-br from-[#d62730] via-[#cd1820] to-[#c41d24] rounded-[24px] sm:rounded-[36px] pt-12 sm:pt-16 pb-12 sm:pb-16 px-6 sm:px-10 lg:px-16 shadow-[0_24px_48px_-12px_rgba(214,39,48,0.32)] overflow-hidden text-center">
-        <!-- Concentric rings watermark -->
-        <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1440 480" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-          <circle cx="200" cy="180" r="140" stroke="rgba(0, 0, 0, 0.065)" stroke-width="42" />
-          <circle cx="200" cy="180" r="280" stroke="rgba(0, 0, 0, 0.045)" stroke-width="42" />
-          <circle cx="1200" cy="200" r="150" stroke="rgba(0, 0, 0, 0.06)" stroke-width="42" />
-          <circle cx="1200" cy="200" r="300" stroke="rgba(0, 0, 0, 0.04)" stroke-width="42" />
-        </svg>
+      <div class="max-w-3xl space-y-6 relative z-10">
+        <!-- Eyebrow Pill (Figma #1663:14742) -->
+        <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-[#E31E24] text-white text-xs font-bold tracking-[0.04em]">
+          PENERIMAAN SISWA BARU 2026
+        </div>
 
-        <div class="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
-          <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md px-4 py-1.5 rounded-full text-white text-xs font-jakarta font-semibold tracking-wider uppercase mb-5 border border-white/20">
-            <span>UPDATE TERBARU</span>
-          </div>
+        <!-- Heading 1 (Figma #1663:14746: Plus Jakarta Sans ExtraBold 44px, line-height 52px) -->
+        <h1 class="font-extrabold text-3xl sm:text-4xl md:text-[44px] leading-tight md:leading-[52px] tracking-[-0.02em] font-sans">
+          Membentuk Talenta Digital<br class="hidden sm:inline" />
+          Masa Depan Indonesia
+        </h1>
 
-          <h1 class="font-poppins text-white font-bold text-3xl sm:text-5xl lg:text-[3.25rem] leading-[1.15] tracking-tight mb-5">
-            Berita & Kegiatan Sekolah
-          </h1>
+        <!-- Subtitle -->
+        <p class="text-neutral-300 text-base sm:text-lg leading-relaxed max-w-2xl">
+          SMK Telkom Purwokerto menghadirkan kurikulum vokasi teknologi informasi terdepan, fasilitas lab berstandar industri, dan jaringan kemitraan BUMN terluas.
+        </p>
 
-          <p class="font-jakarta text-white/92 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl mb-6">
-            Informasi terkini seputar kegiatan akademik, prestasi siswa, kerjasama industri, dan pengumuman resmi SMK Telkom Purwokerto.
-          </p>
+        <!-- CTA Buttons (Figma #1663:14747) -->
+        <div class="pt-2 flex flex-wrap items-center gap-4">
+          <a
+            href="https://ppdb.smktelkom-pwt.sch.id"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-7 py-3.5 rounded-full bg-[#E31E24] hover:bg-[#c9181e] text-white font-bold text-sm shadow-lg shadow-[#E31E24]/30 transition-all duration-300"
+          >
+            Daftar PPDB Online
+          </a>
+          <a
+            href="/jurusan"
+            class="px-7 py-3.5 rounded-full bg-transparent hover:bg-white/10 text-white border border-white/40 font-semibold text-sm transition-all duration-300"
+          >
+            Pelajari Program
+          </a>
         </div>
       </div>
     </Container>
   </section>
 
-  <!-- 2. STATS BANNER FROM FIGMA -->
-  <section class="py-8 bg-white border-b border-gray-100">
+  <!-- Section 2: Stats Banner (Figma Section #1663:14772: bg: #F7F7F8, padding: 48px 80px) -->
+  <section class="py-10 md:py-12 bg-[#F7F7F8] border-b border-neutral-200">
     <Container>
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-        {stats.map((s) => (
-          <div class="flex flex-col items-center text-center p-3 rounded-xl bg-gray-50/60 border border-gray-100">
-            <span class="font-poppins text-3xl sm:text-4xl font-extrabold text-[#ed1e28] mb-0.5">
-              {s.value}
-            </span>
-            <span class="font-jakarta text-xs sm:text-sm font-semibold text-gray-700">
-              {s.label}
-            </span>
-          </div>
-        ))}
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-[1280px] mx-auto text-center">
+        <!-- Stat 1 -->
+        <div class="space-y-1">
+          <p class="text-3xl sm:text-4xl font-extrabold text-[#E31E24] font-sans">128+</p>
+          <p class="text-xs sm:text-sm font-medium text-neutral-600">Siswa Berprestasi</p>
+        </div>
+
+        <!-- Stat 2 -->
+        <div class="space-y-1">
+          <p class="text-3xl sm:text-4xl font-extrabold text-[#E31E24] font-sans">64</p>
+          <p class="text-xs sm:text-sm font-medium text-neutral-600">Kegiatan Tahunan</p>
+        </div>
+
+        <!-- Stat 3 -->
+        <div class="space-y-1">
+          <p class="text-3xl sm:text-4xl font-extrabold text-[#E31E24] font-sans">35</p>
+          <p class="text-xs sm:text-sm font-medium text-neutral-600">Mitra Industri Aktif</p>
+        </div>
+
+        <!-- Stat 4 -->
+        <div class="space-y-1">
+          <p class="text-3xl sm:text-4xl font-extrabold text-[#E31E24] font-sans">210+</p>
+          <p class="text-xs sm:text-sm font-medium text-neutral-600">Prestasi Diraih</p>
+        </div>
       </div>
     </Container>
   </section>
 
-  <!-- 3. FEATURED & ARTICLES LIST -->
-  <section class="py-12 sm:py-20 bg-white" id="daftar-artikel">
+  <!-- Section 3: Featured News & Side News (Figma Section #1663:14791: padding: 72px 80px) -->
+  <section class="py-16 md:py-24 bg-white">
     <Container>
-      <!-- Filter Categories -->
-      <div class="flex items-center justify-center gap-2 sm:gap-3 flex-wrap mb-12" id="berita-filter">
-        {categories.map((cat, idx) => (
-          <button
-            type="button"
-            data-filter={cat.id}
-            class={`berita-filter-btn font-jakarta text-xs sm:text-sm font-semibold px-4 sm:px-5 py-2 rounded-full cursor-pointer transition-all duration-200 ${idx === 0 ? "bg-[#ed1e28] text-white shadow-sm" : "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
-          >
-            {cat.name}
-          </button>
-        ))}
-      </div>
+      <div class="max-w-[1280px] mx-auto space-y-16">
+        <!-- Top Row: Featured Card (Left) + Side News List (Right) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <!-- Featured Story (Figma #1663:14823: 7 cols) -->
+          <div class="lg:col-span-7 bg-white rounded-3xl border border-neutral-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+            <!-- Image & Badge Container -->
+            <div class="relative w-full aspect-[16/10] overflow-hidden bg-neutral-100">
+              <img
+                src={featuredNews.image}
+                alt={featuredNews.title}
+                class="w-full h-full object-cover"
+                loading="eager"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+              <div class="absolute top-6 left-6 px-4 py-1.5 rounded-full bg-[#E31E24] text-white text-xs font-bold tracking-wider">
+                {featuredNews.category}
+              </div>
+            </div>
 
-      <!-- Articles Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="berita-grid">
-        {articles.map((art) => (
-          <article
-            data-category={art.category}
-            class={`article-card border border-gray-200 rounded-2xl overflow-hidden bg-white hover:border-[#ed1e28]/40 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between ${art.featured ? "md:col-span-2 lg:col-span-3 bg-gradient-to-r from-red-50/30 to-white border-red-100" : ""}`}
-          >
-            <div class={art.featured ? "p-6 sm:p-10 lg:grid lg:grid-cols-2 lg:gap-10 items-center" : "p-6"}>
-              <div>
-                <div class="flex items-center gap-3 mb-3">
-                  <span class="bg-[#ed1e28] text-white font-jakarta text-[0.6875rem] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">
-                    {art.categoryName}
-                  </span>
-                  <span class="font-jakarta text-xs text-gray-400 font-medium">
-                    {art.date}
-                  </span>
+            <!-- Content -->
+            <div class="p-8 sm:p-10 space-y-4">
+              <p class="text-xs sm:text-sm font-semibold text-neutral-400">
+                {featuredNews.date}
+              </p>
+              <h2 class="text-2xl sm:text-3xl font-extrabold text-[#33343A] leading-tight font-sans">
+                {featuredNews.title}
+              </h2>
+              <p class="text-neutral-600 text-sm sm:text-base leading-relaxed">
+                {featuredNews.desc}
+              </p>
+              <div class="pt-2">
+                <a
+                  href="#"
+                  class="inline-flex items-center gap-2 text-[#E31E24] font-bold text-sm hover:underline"
+                >
+                  Baca Selengkapnya
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Side News List (Figma #1663:14847: 5 cols) -->
+          <div class="lg:col-span-5 space-y-5">
+            {sideNews.map((news) => (
+              <div class={`bg-[#F7F7F8] rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex gap-4 items-center ${news.borderLeft}`}>
+                <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden bg-neutral-200 shrink-0">
+                  <img src={news.image} alt={news.title} class="w-full h-full object-cover" loading="lazy" />
                 </div>
+                <div class="space-y-2 flex-1">
+                  <span class={`inline-block px-3 py-1 rounded-full text-[10px] font-bold tracking-wider ${news.badgeColor}`}>
+                    {news.category}
+                  </span>
+                  <h3 class="font-bold text-sm sm:text-base text-[#33343A] leading-snug line-clamp-2 hover:text-[#E31E24] transition-colors">
+                    {news.title}
+                  </h3>
+                  <p class="text-xs text-neutral-400 font-medium">
+                    {news.date}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
 
-                <h2 class={`font-poppins font-bold text-[#111827] leading-snug mb-3 ${art.featured ? "text-xl sm:text-3xl" : "text-lg"}`}>
-                  {art.title}
-                </h2>
-
-                <p class="font-jakarta text-[#4b5563] text-sm leading-relaxed mb-6">
-                  {art.excerpt}
+        <!-- Secondary Row: 2 Highlight Cards (Figma #1663:14881, #1663:14893) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {secondaryNews.map((item) => (
+            <div class="bg-white rounded-3xl border border-[#E7E8EA] overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between">
+              <div class="relative w-full aspect-[16/9] overflow-hidden bg-neutral-100">
+                <img src={item.image} alt={item.title} class="w-full h-full object-cover" loading="lazy" />
+                <div class="absolute top-4 left-4 px-3.5 py-1 rounded-full bg-[#E31E24] text-white text-[11px] font-bold">
+                  {item.category}
+                </div>
+              </div>
+              <div class="p-6 sm:p-8 space-y-3">
+                <p class="text-xs font-semibold text-neutral-400">{item.date}</p>
+                <h3 class="text-xl font-extrabold text-[#33343A] leading-snug font-sans">
+                  {item.title}
+                </h3>
+                <p class="text-neutral-600 text-sm leading-relaxed">
+                  {item.desc}
                 </p>
               </div>
-
-              {art.featured && (
-                <div class="rounded-xl overflow-hidden bg-gray-100 aspect-16/10 border border-gray-200 flex items-center justify-center p-6 text-center text-gray-400 text-sm">
-                  <span>Liputan Utama • SMK Telkom Purwokerto</span>
-                </div>
-              )}
             </div>
+          ))}
+        </div>
 
-            <div class="px-6 pb-6 pt-2">
-              <span class="text-[#ed1e28] font-jakarta text-sm font-bold inline-flex items-center gap-1.5 hover:gap-2.5 transition-all">
-                <span>Baca Selengkapnya</span>
-                <span>→</span>
-              </span>
-            </div>
-          </article>
-        ))}
-      </div>
-    </Container>
-  </section>
+        <!-- Slider Navigation & Pagination Dots (Figma #3168:3463, #3168:3469) -->
+        <div class="flex items-center justify-between pt-8 border-t border-neutral-100">
+          <!-- Dots -->
+          <div class="flex items-center gap-2">
+            <span class="w-8 h-2 rounded-full bg-[#ED1E28]"></span>
+            <span class="w-2 h-2 rounded-full bg-[#D9D9DE]"></span>
+            <span class="w-2 h-2 rounded-full bg-[#D9D9DE]"></span>
+            <span class="w-2 h-2 rounded-full bg-[#D9D9DE]"></span>
+          </div>
 
-  <!-- 4. BOTTOM CTA -->
-  <section class="py-14 sm:py-20 bg-[#f8fafc] border-t border-gray-100 text-center">
-    <Container>
-      <div class="max-w-2xl mx-auto flex flex-col items-center">
-        <h2 class="font-poppins text-2xl sm:text-3xl font-bold text-[#111827] mb-4">
-          Ingin Terus Terhubung dengan Kegiatan Kami?
-        </h2>
-        <p class="font-jakarta text-[#64748b] text-sm sm:text-base leading-relaxed mb-8">
-          Ikuti media sosial resmi SMK Telkom Purwokerto untuk mendapatkan dokumentasi kegiatan dan kabar terbaru setiap hari.
-        </p>
-        <div class="flex items-center gap-3.5 flex-wrap justify-center">
-          <a
-            href="https://www.instagram.com/smktelkompurwokerto/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="bg-[#ed1e28] hover:bg-[#d81820] text-white font-jakarta text-sm font-bold px-6 py-3 rounded-full no-underline shadow-sm hover:-translate-y-0.5 transition-all duration-200"
-          >
-            Instagram Resmi
-          </a>
-          <a
-            href="https://www.youtube.com/@smktelkompurwokerto"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="bg-white hover:bg-gray-50 border border-gray-200 text-gray-800 font-jakarta text-sm font-semibold px-6 py-3 rounded-full no-underline shadow-xs hover:-translate-y-0.5 transition-all duration-200"
-          >
-            Kanal YouTube
-          </a>
+          <!-- Prev/Next Buttons -->
+          <div class="flex items-center gap-3">
+            <button
+              type="button"
+              class="w-12 h-12 rounded-full bg-white border border-[#E7E8EA] text-[#33343A] flex items-center justify-center hover:bg-neutral-50 shadow-sm transition-all"
+              aria-label="Previous"
+            >
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              class="w-12 h-12 rounded-full bg-[#ED1E28] text-white flex items-center justify-center hover:bg-[#d01620] shadow-md shadow-[#ED1E28]/30 transition-all"
+              aria-label="Next"
+            >
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </Container>
   </section>
 </BaseLayout>
-
-<script>
-  const filterBtns = document.querySelectorAll(".berita-filter-btn");
-  const articles = document.querySelectorAll(".article-card");
-
-  filterBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const filter = btn.getAttribute("data-filter");
-
-      filterBtns.forEach((b) => {
-        b.classList.remove("bg-[#ed1e28]", "text-white", "shadow-sm");
-        b.classList.add("bg-gray-100", "text-gray-700");
-      });
-      btn.classList.add("bg-[#ed1e28]", "text-white", "shadow-sm");
-      btn.classList.remove("bg-gray-100", "text-gray-700");
-
-      articles.forEach((art) => {
-        const cat = art.getAttribute("data-category");
-        if (filter === "all" || cat === filter) {
-          (art as HTMLElement).style.display = "flex";
-        } else {
-          (art as HTMLElement).style.display = "none";
-        }
-      });
-    });
-  });
-</script>

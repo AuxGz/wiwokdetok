@@ -2,220 +2,185 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/Container.astro";
 
-const stats = [
-  { value: "12+", label: "Fasilitas Unggulan", desc: "Sarana belajar & praktik modern" },
-  { value: "1200+", label: "Siswa Aktif", desc: "Didukung infrastruktur terintegrasi" },
-  { value: "4", label: "Klaster Lab Kejuruan", desc: "Berstandar industri teknologi" },
-  { value: "100%", label: "Koneksi Fiber Optik", desc: "Akses internet Telkom kecepatan tinggi" },
-];
-
+// 8 Fasilitas Unggulan exact from Figma frame Fasilitas Sekolah #1044:2261
 const facilities = [
   {
-    name: "Smart Millenial Classroom",
-    tagline: "Startup Vibe & Collaborative Learning",
-    desc: "Ruang kelas berpendingin udara dengan smart screen interaktif, layout fleksibel, dan pencahayaan ergonomis untuk kenyamanan belajar tingkat tinggi.",
-    category: "Ruang Teori & Kolaborasi",
+    badge: "Lapangan",
+    title: "Lapangan Olahraga",
+    desc: "Lapangan olahraga multifungsi meliputi lapangan basket, voli, dan futsal untuk mendukung aktivitas fisik dan prestasi olahraga siswa.",
+    image: "/images/kegiatan/kegiatan-basket.png",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />`
   },
   {
-    name: "Laboratorium Software Development",
-    tagline: "Software House Simulation Environment",
-    desc: "Komputer spesifikasi developer untuk pemrograman web, mobile apps, database relational, dan software architecture simulation.",
-    category: "Lab Kejuruan",
+    badge: "Perpustakaan",
+    title: "Perpustakaan",
+    desc: "Perpustakaan modern dengan koleksi ribuan buku, referensi digital, dan ruang baca nyaman untuk mendukung literasi siswa.",
+    image: "/images/profile/indoor-coworking.png",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />`
   },
   {
-    name: "Laboratorium Cisco & Jaringan Enterprise",
-    tagline: "Industrial Networking Equipment",
-    desc: "Dilengkapi rack server, switch manageable, router Cisco & MikroTik, serta patch panel untuk simulasi jaringan enterprise nyata.",
-    category: "Lab Kejuruan",
+    badge: "Lab Komputer",
+    title: "Laboratorium Komputer",
+    desc: "Ruang laboratorium komputer berkapasitas 40 unit PC dengan spesifikasi terkini untuk praktik pemrograman, desain grafis, dan multimedia.",
+    image: "/images/profile/smart-school-fasilitas.png",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />`
   },
   {
-    name: "Laboratorium Game Development & 3D",
-    tagline: "High-Performance Graphics Workstations",
-    desc: "Unit PC workstation bertenaga GPU modern untuk kebutuhan rendering 3D Blender, game development Unity/Unreal, dan motion graphics.",
-    category: "Lab Kejuruan",
+    badge: "Ruang Kelas",
+    title: "Ruang Kelas",
+    desc: "Ruang kelas ber-AC dengan proyektor interaktif, meja ergonomis, dan suasana belajar kondusif untuk mendukung proses KBM.",
+    image: "/images/brand/gedung-sekolah.png",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />`
   },
   {
-    name: "Laboratorium Fiber Optik & FTTH",
-    tagline: "Kerjasama Resmi Telkom Akses",
-    desc: "Peralatan splicing serat optik presisi, Optical Time-Domain Reflectometer (OTDR), Optical Power Meter (OPM), dan Optical Distribution Cabinet (ODC).",
-    category: "Lab Kejuruan",
+    badge: "Masjid",
+    title: "Masjid",
+    desc: "Masjid sekolah yang indah dan representatif sebagai pusat kegiatan keagamaan, ibadah, dan pembinaan karakter islami siswa.",
+    image: "/images/brand/gedung-sekolah.png",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />`
   },
   {
-    name: "Digital Library & Learning Resource Center",
-    tagline: "Ribuan Koleksi E-Book & Akses Jurnal",
-    desc: "Perpustakaan modern dengan katalog digital terotomasi, bilik baca privat, akses e-book teknologi, dan suasana tenang untuk riset.",
-    category: "Pusat Pembelajaran",
+    badge: "Lab Jaringan",
+    title: "Laboratorium Jaringan",
+    desc: "Fasilitas praktik jaringan komputer lengkap dengan perangkat Cisco, server, dan infrastruktur jaringan nyata untuk simulasi industri.",
+    image: "/images/profile/smart-school-fasilitas.png",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />`
   },
   {
-    name: "Siswa Coworking & Maker Space",
-    tagline: "Ruang Diskusi & Inkubasi Proyek Siswa",
-    desc: "Area terbuka untuk brainstorming, pengerjaan tugas proyek akhir, hackathon internal, dan diskusi tim layaknya inkubator startup.",
-    category: "Ruang Kolaborasi",
+    badge: "Aula",
+    title: "Aula",
+    desc: "Gedung serbaguna berkapasitas besar dilengkapi sistem audio visual canggih untuk kegiatan upacara, seminar, dan pentas seni.",
+    image: "/images/kegiatan/extrakurikuler-banner.png",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />`
   },
   {
-    name: "Studio Multimedia & Audio-Visual",
-    tagline: "Peralatan Produksi Konten Standar Profesional",
-    desc: "Studio kedap suara dengan green screen, tata lampu broadcast, microphone studio, dan kamera resolusi tinggi untuk produksi konten kreatif.",
-    category: "Media & Kreatif",
-  },
-  {
-    name: "Gelanggang Olahraga & Lapangan Terpadu",
-    tagline: "Sarana Kebugaran & Sportivitas Siswa",
-    desc: "Lapangan multifungsi untuk cabang olahraga futsal, basket, voli, dan bulu tangkis dengan standar keselamatan prima.",
-    category: "Olahraga & Kesehatan",
-  },
-  {
-    name: "Masjid Sekolah & Sarana Ibadah",
-    tagline: "Pusat Pembinaan Karakter Spiritual",
-    desc: "Tempat ibadah yang bersih, luas, dan representatif untuk pembinaan karakter moral, sholat berjamaah, dan kegiatan keagamaan.",
-    category: "Spiritual & Karakter",
-  },
-  {
-    name: "Asrama Siswa Berfasilitas Lengkap",
-    tagline: "Hunian Nyaman, Aman, & Terpantau",
-    desc: "Disediakan bagi siswa dari luar kota dengan sistem pembinaan disiplin terpadu, kamar bersih, pengamanan 24 jam, dan lingkungan ramah.",
-    category: "Fasilitas Hunian",
-  },
-  {
-    name: "Kantin Sehat & Cafetaria Telkom",
-    tagline: "Higienis, Nyaman, & Menu Beragam",
-    desc: "Pusat kuliner sekolah yang menjaga standar higienitas makanan, pembayaran digital terintegrasi, dan area santai saat jeda istirahat.",
-    category: "Layanan Siswa",
-  },
+    badge: "UKS",
+    title: "UKS (Unit Kesehatan Siswa)",
+    desc: "Unit Kesehatan Siswa dengan peralatan medis lengkap, tenaga kesehatan terlatih, dan layanan konsultasi kesehatan untuk siswa.",
+    image: "/images/profile/smart-school-playing.png",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />`
+  }
 ];
 ---
 
 <BaseLayout
-  title="Fasilitas & Sarana Prasarana | SMK Telkom Purwokerto"
-  description="Fasilitas modern berstandar industri digital di SMK Telkom Purwokerto: Smart Classroom, Lab Canggih, Coworking Space, dan sarana olahraga."
+  title="Fasilitas Sekolah - SMK Telkom Purwokerto"
+  description="Fasilitas modern dan lengkap untuk mendukung proses belajar dan berkarya siswa SMK Telkom Purwokerto."
 >
-  <!-- 1. HERO SECTION -->
-  <section class="relative pt-6 pb-16 sm:pb-24 bg-[#fdfdfd] overflow-hidden" id="hero-fasilitas">
-    <Container>
-      <div class="relative bg-gradient-to-br from-[#d62730] via-[#cd1820] to-[#c41d24] rounded-[24px] sm:rounded-[36px] pt-12 sm:pt-16 pb-12 sm:pb-16 px-6 sm:px-10 lg:px-16 shadow-[0_24px_48px_-12px_rgba(214,39,48,0.32)] overflow-hidden text-center">
-        <!-- Concentric rings watermark -->
-        <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1440 480" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-          <circle cx="200" cy="180" r="140" stroke="rgba(0, 0, 0, 0.065)" stroke-width="42" />
-          <circle cx="200" cy="180" r="280" stroke="rgba(0, 0, 0, 0.045)" stroke-width="42" />
-          <circle cx="1200" cy="200" r="150" stroke="rgba(0, 0, 0, 0.06)" stroke-width="42" />
-          <circle cx="1200" cy="200" r="300" stroke="rgba(0, 0, 0, 0.04)" stroke-width="42" />
-        </svg>
+  <!-- Section 1: Hero Banner (Figma Fasilitas Kami #1044:2315: height 520px) -->
+  <section class="relative w-full h-[480px] sm:h-[520px] overflow-hidden bg-black">
+    <!-- Background Image -->
+    <img
+      src="/images/profile/smart-school-fasilitas.png"
+      alt="Fasilitas SMK Telkom Purwokerto"
+      class="absolute inset-0 w-full h-full object-cover object-center opacity-40"
+      loading="eager"
+    />
 
-        <div class="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
-          <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md px-4 py-1.5 rounded-full text-white text-xs font-jakarta font-semibold tracking-wider uppercase mb-5 border border-white/20">
-            <span>Startup Vibe</span>
+    <!-- Exact Gradient Overlay from Figma: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.3) 100%) -->
+    <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/30"></div>
+
+    <!-- Exact Red Vertical Accent Bar on Left (width: 8px, fill: #BD0C12) -->
+    <div class="absolute top-0 left-0 bottom-0 w-2 bg-[#BD0C12] z-20"></div>
+
+    <!-- Hero Content (padding: 0px 96px in Figma) -->
+    <div class="relative z-10 w-full h-full flex flex-col justify-center">
+      <Container>
+        <div class="max-w-3xl space-y-4 sm:space-y-6">
+          <!-- Breadcrumb (Figma #1044:2321) -->
+          <nav class="flex items-center gap-2 text-xs sm:text-sm font-medium">
+            <a href="/" class="text-white/70 hover:text-white transition-colors">Beranda</a>
+            <span class="text-white/40">/</span>
+            <span class="text-[#ED1E28] font-semibold">Fasilitas</span>
+          </nav>
+
+          <!-- Eyebrow (Figma #1044:2330) -->
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-0.5 bg-[#BD0C12]"></span>
+            <span class="text-[#ED1E28] font-semibold text-xs sm:text-sm tracking-[0.1em] uppercase font-sans">
+              SMK TELKOM PURWOKERTO
+            </span>
           </div>
 
-          <h1 class="font-poppins text-white font-bold text-3xl sm:text-5xl lg:text-[3.25rem] leading-[1.15] tracking-tight mb-5">
-            Smart Millenial Classroom <br class="hidden sm:inline" />& Lab Canggih
+          <!-- Heading 1 (Figma #1044:2336: Poppins Bold 58px) -->
+          <h1 class="font-poppins font-bold text-4xl sm:text-5xl md:text-[58px] text-white leading-[1.1] tracking-tight">
+            Fasilitas Kami
           </h1>
 
-          <p class="font-jakarta text-white/92 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl mb-8">
-            Ruang kelas dan fasilitas kami dirancang dengan konsep modern yang suportif, aman, dan nyaman—memberikan suasana belajar layaknya bekerja di kantor industri teknologi digital.
+          <!-- Subtitle (Figma #1044:2338) -->
+          <p class="text-white/75 text-base sm:text-lg leading-relaxed max-w-xl">
+            Kami menyediakan fasilitas modern dan lengkap untuk mendukung proses belajar dan berkarya siswa SMK Telkom Purwokerto.
           </p>
 
-          <a
-            href="/school-tour"
-            class="bg-white text-[#ed1e28] hover:bg-gray-100 font-jakarta text-sm font-bold px-6 py-3 rounded-full no-underline shadow-md hover:-translate-y-0.5 transition-all duration-200 inline-flex items-center gap-2"
-          >
-            <span>Jelajahi School Tour Virtual 360°</span>
-            <span>→</span>
-          </a>
-        </div>
-      </div>
-    </Container>
-  </section>
-
-  <!-- 2. STATS SECTION -->
-  <section class="py-10 bg-white border-b border-gray-100">
-    <Container>
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-        {stats.map((s) => (
-          <div class="flex flex-col items-center text-center p-4 rounded-2xl bg-gray-50/70 border border-gray-100">
-            <span class="font-poppins text-3xl sm:text-4xl font-extrabold text-[#ed1e28] mb-1">
-              {s.value}
-            </span>
-            <strong class="font-poppins text-sm sm:text-base font-bold text-[#111827]">
-              {s.label}
-            </strong>
-            <span class="font-jakarta text-xs text-gray-500 mt-1 leading-normal">
-              {s.desc}
-            </span>
-          </div>
-        ))}
-      </div>
-    </Container>
-  </section>
-
-  <!-- 3. FACILITIES GRID -->
-  <section class="py-12 sm:py-20 bg-white" id="katalog-fasilitas">
-    <Container>
-      <div class="text-center max-w-2xl mx-auto mb-12">
-        <h2 class="font-poppins text-2xl sm:text-3xl font-bold text-[#111827] mb-3">
-          Katalog Fasilitas Sekolah
-        </h2>
-        <p class="font-jakarta text-[#64748b] text-sm sm:text-base leading-relaxed">
-          Dirancang untuk memberikan ekosistem belajar yang menyeluruh antara pemahaman teori, praktik laboratorium, dan pengembangan bakat.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-        {facilities.map((fac) => (
-          <div class="border border-gray-200 rounded-2xl p-6 bg-white hover:border-[#ed1e28]/40 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between">
+          <!-- Hero Stat Row (Figma #1044:2340: 12+, 1200+, 4) -->
+          <div class="pt-4 flex items-center gap-6 sm:gap-10">
             <div>
-              <span class="inline-block bg-gray-100 text-gray-700 font-jakarta text-[0.6875rem] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider mb-3">
-                {fac.category}
-              </span>
+              <p class="text-2xl sm:text-3xl font-bold text-white font-sans">12+</p>
+              <p class="text-white/60 text-xs font-normal">Fasilitas Unggulan</p>
+            </div>
+            <div class="w-px h-8 bg-white/20"></div>
+            <div>
+              <p class="text-2xl sm:text-3xl font-bold text-white font-sans">1200+</p>
+              <p class="text-white/60 text-xs font-normal">Siswa Aktif</p>
+            </div>
+            <div class="w-px h-8 bg-white/20"></div>
+            <div>
+              <p class="text-2xl sm:text-3xl font-bold text-white font-sans">4</p>
+              <p class="text-white/60 text-xs font-normal">Program Keahlian</p>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </div>
+  </section>
 
-              <h3 class="font-poppins text-lg font-bold text-[#111827] leading-snug mb-1">
-                {fac.name}
-              </h3>
-
-              <span class="block font-jakarta text-xs font-semibold text-[#ed1e28] mb-3">
-                {fac.tagline}
-              </span>
-
-              <p class="font-jakarta text-[#4b5563] text-sm leading-relaxed mb-6">
-                {fac.desc}
-              </p>
+  <!-- Section 2: Facilities Grid (Figma Fasilitas #1703:2119: bg: #F7F8F9, padding: 40px 80px 80px) -->
+  <section class="py-16 md:py-24 bg-[#F7F8F9]">
+    <Container>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-[1360px] mx-auto">
+        {facilities.map((fac) => (
+          <div class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between border border-neutral-100">
+            <!-- Image & Badge Container -->
+            <div class="relative w-full aspect-[16/10] overflow-hidden bg-neutral-100">
+              <img
+                src={fac.image}
+                alt={fac.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+              <div class="absolute top-4 left-4 px-4 py-1 rounded-full bg-[#BD0C12] text-white text-xs font-bold shadow-md">
+                {fac.badge}
+              </div>
             </div>
 
-            <div class="pt-4 border-t border-gray-100 flex items-center justify-between text-xs font-jakarta text-gray-500">
-              <span class="text-emerald-600 font-semibold">● Beroperasi Penuh</span>
-              <a href="/school-tour" class="text-[#ed1e28] font-bold hover:underline">
-                Lihat Tour 360° →
-              </a>
+            <!-- Card Body Container -->
+            <div class="p-6 sm:p-7 space-y-4 flex-1 flex flex-col justify-between">
+              <div class="space-y-3">
+                <div class="flex items-center gap-3">
+                  <!-- Red Icon Box (Figma bg: #FEF2F2, radius: 12px) -->
+                  <div class="w-10 h-10 rounded-xl bg-[#FEF2F2] flex items-center justify-center text-[#BD0C12] shrink-0">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <Fragment set:html={fac.icon} />
+                    </svg>
+                  </div>
+                  <h3 class="font-bold text-lg sm:text-xl text-[#2B2C31] font-sans">
+                    {fac.title}
+                  </h3>
+                </div>
+
+                <p class="text-[#959597] text-sm leading-relaxed">
+                  {fac.desc}
+                </p>
+              </div>
+
+              <!-- Horizontal Border Divider (Figma #1703:1697: stroke #E7E8EA) -->
+              <div class="pt-4 border-t border-[#E7E8EA] flex items-center justify-between text-xs text-neutral-400">
+                <span>Fasilitas Resmi</span>
+                <span class="text-[#BD0C12] font-semibold group-hover:translate-x-1 transition-transform">Standar Industri →</span>
+              </div>
             </div>
           </div>
         ))}
-      </div>
-    </Container>
-  </section>
-
-  <!-- 4. BOTTOM CTA -->
-  <section class="py-14 sm:py-20 bg-[#f8fafc] border-t border-gray-100 text-center">
-    <Container>
-      <div class="max-w-2xl mx-auto flex flex-col items-center">
-        <h2 class="font-poppins text-2xl sm:text-3xl font-bold text-[#111827] mb-4">
-          Rasakan Pengalaman Belajar di Lingkungan Terbaik
-        </h2>
-        <p class="font-jakarta text-[#64748b] text-sm sm:text-base leading-relaxed mb-8">
-          Kunjungi sekolah secara langsung atau ikuti tur virtual 360 derajat untuk melihat fasilitas unggulan kami.
-        </p>
-        <div class="flex items-center gap-4 flex-wrap justify-center">
-          <a
-            href="/school-tour"
-            class="bg-[#ed1e28] hover:bg-[#d81820] text-white font-jakarta text-sm font-bold px-7 py-3.5 rounded-full no-underline shadow-[0_4px_14px_rgba(237,30,40,0.3)] hover:-translate-y-0.5 transition-all duration-200"
-          >
-            Buka School Tour Virtual
-          </a>
-          <a
-            href="/#ppdb"
-            class="bg-white hover:bg-gray-50 border border-gray-200 text-gray-800 font-jakarta text-sm font-semibold px-7 py-3.5 rounded-full no-underline shadow-xs hover:-translate-y-0.5 transition-all duration-200"
-          >
-            Daftar PPDB 2026
-          </a>
-        </div>
       </div>
     </Container>
   </section>

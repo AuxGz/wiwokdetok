@@ -2,246 +2,130 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/Container.astro";
 
-const categories = [
-  { id: "all", name: "Semua Kategori" },
-  { id: "teknologi", name: "Teknologi & Riset" },
-  { id: "olahraga", name: "Olahraga" },
-  { id: "seni", name: "Seni & Media" },
-  { id: "kepemimpinan", name: "Kepemimpinan & Sosial" },
-];
-
+// 6 Kegiatan Ekstrakurikuler exact from Figma frame #682:1059
 const ekskulList = [
   {
-    name: "Telkom Robotic Club",
-    category: "teknologi",
-    categoryName: "Teknologi & Riset",
-    desc: "Mempelajari mikrokontroler Arduino/ESP32, robot line follower, robotika otonom, dan IoT untuk kompetisi nasional.",
-    schedule: "Rabu & Jumat, 15.30 WIB",
-    prestasi: "Juara 1 Robotic Competition Nasional 2024",
+    name: "Badminton",
+    image: "/images/kegiatan/kegiatan-seni.png",
+    desc: "Olahraga bulutangkis untuk melatih ketangkasan, refleks, stamina, serta teknik bertanding yang kompetitif di berbagai kejuaraan.",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />`
   },
   {
-    name: "Cyber Security & Networking Club",
-    category: "teknologi",
-    categoryName: "Teknologi & Riset",
-    desc: "Eksplorasi penetration testing, Capture The Flag (CTF), konfigurasi server keamanan, dan kriptografi terapan.",
-    schedule: "Selasa & Kamis, 15.30 WIB",
-    prestasi: "Top 5 LKS Cyber Security Jawa Tengah",
+    name: "Basket",
+    image: "/images/kegiatan/kegiatan-basket.png",
+    desc: "Olahraga basket kompetitif antar sekolah yang melatih kerjasama tim, strategi, dan kebugaran fisik para siswa.",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />`
   },
   {
-    name: "Game Development Community",
-    category: "teknologi",
-    categoryName: "Teknologi & Riset",
-    desc: "Wadah berkreasi membuat game 2D & 3D menggunakan Unity Engine, Blender, dan asset modeling bersama praktisi game.",
-    schedule: "Senin & Rabu, 15.30 WIB",
-    prestasi: "Pemenang Game Jam Regional 2025",
+    name: "Futsal",
+    image: "/images/kegiatan/kegiatan-futsal.png",
+    desc: "Olahraga futsal tim sekolah yang mengasah kemampuan teknis, kecepatan, dan kerjasama dalam pertandingan antar sekolah.",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />`
   },
   {
-    name: "Coding & Software Engineering Club",
-    category: "teknologi",
-    categoryName: "Teknologi & Riset",
-    desc: "Pemrograman web, mobile apps, algoritma kompetitif, dan proyek perangkat lunak open-source kolaboratif.",
-    schedule: "Kamis, 15.30 WIB",
-    prestasi: "Juara 2 Hackathon Pelajar Nasional",
+    name: "Paskibra",
+    image: "/images/kegiatan/kegiatan-paskibra.png",
+    desc: "Paskibra adalah ekskul baris-berbaris untuk melatih kedisiplinan dan mempersiapkan petugas pengibar bendera sekolah.",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />`
   },
   {
-    name: "Futsal Telkom",
-    category: "olahraga",
-    categoryName: "Olahraga",
-    desc: "Pelatihan teknik dasar, fisik, taktik pertandingan, dan pembinaan tim inti untuk berbagai turnamen pelajar regional.",
-    schedule: "Senin & Kamis, 16.00 WIB",
-    prestasi: "Juara 1 Turnamen Futsal Antar-SMK se-Banyumas",
-  },
-  {
-    name: "Basket Telkom Purwokerto",
-    category: "olahraga",
-    categoryName: "Olahraga",
-    desc: "Pengembangan bakat bola basket, kerja sama tim, sportivitas, dan persiapan kompetisi DBL Jawa Tengah.",
-    schedule: "Selasa & Jumat, 16.00 WIB",
-    prestasi: "Semifinalis DBL Central Java Series",
-  },
-  {
-    name: "Badminton Club",
-    category: "olahraga",
-    categoryName: "Olahraga",
-    desc: "Latihan rutin bulu tangkis tunggal dan ganda dengan fasilitas lapangan representatif.",
-    schedule: "Rabu, 15.30 WIB",
-    prestasi: "Juara 2 O2SN Tingkat Kabupaten",
-  },
-  {
-    name: "Fotografi & Sinematografi (Lensa Telkom)",
-    category: "seni",
-    categoryName: "Seni & Media",
-    desc: "Teknik tata kamera profesional, pencahayaan, editing video digital, dan produksi film pendek kreatif.",
-    schedule: "Senin & Kamis, 15.30 WIB",
-    prestasi: "Juara Festival Film Pendek Pelajar 2024",
-  },
-  {
-    name: "Band & Seni Musik",
-    category: "seni",
-    categoryName: "Seni & Media",
-    desc: "Pengasahan talenta vokal dan alat musik (gitar, bass, drum, keyboard) serta penampilan di konser sekolah.",
-    schedule: "Jumat, 15.30 WIB",
-    prestasi: "Best Performance Festival Musik Pelajar",
-  },
-  {
-    name: "Paskibra (Pasukan Pengibar Bendera)",
-    category: "kepemimpinan",
-    categoryName: "Kepemimpinan & Sosial",
-    desc: "Menempa kedisiplinan tingkat tinggi, baris-berbaris presisi, ketahanan mental, dan rasa cinta tanah air.",
-    schedule: "Selasa & Sabtu, 15.30 WIB",
-    prestasi: "Juara Umum LPBB Tingkat Provinsi 2025",
+    name: "Pramuka",
+    image: "/images/kegiatan/kegiatan-pramuka.png",
+    desc: "Kegiatan kepanduan untuk membentuk karakter siswa yang disiplin, mandiri, dan bertanggung jawab melalui berbagai kegiatan alam dan sosial.",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />`
   },
   {
     name: "PMR (Palang Merah Remaja)",
-    category: "kepemimpinan",
-    categoryName: "Kepemimpinan & Sosial",
-    desc: "Pelatihan pertolongan pertama, donor darah, mitigasi bencana, dan kegiatan sosial kepedulian masyarakat.",
-    schedule: "Rabu, 15.30 WIB",
-    prestasi: "PMR Madya Berprestasi Kabupaten Banyumas",
-  },
-  {
-    name: "Pramuka Gugus Depan Telkom",
-    category: "kepemimpinan",
-    categoryName: "Kepemimpinan & Sosial",
-    desc: "Pendidikan kepanduan, kepemimpinan lapangan, survival, sandi teknik, dan pembentukan watak tangguh mandiri.",
-    schedule: "Jumat, 14.00 WIB",
-    prestasi: "Gugus Depan Tergiat Kwartir Cabang",
-  },
+    image: "/images/kegiatan/kegiatan-paduan-suara.png",
+    desc: "Kegiatan palang merah remaja dan pertolongan pertama yang melatih siswa untuk siap membantu sesama dalam situasi darurat.",
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />`
+  }
 ];
 ---
 
 <BaseLayout
-  title="Ekstrakurikuler & Organisasi Siswa | SMK Telkom Purwokerto"
-  description="Daftar kegiatan ekstrakurikuler di SMK Telkom Purwokerto untuk mengembangkan minat, bakat, kepemimpinan, dan prestasi siswa di luar akademik."
+  title="Ekstrakurikuler - SMK Telkom Purwokerto"
+  description="Kegiatan ekstrakurikuler di SMK Telkom Purwokerto untuk mengembangkan bakat, minat, dan potensi siswa di luar akademik."
 >
-  <!-- 1. HERO SECTION -->
-  <section class="relative pt-6 pb-16 sm:pb-24 bg-[#fdfdfd] overflow-hidden" id="hero-ekskul">
-    <Container>
-      <div class="relative bg-gradient-to-br from-[#d62730] via-[#cd1820] to-[#c41d24] rounded-[24px] sm:rounded-[36px] pt-12 sm:pt-16 pb-12 sm:pb-16 px-6 sm:px-10 lg:px-16 shadow-[0_24px_48px_-12px_rgba(214,39,48,0.32)] overflow-hidden text-center">
-        <!-- Background watermark circles -->
-        <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1440 480" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-          <circle cx="200" cy="180" r="140" stroke="rgba(0, 0, 0, 0.065)" stroke-width="42" />
-          <circle cx="200" cy="180" r="280" stroke="rgba(0, 0, 0, 0.045)" stroke-width="42" />
-          <circle cx="1200" cy="200" r="150" stroke="rgba(0, 0, 0, 0.06)" stroke-width="42" />
-          <circle cx="1200" cy="200" r="300" stroke="rgba(0, 0, 0, 0.04)" stroke-width="42" />
-        </svg>
+  <!-- Section 1: Hero Banner (Figma Section #1145:4204) -->
+  <section class="relative w-full h-[380px] sm:h-[420px] overflow-hidden">
+    <!-- Background Image -->
+    <img
+      src="/images/kegiatan/extrakurikuler-banner.png"
+      alt="Kegiatan Ekstrakurikuler SMK Telkom Purwokerto"
+      class="absolute inset-0 w-full h-full object-cover object-center"
+      loading="eager"
+    />
+    
+    <!-- Exact Gradient Overlay from Figma: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.55) 50%, rgba(0, 0, 0, 0.7) 100%) -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/70"></div>
 
-        <div class="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
-          <div class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md px-4 py-1.5 rounded-full text-white text-xs font-jakarta font-semibold tracking-wider uppercase mb-5 border border-white/20">
-            <span>Ekstrakurikuler & Organisasi Siswa</span>
-          </div>
+    <!-- Centered Content -->
+    <div class="relative z-10 w-full h-full flex items-center justify-center">
+      <h1 class="font-poppins font-bold text-4xl sm:text-5xl md:text-6xl text-white tracking-[-0.025em] text-center drop-shadow-md">
+        Ekstrakurikuler
+      </h1>
+    </div>
 
-          <h1 class="font-poppins text-white font-bold text-3xl sm:text-5xl lg:text-[3.25rem] leading-[1.15] tracking-tight mb-5">
-            Kembangkan Bakat, Raih Prestasi <br class="hidden sm:inline" />Di Luar Ruang Kelas
-          </h1>
-
-          <p class="font-jakarta text-white/92 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl mb-6">
-            SMK Telkom Purwokerto menyediakan beragam kegiatan ekstrakurikuler untuk mengembangkan minat, bakat, karakter kepemimpinan, dan potensi unggul siswa secara seimbang.
-          </p>
-        </div>
-      </div>
-    </Container>
+    <!-- Exact Red Bottom Accent Bar (height: 25px, fill: #ED1E28) -->
+    <div class="absolute bottom-0 left-0 right-0 h-[20px] sm:h-[25px] bg-[#ED1E28]"></div>
   </section>
 
-  <!-- 2. EKSKUL DIRECTORY & CARDS -->
-  <section class="py-12 sm:py-20 bg-white" id="daftar-ekskul">
+  <!-- Section 2: Main Content (Figma ekstrakurikuler #1145:4220) -->
+  <section class="py-16 md:py-24 bg-white">
     <Container>
-      <!-- Filter Tabs -->
-      <div class="flex items-center justify-center gap-2 sm:gap-3 flex-wrap mb-12" id="filter-container">
-        {categories.map((cat, idx) => (
-          <button
-            type="button"
-            data-filter={cat.id}
-            class={`filter-btn font-jakarta text-xs sm:text-sm font-semibold px-4 sm:px-5 py-2 rounded-full cursor-pointer transition-all duration-200 ${idx === 0 ? "bg-[#ed1e28] text-white shadow-sm" : "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}
-          >
-            {cat.name}
-          </button>
-        ))}
-      </div>
-
-      <!-- Card Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" id="ekskul-grid">
-        {ekskulList.map((item) => (
-          <div
-            data-category={item.category}
-            class="ekskul-card border border-gray-200 rounded-2xl p-6 bg-white hover:border-[#ed1e28]/40 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
-          >
-            <div>
-              <div class="flex items-center justify-between gap-2 mb-4">
-                <span class="bg-red-50 text-[#ed1e28] font-jakarta text-[0.6875rem] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider">
-                  {item.categoryName}
-                </span>
-              </div>
-
-              <h3 class="font-poppins text-lg sm:text-xl font-bold text-[#111827] leading-snug mb-3">
-                {item.name}
-              </h3>
-
-              <p class="font-jakarta text-[#4b5563] text-sm leading-relaxed mb-6">
-                {item.desc}
-              </p>
-            </div>
-
-            <div class="pt-4 border-t border-gray-100 flex flex-col gap-2">
-              <div class="flex items-center gap-2 text-xs font-jakarta text-gray-500">
-                <span class="font-semibold text-gray-700">Jadwal:</span>
-                <span>{item.schedule}</span>
-              </div>
-              <div class="flex items-start gap-2 text-xs font-jakarta text-[#ed1e28]">
-                <span class="font-bold">★ Prestasi:</span>
-                <span class="font-medium text-gray-700">{item.prestasi}</span>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </Container>
-  </section>
-
-  <!-- 3. BOTTOM CTA -->
-  <section class="py-14 sm:py-20 bg-[#f8fafc] border-t border-gray-100 text-center">
-    <Container>
-      <div class="max-w-2xl mx-auto flex flex-col items-center">
-        <h2 class="font-poppins text-2xl sm:text-3xl font-bold text-[#111827] mb-4">
-          Siap Mewujudkan Prestasimu?
+      <!-- Title & Description Container (Figma #1145:4221) -->
+      <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+        <h2 class="font-bold text-2xl sm:text-3xl md:text-[30px] leading-tight text-black tracking-[0.001em] font-sans">
+          Kegiatan Ekstrakurikuler
         </h2>
-        <p class="font-jakarta text-[#64748b] text-sm sm:text-base leading-relaxed mb-8">
-          Semua ekstrakurikuler dibimbing langsung oleh instruktur berpengalaman dan didukung penuh fasilitas modern sekolah.
+
+        <!-- Red Accent Indicator (width: 80px, height: 4px, fill: #BD0C12, borderRadius: 9999px) -->
+        <div class="w-20 h-1 bg-[#BD0C12] rounded-full mx-auto"></div>
+
+        <!-- Description (Figma #1145:4227) -->
+        <p class="text-[#55565B] text-sm sm:text-base leading-relaxed pt-2 max-w-2xl mx-auto">
+          SMK Telkom Purwokerto menyediakan berbagai kegiatan ekstrakurikuler untuk mengembangkan bakat, minat, dan potensi siswa di luar kegiatan akademik. Setiap kegiatan dirancang untuk membentuk karakter unggul dan profesional.
         </p>
-        <a
-          href="/#ppdb"
-          class="bg-[#ed1e28] hover:bg-[#d81820] text-white font-jakarta text-sm font-bold px-7 py-3.5 rounded-full no-underline shadow-[0_4px_14px_rgba(237,30,40,0.3)] hover:-translate-y-0.5 transition-all duration-200"
-        >
-          Bergabung di PPDB 2026
-        </a>
+      </div>
+
+      <!-- 6 Grid Cards (Figma HoverEskul #1641:13986: 3 cols, gap: 52px) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 lg:gap-12 max-w-[1320px] mx-auto">
+        {ekskulList.map((item) => (
+          <div class="group bg-white rounded-xl border border-[#F3F4F6] shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between">
+            <!-- Card Image Container -->
+            <div class="relative w-full aspect-[16/11] overflow-hidden bg-neutral-100">
+              <img
+                src={item.image}
+                alt={item.name}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+            </div>
+
+            <!-- Card Body Container (Figma #1641:13691) -->
+            <div class="p-6 sm:p-7 space-y-3.5 flex-1 flex flex-col justify-between">
+              <div class="space-y-3">
+                <div class="flex items-center gap-3">
+                  <!-- Red Badge Overlay (Figma #1641:13693: bg: rgba(189,12,18,0.1), borderRadius: 9999px) -->
+                  <div class="w-9 h-9 rounded-full bg-[#BD0C12]/10 flex items-center justify-center text-[#BD0C12] shrink-0">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <Fragment set:html={item.icon} />
+                    </svg>
+                  </div>
+                  <h3 class="font-bold text-lg sm:text-xl text-black font-sans">
+                    {item.name}
+                  </h3>
+                </div>
+
+                <p class="text-[#55565B] text-sm leading-relaxed">
+                  {item.desc}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </Container>
   </section>
 </BaseLayout>
-
-<script>
-  const filterBtns = document.querySelectorAll(".filter-btn");
-  const cards = document.querySelectorAll(".ekskul-card");
-
-  filterBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const filter = btn.getAttribute("data-filter");
-
-      filterBtns.forEach((b) => {
-        b.classList.remove("bg-[#ed1e28]", "text-white", "shadow-sm");
-        b.classList.add("bg-gray-100", "text-gray-700");
-      });
-      btn.classList.add("bg-[#ed1e28]", "text-white", "shadow-sm");
-      btn.classList.remove("bg-gray-100", "text-gray-700");
-
-      cards.forEach((card) => {
-        const cat = card.getAttribute("data-category");
-        if (filter === "all" || cat === filter) {
-          (card as HTMLElement).style.display = "flex";
-        } else {
-          (card as HTMLElement).style.display = "none";
-        }
-      });
-    });
-  });
-</script>
