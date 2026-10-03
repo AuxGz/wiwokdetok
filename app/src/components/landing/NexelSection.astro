@@ -1,0 +1,262 @@
+---
+import Container from "../Container.astro";
+---
+
+<section class="py-10 sm:py-14 lg:py-16 bg-white" id="nexel">
+  <Container>
+    <div class="max-w-[1140px] mx-auto">
+      <div class="relative bg-gradient-to-br from-[#eb1d27] via-[#dc1720] to-[#c4151e] rounded-[24px] sm:rounded-[36px] p-6 sm:p-10 lg:p-12 xl:p-14 text-white overflow-hidden shadow-[0_24px_50px_-12px_rgba(237,30,40,0.32)]">
+        <!-- Concentric Rings Decorative Watermark Pattern -->
+        <svg class="absolute inset-0 w-full h-full pointer-events-none z-1" viewBox="0 0 1200 600" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <circle cx="90" cy="120" r="140" stroke="rgba(255, 255, 255, 0.08)" stroke-width="32" />
+          <circle cx="90" cy="120" r="250" stroke="rgba(255, 255, 255, 0.05)" stroke-width="32" />
+          <circle cx="850" cy="460" r="160" stroke="rgba(255, 255, 255, 0.08)" stroke-width="32" />
+          <circle cx="850" cy="460" r="270" stroke="rgba(255, 255, 255, 0.05)" stroke-width="32" />
+          <circle cx="850" cy="460" r="380" stroke="rgba(255, 255, 255, 0.03)" stroke-width="36" />
+        </svg>
+
+        <div class="relative z-2 grid grid-cols-1 lg:grid-cols-[1.18fr_0.82fr] gap-10 lg:gap-10 xl:gap-14 items-center">
+          <!-- Left Column: Copy & Actions -->
+          <div class="flex flex-col items-start text-left">
+            <!-- Badge -->
+            <div class="inline-flex items-center border border-white/35 bg-white/15 px-4 py-1.5 rounded-full font-jakarta text-xs font-bold tracking-[0.08em] text-white uppercase mb-5 sm:mb-6 shadow-sm">
+              <span>ASISTEN PPDB 2026/2027</span>
+            </div>
+
+            <!-- Heading -->
+            <h2 class="font-poppins text-3xl sm:text-4xl lg:text-[2.65rem] xl:text-[2.85rem] font-bold leading-[1.14] text-white tracking-[-0.025em] mb-4 sm:mb-5">
+              Ada pertanyaan soal<br class="hidden sm:inline" /> PPDB? Tanya Nexel.
+            </h2>
+
+            <!-- Description -->
+            <p class="font-jakarta text-sm sm:text-[0.9375rem] leading-[1.68] text-white/90 max-w-[540px] mb-7 sm:mb-8">
+              Nexel adalah asisten SMK Telkom Purwokerto yang menjawab pertanyaan calon siswa dan orang tua kapan saja. Tidak perlu paham teknologi, cukup ketik seperti chat WhatsApp.
+            </p>
+
+            <!-- 3 Steps -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4 w-full max-w-[560px] mb-7 sm:mb-8">
+              <!-- Step 1 -->
+              <div class="flex items-center sm:items-start gap-3">
+                <span class="w-7 h-7 rounded-full bg-white text-[#ed1e28] font-jakarta font-bold text-xs sm:text-sm flex items-center justify-center shrink-0 shadow-sm">
+                  1
+                </span>
+                <div class="flex flex-col">
+                  <span class="font-jakarta font-bold text-white text-xs sm:text-sm leading-tight">Klik tombol</span>
+                  <span class="font-jakarta text-white/80 text-[0.6875rem] sm:text-xs mt-0.5">Mulai Chat</span>
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="flex items-center sm:items-start gap-3">
+                <span class="w-7 h-7 rounded-full bg-white text-[#ed1e28] font-jakarta font-bold text-xs sm:text-sm flex items-center justify-center shrink-0 shadow-sm">
+                  2
+                </span>
+                <div class="flex flex-col">
+                  <span class="font-jakarta font-bold text-white text-xs sm:text-sm leading-tight">Ketik pertanyaan</span>
+                  <span class="font-jakarta text-white/80 text-[0.6875rem] sm:text-xs mt-0.5">Bahasa sehari-hari</span>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="flex items-center sm:items-start gap-3">
+                <span class="w-7 h-7 rounded-full bg-white text-[#ed1e28] font-jakarta font-bold text-xs sm:text-sm flex items-center justify-center shrink-0 shadow-sm">
+                  3
+                </span>
+                <div class="flex flex-col">
+                  <span class="font-jakarta font-bold text-white text-xs sm:text-sm leading-tight">Baca jawaban</span>
+                  <span class="font-jakarta text-white/80 text-[0.6875rem] sm:text-xs mt-0.5">Langsung muncul</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Example Questions Title & Pills -->
+            <div class="w-full mb-8">
+              <span class="font-jakarta text-white/90 text-xs sm:text-[0.8125rem] font-medium mb-3 block">
+                Contoh yang bisa Anda tanyakan:
+              </span>
+              <div class="flex flex-wrap gap-2 sm:gap-2.5">
+                <button
+                  type="button"
+                  class="nexel-example-btn inline-flex items-center px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full border border-white/35 bg-white/10 hover:bg-white/20 active:scale-95 text-white font-jakarta text-xs sm:text-[0.8125rem] font-medium transition-all duration-150 cursor-pointer"
+                  data-question="Kapan pendaftaran dibuka?"
+                >
+                  Kapan pendaftaran dibuka?
+                </button>
+                <button
+                  type="button"
+                  class="nexel-example-btn inline-flex items-center px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full border border-white/35 bg-white/10 hover:bg-white/20 active:scale-95 text-white font-jakarta text-xs sm:text-[0.8125rem] font-medium transition-all duration-150 cursor-pointer"
+                  data-question="Berkas apa yang harus disiapkan?"
+                >
+                  Berkas apa yang harus disiapkan?
+                </button>
+                <button
+                  type="button"
+                  class="nexel-example-btn inline-flex items-center px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full border border-white/35 bg-white/10 hover:bg-white/20 active:scale-95 text-white font-jakarta text-xs sm:text-[0.8125rem] font-medium transition-all duration-150 cursor-pointer"
+                  data-question="Jurusan mana yang cocok untuk anak saya?"
+                >
+                  Jurusan mana yang cocok untuk anak saya?
+                </button>
+                <button
+                  type="button"
+                  class="nexel-example-btn inline-flex items-center px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full border border-white/35 bg-white/10 hover:bg-white/20 active:scale-95 text-white font-jakarta text-xs sm:text-[0.8125rem] font-medium transition-all duration-150 cursor-pointer"
+                  data-question="Berapa perkiraan biayanya?"
+                >
+                  Berapa perkiraan biayanya?
+                </button>
+              </div>
+            </div>
+
+            <!-- CTA Button -->
+            <div class="mb-7">
+              <button
+                type="button"
+                id="btn-open-nexel-chat"
+                class="group inline-flex items-center gap-3.5 bg-white text-[#ed1e28] font-jakarta text-sm sm:text-base font-bold py-2.5 pl-6 pr-2.5 rounded-full shadow-[0_6px_20px_rgba(0,0,0,0.16)] hover:bg-[#fff5f5] hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(0,0,0,0.22)] active:scale-[0.98] transition-all duration-200 cursor-pointer"
+              >
+                <span>Mulai Chat dengan Nexel</span>
+                <span class="w-8 h-8 rounded-full bg-[#ed1e28] text-white flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:translate-x-0.5">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </span>
+              </button>
+            </div>
+
+            <!-- Benefits -->
+            <div class="flex items-center gap-4 sm:gap-6 text-white/90 font-jakarta text-xs sm:text-[0.8125rem] font-medium flex-wrap">
+              <div class="inline-flex items-center gap-1.5">
+                <span class="text-[0.65rem] text-white/80">◆</span>
+                <span>Gratis</span>
+              </div>
+              <div class="inline-flex items-center gap-1.5">
+                <span class="text-[0.65rem] text-white/80">◆</span>
+                <span>Tanpa daftar akun</span>
+              </div>
+              <div class="inline-flex items-center gap-1.5">
+                <span class="text-[0.65rem] text-white/80">◆</span>
+                <span>Bisa lewat HP</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive Chat Mockup Card -->
+          <div class="relative w-full max-w-[420px] mx-auto lg:ml-auto">
+            <!-- Mockup Card Container -->
+            <div class="relative bg-white rounded-[24px] sm:rounded-[28px] shadow-[0_20px_45px_rgba(0,0,0,0.24)] overflow-hidden border border-white/20 font-jakarta">
+              <!-- Chat Header -->
+              <div class="bg-[#ed1e28] text-white px-4 sm:px-5 py-3.5 flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-white/15 flex items-center justify-center shrink-0 p-1.5">
+                  <img src="/images/brand/chatbot-avatar.png" alt="Nexel" width="22" height="20" class="block object-contain" />
+                </div>
+                <div>
+                  <h3 class="font-poppins font-bold text-sm sm:text-[0.9375rem] text-white leading-tight">
+                    Nexel Assistant
+                  </h3>
+                  <span class="flex items-center gap-1.5 text-[0.6875rem] text-white/90 font-medium mt-0.5">
+                    <span class="w-2 h-2 rounded-full bg-[#22c55e]"></span>
+                    Online
+                  </span>
+                </div>
+              </div>
+
+              <!-- Chat Body -->
+              <div class="p-4 sm:p-5 bg-[#ffffff] flex flex-col gap-3.5 min-h-[300px]">
+                <!-- Message 1 (Bot) -->
+                <div class="flex items-start gap-2.5 max-w-[92%]">
+                  <div class="w-7 h-7 rounded-lg bg-[#ed1e28] text-white flex items-center justify-center shrink-0 p-1 mt-0.5">
+                    <img src="/images/brand/chatbot-avatar.png" alt="" width="16" height="15" class="block object-contain" />
+                  </div>
+                  <div class="flex flex-col items-start">
+                    <div class="bg-[#f3f4f6] text-[#1f2937] text-xs sm:text-[0.8125rem] leading-relaxed p-3 sm:p-3.5 rounded-2xl rounded-tl-xs border border-gray-100">
+                      Halo! Saya Asisten Virtual SMK Telkom Purwokerto. Ada yang bisa saya bantu hari ini?
+                    </div>
+                    <span class="text-[10px] text-gray-400 mt-1 pl-1">09:41</span>
+                  </div>
+                </div>
+
+                <!-- Message 2 (User) -->
+                <div class="flex flex-col items-end self-end max-w-[85%]">
+                  <div class="bg-[#ed1e28] text-white text-xs sm:text-[0.8125rem] leading-relaxed p-3 sm:p-3.5 rounded-2xl rounded-tr-xs shadow-sm">
+                    Apa saja jurusan yang tersedia?
+                  </div>
+                  <span class="text-[10px] text-gray-400 mt-1 pr-1">09:42</span>
+                </div>
+
+                <!-- Message 3 (Bot) -->
+                <div class="flex items-start gap-2.5 max-w-[92%]">
+                  <div class="w-7 h-7 rounded-lg bg-[#ed1e28] text-white flex items-center justify-center shrink-0 p-1 mt-0.5">
+                    <img src="/images/brand/chatbot-avatar.png" alt="" width="16" height="15" class="block object-contain" />
+                  </div>
+                  <div class="flex flex-col items-start">
+                    <div class="bg-[#f3f4f6] text-[#1f2937] text-xs sm:text-[0.8125rem] leading-relaxed p-3 sm:p-3.5 rounded-2xl rounded-tl-xs border border-gray-100">
+                      <p class="mb-1 font-medium">Beberapa jurusan unggulan kami:</p>
+                      <ul class="space-y-0.5 text-[#374151]">
+                        <li class="flex items-center gap-1.5">
+                          <span class="text-[#ed1e28] font-bold text-xs">✓</span>
+                          <span>Rekayasa Perangkat Lunak</span>
+                        </li>
+                        <li class="flex items-center gap-1.5">
+                          <span class="text-[#ed1e28] font-bold text-xs">✓</span>
+                          <span>Teknik Jaringan &amp; Telekomunikasi</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <span class="text-[10px] text-gray-400 mt-1 pl-1">09:42</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Input Bar at bottom -->
+              <div class="p-3 sm:p-3.5 bg-white border-t border-gray-100 flex items-center gap-2">
+                <div class="flex-1 bg-[#f3f4f6] rounded-full px-4 py-2.5 text-xs text-gray-400 select-none">
+                  Tulis pertanyaan kamu di sini...
+                </div>
+                <button
+                  type="button"
+                  class="nexel-trigger-icon w-8 h-8 rounded-full bg-[#ed1e28] hover:bg-[#d81820] text-white flex items-center justify-center shrink-0 shadow-sm cursor-pointer transition-colors"
+                  aria-label="Kirim pertanyaan ke Nexel"
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Floating red badge on bottom-right of chat card -->
+            <button
+              type="button"
+              class="nexel-floating-badge absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#ed1e28] text-white flex items-center justify-center shadow-[0_10px_25px_rgba(237,30,40,0.5)] border-[3px] border-white p-2.5 sm:p-3 hover:scale-105 active:scale-95 transition-transform duration-200 cursor-pointer z-10"
+              aria-label="Buka Chat Nexel"
+            >
+              <img src="/images/brand/chatbot-avatar.png" alt="" width="26" height="24" class="block object-contain pointer-events-none select-none" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>
+
+<script>
+  // Hubungkan tombol di NexelSection dengan floating chatbot widget
+  function openChatbot() {
+    const floatingOpenBtn = document.getElementById("open-chat");
+    if (floatingOpenBtn) {
+      floatingOpenBtn.click();
+    }
+  }
+
+  document.getElementById("btn-open-nexel-chat")?.addEventListener("click", openChatbot);
+
+  document.querySelectorAll(".nexel-floating-badge, .nexel-trigger-icon").forEach((el) => {
+    el.addEventListener("click", openChatbot);
+  });
+
+  document.querySelectorAll(".nexel-example-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      openChatbot();
+    });
+  });
+</script>
