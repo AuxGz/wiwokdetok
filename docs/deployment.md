@@ -8,12 +8,11 @@ Panduan ini mendokumentasikan proses deployment sistem website sekolah ke VPS be
 
 ```text
 Pengguna / Peramban Publik
-    ↓ (HTTPS: Port 443)
-Cloudflare (Mode TLS: Full Strict + WAF)
-    ↓ (HTTPS Origin: Port 443)
-Jagoan Hosting Ingress / NAT
-    ↓ (Port 443)
-Webuzo Host Server (Terminasi SSL via Cloudflare Origin CA)
+    ↓ (HTTP: Port 80 / HTTPS: Port 443)
+Jagoan Hosting Ingress / NAT (101.50.1.15)
+    ↓ (Port 80 / 443)
+Webuzo Host Server (Apache 2.4 - Terminasi SSL Let's Encrypt via acme.sh)
+    ↓ (HTTP 301 Redirect Port 80 -> Port 443, kecuali /.well-known/acme-challenge/)
     ↓ (HTTP Reverse Proxy: 127.0.0.1:3000)
 Kontainer Docker: app (Port 3000)
     ↓ (Koneksi Internal Docker)
@@ -22,30 +21,70 @@ Kontainer Docker: postgres (Port 5432)
 
 ---
 
-## 2. Konfigurasi Awal di Server Webuzo
+## 2. Konfigurasi Reverse Proxy Apache & SSL Let's Encrypt
 
-1. **Buat Domain / Virtual Host**:
-   Daftarkan domain atau subdomain sekolah pada menu Domain Management Webuzo.
+Konfigurasi reverse proxy dan SSL ditangani oleh Apache bawaan Webuzo pada `/usr/local/apps/apache2/etc/conf.d/web-jhic-proxy.conf`:
 
-2. **Pasang Sertifikat SSL Cloudflare Origin CA**:
-   - Terbitkan Origin Certificate dari dashboard Cloudflare untuk domain terkait.
-   - Pasang sertifikat publik (.crt) dan kunci privat (.key) pada menu SSL di Webuzo.
+```apache
+# Reverse Proxy configuration for Web JHIC (Astro + Express)
+<VirtualHost *:80>
+    ServerName renovare.smktelkom-pwt.sch.id
+    ServerAlias www.renovare.smktelkom-pwt.sch.id server.renovare.smktelkom-pwt.sch.id
 
-3. **Konfigurasi Reverse Proxy Nginx**:
-   Arahkan seluruh trafik HTTP dari domain host ke port loopback aplikasi (`127.0.0.1:3000`):
-   ```nginx
-   location / {
-       proxy_pass http://127.0.0.1:3000;
-       proxy_http_version 1.1;
-       proxy_set_header Upgrade $http_upgrade;
-       proxy_set_header Connection 'upgrade';
-       proxy_set_header Host $host;
-       proxy_cache_bypass $http_upgrade;
-       proxy_set_header X-Real-IP $remote_addr;
-       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-       proxy_set_header X-Forwarded-Proto $scheme;
-   }
-   ```
+    DocumentRoot /var/webuzo-data/www
+
+    Alias /.well-known/acme-challenge/ /var/webuzo-data/www/.well-known/acme-challenge/
+    <Directory /var/webuzo-data/www/.well-known/acme-challenge/>
+        Options None
+        AllowOverride None
+        Require all granted
+    </Directory>
+
+    RewriteEngine On
+    RewriteCond %{REQUEST_URI} !^/\.well-known/acme-challenge/
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+    ProxyPreserveHost On
+    ProxyPass /.well-known/acme-challenge/ !
+    ProxyPass / http://127.0.0.1:3000/
+    ProxyPassReverse / http://127.0.0.1:3000/
+
+    RequestHeader set X-Forwarded-Proto "http"
+</VirtualHost>
+
+<VirtualHost *:443>
+    ServerName renovare.smktelkom-pwt.sch.id
+    ServerAlias www.renovare.smktelkom-pwt.sch.id server.renovare.smktelkom-pwt.sch.id
+
+    DocumentRoot /var/webuzo-data/www
+
+    Alias /.well-known/acme-challenge/ /var/webuzo-data/www/.well-known/acme-challenge/
+    <Directory /var/webuzo-data/www/.well-known/acme-challenge/>
+        Options None
+        AllowOverride None
+        Require all granted
+    </Directory>
+
+    SSLEngine on
+    SSLCertificateFile /var/webuzo/certs/renovare/fullchain.pem
+    SSLCertificateKeyFile /var/webuzo/certs/renovare/key.pem
+    SSLUseStapling Off
+
+    ProxyPreserveHost On
+    ProxyPass /.well-known/acme-challenge/ !
+    ProxyPass / http://127.0.0.1:3000/
+    ProxyPassReverse / http://127.0.0.1:3000/
+
+    RequestHeader set X-Forwarded-Proto "https"
+</VirtualHost>
+```
+
+### Pembaruan Otomatis Sertifikat SSL (Auto Renewal)
+Sertifikat dikelola oleh `acme.sh` dengan cron berkala di `/etc/cron.d/acme_sh`:
+```text
+30 2 * * * root bash /usr/local/webuzo/includes/cli/acme.sh --cron --home /root/.acme.sh > /dev/null 2>&1
+```
+Ketika sertifikat mendekati masa kadaluwarsa (60 hari), `acme.sh` akan memperbarui sertifikat dan memicu perintah graceful reload pada Apache (`apachectl graceful`).
 
 ---
 
