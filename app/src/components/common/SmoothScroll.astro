@@ -1,0 +1,83 @@
+---
+// Smooth scroll integration with Lenis for silky momentum scrolling and anchor navigation
+---
+
+<script>
+  import Lenis from "lenis";
+
+  // Check if reduced motion is requested
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (!prefersReducedMotion) {
+    const lenis = new Lenis({
+      autoRaf: true,
+      duration: 1.15,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      wheelMultiplier: 0.95,
+      touchMultiplier: 1.5,
+    });
+
+    // Make lenis globally accessible if needed
+    (window as any).lenis = lenis;
+
+    // Smooth anchor link scrolling with header clearance
+    function setupAnchorLinks() {
+      const links = document.querySelectorAll<HTMLAnchorElement>('a[href*="#"]');
+      links.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          const href = link.getAttribute("href");
+          if (!href) return;
+
+          const hashIndex = href.indexOf("#");
+          if (hashIndex === -1) return;
+
+          const hash = href.slice(hashIndex);
+          if (!hash || hash === "#") return;
+
+          const path = href.slice(0, hashIndex);
+          const currentPath = window.location.pathname;
+
+          // Check if this link points to an anchor on the current page
+          const isSamePage =
+            !path ||
+            path === currentPath ||
+            (path === "/" && (currentPath === "/" || currentPath === "")) ||
+            path === window.location.href;
+
+          if (isSamePage) {
+            const target = document.querySelector<HTMLElement>(hash);
+            if (target) {
+              e.preventDefault();
+              lenis.scrollTo(target, {
+                offset: -90,
+                duration: 1.1,
+              });
+              history.pushState(null, "", hash);
+            }
+          }
+        });
+      });
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", setupAnchorLinks);
+    } else {
+      setupAnchorLinks();
+    }
+
+    // Handle hash on initial page load (e.g. user opens url with #faq or #daftar-prestasi)
+    if (window.location.hash) {
+      setTimeout(() => {
+        const initialTarget = document.querySelector<HTMLElement>(window.location.hash);
+        if (initialTarget) {
+          lenis.scrollTo(initialTarget, {
+            offset: -90,
+            duration: 0.9,
+            immediate: false,
+          });
+        }
+      }, 150);
+    }
+  }
+</script>
