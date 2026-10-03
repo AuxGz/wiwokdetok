@@ -144,14 +144,14 @@ const isTentangActive = isProfileGuru || isProfileSekolah;
   <div id="mobile-menu" class="mobile-menu hidden w-full bg-white/98 backdrop-blur-xl border-t border-gray-100 shadow-[0_20px_40px_rgba(0,0,0,0.08)] py-4 max-h-[calc(100vh-72px)] overflow-y-auto">
     <Container>
       <nav class="mobile-nav-links flex flex-col gap-1.5">
-        <a href="/" class="mobile-nav-link font-jakarta text-[0.9375rem] font-medium text-gray-800 px-3.5 py-2.5 rounded-xl no-underline transition-colors hover:bg-gray-100 hover:text-[#ed1e28]">Beranda</a>
-        <a href="/profile-sekolah" class="mobile-nav-link font-jakarta text-[0.9375rem] font-medium text-gray-800 px-3.5 py-2.5 rounded-xl no-underline transition-colors hover:bg-gray-100 hover:text-[#ed1e28]">Profile Sekolah</a>
-        <a href="/profile-guru" class="mobile-nav-link font-jakarta text-[0.9375rem] font-medium text-gray-800 px-3.5 py-2.5 rounded-xl no-underline transition-colors hover:bg-gray-100 hover:text-[#ed1e28]">Profile Guru</a>
+        <a href="/" class={`mobile-nav-link font-jakarta text-[0.9375rem] px-3.5 py-2.5 rounded-xl no-underline transition-colors ${currentPath === "/" ? "bg-red-50 text-[#ed1e28] font-bold" : "font-medium text-gray-800 hover:bg-gray-100 hover:text-[#ed1e28]"}`}>Beranda</a>
+        <a href="/profile-sekolah" class={`mobile-nav-link font-jakarta text-[0.9375rem] px-3.5 py-2.5 rounded-xl no-underline transition-colors ${isProfileSekolah ? "bg-red-50 text-[#ed1e28] font-bold" : "font-medium text-gray-800 hover:bg-gray-100 hover:text-[#ed1e28]"}`}>Profile Sekolah</a>
+        <a href="/profile-guru" class={`mobile-nav-link font-jakarta text-[0.9375rem] px-3.5 py-2.5 rounded-xl no-underline transition-colors ${isProfileGuru ? "bg-red-50 text-[#ed1e28] font-bold" : "font-medium text-gray-800 hover:bg-gray-100 hover:text-[#ed1e28]"}`}>Profile Guru</a>
         <a href="/#jurusan" class="mobile-nav-link font-jakarta text-[0.9375rem] font-medium text-gray-800 px-3.5 py-2.5 rounded-xl no-underline transition-colors hover:bg-gray-100 hover:text-[#ed1e28]">Program Keahlian</a>
         <a href="/#berita" class="mobile-nav-link font-jakarta text-[0.9375rem] font-medium text-gray-800 px-3.5 py-2.5 rounded-xl no-underline transition-colors hover:bg-gray-100 hover:text-[#ed1e28]">Informasi & Berita</a>
         <a href="/#faq" class="mobile-nav-link font-jakarta text-[0.9375rem] font-medium text-gray-800 px-3.5 py-2.5 rounded-xl no-underline transition-colors hover:bg-gray-100 hover:text-[#ed1e28]">FAQ</a>
         <a href="/#alumni" class="mobile-nav-link font-jakarta text-[0.9375rem] font-medium text-gray-800 px-3.5 py-2.5 rounded-xl no-underline transition-colors hover:bg-gray-100 hover:text-[#ed1e28]">Cerita Sukses Alumni</a>
-        <a href="/school-tour" class="mobile-nav-link font-jakarta text-[0.9375rem] font-medium text-gray-800 px-3.5 py-2.5 rounded-xl no-underline transition-colors hover:bg-gray-100 hover:text-[#ed1e28]">School Tour</a>
+        <a href="/school-tour" class={`mobile-nav-link font-jakarta text-[0.9375rem] px-3.5 py-2.5 rounded-xl no-underline transition-colors ${isSchoolTour ? "bg-red-50 text-[#ed1e28] font-bold" : "font-medium text-gray-800 hover:bg-gray-100 hover:text-[#ed1e28]"}`}>School Tour</a>
         
         <div class="mobile-ppdb-wrap mt-3 pt-3 border-t border-gray-100">
           <a href="/#ppdb" class="btn-ppdb-mobile block text-center bg-[#ed1e28] hover:bg-[#d81820] text-white font-jakarta text-[0.9375rem] font-bold px-6 py-3 rounded-full no-underline shadow-[0_4px_12px_rgba(237,30,40,0.28)]">
@@ -164,10 +164,24 @@ const isTentangActive = isProfileGuru || isProfileSekolah;
 </header>
 
 <script>
+  const header = document.querySelector(".site-header");
   const toggleBtn = document.getElementById("mobile-toggle");
   const mobileMenu = document.getElementById("mobile-menu");
   const iconMenu = document.getElementById("icon-menu");
   const iconClose = document.getElementById("icon-close");
+
+  // Dynamic Scroll Elevation Shadow
+  if (header) {
+    const handleScroll = () => {
+      if (window.scrollY > 12) {
+        header.classList.add("shadow-[0_4px_20px_rgba(0,0,0,0.06)]");
+      } else {
+        header.classList.remove("shadow-[0_4px_20px_rgba(0,0,0,0.06)]");
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+  }
 
   function openMobileMenu() {
     if (!mobileMenu || !toggleBtn) return;
@@ -186,7 +200,8 @@ const isTentangActive = isProfileGuru || isProfileSekolah;
   }
 
   if (toggleBtn && mobileMenu) {
-    toggleBtn.addEventListener("click", () => {
+    toggleBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
       const isClosed = mobileMenu.classList.contains("hidden");
       if (isClosed) {
         openMobileMenu();
@@ -199,6 +214,16 @@ const isTentangActive = isProfileGuru || isProfileSekolah;
       link.addEventListener("click", () => {
         closeMobileMenu();
       });
+    });
+
+    // Close on click outside header
+    document.addEventListener("click", (e) => {
+      const target = e.target as HTMLElement | null;
+      if (mobileMenu && !mobileMenu.classList.contains("hidden")) {
+        if (!header?.contains(target)) {
+          closeMobileMenu();
+        }
+      }
     });
 
     // Close on escape key

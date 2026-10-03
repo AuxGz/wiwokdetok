@@ -1,57 +1,59 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/Container.astro";
-import Section from "../components/Section.astro";
 ---
 
-<BaseLayout title="404 - Halaman Tidak Ditemukan | Website Sekolah">
-  <Section className="not-found-section">
+<BaseLayout
+  title="404 - Halaman Tidak Ditemukan | SMK Telkom Purwokerto"
+  description="Halaman yang Anda tuju tidak tersedia atau telah dipindahkan."
+>
+  <section class="relative py-20 sm:py-28 min-h-[70vh] flex items-center justify-center bg-white overflow-hidden">
+    <!-- Subtle Concentric Watermark Circles -->
+    <svg class="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-40" viewBox="0 0 1440 600" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <circle cx="720" cy="300" r="180" stroke="rgba(237, 30, 40, 0.08)" stroke-width="40" />
+      <circle cx="720" cy="300" r="320" stroke="rgba(237, 30, 40, 0.05)" stroke-width="40" />
+      <circle cx="720" cy="300" r="460" stroke="rgba(237, 30, 40, 0.03)" stroke-width="40" />
+    </svg>
+
     <Container>
-      <div class="not-found-content">
-        <h1>404</h1>
-        <h2>Halaman Tidak Ditemukan</h2>
-        <p>Halaman yang Anda tuju tidak tersedia atau telah dipindahkan.</p>
-        <div class="actions">
-          <a href="/" class="btn btn-primary">Kembali ke Beranda</a>
+      <div class="relative z-10 max-w-xl mx-auto text-center flex flex-col items-center">
+        <!-- Error Badge -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-50 border border-red-100 text-[#ed1e28] font-jakarta text-xs font-bold tracking-wider uppercase mb-5">
+          <span class="w-2 h-2 rounded-full bg-[#ed1e28]"></span>
+          <span>Kesalahan 404</span>
+        </div>
+
+        <!-- Big 404 Heading -->
+        <h1 class="font-poppins text-7xl sm:text-9xl font-black text-[#111827] tracking-tighter leading-none mb-4 select-none">
+          4<span class="text-[#ed1e28]">0</span>4
+        </h1>
+
+        <!-- Title -->
+        <h2 class="font-poppins text-2xl sm:text-3xl font-bold text-[#111827] mb-3">
+          Halaman Tidak Ditemukan
+        </h2>
+
+        <!-- Description -->
+        <p class="font-jakarta text-[#64748b] text-base sm:text-lg leading-relaxed max-w-md mb-8">
+          Halaman yang Anda tuju tidak tersedia, telah dipindahkan, atau alamat URL yang dimasukkan kurang tepat.
+        </p>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center justify-center gap-3.5 flex-wrap">
+          <a
+            href="/"
+            class="bg-[#ed1e28] hover:bg-[#d81820] text-white font-jakarta text-sm font-bold px-6 py-3 rounded-full no-underline shadow-[0_4px_14px_rgba(237,30,40,0.3)] hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200"
+          >
+            Kembali ke Beranda
+          </a>
+          <a
+            href="/#jurusan"
+            class="bg-gray-100 hover:bg-gray-200 text-[#111827] font-jakarta text-sm font-semibold px-6 py-3 rounded-full no-underline hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200"
+          >
+            Lihat Program Keahlian
+          </a>
         </div>
       </div>
     </Container>
-  </Section>
+  </section>
 </BaseLayout>
-
-<style>
-  .not-found-section {
-    padding: 6rem 0;
-    text-align: center;
-  }
-  .not-found-content h1 {
-    font-size: 5rem;
-    font-weight: 900;
-    color: var(--color-primary);
-    line-height: 1;
-    margin-bottom: 1rem;
-  }
-  .not-found-content h2 {
-    font-size: 1.75rem;
-    color: var(--color-text);
-    margin-bottom: 0.5rem;
-  }
-  .not-found-content p {
-    color: var(--color-text-muted);
-    margin-bottom: 2rem;
-  }
-  .btn {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.375rem;
-    font-weight: 600;
-    text-decoration: none;
-  }
-  .btn-primary {
-    background-color: var(--color-primary);
-    color: #ffffff;
-  }
-  .btn-primary:hover {
-    background-color: var(--color-primary-hover);
-  }
-</style>
