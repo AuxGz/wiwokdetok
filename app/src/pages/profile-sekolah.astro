@@ -493,12 +493,11 @@ import Container from "../components/Container.astro";
   const videoFrame = document.getElementById("video-frame") as HTMLIFrameElement | null;
 
   // Official SMK Telkom Purwokerto Video
-  const videoUrl = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"; // fallback or official video id
+  const videoUrl = "https://www.youtube-nocookie.com/embed/w68QaEXd7iw?autoplay=1&rel=0";
 
   if (playBtn && videoModal && closeBtn && videoFrame) {
     playBtn.addEventListener("click", () => {
-      // Use official Telkom Schools Purwokerto profile video if available, or embed
-      videoFrame.src = "https://www.youtube.com/embed/Z0bZ2g-z_bM?autoplay=1";
+      videoFrame.src = videoUrl;
       videoModal.classList.remove("hidden");
       videoModal.classList.add("flex");
       document.body.style.overflow = "hidden";
