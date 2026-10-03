@@ -183,31 +183,40 @@ const prestasiItems = [
         </div>
 
         <!-- 6 Prestasi Cards Grid (Figma #1006:2211: radius 24px) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-[1260px] mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-[1260px] mx-auto">
           {prestasiItems.map((item) => (
             <div
               data-category={item.category}
-              class="prestasi-card group bg-white border border-[#EDEEF0] rounded-[24px] p-6 sm:p-8 shadow-sm hover:shadow-xl hover:border-[#ED1E28]/30 transition-all duration-300 flex flex-col justify-between"
+              class="prestasi-card group bg-white border border-[#EDEEF0] rounded-[24px] overflow-hidden shadow-sm hover:shadow-xl hover:border-[#ED1E28]/20 transition-all duration-300 flex flex-col justify-between"
             >
-              <div class="space-y-4">
-                <div class="flex items-center justify-between gap-3 flex-wrap">
-                  <span class="text-xs font-semibold text-[#959597]">
+              <!-- Card Image & Badge Container (Placeholder Image Not Found) -->
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-[#F7F8F9] border-b border-[#EDEEF0] flex items-center justify-center p-6 select-none">
+                <img
+                  src="/images/placeholders/image-not-found.svg"
+                  alt="Foto dokumentasi belum tersedia"
+                  class="h-24 sm:h-28 w-auto object-contain opacity-70 group-hover:opacity-90 group-hover:scale-105 transition-all duration-300"
+                  loading="lazy"
+                />
+                {item.badge && (
+                  <div class="absolute top-4 left-4 px-3.5 py-1 rounded-full bg-[#ED1E28] text-white text-xs font-bold shadow-md">
+                    {item.badge}
+                  </div>
+                )}
+              </div>
+
+              <!-- Card Body -->
+              <div class="p-6 sm:p-7 space-y-3 flex-1 flex flex-col justify-between">
+                <div class="space-y-2">
+                  <p class="text-xs font-semibold text-[#959597]">
                     {item.meta}
-                  </span>
-                  {item.badge && (
-                    <span class="px-3 py-1 rounded-full bg-[#ED1E28] text-white text-xs font-bold shadow-sm">
-                      {item.badge}
-                    </span>
-                  )}
+                  </p>
+                  <h3 class="font-bold text-lg sm:text-xl text-[#2B2C31] group-hover:text-[#ED1E28] transition-colors leading-snug">
+                    {item.title}
+                  </h3>
+                  <p class="text-[#959597] text-sm leading-relaxed pt-1">
+                    {item.desc}
+                  </p>
                 </div>
-
-                <h3 class="font-bold text-lg sm:text-xl text-[#2B2C31] group-hover:text-[#ED1E28] transition-colors leading-snug">
-                  {item.title}
-                </h3>
-
-                <p class="text-[#959597] text-sm leading-relaxed">
-                  {item.desc}
-                </p>
               </div>
             </div>
           ))}

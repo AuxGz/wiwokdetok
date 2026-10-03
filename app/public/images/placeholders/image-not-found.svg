@@ -1,0 +1,18 @@
+<svg width="120" height="144" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Back Card -->
+  <rect x="23" y="6" width="63" height="74" rx="7" stroke="#9CA3AF" stroke-width="3" fill="#F3F4F6"/>
+  <!-- Front Card -->
+  <rect x="11" y="16" width="63" height="74" rx="7" stroke="#6B7280" stroke-width="3" fill="#FFFFFF"/>
+  <!-- Inner Photo Frame Box -->
+  <rect x="19" y="24" width="47" height="42" rx="3" fill="#9CA3AF"/>
+  <!-- Left Eye: X -->
+  <path d="M 28 35 L 38 45 M 38 35 L 28 45" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Right Eye: X -->
+  <path d="M 47 35 L 57 45 M 57 35 L 47 45" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Sad Mouth: Arc -->
+  <path d="M 34 56 C 37 50, 47 50, 50 56" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round" fill="none"/>
+  <!-- Text: IMAGE -->
+  <text x="42.5" y="104" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-weight="800" font-size="12.5" letter-spacing="1.2" fill="#4B5563">IMAGE</text>
+  <!-- Text: NOT FOUND -->
+  <text x="42.5" y="116" text-anchor="middle" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="8.5" letter-spacing="0.6" fill="#9CA3AF">NOT FOUND</text>
+</svg>
