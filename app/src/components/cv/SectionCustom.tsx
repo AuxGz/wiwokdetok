@@ -15,16 +15,15 @@ import {
   arrayMove,
 } from '@dnd-kit/sortable';
 import { useCv } from './CvContext';
-import { EntryCard } from './EntryCard';
 import { BulletListEditor } from './BulletListEditor';
 import { generateId } from './constants';
 import type { CvCustomSection, CvCustomEntry } from './types';
 
 export const SectionCustom: React.FC = () => {
-  const { data, dispatch, addToast, focusedEntryId, setFocusedEntryId } = useCv();
+  const { data, dispatch, addToast, setFocusedEntryId } = useCv();
   const { custom } = data;
   const [openSectionId, setOpenSectionId] = useState<string | null>(custom[0]?.id || null);
-  const [openEntryId, setOpenEntryId] = useState<string | null>(null);
+  const [_openEntryId, setOpenEntryId] = useState<string | null>(null);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),

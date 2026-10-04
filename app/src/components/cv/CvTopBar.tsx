@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { useCv } from './CvContext';
 import { migrateData } from './reducer';
-import type { CvData } from './types';
 
 export const CvTopBar: React.FC = () => {
   const {
@@ -68,7 +67,7 @@ export const CvTopBar: React.FC = () => {
           },
           duration: 7000,
         });
-      } catch (err) {
+      } catch {
         alert('File JSON tidak valid atau rusak.');
       }
     };

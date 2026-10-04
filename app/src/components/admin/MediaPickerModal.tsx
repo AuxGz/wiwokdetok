@@ -141,7 +141,7 @@ export const MediaPickerModal: React.FC<MediaPickerModalProps> = ({
 
     try {
       // Kirim via JSON base64 ke endpoint upload admin
-      let res = await fetch("/api/admin/media/upload", {
+      const res = await fetch("/api/admin/media/upload", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

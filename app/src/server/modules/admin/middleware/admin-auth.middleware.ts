@@ -3,6 +3,7 @@ import { ADMIN_COOKIE_NAME, parseCookies, verifySession } from "../auth/admin-au
 import type { AdminUser } from "../../../../generated/prisma/client.js";
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Express {
     interface Request {
       adminUser?: AdminUser;

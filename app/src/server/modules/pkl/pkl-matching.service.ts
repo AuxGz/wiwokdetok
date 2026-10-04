@@ -600,7 +600,6 @@ Nilai semua lowongan di atas berdasarkan profil siswa dan kembalikan JSON array 
       }
     }
 
-    const listingMap = new Map(listings.map((l) => [l.id, l]));
     const fallbackResults = calculateSmartFallback(listings, input);
     const fallbackMap = new Map(fallbackResults.map((r) => [r.listingId, r]));
 

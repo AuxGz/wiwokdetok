@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer, useEffect, useRef, useState, useCallback } from 'react';
 import type { CvData, CvAction } from './types';
-import { SAMPLE_CV_DATA, EMPTY_CV_DATA } from './constants';
+import { SAMPLE_CV_DATA } from './constants';
 import { cvReducer, CURRENT_STORAGE_KEY, BACKUP_STORAGE_KEY, migrateData } from './reducer';
 
 export interface ToastItem {
@@ -161,7 +161,9 @@ export const CvProvider: React.FC<{ children: React.ReactNode }> = ({ children }
         if (corrupted) {
           localStorage.setItem(BACKUP_STORAGE_KEY, corrupted);
         }
-      } catch {}
+      } catch {
+        // Abaikan kegagalan penyimpanan cadangan darurat
+      }
       addToast({
         message: 'Data CV sebelumnya rusak. Cadangan disimpan & formulir dimuat ulang.',
       });
@@ -217,7 +219,9 @@ export const CvProvider: React.FC<{ children: React.ReactNode }> = ({ children }
             },
             duration: 10000,
           });
-        } catch {}
+        } catch {
+          // Abaikan jika data dari tab lain tidak berformat JSON valid
+        }
       }
     };
 
