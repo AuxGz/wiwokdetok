@@ -1,5 +1,5 @@
 # Stage 1: Build & Kompilasi
-FROM node:24-bookworm-slim AS builder
+FROM node:22-bookworm-slim AS builder
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y --no-install-recommends openssl && rm -rf /var/lib/apt/lists/*
@@ -10,8 +10,10 @@ RUN npm ci
 
 COPY . .
 
-# Pembatasan thread engine Rust (Tokio & Rayon) serta heap V8 Node.js
-# untuk mencegah 'os error 11 (EAGAIN)' / thread exhaustion di VPS dengan resource terbatas
+# Konfigurasi lingkungan build stabil untuk Node 22 LTS
+# Mencegah crash ABI Rust, pembatasan thread, dan menonaktifkan telemetry jaringan
+ENV CI=1
+ENV ASTRO_TELEMETRY_DISABLED=1
 ENV NODE_OPTIONS="--max-old-space-size=2048"
 ENV TOKIO_WORKER_THREADS=1
 ENV RAYON_NUM_THREADS=1
@@ -23,7 +25,7 @@ ENV DATABASE_URL="postgresql://placeholder:placeholder@localhost:5432/app_db"
 RUN npm run build
 
 # Stage 2: Runtime Produksi
-FROM node:24-bookworm-slim AS runner
+FROM node:22-bookworm-slim AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production

@@ -22,6 +22,8 @@ jobs:
     env:
       DATABASE_URL: "postgresql://placeholder:placeholder@localhost:5432/app_db"
       NODE_ENV: "test"
+      CI: 1
+      ASTRO_TELEMETRY_DISABLED: 1
       PUBLIC_SITE_URL: "http://localhost:4321"
       NODE_OPTIONS: "--max-old-space-size=2048"
       TOKIO_WORKER_THREADS: 1
