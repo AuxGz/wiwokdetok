@@ -10,6 +10,13 @@ RUN npm ci
 
 COPY . .
 
+# Pembatasan thread engine Rust (Tokio & Rayon) serta heap V8 Node.js
+# untuk mencegah 'os error 11 (EAGAIN)' / thread exhaustion di VPS dengan resource terbatas
+ENV NODE_OPTIONS="--max-old-space-size=2048"
+ENV TOKIO_WORKER_THREADS=1
+ENV RAYON_NUM_THREADS=1
+ENV UV_THREADPOOL_SIZE=2
+
 # Dummy DATABASE_URL agar prisma generate bisa mengevaluasi prisma.config.ts tanpa DB aktif saat build
 ENV DATABASE_URL="postgresql://placeholder:placeholder@localhost:5432/app_db"
 # npm run build secara otomatis mengeksekusi prisma:generate, build:astro, dan build:server
