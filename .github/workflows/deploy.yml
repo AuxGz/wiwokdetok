@@ -21,6 +21,7 @@ jobs:
         working-directory: ./app
     env:
       DATABASE_URL: "postgresql://placeholder:placeholder@localhost:5432/app_db"
+      AI_API_KEY: "test-ci-placeholder-key"
       NODE_ENV: "test"
       CI: 1
       ASTRO_TELEMETRY_DISABLED: 1

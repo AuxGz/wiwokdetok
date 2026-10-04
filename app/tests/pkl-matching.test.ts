@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import request from "supertest";
 import { createApiApp } from "../src/server/api-app.js";
 import { prisma } from "../src/server/lib/prisma.js";
+import { env } from "../src/server/config/env.js";
 import {
   calculateSmartFallback,
   DEFAULT_PKL_LISTINGS,
@@ -58,6 +59,7 @@ describe("AI PKL Matching & Listings API Tests", () => {
 
   beforeEach(() => {
     vi.restoreAllMocks();
+    env.AI_API_KEY = "test-mock-api-key";
   });
 
   describe("GET /api/pkl", () => {
