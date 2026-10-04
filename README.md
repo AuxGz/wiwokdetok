@@ -1,6 +1,6 @@
 # Website Sekolah — Arsitektur & Panduan Sistem
 
-Repositori ini memuat sistem website sekolah dengan arsitektur Server-Side Rendering (SSR) berbasis Astro dan API backend Express. Data sekolah dikelola secara mandiri menggunakan basis data PostgreSQL dan Prisma ORM melalui modul Custom Admin internal tanpa ketergantungan pada CMS pihak ketiga (Directus telah dilepas dari sistem).
+Repositori ini memuat sistem website sekolah dengan arsitektur Server-Side Rendering (SSR) berbasis Astro dan API backend Express. Data sekolah dikelola secara mandiri menggunakan basis data PostgreSQL dan Prisma ORM melalui modul Custom Admin internal tanpa ketergantungan pada CMS pihak ketiga.
 
 ---
 

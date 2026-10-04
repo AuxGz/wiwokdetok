@@ -7,7 +7,7 @@ Dokumen ini memuat arsitektur teknis, batasan tanggung jawab komponen, topologi 
 ## 1. Prinsip Utama Arsitektur
 
 1. **Pengelolaan Data Terintegrasi (Custom Admin)**:
-   Pengelolaan data guru, pimpinan, dan konten sekolah dikelola langsung melalui modul Custom Admin internal yang terhubung ke Prisma ORM dan PostgreSQL. Sistem tidak menggunakan CMS eksternal (seperti Directus) guna menyederhanakan alur data dan mengurangi overhead sistem.
+   Pengelolaan data guru, pimpinan, dan konten sekolah dikelola langsung melalui modul Custom Admin internal yang terhubung ke Prisma ORM dan PostgreSQL. Sistem tidak menggunakan CMS eksternal guna menyederhanakan alur data dan mengurangi overhead sistem.
 
 2. **Efisiensi Penggunaan Resource VPS**:
    Sistem dirancang untuk berjalan optimal pada VPS dengan kapasitas memori terbatas (~4 GB RAM) dengan hanya mengoperasikan dua kontainer Docker utama:
@@ -34,7 +34,6 @@ VPS Ingress (Webuzo Host Server)
     ↓ HTTP Reverse Proxy (127.0.0.1:3000)
 Kontainer Docker: app (:3000)
     ├── /api/*               ──> Express Router (createApiApp)
-    ├── /admin/*             ──> Modul Custom Admin & Autentikasi
     ├── express.static       ──> Aset Statis Klien (dist/astro/client)
     └── Astro SSR Handler    ──> Handler Halaman Publik (dist/astro/server/entry.mjs)
         ↓ (TCP Internal Docker Network: port 5432)
