@@ -1,9 +1,11 @@
+import process from "node:process";
 import { defineConfig } from "astro/config";
 import node from "@astrojs/node";
 import react from "@astrojs/react";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
+  site: process.env.PUBLIC_SITE_URL || "https://smktelkom-pwt.sch.id",
   outDir: "./dist/astro",
   output: "server",
   adapter: node({

@@ -1,11 +1,14 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/Container.astro";
+
+Astro.response.status = 404;
 ---
 
 <BaseLayout
   title="404 - Halaman Tidak Ditemukan | SMK Telkom Purwokerto"
   description="Halaman yang Anda tuju tidak tersedia atau telah dipindahkan."
+  robots="noindex, nofollow"
 >
   <section class="relative py-20 sm:py-28 min-h-[70vh] flex items-center justify-center bg-white overflow-hidden">
     <!-- Subtle Concentric Watermark Circles -->

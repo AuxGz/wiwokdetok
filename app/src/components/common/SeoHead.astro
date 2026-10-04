@@ -1,0 +1,77 @@
+---
+import {
+  getCanonicalOrigin,
+  getCanonicalUrl,
+  getSocialImageUrl,
+  getSchoolSchema,
+  getWebSiteSchema,
+  getBreadcrumbSchema,
+} from "../../lib/seo";
+
+export interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: "website" | "article";
+  robots?: string;
+  breadcrumbTitle?: string;
+}
+
+const {
+  title = "SMK Telkom Purwokerto | Pelopor Pendidikan Vokasi Teknologi Digital",
+  description = "Portal Resmi SMK Telkom Purwokerto - Sekolah Menengah Kejuruan Berbasis Teknologi dan Industri Digital di Bawah Yayasan Pendidikan Telkom.",
+  canonical,
+  ogImage,
+  ogType = "website",
+  robots = "index, follow",
+  breadcrumbTitle,
+} = Astro.props;
+
+const siteOrigin = getCanonicalOrigin();
+const canonicalUrl = canonical || getCanonicalUrl(Astro.url.pathname);
+const socialImageUrl = getSocialImageUrl(ogImage);
+
+const schoolSchema = getSchoolSchema(siteOrigin);
+const websiteSchema = getWebSiteSchema(siteOrigin);
+const breadcrumbSchema = getBreadcrumbSchema(siteOrigin, breadcrumbTitle || title.split("|")[0].trim(), Astro.url.pathname);
+---
+
+<!-- Essential Document & Viewport Meta -->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="robots" content={robots} />
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- Favicons & Mobile Web App Manifest -->
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/images/brand/logo-telkom-schools.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta name="theme-color" content="#E4002B" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={ogType} />
+<meta property="og:site_name" content="SMK Telkom Purwokerto" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={socialImageUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="id_ID" />
+
+<!-- Twitter / X Cards -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={socialImageUrl} />
+
+<!-- Structured Data (JSON-LD) -->
+<script type="application/ld+json" set:html={JSON.stringify(schoolSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+{breadcrumbSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+)}

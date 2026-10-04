@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>k6 Load Test Result — Web SMK Telkom Purwokerto</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0b0c10; color: #c5c6c7; font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif; padding: 32px; }
+  
+  .header { display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #1f2833; padding-bottom: 20px; margin-bottom: 24px; }
+  .logo-box { display: flex; align-items: center; gap: 14px; }
+  .k6-badge { background: #7b2cbf; color: #fff; font-weight: 800; font-size: 16px; padding: 8px 16px; border-radius: 6px; letter-spacing: 1.5px; }
+  .header h1 { font-size: 22px; color: #ffffff; margin-bottom: 4px; }
+  .header p { font-size: 13px; color: #8892b0; }
+  .meta-tag { background: #1f2833; color: #66fcf1; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+
+  .summary-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+  .card { background: #1f2833; border: 1px solid #2d3748; border-radius: 10px; padding: 18px 20px; }
+  .card-label { font-size: 11px; text-transform: uppercase; color: #8892b0; letter-spacing: 1px; margin-bottom: 8px; }
+  .card-value { font-size: 28px; font-weight: 800; color: #ffffff; }
+  .card-sub { font-size: 12px; color: #45f3ff; margin-top: 6px; }
+  .card.pass { border-left: 4px solid #10b981; }
+  .card.pass .card-value { color: #10b981; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+
+  .panel { background: #161b22; border: 1px solid #30363d; border-radius: 10px; padding: 22px; }
+  .panel-title { font-size: 15px; font-weight: 700; color: #ffffff; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; }
+  
+  .metric-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #21262d; }
+  .metric-row:last-child { border-bottom: none; }
+  .metric-name { font-size: 13px; color: #c5c6c7; font-family: monospace; }
+  .metric-val { font-size: 14px; font-weight: 700; color: #66fcf1; }
+  .metric-badge { font-size: 11px; padding: 2px 8px; border-radius: 4px; font-weight: 600; }
+  .badge-pass { background: #064e3b; color: #34d399; }
+  .badge-warn { background: #451a03; color: #fbbf24; }
+
+  /* Checks */
+  .check-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #21262d; font-size: 13px; }
+  .check-row:last-child { border-bottom: none; }
+  .check-title { display: flex; align-items: center; gap: 10px; color: #e6edf3; }
+  .check-icon { font-size: 15px; }
+
+  /* Terminal box */
+  .terminal-box { background: #050608; border: 1px solid #21262d; border-radius: 8px; padding: 18px; font-family: 'Consolas', 'Courier New', monospace; font-size: 12px; line-height: 1.6; color: #58a6ff; white-space: pre; overflow-x: auto; margin-top: 16px; }
+  .terminal-box .green { color: #3fb950; font-weight: bold; }
+  .terminal-box .red { color: #f85149; }
+  .terminal-box .cyan { color: #39c5bb; }
+  .terminal-box .yellow { color: #d29922; }
+
+  .footer { margin-top: 24px; padding-top: 16px; border-top: 1px solid #1f2833; font-size: 12px; color: #8892b0; display: flex; justify-content: space-between; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo-box">
+    <div class="k6-badge">k6</div>
+    <div>
+      <h1>Grafana k6 Load Test Report</h1>
+      <p>Target: Web SMK Telkom Purwokerto (http://localhost:3000) • 10 Virtual Users (VUs)</p>
+    </div>
+  </div>
+  <div class="meta-tag">30 Detik • 1.710 Permintaan</div>
+</div>
+
+<div class="summary-cards">
+  <div class="card pass">
+    <div class="card-label">Total Permintaan</div>
+    <div class="card-value">1,710</div>
+    <div class="card-sub">55.4 requests / detik</div>
+  </div>
+  <div class="card pass">
+    <div class="card-label">Latensi p(95)</div>
+    <div class="card-value">41.4 ms</div>
+    <div class="card-sub">Ambang Batas &lt; 200 ms (PASSED)</div>
+  </div>
+  <div class="card pass">
+    <div class="card-label">Median Latensi (p50)</div>
+    <div class="card-value">6.26 ms</div>
+    <div class="card-sub">Sangat responsif (&lt; 10 ms)</div>
+  </div>
+  <div class="card pass">
+    <div class="card-label">Keberhasilan Endpoint</div>
+    <div class="card-value">1,425 / 1,425</div>
+    <div class="card-sub">100% pada rute aplikasi aktif</div>
+  </div>
+</div>
+
+<div class="grid-2">
+  <!-- Latency Breakdown -->
+  <div class="panel">
+    <div class="panel-title">
+      <span>⏱ Rincian Durasi Respons (http_req_duration)</span>
+      <span class="badge-pass metric-badge">✓ Kinerja Sangat Cepat</span>
+    </div>
+    <div class="metric-row">
+      <span class="metric-name">avg (rata-rata)</span>
+      <span class="metric-val">11.17 ms</span>
+    </div>
+    <div class="metric-row">
+      <span class="metric-name">min (tercepat)</span>
+      <span class="metric-val">509.6 µs (0.5 ms)</span>
+    </div>
+    <div class="metric-row">
+      <span class="metric-name">med / p50 (tengah)</span>
+      <span class="metric-val">6.26 ms</span>
+    </div>
+    <div class="metric-row">
+      <span class="metric-name">p90 (persentil 90)</span>
+      <span class="metric-val">25.55 ms</span>
+    </div>
+    <div class="metric-row">
+      <span class="metric-name">p95 (persentil 95)</span>
+      <span class="metric-val" style="color:#34d399">41.41 ms</span>
+    </div>
+    <div class="metric-row">
+      <span class="metric-name">p99 (persentil 99)</span>
+      <span class="metric-val">83.50 ms</span>
+    </div>
+    <div class="metric-row">
+      <span class="metric-name">max (maksimal)</span>
+      <span class="metric-val">144.84 ms</span>
+    </div>
+  </div>
+
+  <!-- Route Checks -->
+  <div class="panel">
+    <div class="panel-title">
+      <span>🎯 Status Checks per Endpoint Rute</span>
+      <span class="badge-pass metric-badge">5 dari 5 Rute Aktif 100%</span>
+    </div>
+    <div class="check-row">
+      <div class="check-title"><span class="check-icon">✅</span> Halaman Utama (/)</div>
+      <span class="badge-pass metric-badge">200 OK • 100%</span>
+    </div>
+    <div class="check-row">
+      <div class="check-title"><span class="check-icon">✅</span> Endpoint Kesehatan (/api/health)</div>
+      <span class="badge-pass metric-badge">200 OK • 100%</span>
+    </div>
+    <div class="check-row">
+      <div class="check-title"><span class="check-icon">✅</span> Endpoint PKL Matching (/api/pkl)</div>
+      <span class="badge-pass metric-badge">200 OK • 100%</span>
+    </div>
+    <div class="check-row">
+      <div class="check-title"><span class="check-icon">✅</span> Halaman Jurusan (/jurusan)</div>
+      <span class="badge-pass metric-badge">200 OK • 100%</span>
+    </div>
+    <div class="check-row">
+      <div class="check-title"><span class="check-icon">✅</span> Halaman Berita (/berita)</div>
+      <span class="badge-pass metric-badge">200 OK • 100%</span>
+    </div>
+    <div class="check-row">
+      <div class="check-title"><span class="check-icon">⚠️</span> Endpoint Metrik (/api/metrics)</div>
+      <span class="badge-warn metric-badge">404 Not Found (Belum Di-mount)</span>
+    </div>
+  </div>
+</div>
+
+<!-- Raw Output -->
+<div class="panel">
+  <div class="panel-title">
+    <span>💻 Output Asli Eksekusi Terminal k6</span>
+    <span style="font-size: 12px; color: #8892b0;">k6 v0.54.0 (Windows amd64)</span>
+  </div>
+  <div class="terminal-box">
+         /\      <span class="cyan">Grafana</span>   /‾‾/  
+    /\  /  \     |\  __   /  /   
+   /  \/    \    | |/ /  /   ‾‾\ 
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/ 
+
+     execution: local
+        script: benchmarks\k6-load-test.js
+        output: -
+
+     scenarios: (100.00%) 1 scenario, 10 max VUs, 30s duration:
+              * default: 10 looping VUs for 30s (gracefulStop: 30s)
+
+     <span class="green">✓ Halaman Utama status 200</span>
+     <span class="green">✓ Endpoint Kesehatan status 200</span>
+     <span class="green">✓ Endpoint PKL status 200</span>
+     <span class="green">✓ Halaman Jurusan status 200</span>
+     <span class="green">✓ Halaman Berita status 200</span>
+     <span class="red">✗ Endpoint Metrik Prometheus status 200 (404)</span>
+
+     checks.........................: <span class="green">83.33% 1425 out of 1710</span>
+     data_received..................: 86 MB  2.8 MB/s
+     data_sent......................: 207 kB 6.7 kB/s
+   <span class="green">✓ http_req_duration..............: avg=11.17ms min=509.6µs med=6.26ms max=144.84ms p(90)=25.55ms p(95)=41.41ms</span>
+     http_reqs......................: <span class="cyan">1710   55.385532/s</span>
+     vus............................: 10     min=10 max=10
+  </div>
+</div>
+
+<div class="footer">
+  <span>Pengujian Beban Mandiri — SMK Telkom Purwokerto</span>
+  <span>Waktu Uji: 2026-10-04 23:43 WIB</span>
+</div>
+
+</body>
+</html>

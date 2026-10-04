@@ -1,0 +1,26 @@
+{
+  "name": "SMK Telkom Purwokerto",
+  "short_name": "SMK Telkom Pwt",
+  "description": "Website resmi SMK Telkom Purwokerto - School of Global Technopreneur",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#E4002B",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/brand/logo-telkom-schools.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benchmark Report — Web SMK Telkom Purwokerto</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0f1117; color: #e0e0e0; font-family: 'Inter', 'Segoe UI', sans-serif; padding: 32px; }
+
+  .header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; border-bottom: 1px solid #1f2937; padding-bottom: 20px; }
+  .grafana-logo { background: #f46800; color: white; font-weight: 700; font-size: 13px; padding: 6px 12px; border-radius: 4px; letter-spacing: 1px; }
+  .header h1 { font-size: 20px; font-weight: 600; color: #fff; }
+  .header .sub { font-size: 13px; color: #6b7280; margin-top: 2px; }
+  .badge { background: #1f2937; border: 1px solid #374151; border-radius: 4px; padding: 3px 10px; font-size: 12px; color: #9ca3af; margin-left: auto; }
+  .badge span { color: #22c55e; font-weight: 600; }
+
+  .section-title { font-size: 13px; font-weight: 600; color: #9ca3af; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; margin-top: 28px; }
+
+  /* Stat cards */
+  .cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 8px; }
+  .card { background: #161b27; border: 1px solid #1f2937; border-radius: 8px; padding: 16px 20px; }
+  .card .label { font-size: 11px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .card .value { font-size: 28px; font-weight: 700; color: #fff; line-height: 1; }
+  .card .unit { font-size: 13px; color: #6b7280; margin-left: 4px; }
+  .card.green .value { color: #22c55e; }
+  .card.red .value { color: #ef4444; }
+  .card.yellow .value { color: #f59e0b; }
+  .card.blue .value { color: #3b82f6; }
+  .card .sub-val { font-size: 12px; color: #6b7280; margin-top: 4px; }
+
+  /* Bar chart */
+  .chart-wrap { background: #161b27; border: 1px solid #1f2937; border-radius: 8px; padding: 20px; margin-bottom: 12px; }
+  .chart-title { font-size: 13px; color: #9ca3af; margin-bottom: 16px; font-weight: 600; }
+  .bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .bar-label { font-size: 12px; color: #9ca3af; width: 210px; flex-shrink: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .bar-track { flex: 1; background: #0f1117; border-radius: 3px; height: 18px; position: relative; }
+  .bar-fill { height: 100%; border-radius: 3px; transition: width 0.3s; display: flex; align-items: center; padding-left: 8px; }
+  .bar-fill.green { background: linear-gradient(90deg, #15803d, #22c55e); }
+  .bar-fill.blue { background: linear-gradient(90deg, #1d4ed8, #3b82f6); }
+  .bar-fill.orange { background: linear-gradient(90deg, #b45309, #f59e0b); }
+  .bar-fill.red { background: linear-gradient(90deg, #991b1b, #ef4444); }
+  .bar-val { font-size: 11px; color: #fff; font-weight: 600; white-space: nowrap; }
+  .bar-val-right { font-size: 12px; color: #6b7280; width: 80px; text-align: right; flex-shrink: 0; }
+
+  /* Grid 2 col */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  /* Latency percentiles */
+  .latency-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #1a2030; }
+  .latency-row:last-child { border-bottom: none; }
+  .latency-ep { font-size: 12px; color: #d1d5db; }
+  .latency-vals { display: flex; gap: 16px; }
+  .latency-pill { font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
+  .pill-avg { background: #1e3a5f; color: #60a5fa; }
+  .pill-p90 { background: #1a3320; color: #4ade80; }
+  .pill-p99 { background: #3b1f1f; color: #f87171; }
+
+  /* k6 section */
+  .k6-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .k6-metric { background: #161b27; border: 1px solid #1f2937; border-radius: 8px; padding: 14px 16px; }
+  .k6-metric .label { font-size: 11px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .k6-metric .val { font-size: 22px; font-weight: 700; color: #fff; }
+  .k6-metric .detail { font-size: 11px; color: #6b7280; margin-top: 4px; }
+  .k6-metric.pass { border-color: #166534; }
+  .k6-metric.pass .val { color: #22c55e; }
+  .k6-metric.fail { border-color: #991b1b; }
+  .k6-metric.fail .val { color: #ef4444; }
+
+  .check-list { background: #161b27; border: 1px solid #1f2937; border-radius: 8px; padding: 16px 20px; }
+  .check-item { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px solid #1a2030; font-size: 13px; }
+  .check-item:last-child { border-bottom: none; }
+  .check-icon { font-size: 16px; flex-shrink: 0; }
+  .check-name { flex: 1; color: #d1d5db; }
+  .check-pct { font-size: 12px; font-weight: 700; }
+  .pass-pct { color: #22c55e; }
+  .fail-pct { color: #ef4444; }
+
+  /* footer */
+  .footer { margin-top: 28px; padding-top: 16px; border-top: 1px solid #1f2937; font-size: 11px; color: #4b5563; display: flex; justify-content: space-between; }
+
+  .threshold-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+  .threshold-badge { font-size: 11px; padding: 3px 10px; border-radius: 4px; font-weight: 600; }
+  .pass-badge { background: #14532d; color: #4ade80; }
+  .fail-badge { background: #7f1d1d; color: #fca5a5; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="grafana-logo">GRAFANA</div>
+  <div>
+    <h1>Performance Benchmark Dashboard</h1>
+    <div class="sub">Web SMK Telkom Purwokerto — localhost:3000</div>
+  </div>
+  <div class="badge">Run: <span>2026-10-04 23:41–23:43 WIB</span></div>
+</div>
+
+<!-- ── QUICK-BENCH OVERVIEW ── -->
+<div class="section-title">Quick-Bench — 100 Concurrent Requests per Endpoint</div>
+
+<div class="cards">
+  <div class="card green">
+    <div class="label">Endpoints Passed</div>
+    <div class="value">5<span class="unit">/ 6</span></div>
+    <div class="sub-val">83.3% success rate</div>
+  </div>
+  <div class="card blue">
+    <div class="label">Best Throughput</div>
+    <div class="value">1385<span class="unit">rps</span></div>
+    <div class="sub-val">/api/metrics (cached)</div>
+  </div>
+  <div class="card">
+    <div class="label">Avg Latency (p50)</div>
+    <div class="value">225<span class="unit">ms</span></div>
+    <div class="sub-val">across 5 live endpoints</div>
+  </div>
+  <div class="card yellow">
+    <div class="label">Slowest Endpoint</div>
+    <div class="value">451<span class="unit">ms</span></div>
+    <div class="sub-val">/ (halaman utama, p99)</div>
+  </div>
+  <div class="card red">
+    <div class="label">Failed Endpoint</div>
+    <div class="value">1</div>
+    <div class="sub-val">/api/metrics (404)</div>
+  </div>
+</div>
+
+<!-- RPS Chart -->
+<div class="chart-wrap" style="margin-top:12px">
+  <div class="chart-title">📊 Throughput per Endpoint (req/s) — 100 concurrent requests</div>
+  <div class="bar-row">
+    <div class="bar-label">Endpoint Metrik Prometheus</div>
+    <div class="bar-track"><div class="bar-fill red" style="width:100%"><span class="bar-val">1385.2 req/s</span></div></div>
+    <div class="bar-val-right" style="color:#ef4444">0% success</div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">Endpoint Kesehatan</div>
+    <div class="bar-track"><div class="bar-fill green" style="width:23.6%"><span class="bar-val">327.1</span></div></div>
+    <div class="bar-val-right">100% ✓</div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">Halaman Berita</div>
+    <div class="bar-track"><div class="bar-fill green" style="width:21.7%"><span class="bar-val">300.2</span></div></div>
+    <div class="bar-val-right">100% ✓</div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">Endpoint PKL</div>
+    <div class="bar-track"><div class="bar-fill green" style="width:21.3%"><span class="bar-val">295.4</span></div></div>
+    <div class="bar-val-right">100% ✓</div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">Halaman Jurusan</div>
+    <div class="bar-track"><div class="bar-fill blue" style="width:17.8%"><span class="bar-val">246.5</span></div></div>
+    <div class="bar-val-right">100% ✓</div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">Halaman Utama</div>
+    <div class="bar-track"><div class="bar-fill orange" style="width:5.8%"><span class="bar-val">80.4</span></div></div>
+    <div class="bar-val-right">100% ✓</div>
+  </div>
+</div>
+
+<!-- Latency detail -->
+<div class="chart-wrap">
+  <div class="chart-title">⏱ Latency Detail per Endpoint (avg / p90 / p99)</div>
+  <div class="latency-row" style="border-bottom:1px solid #374151; margin-bottom:4px; padding-bottom:8px;">
+    <div class="latency-ep" style="color:#6b7280; font-size:11px; text-transform:uppercase;">Endpoint</div>
+    <div class="latency-vals">
+      <span class="latency-pill pill-avg">AVG</span>
+      <span class="latency-pill pill-p90">P90</span>
+      <span class="latency-pill pill-p99">P99</span>
+    </div>
+  </div>
+  <div class="latency-row">
+    <div class="latency-ep">Endpoint Kesehatan</div>
+    <div class="latency-vals">
+      <span class="latency-pill pill-avg">198.2ms</span>
+      <span class="latency-pill pill-p90">207.8ms</span>
+      <span class="latency-pill pill-p99">241.0ms</span>
+    </div>
+  </div>
+  <div class="latency-row">
+    <div class="latency-ep">Endpoint PKL</div>
+    <div class="latency-vals">
+      <span class="latency-pill pill-avg">224.3ms</span>
+      <span class="latency-pill pill-p90">319.7ms</span>
+      <span class="latency-pill pill-p99">326.9ms</span>
+    </div>
+  </div>
+  <div class="latency-row">
+    <div class="latency-ep">Halaman Utama</div>
+    <div class="latency-vals">
+      <span class="latency-pill pill-avg">259.9ms</span>
+      <span class="latency-pill pill-p90">421.7ms</span>
+      <span class="latency-pill pill-p99">451.0ms</span>
+    </div>
+  </div>
+  <div class="latency-row">
+    <div class="latency-ep">Halaman Jurusan</div>
+    <div class="latency-vals">
+      <span class="latency-pill pill-avg">237.1ms</span>
+      <span class="latency-pill pill-p90">376.2ms</span>
+      <span class="latency-pill pill-p99">395.8ms</span>
+    </div>
+  </div>
+  <div class="latency-row">
+    <div class="latency-ep">Halaman Berita</div>
+    <div class="latency-vals">
+      <span class="latency-pill pill-avg">214.0ms</span>
+      <span class="latency-pill pill-p90">305.7ms</span>
+      <span class="latency-pill pill-p99">325.0ms</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── K6 LOAD TEST ── -->
+<div class="section-title">k6 Load Test — 10 VUs × 30 detik (1710 total requests)</div>
+
+<div class="k6-grid">
+  <div class="k6-metric pass">
+    <div class="label">Total Requests</div>
+    <div class="val">1,710</div>
+    <div class="detail">285 iterations × 6 endpoints</div>
+  </div>
+  <div class="k6-metric pass">
+    <div class="label">Throughput</div>
+    <div class="val">55.4 rps</div>
+    <div class="detail">9.23 iterations/s</div>
+  </div>
+  <div class="k6-metric pass">
+    <div class="label">http_req_duration p(95)</div>
+    <div class="val">41.4ms</div>
+    <div class="detail">✓ PASSED — threshold &lt; 200ms</div>
+  </div>
+  <div class="k6-metric fail">
+    <div class="label">http_req_failed</div>
+    <div class="val">16.66%</div>
+    <div class="detail">✗ FAILED — /api/metrics 404</div>
+  </div>
+</div>
+
+<div class="grid2" style="margin-top:12px">
+  <!-- Latency breakdown k6 -->
+  <div class="chart-wrap" style="margin-bottom:0">
+    <div class="chart-title">⚡ k6 Request Duration Breakdown</div>
+    <div class="bar-row">
+      <div class="bar-label">avg</div>
+      <div class="bar-track"><div class="bar-fill green" style="width:7.7%"><span class="bar-val">11.17ms</span></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">median (p50)</div>
+      <div class="bar-track"><div class="bar-fill green" style="width:4.3%"><span class="bar-val">6.26ms</span></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">p(90)</div>
+      <div class="bar-track"><div class="bar-fill blue" style="width:17.6%"><span class="bar-val">25.55ms</span></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">p(95)</div>
+      <div class="bar-track"><div class="bar-fill orange" style="width:28.5%"><span class="bar-val">41.41ms</span></div></div>
+    </div>
+    <div class="bar-row">
+      <div class="bar-label">max</div>
+      <div class="bar-track"><div class="bar-fill red" style="width:100%"><span class="bar-val">144.84ms</span></div></div>
+    </div>
+    <div class="threshold-row">
+      <span class="threshold-badge pass-badge">✓ p95 &lt; 200ms — PASSED</span>
+      <span class="threshold-badge pass-badge">✓ p99 &lt; 400ms — PASSED</span>
+      <span class="threshold-badge fail-badge">✗ failed_rate &lt; 1% — FAILED</span>
+    </div>
+  </div>
+
+  <!-- Checks -->
+  <div class="check-list">
+    <div class="chart-title">✅ k6 Checks per Endpoint</div>
+    <div class="check-item">
+      <span class="check-icon">✅</span>
+      <span class="check-name">Halaman Utama status 200</span>
+      <span class="check-pct pass-pct">100%</span>
+    </div>
+    <div class="check-item">
+      <span class="check-icon">✅</span>
+      <span class="check-name">Endpoint Kesehatan status 200</span>
+      <span class="check-pct pass-pct">100%</span>
+    </div>
+    <div class="check-item">
+      <span class="check-icon">✅</span>
+      <span class="check-name">Endpoint PKL status 200</span>
+      <span class="check-pct pass-pct">100%</span>
+    </div>
+    <div class="check-item">
+      <span class="check-icon">✅</span>
+      <span class="check-name">Halaman Jurusan status 200</span>
+      <span class="check-pct pass-pct">100%</span>
+    </div>
+    <div class="check-item">
+      <span class="check-icon">✅</span>
+      <span class="check-name">Halaman Berita status 200</span>
+      <span class="check-pct pass-pct">100%</span>
+    </div>
+    <div class="check-item">
+      <span class="check-icon">❌</span>
+      <span class="check-name">Endpoint Metrik Prometheus status 200</span>
+      <span class="check-pct fail-pct">0%</span>
+    </div>
+    <div style="margin-top:10px; padding-top:10px; border-top:1px solid #1f2937; font-size:12px; color:#6b7280;">
+      Total checks: 1425 passed / 285 failed — <strong style="color:#f59e0b">83.33%</strong><br>
+      <span style="font-size:11px;">⚠ /api/metrics route belum aktif di server — bukan error performa</span>
+    </div>
+  </div>
+</div>
+
+<!-- Network -->
+<div class="cards" style="margin-top:12px; grid-template-columns: repeat(4,1fr)">
+  <div class="card">
+    <div class="label">Data Received</div>
+    <div class="value">86<span class="unit">MB</span></div>
+    <div class="sub-val">2.8 MB/s</div>
+  </div>
+  <div class="card">
+    <div class="label">Data Sent</div>
+    <div class="value">207<span class="unit">kB</span></div>
+    <div class="sub-val">6.7 kB/s</div>
+  </div>
+  <div class="card">
+    <div class="label">http_req_waiting avg</div>
+    <div class="value">8.8<span class="unit">ms</span></div>
+    <div class="sub-val">TTFB average</div>
+  </div>
+  <div class="card blue">
+    <div class="label">Iteration Duration</div>
+    <div class="value">1.06<span class="unit">s</span></div>
+    <div class="sub-val">p95: 1.19s</div>
+  </div>
+</div>
+
+<!-- PageSpeed note -->
+<div class="section-title">PageSpeed Insights</div>
+<div class="chart-wrap">
+  <div style="display:flex; align-items:center; gap:12px; color:#f59e0b; font-size:13px; font-weight:600; margin-bottom:8px;">
+    ⚠ PageSpeed Insights memerlukan URL publik
+  </div>
+  <div style="font-size:12px; color:#9ca3af; line-height:1.7;">
+    Google PageSpeed Insights tidak dapat mengakses <code style="background:#0f1117; padding:2px 6px; border-radius:3px; color:#60a5fa;">localhost:3000</code>.<br>
+    Deploy ke server/VPS dengan domain publik terlebih dahulu, lalu jalankan:<br>
+    <code style="background:#0f1117; padding:4px 10px; border-radius:3px; color:#4ade80; display:inline-block; margin-top:6px;">
+      curl "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://yourdomain.com&strategy=mobile"
+    </code><br>
+    Atau gunakan Lighthouse CLI: <code style="background:#0f1117; padding:2px 6px; border-radius:3px; color:#60a5fa;">npx lighthouse http://localhost:3000 --output html</code>
+  </div>
+</div>
+
+<div class="footer">
+  <span>Dihasilkan oleh Antigravity Benchmark Runner — Web SMK Telkom Purwokerto</span>
+  <span>2026-10-04 23:43 WIB | Node.js v26.7.0 | k6 v0.54.0</span>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+# SMK Telkom Purwokerto
+
+> SMK Telkom Purwokerto adalah sekolah menengah kejuruan terakreditasi A di Purwokerto, Jawa Tengah, di bawah naungan Yayasan Pendidikan Telkom (YPT). Berfokus pada pendidikan vokasi teknologi digital, industri telekomunikasi, dan rekayasa perangkat lunak.
+
+## Program Keahlian (Jurusan)
+- [Rekayasa Perangkat Lunak (RPL)](/jurusan): Pemrograman web, mobile apps, database, dan AI integration.
+- [Pengembangan Gim (PG)](/jurusan): Pemodelan 3D, animasi, game design, dan game engine development.
+- [Teknik Komputer & Jaringan (TJKT/TKJ)](/jurusan): Cloud computing, routing Cisco & MikroTik, administrasi server Linux, dan keamanan jaringan.
+- [Teknik Jaringan Akses Telekomunikasi (TJA)](/jurusan): Jaringan serat optik (FTTH, OTDR, splicing), transmisi radio seluler, dan infrastruktur telekomunikasi.
+
+## Layanan & Fitur Utama
+- [Beranda](/)
+- [Profil Sekolah](/profile-sekolah)
+- [Guru & Pimpinan](/profile-guru)
+- [Fasilitas & Lab 3D](/fasilitas)
+- [Ekstrakurikuler](/ekstrakurikuler)
+- [Prestasi Siswa](/prestasi)
+- [Berita & Pengumuman](/berita)
+- [AI PKL Matching](/pkl-matching): Sistem pencocokan lowongan PKL berbasis kecerdasan buatan.
+- [CV Generator](/cv-generator): Generator resume ATS-friendly dengan ekspor PDF.
+
+## Informasi Kontak
+- Alamat: Jl. D.I. Panjaitan No. 128, Purwokerto Selatan, Banyumas, Jawa Tengah 53147
+- Telepon: 0812-2970-1800
+- Surel: office@smktelkom-pwt.sch.id
+- Website Resmi: https://smktelkom-pwt.sch.id
