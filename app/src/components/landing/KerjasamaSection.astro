@@ -1,7 +1,7 @@
 ---
 import Container from "../Container.astro";
 
-const partners = [
+const defaultPartners = [
   { name: "Dinkominfo Banyumas", logo: "/images/mitra/mitra-telkom.png", scale: 1.28 },
   { name: "Bank Jateng", logo: "/images/mitra/mitra-oracle.png", scale: 1.0 },
   { name: "PLN Indonesia Power", logo: "/images/mitra/mitra-pln.png", scale: 1.7 },
@@ -10,6 +10,25 @@ const partners = [
   { name: "METRODATA", logo: "/images/mitra/mitra-redhat.png", scale: 1.35 },
   { name: "Dicoding", logo: "/images/mitra/mitra-aws.png", scale: 1.65 },
 ];
+
+let partners = defaultPartners;
+
+try {
+  const { prisma } = await import("../../server/lib/prisma.js");
+  const dbPartners = await prisma.industryPartner.findMany({
+    orderBy: { order: "asc" },
+  });
+
+  if (dbPartners && dbPartners.length > 0) {
+    partners = dbPartners.map((p) => ({
+      name: p.name,
+      logo: p.logoUrl,
+      scale: p.scale ?? 1.0,
+    }));
+  }
+} catch {
+  // Gunakan data default jika database offline atau belum terisi
+}
 ---
 
 <section class="py-6 sm:py-7 bg-white border-y border-slate-100 overflow-hidden" id="kerjasama">
@@ -37,6 +56,8 @@ const partners = [
               alt={partner.name}
               class="max-w-[150px] max-h-[52px] w-auto h-auto object-contain block select-none pointer-events-none [transform-origin:center] drop-shadow-[0_1px_3px_rgba(0,0,0,0.04)]"
               style={`transform: scale(${partner.scale});`}
+              width="150"
+              height="52"
               loading="lazy"
               decoding="async"
             />

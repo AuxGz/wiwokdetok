@@ -2,8 +2,8 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/Container.astro";
 
-// 6 Kegiatan Ekstrakurikuler exact from Figma frame #682:1059
-const ekskulList = [
+// 6 Kegiatan Ekstrakurikuler exact from Figma frame #682:1059 (fallback default)
+const defaultEkskulList = [
   {
     name: "Badminton",
     image: "/images/kegiatan/kegiatan-seni.png",
@@ -41,6 +41,26 @@ const ekskulList = [
     icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />`
   }
 ];
+
+let ekskulList = defaultEkskulList;
+
+try {
+  const { prisma } = await import("../server/lib/prisma.js");
+  const dbEkskul = await prisma.extracurricular.findMany({
+    orderBy: { order: "asc" },
+  });
+
+  if (dbEkskul && dbEkskul.length > 0) {
+    ekskulList = dbEkskul.map((e, idx) => ({
+      name: e.name,
+      image: e.imageUrl || defaultEkskulList[idx % defaultEkskulList.length]?.image || "/images/kegiatan/kegiatan-seni.png",
+      desc: e.description,
+      icon: e.icon || defaultEkskulList[idx % defaultEkskulList.length]?.icon || defaultEkskulList[0].icon,
+    }));
+  }
+} catch {
+  // Gunakan data default jika database offline atau belum terisi
+}
 ---
 
 <BaseLayout
@@ -54,7 +74,11 @@ const ekskulList = [
       src="/images/kegiatan/extrakurikuler-banner.png"
       alt="Kegiatan Ekstrakurikuler SMK Telkom Purwokerto"
       class="absolute inset-0 w-full h-full object-cover object-center"
+      width="1920"
+      height="420"
       loading="eager"
+      fetchpriority="high"
+      decoding="async"
     />
     
     <!-- Exact Gradient Overlay from Figma: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.55) 50%, rgba(0, 0, 0, 0.7) 100%) -->
@@ -99,7 +123,10 @@ const ekskulList = [
                 src={item.image}
                 alt={item.name}
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                width="400"
+                height="275"
                 loading="lazy"
+                decoding="async"
               />
             </div>
 

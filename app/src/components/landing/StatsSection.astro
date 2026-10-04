@@ -1,7 +1,7 @@
 ---
 import Container from "../Container.astro";
 
-const stats = [
+const defaultStats = [
   {
     number: "910+",
     display: "910+",
@@ -23,6 +23,45 @@ const stats = [
     label: "Prestasi (5 thn)",
   },
 ];
+
+let stats = defaultStats.map((s) => ({ ...s }));
+
+try {
+  const { prisma } = await import("../../server/lib/prisma.js");
+  const settings = await prisma.systemSetting.findMany({
+    where: {
+      key: {
+        in: ["stats_siswa", "stats_jurusan", "stats_mitra", "stats_prestasi"],
+      },
+    },
+  });
+
+  if (settings && settings.length > 0) {
+    const valMap: Record<string, string> = {};
+    for (const s of settings) {
+      if (s.value) valMap[s.key] = s.value;
+    }
+
+    if (valMap.stats_siswa) {
+      stats[0].number = valMap.stats_siswa;
+      stats[0].display = valMap.stats_siswa;
+    }
+    if (valMap.stats_jurusan) {
+      stats[1].number = valMap.stats_jurusan;
+      stats[1].display = valMap.stats_jurusan;
+    }
+    if (valMap.stats_mitra) {
+      stats[2].number = valMap.stats_mitra;
+      stats[2].display = valMap.stats_mitra;
+    }
+    if (valMap.stats_prestasi) {
+      stats[3].number = valMap.stats_prestasi;
+      stats[3].display = valMap.stats_prestasi;
+    }
+  }
+} catch {
+  // Gunakan data default jika database offline atau belum terisi
+}
 ---
 
 <section class="pt-6 pb-16 bg-white" id="stats">

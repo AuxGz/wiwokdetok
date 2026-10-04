@@ -27,8 +27,12 @@ function sanitizeGatewayUrl(val: string): string {
 }
 
 function sanitizeAiModel(val: string): string {
-  if (!val) return "nvidia/nemotron-3.5-lightning:free";
+  if (!val) return "kimi-k2.7";
   const trimmed = val.trim();
+  const lower = trimmed.toLowerCase();
+  if (lower === "kimi 2.7" || lower === "kimi-2.7" || lower === "kimi-k2.7") {
+    return "kimi-k2.7";
+  }
   if (trimmed === "nemotron-3.5-lightning" || trimmed === "nvidia/nemotron-3.5-lightning") {
     return "nvidia/nemotron-3.5-lightning:free";
   }
@@ -54,7 +58,7 @@ const envSchema = z.object({
   // AI Chat Provider (OpenAI Chat Completions-compatible)
   AI_BASE_URL: z.string().default("https://api.openai.com").transform(sanitizeGatewayUrl),
   AI_API_KEY: z.string().default(""),
-  AI_MODEL: z.string().default("nvidia/nemotron-3.5-lightning:free").transform(sanitizeAiModel),
+  AI_MODEL: z.string().default("kimi-k2.7").transform(sanitizeAiModel),
   AI_TIMEOUT_MS: z.coerce.number().default(60000),
 
   // Embedding Provider (otomatis fallback ke AI_BASE_URL & AI_API_KEY jika dikosongkan)

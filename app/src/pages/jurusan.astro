@@ -2,8 +2,8 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/Container.astro";
 
-// Data Program Keahlian exact from Figma (1:1 fidelity)
-const majorsData = {
+// Data Program Keahlian exact from Figma (fallback default)
+const defaultMajorsData = {
   pg: {
     code: "PG",
     number: "02",
@@ -81,6 +81,52 @@ const majorsData = {
     ]
   }
 };
+
+let majorsData = { ...defaultMajorsData };
+
+try {
+  const { prisma } = await import("../server/lib/prisma.js");
+  const dbMajors = await prisma.schoolMajor.findMany({
+    orderBy: { order: "asc" },
+  });
+
+  if (dbMajors && dbMajors.length > 0) {
+    for (const m of dbMajors) {
+      const codeKey = (m.code || "").toLowerCase();
+      if (majorsData[codeKey as keyof typeof defaultMajorsData]) {
+        const cur = majorsData[codeKey as keyof typeof defaultMajorsData];
+        let titleHighlight = cur.titleHighlight;
+        let titleWord = cur.titleWord;
+        if (m.headlineTitle) {
+          const parts = m.headlineTitle.trim().split(" ");
+          titleHighlight = parts[0] || cur.titleHighlight;
+          titleWord = parts.slice(1).join(" ") || cur.titleWord;
+        }
+
+        let parsedBadges = cur.badges;
+        if (m.competencies && Array.isArray(m.competencies)) {
+          parsedBadges = m.competencies.map((c: any) =>
+            typeof c === "string" ? { text: c, icon: "code" } : { text: c.text || c.name || "", icon: c.icon || "code" }
+          );
+        }
+
+        majorsData[codeKey as keyof typeof defaultMajorsData] = {
+          ...cur,
+          shortName: m.name || cur.shortName,
+          titleHighlight,
+          titleWord,
+          tagline: m.tagline || cur.tagline,
+          desc: m.description || cur.desc,
+          image: m.imageUrl || cur.image,
+          cardTags: m.cardTags && m.cardTags.length > 0 ? m.cardTags : cur.cardTags,
+          badges: parsedBadges.length > 0 ? parsedBadges : cur.badges,
+        };
+      }
+    }
+  }
+} catch {
+  // Gunakan data default jika database offline atau belum terisi
+}
 ---
 
 <BaseLayout
@@ -227,7 +273,10 @@ const majorsData = {
                   src={item.image}
                   alt={item.shortName}
                   class="relative z-10 w-full h-full object-contain drop-shadow-2xl"
+                  width="480"
+                  height="600"
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>

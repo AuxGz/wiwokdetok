@@ -55,7 +55,19 @@ export const ModelName = {
   ChatSession: 'ChatSession',
   ChatMessage: 'ChatMessage',
   KnowledgeDocument: 'KnowledgeDocument',
-  KnowledgeChunk: 'KnowledgeChunk'
+  KnowledgeChunk: 'KnowledgeChunk',
+  AdminUser: 'AdminUser',
+  AdminSession: 'AdminSession',
+  NewsArticle: 'NewsArticle',
+  SchoolMajor: 'SchoolMajor',
+  TeacherLeader: 'TeacherLeader',
+  StudentAchievement: 'StudentAchievement',
+  SchoolFacility: 'SchoolFacility',
+  Extracurricular: 'Extracurricular',
+  IndustryPartner: 'IndustryPartner',
+  PklListing: 'PklListing',
+  AlumniStory: 'AlumniStory',
+  FaqItem: 'FaqItem'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -129,6 +141,194 @@ export const KnowledgeChunkScalarFieldEnum = {
 } as const
 
 export type KnowledgeChunkScalarFieldEnum = (typeof KnowledgeChunkScalarFieldEnum)[keyof typeof KnowledgeChunkScalarFieldEnum]
+
+
+export const AdminUserScalarFieldEnum = {
+  id: 'id',
+  username: 'username',
+  email: 'email',
+  passwordHash: 'passwordHash',
+  name: 'name',
+  role: 'role',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AdminUserScalarFieldEnum = (typeof AdminUserScalarFieldEnum)[keyof typeof AdminUserScalarFieldEnum]
+
+
+export const AdminSessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  token: 'token',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type AdminSessionScalarFieldEnum = (typeof AdminSessionScalarFieldEnum)[keyof typeof AdminSessionScalarFieldEnum]
+
+
+export const NewsArticleScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  category: 'category',
+  date: 'date',
+  excerpt: 'excerpt',
+  content: 'content',
+  imageUrl: 'imageUrl',
+  isFeatured: 'isFeatured',
+  isPublished: 'isPublished',
+  order: 'order',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type NewsArticleScalarFieldEnum = (typeof NewsArticleScalarFieldEnum)[keyof typeof NewsArticleScalarFieldEnum]
+
+
+export const SchoolMajorScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  name: 'name',
+  headlineTitle: 'headlineTitle',
+  tagline: 'tagline',
+  description: 'description',
+  imageUrl: 'imageUrl',
+  cardTags: 'cardTags',
+  competencies: 'competencies',
+  careerProspects: 'careerProspects',
+  order: 'order',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SchoolMajorScalarFieldEnum = (typeof SchoolMajorScalarFieldEnum)[keyof typeof SchoolMajorScalarFieldEnum]
+
+
+export const TeacherLeaderScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  position: 'position',
+  sectionId: 'sectionId',
+  sectionBadge: 'sectionBadge',
+  sectionTitle: 'sectionTitle',
+  imageUrl: 'imageUrl',
+  order: 'order',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TeacherLeaderScalarFieldEnum = (typeof TeacherLeaderScalarFieldEnum)[keyof typeof TeacherLeaderScalarFieldEnum]
+
+
+export const StudentAchievementScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  category: 'category',
+  badge: 'badge',
+  meta: 'meta',
+  description: 'description',
+  year: 'year',
+  order: 'order',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StudentAchievementScalarFieldEnum = (typeof StudentAchievementScalarFieldEnum)[keyof typeof StudentAchievementScalarFieldEnum]
+
+
+export const SchoolFacilityScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  badge: 'badge',
+  description: 'description',
+  imageUrl: 'imageUrl',
+  isPanorama: 'isPanorama',
+  icon: 'icon',
+  order: 'order',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SchoolFacilityScalarFieldEnum = (typeof SchoolFacilityScalarFieldEnum)[keyof typeof SchoolFacilityScalarFieldEnum]
+
+
+export const ExtracurricularScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  imageUrl: 'imageUrl',
+  icon: 'icon',
+  order: 'order',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ExtracurricularScalarFieldEnum = (typeof ExtracurricularScalarFieldEnum)[keyof typeof ExtracurricularScalarFieldEnum]
+
+
+export const IndustryPartnerScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  logoUrl: 'logoUrl',
+  scale: 'scale',
+  category: 'category',
+  order: 'order',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type IndustryPartnerScalarFieldEnum = (typeof IndustryPartnerScalarFieldEnum)[keyof typeof IndustryPartnerScalarFieldEnum]
+
+
+export const PklListingScalarFieldEnum = {
+  id: 'id',
+  company: 'company',
+  initials: 'initials',
+  logoBg: 'logoBg',
+  location: 'location',
+  workMode: 'workMode',
+  title: 'title',
+  tags: 'tags',
+  description: 'description',
+  major: 'major',
+  isOpen: 'isOpen',
+  order: 'order',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PklListingScalarFieldEnum = (typeof PklListingScalarFieldEnum)[keyof typeof PklListingScalarFieldEnum]
+
+
+export const AlumniStoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  role: 'role',
+  quote: 'quote',
+  imageUrl: 'imageUrl',
+  graduationYear: 'graduationYear',
+  order: 'order',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AlumniStoryScalarFieldEnum = (typeof AlumniStoryScalarFieldEnum)[keyof typeof AlumniStoryScalarFieldEnum]
+
+
+export const FaqItemScalarFieldEnum = {
+  id: 'id',
+  question: 'question',
+  answer: 'answer',
+  category: 'category',
+  order: 'order',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FaqItemScalarFieldEnum = (typeof FaqItemScalarFieldEnum)[keyof typeof FaqItemScalarFieldEnum]
 
 
 export const SortOrder = {

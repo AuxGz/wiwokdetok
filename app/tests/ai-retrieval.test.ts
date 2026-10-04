@@ -1,5 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { retrieveRelevantChunks } from "../src/server/modules/ai/retrieval.service.js";
+import {
+  retrieveRelevantChunks,
+  retrieveRelevantChunksByKeyword,
+} from "../src/server/modules/ai/retrieval.service.js";
 import { extractSources } from "../src/server/modules/ai/sources.js";
 import { prisma } from "../src/server/lib/prisma.js";
 
@@ -78,5 +81,48 @@ describe("NEXEL AI Retrieval & Scope Gate Tests", () => {
     expect(result.isRelevant).toBe(false);
     expect(result.bestSimilarity).toBe(0);
     expect(result.chunks).toEqual([]);
+  });
+
+  it("ranks jurusan.md at the top when searching for majors with institutional keywords", async () => {
+    const mockRows = [
+      {
+        id: "chunk-sekolah",
+        documentId: "doc-sekolah",
+        chunkIndex: 0,
+        content: "SMK Telkom Purwokerto adalah sekolah kejuruan di Purwokerto.",
+        metadata: {},
+        documentTitle: "Profil SMK Telkom Purwokerto",
+        documentSource: "sekolah.md",
+      },
+      {
+        id: "chunk-fasilitas",
+        documentId: "doc-fasilitas",
+        chunkIndex: 0,
+        content: "Fasilitas lengkap SMK Telkom Purwokerto untuk mendukung pembelajaran di sekolah.",
+        metadata: {},
+        documentTitle: "Fasilitas Sekolah SMK Telkom Purwokerto",
+        documentSource: "fasilitas.md",
+      },
+      {
+        id: "chunk-jurusan",
+        documentId: "doc-jurusan",
+        chunkIndex: 0,
+        content: "SMK Telkom Purwokerto memiliki 4 program keahlian unggulan: RPL, PG, TKJ, dan TJA.",
+        metadata: {},
+        documentTitle: "Program Keahlian (Jurusan) SMK Telkom Purwokerto",
+        documentSource: "jurusan.md",
+      },
+    ];
+
+    vi.spyOn(prisma, "$queryRaw").mockResolvedValueOnce(mockRows as never);
+
+    const result = await retrieveRelevantChunksByKeyword(
+      "Jurusan apa saja yang tersedia di SMK Telkom Purwokerto?"
+    );
+
+    expect(result.isRelevant).toBe(true);
+    expect(result.chunks.length).toBeGreaterThan(0);
+    expect(result.chunks[0].documentSource).toBe("jurusan.md");
+    expect(result.chunks[0].documentTitle).toContain("Jurusan");
   });
 });

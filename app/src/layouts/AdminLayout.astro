@@ -1,0 +1,309 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  activeModule?: string;
+}
+
+const {
+  title = "Dasbor Admin - SMK Telkom Purwokerto",
+  activeModule = "dashboard",
+} = Astro.props;
+
+const navItems = [
+  { key: "dashboard", label: "Ringkasan Dasbor", href: "/admin", icon: "dashboard" },
+  { key: "berita", label: "Berita & Agenda", href: "/admin/berita", icon: "newspaper" },
+  { key: "jurusan", label: "Program Keahlian", href: "/admin/jurusan", icon: "book" },
+  { key: "guru", label: "Dewan Guru & Pimpinan", href: "/admin/guru", icon: "users" },
+  { key: "fasilitas", label: "Fasilitas & Lab 3D", href: "/admin/fasilitas", icon: "building" },
+  { key: "prestasi", label: "Prestasi Siswa", href: "/admin/prestasi", icon: "award" },
+  { key: "ekstrakurikuler", label: "Ekstrakurikuler", href: "/admin/ekstrakurikuler", icon: "activity" },
+  { key: "mitra", label: "Mitra Industri", href: "/admin/mitra", icon: "handshake" },
+  { key: "pkl", label: "Lowongan PKL", href: "/admin/pkl", icon: "briefcase" },
+  { key: "alumni", label: "Cerita Alumni", href: "/admin/alumni", icon: "graduation" },
+  { key: "faq", label: "Pertanyaan (FAQ)", href: "/admin/faq", icon: "help" },
+  { key: "pengaturan", label: "Pengaturan Website", href: "/admin/pengaturan", icon: "settings" },
+  { key: "ai-sync", label: "Sinkronisasi AI", href: "/admin/ai-sync", icon: "cpu" },
+];
+---
+
+<!doctype html>
+<html lang="id" class="h-full bg-neutral-100">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <link rel="icon" type="image/png" href="/images/brand/logo-telkom-schools.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="h-full flex text-neutral-800 font-sans antialiased">
+    <!-- Sidebar Desktop & Mobile Overlay -->
+    <div
+      id="sidebar-overlay"
+      class="fixed inset-0 bg-black/50 z-40 lg:hidden hidden transition-opacity"
+      aria-hidden="true"
+    ></div>
+
+    <aside
+      id="admin-sidebar"
+      class="fixed inset-y-0 left-0 z-50 w-72 bg-neutral-900 text-white flex flex-col transition-transform duration-300 -translate-x-full lg:translate-x-0"
+    >
+      <!-- Brand Header -->
+      <div class="h-20 px-6 border-b border-neutral-800 flex items-center justify-between">
+        <a href="/admin" class="flex items-center gap-3">
+          <img
+            src="/images/brand/logo-telkom-schools.png"
+            alt="Logo SMK Telkom"
+            class="w-9 h-9 object-contain"
+            width="36"
+            height="36"
+            decoding="async"
+          />
+          <div>
+            <div class="font-bold text-sm text-white tracking-tight">SMK Telkom</div>
+            <div class="text-[11px] font-semibold text-[#E31E24] tracking-widest uppercase">Admin Panel</div>
+          </div>
+        </a>
+
+        <!-- Mobile Close Button -->
+        <button
+          id="close-sidebar-btn"
+          class="lg:hidden p-1.5 text-neutral-400 hover:text-white rounded-lg hover:bg-neutral-800 transition-colors"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Navigation Links (12 Modul) -->
+      <div class="flex-1 overflow-y-auto py-4 px-3 space-y-1">
+        <div class="px-3 pb-2 text-[10px] font-bold uppercase tracking-wider text-neutral-400">
+          Modul Konten & Sistem
+        </div>
+
+        {
+          navItems.map((item) => {
+            const isActive = activeModule === item.key;
+            return (
+              <a
+                href={item.href}
+                class={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all ${
+                  isActive
+                    ? "bg-[#E31E24] text-white shadow-md shadow-red-600/30 font-bold"
+                    : "text-neutral-300 hover:bg-neutral-800/80 hover:text-white"
+                }`}
+              >
+                <span class="w-5 h-5 flex items-center justify-center shrink-0">
+                  {item.icon === "dashboard" && (
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                    </svg>
+                  )}
+                  {item.icon === "newspaper" && (
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                    </svg>
+                  )}
+                  {item.icon === "book" && (
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                  )}
+                  {item.icon === "users" && (
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                  )}
+                  {item.icon === "building" && (
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                  )}
+                  {item.icon === "award" && (
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                    </svg>
+                  )}
+                  {item.icon === "activity" && (
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  )}
+                  {item.icon === "handshake" && (
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  )}
+                  {item.icon === "briefcase" && (
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  )}
+                  {item.icon === "graduation" && (
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5" />
+                    </svg>
+                  )}
+                  {item.icon === "help" && (
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  )}
+                  {item.icon === "settings" && (
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  )}
+                  {item.icon === "cpu" && (
+                    <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                    </svg>
+                  )}
+                </span>
+                <span>{item.label}</span>
+              </a>
+            );
+          })
+        }
+      </div>
+
+      <!-- User Profile & Quick Links -->
+      <div class="p-4 border-t border-neutral-800 bg-neutral-950/60 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-[#E31E24] text-white flex items-center justify-center font-bold text-xs">
+            A
+          </div>
+          <div>
+            <div class="text-xs font-bold text-white leading-tight">Admin Utama</div>
+            <div class="text-[10px] text-emerald-400 flex items-center gap-1 font-medium">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              <span>Online</span>
+            </div>
+          </div>
+        </div>
+
+        <button
+          id="logout-btn"
+          title="Keluar dari sesi admin"
+          class="p-2 text-neutral-400 hover:text-red-400 hover:bg-neutral-800 rounded-lg transition-colors"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Layout Area -->
+    <div class="flex-1 flex flex-col min-w-0 lg:pl-72">
+      <!-- Top Navbar -->
+      <header class="h-20 bg-white border-b border-neutral-200 px-4 sm:px-8 flex items-center justify-between sticky top-0 z-30 shadow-xs">
+        <div class="flex items-center gap-4">
+          <!-- Mobile Sidebar Toggle -->
+          <button
+            id="open-sidebar-btn"
+            class="lg:hidden p-2 text-neutral-600 hover:text-neutral-900 rounded-lg hover:bg-neutral-100"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+
+          <div>
+            <h1 class="text-base sm:text-lg font-bold text-neutral-900 tracking-tight">
+              {title}
+            </h1>
+            <p class="text-xs text-neutral-500 hidden sm:block">
+              Sistem Manajemen Konten Terintegrasi SMK Telkom Purwokerto
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <a
+            href="/"
+            target="_blank"
+            class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold text-neutral-700 bg-neutral-100 hover:bg-neutral-200 transition-colors"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+            <span>Buka Website</span>
+          </a>
+
+          <button
+            id="header-logout-btn"
+            class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold text-red-600 bg-red-50 hover:bg-red-100 transition-colors"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+            <span>Logout</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Slot -->
+      <main class="flex-1 p-4 sm:p-8 overflow-y-auto">
+        <slot />
+      </main>
+    </div>
+
+    <!-- Client-side Session Verification & UI Scripts -->
+    <script>
+      // Auth Guard
+      async function verifyAdminAuth() {
+        try {
+          const res = await fetch("/api/admin/auth/me");
+          if (!res.ok && res.status === 401) {
+            window.location.href = "/admin/login";
+          }
+        } catch {
+          // Abaikan offline dev guard
+        }
+      }
+      verifyAdminAuth();
+
+      // Logout handler
+      async function handleLogout() {
+        try {
+          await fetch("/api/admin/auth/logout", { method: "POST" });
+        } catch (e) {
+          console.warn("Logout error:", e);
+        }
+        window.location.href = "/admin/login";
+      }
+
+      document.getElementById("logout-btn")?.addEventListener("click", handleLogout);
+      document.getElementById("header-logout-btn")?.addEventListener("click", handleLogout);
+
+      // Mobile Sidebar Toggle
+      const sidebar = document.getElementById("admin-sidebar");
+      const overlay = document.getElementById("sidebar-overlay");
+      const openBtn = document.getElementById("open-sidebar-btn");
+      const closeBtn = document.getElementById("close-sidebar-btn");
+
+      function openSidebar() {
+        sidebar?.classList.remove("-translate-x-full");
+        overlay?.classList.remove("hidden");
+      }
+
+      function closeSidebar() {
+        sidebar?.classList.add("-translate-x-full");
+        overlay?.classList.add("hidden");
+      }
+
+      openBtn?.addEventListener("click", openSidebar);
+      closeBtn?.addEventListener("click", closeSidebar);
+      overlay?.addEventListener("click", closeSidebar);
+    </script>
+  </body>
+</html>

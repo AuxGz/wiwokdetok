@@ -72,7 +72,7 @@ export async function streamChatCompletion(
         model,
         messages: options.messages,
         stream: true,
-        temperature: options.temperature ?? 0.2,
+        temperature: options.temperature ?? 0.1,
       }),
       signal: controller.signal,
     });
@@ -94,7 +94,7 @@ export async function streamChatCompletion(
                 model,
                 messages: options.messages,
                 stream: true,
-                temperature: options.temperature ?? 0.2,
+                temperature: options.temperature ?? 0.1,
               }),
               signal: controller.signal,
             });
@@ -122,7 +122,7 @@ export async function streamChatCompletion(
               model,
               messages: options.messages,
               stream: false,
-              temperature: options.temperature ?? 0.2,
+              temperature: options.temperature ?? 0.1,
             }),
             signal: controller.signal,
           });

@@ -125,17 +125,23 @@ export async function retrieveRelevantChunksByKeyword(
     JOIN knowledge_documents d ON d.id = c.document_id
   `;
 
+  const institutionalWords = new Set(["smk", "telkom", "purwokerto", "sekolah"]);
+
   const scored = rows.map((r) => {
     let score = 0;
     const lowerContent = r.content.toLowerCase();
     const lowerTitle = r.documentTitle.toLowerCase();
 
     for (const kw of searchKeywords) {
+      const isInstitutional = institutionalWords.has(kw);
+      const titleWeight = isInstitutional ? 1 : 15;
+      const contentWeight = isInstitutional ? 1 : 5;
+
       if (lowerTitle.includes(kw)) {
-        score += 3;
+        score += titleWeight;
       }
       if (lowerContent.includes(kw)) {
-        score += 1;
+        score += contentWeight;
       }
     }
 
@@ -147,12 +153,16 @@ export async function retrieveRelevantChunksByKeyword(
       metadata: r.metadata,
       documentTitle: r.documentTitle,
       documentSource: r.documentSource,
-      similarity: score > 0 ? Math.min(0.5 + score * 0.05, 0.95) : 0,
+      score,
+      similarity: score > 0 ? Math.min(0.5 + score * 0.02, 0.98) : 0,
     };
   });
 
-  scored.sort((a, b) => b.similarity - a.similarity);
-  const matched = scored.filter((s) => s.similarity > 0).slice(0, topK);
+  scored.sort((a, b) => (b.score !== a.score ? b.score - a.score : b.similarity - a.similarity));
+  const matched = scored
+    .filter((s) => s.similarity > 0)
+    .slice(0, topK)
+    .map(({ score: _score, ...rest }) => rest);
 
   const bestSimilarity = matched.length > 0 ? matched[0].similarity : 0;
   const isRelevant = matched.length > 0;

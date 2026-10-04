@@ -42,3 +42,63 @@ export type KnowledgeDocument = Prisma.KnowledgeDocumentModel
  * 
  */
 export type KnowledgeChunk = Prisma.KnowledgeChunkModel
+/**
+ * Model AdminUser
+ * 
+ */
+export type AdminUser = Prisma.AdminUserModel
+/**
+ * Model AdminSession
+ * 
+ */
+export type AdminSession = Prisma.AdminSessionModel
+/**
+ * Model NewsArticle
+ * 
+ */
+export type NewsArticle = Prisma.NewsArticleModel
+/**
+ * Model SchoolMajor
+ * 
+ */
+export type SchoolMajor = Prisma.SchoolMajorModel
+/**
+ * Model TeacherLeader
+ * 
+ */
+export type TeacherLeader = Prisma.TeacherLeaderModel
+/**
+ * Model StudentAchievement
+ * 
+ */
+export type StudentAchievement = Prisma.StudentAchievementModel
+/**
+ * Model SchoolFacility
+ * 
+ */
+export type SchoolFacility = Prisma.SchoolFacilityModel
+/**
+ * Model Extracurricular
+ * 
+ */
+export type Extracurricular = Prisma.ExtracurricularModel
+/**
+ * Model IndustryPartner
+ * 
+ */
+export type IndustryPartner = Prisma.IndustryPartnerModel
+/**
+ * Model PklListing
+ * 
+ */
+export type PklListing = Prisma.PklListingModel
+/**
+ * Model AlumniStory
+ * 
+ */
+export type AlumniStory = Prisma.AlumniStoryModel
+/**
+ * Model FaqItem
+ * 
+ */
+export type FaqItem = Prisma.FaqItemModel

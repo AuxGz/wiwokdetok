@@ -73,3 +73,183 @@ model KnowledgeChunk {
   @@map("knowledge_chunks")
 }
 
+model AdminUser {
+  id           String         @id @default(uuid())
+  username     String         @unique
+  email        String?        @unique
+  passwordHash String         @map("password_hash")
+  name         String
+  role         String         @default("ADMIN")
+  isActive     Boolean        @default(true) @map("is_active")
+  createdAt    DateTime       @default(now()) @map("created_at")
+  updatedAt    DateTime       @updatedAt @map("updated_at")
+  sessions     AdminSession[]
+
+  @@map("admin_users")
+}
+
+model AdminSession {
+  id        String    @id @default(uuid())
+  userId    String    @map("user_id")
+  token     String    @unique
+  expiresAt DateTime  @map("expires_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+  user      AdminUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([userId])
+  @@map("admin_sessions")
+}
+
+model NewsArticle {
+  id          String   @id @default(uuid())
+  title       String
+  slug        String   @unique
+  category    String
+  date        String
+  excerpt     String?  @db.Text
+  content     String?  @db.Text
+  imageUrl    String?  @map("image_url")
+  isFeatured  Boolean  @default(false) @map("is_featured")
+  isPublished Boolean  @default(true) @map("is_published")
+  order       Int      @default(0)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("news_articles")
+}
+
+model SchoolMajor {
+  id             String   @id @default(uuid())
+  code           String   @unique
+  name           String
+  headlineTitle  String?  @map("headline_title")
+  tagline        String?  @default("Keunggulan Jurusan")
+  description    String   @db.Text
+  imageUrl       String?  @map("image_url")
+  cardTags       String[] @default([]) @map("card_tags")
+  competencies   Json?
+  careerProspects String?  @map("career_prospects") @db.Text
+  order          Int      @default(0)
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  @@map("school_majors")
+}
+
+model TeacherLeader {
+  id           String   @id @default(uuid())
+  name         String
+  position     String
+  sectionId    String   @map("section_id")
+  sectionBadge String?  @map("section_badge")
+  sectionTitle String?  @map("section_title")
+  imageUrl     String?  @map("image_url")
+  order        Int      @default(0)
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("teacher_leaders")
+}
+
+model StudentAchievement {
+  id          String   @id @default(uuid())
+  title       String
+  category    String
+  badge       String?
+  meta        String?
+  description String?  @db.Text
+  year        String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("student_achievements")
+}
+
+model SchoolFacility {
+  id          String   @id @default(uuid())
+  name        String
+  badge       String?
+  description String   @db.Text
+  imageUrl    String?  @map("image_url")
+  isPanorama  Boolean  @default(false) @map("is_panorama")
+  icon        String?  @db.Text
+  order       Int      @default(0)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("school_facilities")
+}
+
+model Extracurricular {
+  id          String   @id @default(uuid())
+  name        String
+  description String   @db.Text
+  imageUrl    String?  @map("image_url")
+  icon        String?  @db.Text
+  order       Int      @default(0)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("extracurriculars")
+}
+
+model IndustryPartner {
+  id        String   @id @default(uuid())
+  name      String
+  logoUrl   String   @map("logo_url")
+  scale     Float    @default(1.0)
+  category  String?  @default("Mitra Industri")
+  order     Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("industry_partners")
+}
+
+model PklListing {
+  id          String   @id @default(uuid())
+  company     String
+  initials    String?
+  logoBg      String?  @default("bg-[#E4002B]") @map("logo_bg")
+  location    String
+  workMode    String
+  title       String
+  tags        String[] @default([])
+  description String   @db.Text
+  major       String
+  isOpen      Boolean  @default(true) @map("is_open")
+  order       Int      @default(0)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("pkl_listings")
+}
+
+model AlumniStory {
+  id             String   @id @default(uuid())
+  name           String
+  role           String
+  quote          String   @db.Text
+  imageUrl       String?  @map("image_url")
+  graduationYear String?  @map("graduation_year")
+  order          Int      @default(0)
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  @@map("alumni_stories")
+}
+
+model FaqItem {
+  id        String   @id @default(uuid())
+  question  String
+  answer    String   @db.Text
+  category  String?  @default("Umum")
+  order     Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("faq_items")
+}
+

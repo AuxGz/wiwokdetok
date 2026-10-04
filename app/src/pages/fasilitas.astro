@@ -2,8 +2,8 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/Container.astro";
 
-// Fasilitas Unggulan & Ruang Kelas 3D SMK Telkom Purwokerto
-const facilities = [
+// Fasilitas Unggulan & Ruang Kelas 3D SMK Telkom Purwokerto (fallback default)
+const defaultFacilities = [
   {
     badge: "Ruang PG",
     title: "Ruangan PG",
@@ -70,6 +70,28 @@ const facilities = [
   }
 ];
 
+let facilities = defaultFacilities;
+
+try {
+  const { prisma } = await import("../server/lib/prisma.js");
+  const dbFacilities = await prisma.schoolFacility.findMany({
+    orderBy: { order: "asc" },
+  });
+
+  if (dbFacilities && dbFacilities.length > 0) {
+    facilities = dbFacilities.map((f, idx) => ({
+      badge: f.badge || f.name,
+      title: f.name,
+      desc: f.description,
+      image: f.imageUrl || defaultFacilities[idx % defaultFacilities.length]?.image || "/images/class3d/RuangPG.jpg",
+      isPanorama: f.isPanorama ?? true,
+      icon: f.icon || defaultFacilities[idx % defaultFacilities.length]?.icon || defaultFacilities[0].icon,
+    }));
+  }
+} catch {
+  // Gunakan data default jika database offline atau belum terisi
+}
+
 // Daftar fasilitas 360 panorama untuk navigasi virtual tour
 const panoramaRooms = facilities
   .filter((f) => f.isPanorama)
@@ -93,7 +115,11 @@ const panoramaRooms = facilities
       src="/images/profile/smart-school-fasilitas.png"
       alt="Fasilitas SMK Telkom Purwokerto"
       class="absolute inset-0 w-full h-full object-cover object-center opacity-40"
+      width="1920"
+      height="520"
       loading="eager"
+      fetchpriority="high"
+      decoding="async"
     />
 
     <!-- Exact Gradient Overlay from Figma: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.3) 100%) -->
@@ -167,7 +193,10 @@ const panoramaRooms = facilities
                   src={fac.image}
                   alt={fac.title}
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  width="640"
+                  height="400"
                   loading="lazy"
+                  decoding="async"
                 />
                 <!-- Facility Badge -->
                 <div class="absolute top-4 left-4 px-3.5 py-1 rounded-full bg-[#BD0C12] text-white text-xs font-bold shadow-md z-10">

@@ -1,5 +1,44 @@
 ---
 import Container from "../Container.astro";
+
+let namaKepala = "Aris Puji Santoso, S.Kom., M.M";
+let jabatanKepala = "Kepala SMK Telkom Purwokerto";
+let paragraf1 = "Selamat datang di portal resmi SMK Telkom Purwokerto. Kami percaya pendidikan vokasi yang baik lahir dari kedekatan dengan dunia industri, sehingga setiap program keahlian dirancang bersama mitra kerja dan diuji langsung melalui praktik nyata.";
+let paragraf2 = "Melalui portal ini, seluruh layanan sekolah kami satukan agar siswa, orang tua, dan mitra industri mendapatkan informasi yang sama dan selalu terbarui.";
+let fotoKepala = "/images/guru/kepala-sekolah.png";
+
+try {
+  const { prisma } = await import("../../server/lib/prisma.js");
+  const settings = await prisma.systemSetting.findMany({
+    where: {
+      key: {
+        in: ["sambutan_kepala", "sambutan_jabatan", "sambutan_p1", "sambutan_p2", "sambutan_foto"],
+      },
+    },
+  });
+
+  if (settings && settings.length > 0) {
+    for (const s of settings) {
+      if (s.key === "sambutan_kepala" && s.value) namaKepala = s.value;
+      if (s.key === "sambutan_jabatan" && s.value) jabatanKepala = s.value;
+      if (s.key === "sambutan_p1" && s.value) paragraf1 = s.value;
+      if (s.key === "sambutan_p2" && s.value) paragraf2 = s.value;
+      if (s.key === "sambutan_foto" && s.value) fotoKepala = s.value;
+    }
+  }
+
+  const principal = await prisma.teacherLeader.findFirst({
+    where: {
+      position: { contains: "Kepala Sekolah", mode: "insensitive" },
+    },
+  });
+  if (principal) {
+    if (!settings.some((s) => s.key === "sambutan_kepala")) namaKepala = principal.name;
+    if (principal.imageUrl && !settings.some((s) => s.key === "sambutan_foto")) fotoKepala = principal.imageUrl;
+  }
+} catch {
+  // Gunakan data default jika database offline atau belum terisi
+}
 ---
 
 <section class="py-12 sm:py-16 lg:pt-20 lg:pb-16 bg-[#f8f8f8] overflow-visible" id="sambutan">
@@ -27,8 +66,8 @@ import Container from "../Container.astro";
 
           <!-- Foto Kepala Sekolah -->
           <img
-            src="/images/guru/kepala-sekolah.png"
-            alt="Kepala SMK Telkom Purwokerto - Aris Puji Santoso, S.Kom., M.M"
+            src={fotoKepala}
+            alt={`Kepala SMK Telkom Purwokerto - ${namaKepala}`}
             class="absolute z-3 w-[285px] sm:w-[365px] lg:w-[440px] max-w-none h-auto left-1/2 -translate-x-1/2 bottom-0 drop-shadow-[0_20px_36px_rgba(0,0,0,0.16)] pointer-events-none animate-sambutan-photo"
             width="530"
             height="796"
@@ -51,17 +90,17 @@ import Container from "../Container.astro";
 
         <div class="animate-sambutan-text">
           <p class="font-jakarta text-[0.9375rem] leading-[1.7] text-gray-700 mb-5">
-            Selamat datang di portal resmi SMK Telkom Purwokerto. Kami percaya pendidikan vokasi yang baik lahir dari kedekatan dengan dunia industri, sehingga setiap program keahlian dirancang bersama mitra kerja dan diuji langsung melalui praktik nyata.
+            {paragraf1}
           </p>
 
           <p class="font-jakarta text-[0.9375rem] leading-[1.7] text-gray-700 mb-7">
-            Melalui portal ini, seluruh layanan sekolah kami satukan agar siswa, orang tua, dan mitra industri mendapatkan informasi yang sama dan selalu terbarui.
+            {paragraf2}
           </p>
         </div>
 
         <div class="border-t border-gray-200 pt-5 animate-sambutan-profile">
-          <h3 class="font-jakarta text-[1.0625rem] font-extrabold text-[#111827] mb-1">Aris Puji Santoso, S.Kom., M.M</h3>
-          <p class="font-jakarta text-sm text-gray-500 m-0">Kepala SMK Telkom Purwokerto</p>
+          <h3 class="font-jakarta text-[1.0625rem] font-extrabold text-[#111827] mb-1">{namaKepala}</h3>
+          <p class="font-jakarta text-sm text-gray-500 m-0">{jabatanKepala}</p>
         </div>
       </div>
     </div>

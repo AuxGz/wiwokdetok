@@ -2,8 +2,8 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/Container.astro";
 
-// Data Berita exact from Figma frame Berita #1663:14638
-const featuredNews = {
+// Data Berita exact from Figma frame Berita #1663:14638 (fallback default)
+let featuredNews = {
   category: "PRESTASI",
   date: "18 FEBRUARI 2026",
   title: "Siswa SMK Telkom Raih Juara 1 Lomba Kompetensi Siswa Tingkat Provinsi",
@@ -11,7 +11,7 @@ const featuredNews = {
   image: "/images/berita/berita-prestasi.png",
 };
 
-const sideNews = [
+let sideNews = [
   {
     category: "KERJASAMA INDUSTRI",
     title: "Telkomsel dan PT Telkom Indonesia Jalin MoU Praktik Kerja Lapangan",
@@ -38,7 +38,7 @@ const sideNews = [
   },
 ];
 
-const secondaryNews = [
+let secondaryNews = [
   {
     category: "PENGUMUMAN",
     date: "22 JANUARI 2026",
@@ -54,6 +54,50 @@ const secondaryNews = [
     image: "/images/brand/gedung-sekolah.png",
   },
 ];
+
+// Pembacaan data Prisma secara aman dengan fallback transparan
+try {
+  const { prisma } = await import("../server/lib/prisma.js");
+  const dbArticles = await prisma.newsArticle.findMany({
+    where: { isPublished: true },
+    orderBy: [{ isFeatured: "desc" }, { order: "asc" }, { createdAt: "desc" }],
+  });
+
+  if (dbArticles && dbArticles.length > 0) {
+    const featured = dbArticles.find((a) => a.isFeatured) || dbArticles[0];
+    featuredNews = {
+      category: featured.category || "BERITA",
+      date: featured.date || "2026",
+      title: featured.title,
+      desc: featured.excerpt || featured.content?.slice(0, 200) || "",
+      image: featured.imageUrl || "/images/berita/berita-prestasi.png",
+    };
+
+    const remaining = dbArticles.filter((a) => a.id !== featured.id);
+    if (remaining.length > 0) {
+      sideNews = remaining.slice(0, 3).map((item, idx) => ({
+        category: item.category || "KEGIATAN",
+        title: item.title,
+        date: item.date || "2026",
+        badgeColor: idx === 0 ? "bg-[#7A1216] text-white" : "bg-white border border-[#E7E8EA] text-[#33343A]",
+        borderLeft: idx === 0 ? "border-l-4 border-l-[#E31E24]" : idx === 1 ? "border-l-4 border-l-[#33343A]" : "border-l-4 border-l-neutral-300",
+        image: item.imageUrl || "/images/berita/berita-technopreneur.png",
+      }));
+    }
+
+    if (remaining.length > 3) {
+      secondaryNews = remaining.slice(3, 5).map((item) => ({
+        category: item.category || "PENGUMUMAN",
+        date: item.date || "2026",
+        title: item.title,
+        desc: item.excerpt || item.content?.slice(0, 150) || "",
+        image: item.imageUrl || "/images/berita/berita-spmb.png",
+      }));
+    }
+  }
+} catch {
+  // Silent fallback
+}
 ---
 
 <BaseLayout
@@ -150,7 +194,11 @@ const secondaryNews = [
                 src={featuredNews.image}
                 alt={featuredNews.title}
                 class="w-full h-full object-cover"
+                width="740"
+                height="462"
                 loading="eager"
+                fetchpriority="high"
+                decoding="async"
               />
               <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
               <div class="absolute top-6 left-6 px-4 py-1.5 rounded-full bg-[#E31E24] text-white text-xs font-bold tracking-wider">
@@ -188,7 +236,7 @@ const secondaryNews = [
             {sideNews.map((news) => (
               <div class={`bg-[#F7F7F8] rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300 flex gap-4 items-center ${news.borderLeft}`}>
                 <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden bg-neutral-200 shrink-0">
-                  <img src={news.image} alt={news.title} class="w-full h-full object-cover" loading="lazy" />
+                  <img src={news.image} alt={news.title} class="w-full h-full object-cover" width="96" height="96" loading="lazy" decoding="async" />
                 </div>
                 <div class="space-y-2 flex-1">
                   <span class={`inline-block px-3 py-1 rounded-full text-[10px] font-bold tracking-wider ${news.badgeColor}`}>
@@ -211,7 +259,7 @@ const secondaryNews = [
           {secondaryNews.map((item) => (
             <div class="bg-white rounded-3xl border border-[#E7E8EA] overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between">
               <div class="relative w-full aspect-[16/9] overflow-hidden bg-neutral-100">
-                <img src={item.image} alt={item.title} class="w-full h-full object-cover" loading="lazy" />
+                <img src={item.image} alt={item.title} class="w-full h-full object-cover" width="600" height="338" loading="lazy" decoding="async" />
                 <div class="absolute top-4 left-4 px-3.5 py-1 rounded-full bg-[#E31E24] text-white text-[11px] font-bold">
                   {item.category}
                 </div>

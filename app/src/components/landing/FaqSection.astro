@@ -1,7 +1,7 @@
 ---
 import Container from "../Container.astro";
 
-const faqs = [
+const defaultFaqs = [
   {
     question: "Apa saja jurusan atau program keahlian yang tersedia di SMK Telkom Purwokerto?",
     answer: "SMK Telkom Purwokerto memiliki 4 program keahlian unggulan berstandar industri: Pengembangan Game (PG), Rekayasa Perangkat Lunak (RPL), Teknik Komputer & Jaringan (TKJ), dan Teknik Jaringan Akses Telekomunikasi (TJA). Masing-masing dilengkapi laboratorium modern dan sertifikasi resmi.",
@@ -15,6 +15,24 @@ const faqs = [
     answer: "SMK Telkom Purwokerto bekerjasama dengan mitra asrama dan pondokan/kost terverifikasi yang berada dekat lingkungan sekolah, dengan pengawasan aman, tertib, dan fasilitas memadai bagi siswa dari luar kota Purwokerto.",
   },
 ];
+
+let faqs = defaultFaqs;
+
+try {
+  const { prisma } = await import("../../server/lib/prisma.js");
+  const dbFaqs = await prisma.faqItem.findMany({
+    orderBy: { order: "asc" },
+  });
+
+  if (dbFaqs && dbFaqs.length > 0) {
+    faqs = dbFaqs.map((f) => ({
+      question: f.question,
+      answer: f.answer,
+    }));
+  }
+} catch {
+  // Gunakan data default jika database offline atau belum terisi
+}
 ---
 
 <section class="py-14 sm:py-18 bg-white" id="faq">
@@ -38,7 +56,7 @@ const faqs = [
         <!-- Help Card matching Figma 1:1 -->
         <div class="w-full max-w-[440px] lg:max-w-none p-5 sm:p-[22px_24px] bg-white border border-[#e7e8ea] rounded-[20px] shadow-[0px_6px_20px_0px_rgba(85,86,91,0.06)] flex flex-col gap-4">
           <div class="w-12 h-12 bg-[#fdf1f2] rounded-[14px] flex items-center justify-center" aria-hidden="true">
-            <img src="/images/icons/faq-support-icon.svg" alt="" width="24" height="24" class="block w-[22px] h-[22px]" />
+            <img src="/images/icons/faq-support-icon.svg" alt="" width="24" height="24" loading="lazy" decoding="async" class="block w-[22px] h-[22px]" />
           </div>
 
           <div class="flex flex-col gap-1">
@@ -55,7 +73,7 @@ const faqs = [
             class="inline-flex items-center justify-center gap-2 py-[11px] px-[22px] bg-[#ed1e28] hover:bg-[#d81820] active:scale-[0.98] text-white font-jakarta text-sm font-bold leading-[1.5] rounded-full shadow-[0px_4px_14px_0px_rgba(237,30,40,0.22)] transition-all duration-150"
           >
             <span>Hubungi Kami</span>
-            <img src="/images/icons/hubungi-arrow.svg" alt="" width="12" height="13" class="block" aria-hidden="true" />
+            <img src="/images/icons/hubungi-arrow.svg" alt="" width="12" height="13" loading="lazy" decoding="async" class="block" aria-hidden="true" />
           </a>
         </div>
       </div>
@@ -77,7 +95,7 @@ const faqs = [
                   >
                     <span class="faq-question font-jakarta text-sm sm:text-[0.9375rem] font-bold leading-[1.4] text-[#33343a] pr-3">{item.question}</span>
                     <span class="faq-toggle-circle w-8 h-8 rounded-full bg-white border border-[#e7e8ea] group-[.active]/faq:bg-[#fdf1f2] group-[.active]/faq:border-[#ed1e28] flex items-center justify-center shrink-0 transition-all duration-200" aria-hidden="true">
-                      <img src="/images/icons/accordion-plus.svg" alt="" width="13" height="14" class="toggle-icon block w-[11px] h-[12px] transition-transform duration-250 group-[.active]/faq:rotate-45" />
+                      <img src="/images/icons/accordion-plus.svg" alt="" width="13" height="14" loading="lazy" decoding="async" class="toggle-icon block w-[11px] h-[12px] transition-transform duration-250 group-[.active]/faq:rotate-45" />
                     </span>
                   </button>
                   <div

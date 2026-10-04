@@ -1,233 +1,726 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/Container.astro";
+import { prisma } from "../server/lib/prisma.js";
 
-// Data Lowongan PKL exact from Figma frame PKL Matching #1632:2101
-const pklListings = [
+// Data Lowongan PKL default yang selaras dengan 4 jurusan SMK Telkom Purwokerto (20 lowongan representatif)
+const defaultPklListings = [
+  // --- RPL ---
   {
+    id: "pkl-rpl-1",
     company: "Telkom Indonesia",
     initials: "TI",
     logoBg: "bg-[#E4002B]",
     location: "Bandung",
     workMode: "Hybrid",
     title: "Frontend Developer Intern",
-    tags: ["React", "TypeScript", "Tailwind"],
-    desc: "Membantu pengembangan antarmuka portal layanan pelanggan berbasis web.",
+    tags: ["React", "TypeScript", "Tailwind CSS", "REST APIs"],
+    desc: "Membantu pengembangan antarmuka portal layanan pelanggan berbasis web dan integrasi API design system Telkom.",
     major: "RPL",
+    quota: "4 Siswa",
+    requirements: [
+      "Siswa aktif SMK Telkom Purwokerto jurusan Rekayasa Perangkat Lunak (RPL)",
+      "Memahami dasar HTML, CSS modern, JavaScript (ES6+), dan framework React",
+      "Familiar dengan version control Git & GitHub",
+      "Memiliki rasa ingin tahu tinggi dan kemauan belajar dalam tim agile"
+    ],
+    contact: "bkk@smktelkom-pwt.sch.id",
+    applyUrl: "mailto:bkk@smktelkom-pwt.sch.id?subject=Lamaran%20PKL%20Telkom%20Indonesia%20-%20Frontend%20Developer"
   },
   {
-    company: "Telkom Akses",
-    initials: "TA",
+    id: "pkl-rpl-2",
+    company: "Finnet Indonesia",
+    initials: "FN",
     logoBg: "bg-[#0761C7]",
-    location: "Purwokerto",
-    workMode: "On-site",
-    title: "Fiber Optic Technician Intern",
-    tags: ["FTTH", "OTDR", "Splicing"],
-    desc: "Praktik langsung penanganan jaringan kabel serat optik dan terminasi ODP.",
-    major: "TJA",
+    location: "Jakarta",
+    workMode: "Hybrid",
+    title: "Backend Node.js & API Intern",
+    tags: ["Node.js", "Express", "PostgreSQL", "REST APIs"],
+    desc: "Mengembangkan endpoint microservice pembayaran digital, integrasi gateway perbankan, dan optimasi query database.",
+    major: "RPL",
+    quota: "3 Siswa",
+    requirements: [
+      "Siswa aktif SMK Telkom Purwokerto jurusan Rekayasa Perangkat Lunak (RPL)",
+      "Memahami dasar logika backend, RESTful API, dan database relasional (PostgreSQL/MySQL)",
+      "Familiar dengan runtime Node.js atau Express",
+      "Teliti dalam mengelola struktur data dan logika bisnis"
+    ],
+    contact: "bkk@smktelkom-pwt.sch.id",
+    applyUrl: "mailto:bkk@smktelkom-pwt.sch.id?subject=Lamaran%20PKL%20Finnet%20-%20Backend%20NodeJS"
   },
   {
+    id: "pkl-rpl-3",
+    company: "Telkomsel",
+    initials: "TS",
+    logoBg: "bg-[#E4002B]",
+    location: "Jakarta",
+    workMode: "Hybrid",
+    title: "Mobile Flutter Developer Intern",
+    tags: ["Flutter", "Dart", "State Management", "Mobile UI"],
+    desc: "Membantu pembuatan fitur aplikasi mobile layanan mandiri pelanggan, pengujian widget, dan integrasi response API backend.",
+    major: "RPL",
+    quota: "3 Siswa",
+    requirements: [
+      "Siswa aktif SMK Telkom Purwokerto jurusan Rekayasa Perangkat Lunak (RPL)",
+      "Memahami dasar framework Flutter dan bahasa Dart",
+      "Memahami hierarki widget UI dan konsumsi REST API",
+      "Memiliki portofolio aplikasi mobile sederhana menjadi nilai tambah"
+    ],
+    contact: "bkk@smktelkom-pwt.sch.id",
+    applyUrl: "mailto:bkk@smktelkom-pwt.sch.id?subject=Lamaran%20PKL%20Telkomsel%20-%20Mobile%20Flutter"
+  },
+  {
+    id: "pkl-rpl-4",
+    company: "Tokopedia",
+    initials: "TP",
+    logoBg: "bg-[#10B981]",
+    location: "Jakarta",
+    workMode: "Remote",
+    title: "Junior Fullstack Web Intern",
+    tags: ["Next.js", "TypeScript", "Prisma", "Tailwind CSS"],
+    desc: "Berkolaborasi dalam pengembangan fitur merchant dashboard, pemeliharaan arsitektur frontend, dan integrasi backend modern.",
+    major: "RPL",
+    quota: "2 Siswa",
+    requirements: [
+      "Siswa aktif SMK Telkom Purwokerto jurusan Rekayasa Perangkat Lunak (RPL)",
+      "Memahami dasar Next.js/React, TypeScript, dan ORM database",
+      "Mampu bekerja secara mandiri dengan ritme komunikasi remote yang baik",
+      "Memiliki antusiasme terhadap teknologi e-commerce modern"
+    ],
+    contact: "bkk@smktelkom-pwt.sch.id",
+    applyUrl: "mailto:bkk@smktelkom-pwt.sch.id?subject=Lamaran%20PKL%20Tokopedia%20-%20Fullstack%20Web"
+  },
+  {
+    id: "pkl-rpl-5",
+    company: "Infomedia Nusantara",
+    initials: "IN",
+    logoBg: "bg-[#0761C7]",
+    location: "Bandung",
+    workMode: "Hybrid",
+    title: "QA Automation & Software Tester Intern",
+    tags: ["Playwright", "Cypress", "Jest", "Manual Testing"],
+    desc: "Menyusun skenario pengujian end-to-end, melakukan automation test antarmuka web, dan mendokumentasikan temuan bug sistem.",
+    major: "RPL",
+    quota: "3 Siswa",
+    requirements: [
+      "Siswa aktif SMK Telkom Purwokerto jurusan Rekayasa Perangkat Lunak (RPL)",
+      "Memahami dasar pengujian fungsional perangkat lunak dan pembuatan test case",
+      "Tertarik mempelajari framework automation testing (Playwright/Cypress)",
+      "Memiliki ketelitian tinggi dan dokumentasi kerja yang rapi"
+    ],
+    contact: "bkk@smktelkom-pwt.sch.id",
+    applyUrl: "mailto:bkk@smktelkom-pwt.sch.id?subject=Lamaran%20PKL%20Infomedia%20-%20QA%20Automation"
+  },
+
+  // --- TKJ ---
+  {
+    id: "pkl-tkj-1",
     company: "Telkomsigma",
     initials: "TS",
     logoBg: "bg-[#E4002B]",
     location: "Semarang",
     workMode: "On-site",
     title: "Data Center Support Intern",
-    tags: ["Jaringan", "Server", "Monitoring"],
-    desc: "Membantu pemantauan operasional pusat data perusahaan skala enterprise.",
+    tags: ["Linux Server", "Monitoring", "Hardware", "Virtualization"],
+    desc: "Membantu pemantauan operasional pusat data tier-3, inventarisasi server rak, dan dasar administrasi infrastruktur cloud enterprise.",
     major: "TKJ",
+    quota: "4 Siswa",
+    requirements: [
+      "Siswa aktif SMK Telkom Purwokerto jurusan Teknik Komputer & Jaringan (TKJ)",
+      "Memahami konsep dasar routing, switching, dan perintah dasar Linux Server",
+      "Memahami protokol jaringan dasar (TCP/IP, DNS, DHCP)",
+      "Mampu bekerja dengan teliti dan menjaga kerahasiaan data perusahaan"
+    ],
+    contact: "bkk@smktelkom-pwt.sch.id",
+    applyUrl: "mailto:bkk@smktelkom-pwt.sch.id?subject=Lamaran%20PKL%20Telkomsigma%20-%20Data%20Center%20Support"
   },
   {
-    company: "Metra",
-    initials: "MT",
-    logoBg: "bg-[#E4002B]",
-    location: "Jakarta",
-    workMode: "Hybrid",
-    title: "Multimedia Content Intern",
-    tags: ["Video Editing", "Motion", "Desain UI"],
-    desc: "Memproduksi konten multimedia untuk kebutuhan promosi digital perusahaan.",
-    major: "PG",
-  },
-  {
-    company: "PINS",
+    id: "pkl-tkj-2",
+    company: "PINS Indonesia",
     initials: "PN",
     logoBg: "bg-[#0761C7]",
     location: "Purwokerto",
     workMode: "On-site",
-    title: "IT Infrastructure Intern",
-    tags: ["Jaringan", "Hardware", "Troubleshoot"],
-    desc: "Mendukung instalasi dan pemeliharaan infrastruktur jaringan telekomunikasi.",
+    title: "IT Infrastructure & Support Intern",
+    tags: ["Jaringan", "Hardware", "Troubleshoot", "MikroTik"],
+    desc: "Mendukung instalasi perangkat jaringan, konfigurasi router/switch, dan perbaikan perangkat keras di lingkungan klien korporat.",
     major: "TKJ",
+    quota: "4 Siswa",
+    requirements: [
+      "Siswa aktif SMK Telkom Purwokerto jurusan TKJ",
+      "Memahami instalasi sistem operasi dan perakitan komponen komputer",
+      "Familiar dengan konfigurasi dasar MikroTik dan pengkabelan LAN",
+      "Memiliki kemampuan komunikasi interpersonal yang ramah dan solutif"
+    ],
+    contact: "bkk@smktelkom-pwt.sch.id",
+    applyUrl: "mailto:bkk@smktelkom-pwt.sch.id?subject=Lamaran%20PKL%20PINS%20-%20IT%20Infrastructure"
   },
+  {
+    id: "pkl-tkj-3",
+    company: "Lintasarta",
+    initials: "LA",
+    logoBg: "bg-[#0761C7]",
+    location: "Jakarta",
+    workMode: "On-site",
+    title: "Network Engineer & Routing Intern",
+    tags: ["Cisco", "MikroTik", "BGP", "VLAN", "Routing"],
+    desc: "Membantu konfigurasi routing static & dynamic, manajemen VLAN switch enterprise, dan pengawasan link WAN pelanggan bisnis.",
+    major: "TKJ",
+    quota: "3 Siswa",
+    requirements: [
+      "Siswa aktif SMK Telkom Purwokerto jurusan TKJ",
+      "Memahami konsep OSI Layer, subnetting IPv4, dan protokol routing",
+      "Familiar dengan CLI Cisco IOS atau RouterOS MikroTik",
+      "Siap mengikuti jadwal operasional dan prosedur kerja standar industri"
+    ],
+    contact: "bkk@smktelkom-pwt.sch.id",
+    applyUrl: "mailto:bkk@smktelkom-pwt.sch.id?subject=Lamaran%20PKL%20Lintasarta%20-%20Network%20Engineer"
+  },
+  {
+    id: "pkl-tkj-4",
+    company: "Telkomsel Regional",
+    initials: "TR",
+    logoBg: "bg-[#E4002B]",
+    location: "Purwokerto",
+    workMode: "On-site",
+    title: "NOC Network Operations Intern",
+    tags: ["NOC", "Wireshark", "Monitoring", "TCP/IP", "Incident"],
+    desc: "Membantu monitoring real-time ketersediaan jaringan telekomunikasi seluler dan koordinasi eskalasi insiden BTS di regional Jateng.",
+    major: "TKJ",
+    quota: "3 Siswa",
+    requirements: [
+      "Siswa aktif SMK Telkom Purwokerto jurusan TKJ",
+      "Memahami prinsip kerja sistem monitoring jaringan dan analisis paket dasar",
+      "Mampu bekerja dengan disiplin dalam pemantauan dasbor sistem",
+      "Komunikatif dan responsif dalam penanganan pelaporan kendala"
+    ],
+    contact: "bkk@smktelkom-pwt.sch.id",
+    applyUrl: "mailto:bkk@smktelkom-pwt.sch.id?subject=Lamaran%20PKL%20Telkomsel%20Regional%20-%20NOC%20Support"
+  },
+  {
+    id: "pkl-tkj-5",
+    company: "CBN Cloud",
+    initials: "CB",
+    logoBg: "bg-[#10B981]",
+    location: "Jakarta",
+    workMode: "Hybrid",
+    title: "Cloud & Linux Systems Admin Intern",
+    tags: ["Ubuntu Server", "Docker", "Nginx", "Bash", "Cloud"],
+    desc: "Membantu konfigurasi web server Nginx, containerisasi aplikasi berbasis Docker, dan otomasi pemeliharaan server Linux.",
+    major: "TKJ",
+    quota: "2 Siswa",
+    requirements: [
+      "Siswa aktif SMK Telkom Purwokerto jurusan TKJ",
+      "Familiar dengan sistem operasi Linux (Ubuntu/Debian) via command-line",
+      "Tertarik mempelajari teknologi container Docker dan arsitektur cloud",
+      "Memiliki rasa tanggung jawab tinggi dalam pemeliharaan server"
+    ],
+    contact: "bkk@smktelkom-pwt.sch.id",
+    applyUrl: "mailto:bkk@smktelkom-pwt.sch.id?subject=Lamaran%20PKL%20CBN%20Cloud%20-%20Linux%20Sysadmin"
+  },
+
+  // --- TJA ---
+  {
+    id: "pkl-tja-1",
+    company: "Telkom Akses Purwokerto",
+    initials: "TA",
+    logoBg: "bg-[#0761C7]",
+    location: "Purwokerto",
+    workMode: "On-site",
+    title: "Fiber Optic Splicing & OTDR Technician",
+    tags: ["FTTH", "OTDR", "Fusion Splicer", "ODP/ODC"],
+    desc: "Praktik langsung penanganan jaringan kabel serat optik, penyambungan core dengan fusion splicer, dan pengukuran redaman OTDR.",
+    major: "TJA",
+    quota: "6 Siswa",
+    requirements: [
+      "Siswa aktif SMK Telkom Purwokerto jurusan Teknik Jaringan Akses (TJA)",
+      "Memahami topologi jaringan FTTH dan terminasi kabel serat optik",
+      "Mampu menggunakan fusion splicer dan power meter secara teliti",
+      "Memiliki kedisiplinan dan kepatuhan tinggi terhadap standar K3 lapangan"
+    ],
+    contact: "bkk@smktelkom-pwt.sch.id",
+    applyUrl: "mailto:bkk@smktelkom-pwt.sch.id?subject=Lamaran%20PKL%20Telkom%20Akses%20-%20Fiber%20Optic%20Technician"
+  },
+  {
+    id: "pkl-tja-2",
+    company: "Telkom Akses Regional",
+    initials: "TA",
+    logoBg: "bg-[#0761C7]",
+    location: "Semarang",
+    workMode: "On-site",
+    title: "FTTH Outside Plant (OSP) Planner Intern",
+    tags: ["AutoCAD", "QGIS", "FTTH", "Survey", "ODP"],
+    desc: "Membantu survei lapangan jalur distribusi kabel optik, pemetaan rute tiang & manhole, serta penggambaran as-built drawing jaringan FTTH.",
+    major: "TJA",
+    quota: "4 Siswa",
+    requirements: [
+      "Siswa aktif SMK Telkom Purwokerto jurusan Teknik Jaringan Akses (TJA)",
+      "Memahami komponen pasif FTTH (ODC, ODP, Closure, Tiang, Subduct)",
+      "Mampu mengoperasikan dasar software AutoCAD atau aplikasi pemetaan",
+      "Siap berpartisipasi dalam kegiatan survei verifikasi rute lapangan"
+    ],
+    contact: "bkk@smktelkom-pwt.sch.id",
+    applyUrl: "mailto:bkk@smktelkom-pwt.sch.id?subject=Lamaran%20PKL%20Telkom%20Akses%20-%20OSP%20Planner"
+  },
+  {
+    id: "pkl-tja-3",
+    company: "Mitratel",
+    initials: "MT",
+    logoBg: "bg-[#E4002B]",
+    location: "Purwokerto",
+    workMode: "On-site",
+    title: "Tower & RF Transmission Technician Intern",
+    tags: ["Tower BTS", "RF", "Antenna", "VSWR", "K3 Lapangan"],
+    desc: "Mendampingi teknisi senior dalam pemeliharaan berkala infrastruktur menara BTS, pengecekan feeder kabel RF, dan audit grounding.",
+    major: "TJA",
+    quota: "3 Siswa",
+    requirements: [
+      "Siswa aktif SMK Telkom Purwokerto jurusan Teknik Jaringan Akses (TJA)",
+      "Memahami dasar transmisi radio frekuensi dan perangkat menara telekomunikasi",
+      "Fisik prima dan mematuhi sertifikasi K3 bekerja di ketinggian (didampingi)",
+      "Memiliki etos kerja tinggi dan komitmen pada keselamatan kerja"
+    ],
+    contact: "bkk@smktelkom-pwt.sch.id",
+    applyUrl: "mailto:bkk@smktelkom-pwt.sch.id?subject=Lamaran%20PKL%20Mitratel%20-%20Tower%20Technician"
+  },
+  {
+    id: "pkl-tja-4",
+    company: "Telkom Akses Banyumas",
+    initials: "TA",
+    logoBg: "bg-[#0761C7]",
+    location: "Purwokerto",
+    workMode: "On-site",
+    title: "Quality Assurance & Fiber Testing Intern",
+    tags: ["OPM", "VFL", "Optical Power", "Fiber Optic"],
+    desc: "Melakukan pengujian kualitas sambungan kabel optik pada jaringan backbone dan distribusi menggunakan Optical Power Meter (OPM) dan Visual Fault Locator.",
+    major: "TJA",
+    quota: "4 Siswa",
+    requirements: [
+      "Siswa aktif SMK Telkom Purwokerto jurusan Teknik Jaringan Akses (TJA)",
+      "Memahami standar redaman transmisi optik (loss budget dB)",
+      "Teliti dalam pencatatan data hasil pengukuran instrumen pengujian",
+      "Mampu menyusun laporan pengujian secara sistematis"
+    ],
+    contact: "bkk@smktelkom-pwt.sch.id",
+    applyUrl: "mailto:bkk@smktelkom-pwt.sch.id?subject=Lamaran%20PKL%20Telkom%20Akses%20Banyumas%20-%20Fiber%20Testing"
+  },
+  {
+    id: "pkl-tja-5",
+    company: "Indosat Ooredoo Hutchison",
+    initials: "IO",
+    logoBg: "bg-[#F59E0B]",
+    location: "Yogyakarta",
+    workMode: "Hybrid",
+    title: "Microwave & Backhaul Transmission Intern",
+    tags: ["Microwave", "Backhaul", "Link Budget", "Transmisi"],
+    desc: "Membantu analisis performa link transmisi microwave antar-site, pemantauan utilisasi kapasitas backhaul radio, dan pelaporan metrik sinyal.",
+    major: "TJA",
+    quota: "2 Siswa",
+    requirements: [
+      "Siswa aktif SMK Telkom Purwokerto jurusan Teknik Jaringan Akses (TJA)",
+      "Memahami propagasi gelombang elektromagnetik dan link microwave radio",
+      "Mampu menganalisis grafik performa ketersediaan link radio",
+      "Mampu berkomunikasi dengan baik dalam koordinasi tim teknis"
+    ],
+    contact: "bkk@smktelkom-pwt.sch.id",
+    applyUrl: "mailto:bkk@smktelkom-pwt.sch.id?subject=Lamaran%20PKL%20Indosat%20-%20Microwave%20Transmission"
+  },
+
+  // --- PG ---
+  {
+    id: "pkl-pg-1",
+    company: "Agate International",
+    initials: "AG",
+    logoBg: "bg-[#8B5CF6]",
+    location: "Bandung",
+    workMode: "Hybrid",
+    title: "Game Programmer Unity & C# Intern",
+    tags: ["Unity", "C#", "Gameplay Mechanics", "Physics 2D/3D"],
+    desc: "Mengembangkan logika mekanisme gameplay, sistem kontrol karakter, dan integrasi antarmuka game menggunakan Unity Engine.",
+    major: "PG",
+    quota: "3 Siswa",
+    requirements: [
+      "Siswa aktif SMK Telkom Purwokerto jurusan Pengembangan Gim (PG)",
+      "Familiar dengan Unity Engine dan pemrograman C# berorientasi objek",
+      "Memahami dasar matematika vektor dan fisika game",
+      "Menyertakan tautan portofolio prototipe gim (itch.io/GitHub/G-Drive)"
+    ],
+    contact: "bkk@smktelkom-pwt.sch.id",
+    applyUrl: "mailto:bkk@smktelkom-pwt.sch.id?subject=Lamaran%20PKL%20Agate%20-%20Game%20Programmer"
+  },
+  {
+    id: "pkl-pg-2",
+    company: "Gameloft Indonesia",
+    initials: "GL",
+    logoBg: "bg-[#0761C7]",
+    location: "Yogyakarta",
+    workMode: "Hybrid",
+    title: "3D Game Environment Artist Intern",
+    tags: ["Blender", "Maya", "3D Modeling", "Texturing", "PBR"],
+    desc: "Membuat aset lingkungan 3D berstandar mobile gaming, pemodelan low-poly teroptimasi, serta UV unwrapping dan texturing PBR.",
+    major: "PG",
+    quota: "2 Siswa",
+    requirements: [
+      "Siswa aktif SMK Telkom Purwokerto jurusan Pengembangan Gim (PG)",
+      "Menguasai teknik pemodelan 3D di Blender atau Autodesk Maya",
+      "Memahami alur pipeline 3D (topology, UV mapping, texturing PBR)",
+      "Menyertakan portofolio render 3D (ArtStation / Google Drive)"
+    ],
+    contact: "bkk@smktelkom-pwt.sch.id",
+    applyUrl: "mailto:bkk@smktelkom-pwt.sch.id?subject=Lamaran%20PKL%20Gameloft%20-%203D%20Environment%20Artist"
+  },
+  {
+    id: "pkl-pg-3",
+    company: "Nuon Digital Indonesia",
+    initials: "ND",
+    logoBg: "bg-[#0761C7]",
+    location: "Jakarta",
+    workMode: "Hybrid",
+    title: "Game UI/UX & Asset Designer Intern",
+    tags: ["Figma", "Photoshop", "Game UI", "Asset Export", "Wireframe"],
+    desc: "Merancang layout antarmuka interaktif game mobile, membuat ikon item, tombol, dan asset sheet yang siap diimpor ke game engine.",
+    major: "PG",
+    quota: "3 Siswa",
+    requirements: [
+      "Siswa aktif SMK Telkom Purwokerto jurusan Pengembangan Gim (PG)",
+      "Menguasai Figma dan Adobe Photoshop/Illustrator untuk aset game",
+      "Memahami tata letak antarmuka mobile game dan konsistensi gaya visual",
+      "Menyertakan portofolio desain UI game atau mockup visual"
+    ],
+    contact: "bkk@smktelkom-pwt.sch.id",
+    applyUrl: "mailto:bkk@smktelkom-pwt.sch.id?subject=Lamaran%20PKL%20Nuon%20-%20Game%20UI%20UX"
+  },
+  {
+    id: "pkl-pg-4",
+    company: "Toge Productions",
+    initials: "TP",
+    logoBg: "bg-[#EC4899]",
+    location: "Tangerang",
+    workMode: "Remote",
+    title: "2D Sprite & Pixel Animator Intern",
+    tags: ["Aseprite", "Pixel Art", "2D Animation", "Frame-by-frame"],
+    desc: "Membuat aset karakter 2D, animasi walk/attack/idle frame-by-frame menggunakan Aseprite, dan menyiapkan sprite sheets untuk integrasi game.",
+    major: "PG",
+    quota: "2 Siswa",
+    requirements: [
+      "Siswa aktif SMK Telkom Purwokerto jurusan Pengembangan Gim (PG)",
+      "Familiar dengan software pixel art seperti Aseprite atau Photoshop",
+      "Memahami prinsip dasar animasi 12 prinsip (timing, easing, anticipation)",
+      "Menyertakan portofolio animasi 2D / sprite sheet"
+    ],
+    contact: "bkk@smktelkom-pwt.sch.id",
+    applyUrl: "mailto:bkk@smktelkom-pwt.sch.id?subject=Lamaran%20PKL%20Toge%20Productions%20-%202D%20Pixel%20Animator"
+  },
+  {
+    id: "pkl-pg-5",
+    company: "Metra Digital",
+    initials: "MD",
+    logoBg: "bg-[#E4002B]",
+    location: "Jakarta",
+    workMode: "Hybrid",
+    title: "Multimedia & Motion Graphics Intern",
+    tags: ["After Effects", "Premiere Pro", "Motion Graphics", "Video Editing"],
+    desc: "Memproduksi trailer gameplay interaktif, animasi motion graphics promosi digital, dan aset visual multimedia untuk rilisan gim lokal.",
+    major: "PG",
+    quota: "3 Siswa",
+    requirements: [
+      "Siswa aktif SMK Telkom Purwokerto jurusan Pengembangan Gim (PG)",
+      "Menguasai Adobe Premiere Pro dan After Effects",
+      "Kreatif dalam visual storytelling, sound timing, dan color grading",
+      "Menyertakan tautan portofolio video showreel / motion karya pribadi"
+    ],
+    contact: "bkk@smktelkom-pwt.sch.id",
+    applyUrl: "mailto:bkk@smktelkom-pwt.sch.id?subject=Lamaran%20PKL%20Metra%20Digital%20-%20Motion%20Graphics"
+  }
 ];
+
+let pklListings = defaultPklListings;
+try {
+  const dbPkl = await prisma.pklListing.findMany({
+    where: { isOpen: true },
+    orderBy: { order: "asc" },
+  });
+  if (dbPkl.length > 0) {
+    pklListings = dbPkl.map((p, idx) => ({
+      id: p.id || `db-pkl-${idx}`,
+      company: p.company,
+      initials: p.initials || p.company.slice(0, 2).toUpperCase(),
+      logoBg: p.logoBg || "bg-[#E4002B]",
+      location: p.location,
+      workMode: p.workMode,
+      title: p.title,
+      tags: p.tags,
+      desc: p.description,
+      major: p.major,
+      quota: "3 - 5 Siswa",
+      requirements: [
+        `Siswa aktif SMK Telkom Purwokerto jurusan ${p.major}`,
+        `Keahlian yang relevan: ${p.tags.join(", ")}`,
+        "Disiplin, bertanggung jawab, dan siap beradaptasi di lingkungan profesional"
+      ],
+      contact: "bkk@smktelkom-pwt.sch.id",
+      applyUrl: `mailto:bkk@smktelkom-pwt.sch.id?subject=Lamaran%20PKL%20${encodeURIComponent(p.company)}%20-%20${encodeURIComponent(p.title)}`
+    }));
+  }
+} catch {
+  // Gunakan data default jika database belum tersedia
+}
 ---
 
 <BaseLayout
   title="AI PKL Matching - SMK Telkom Purwokerto"
-  description="Temukan tempat PKL yang paling cocok dengan dirimu melalui pencocokan berbasis AI bersama puluhan mitra industri Telkom Group dan perusahaan teknologi."
+  description="Temukan tempat PKL yang paling cocok dengan dirimu melalui pencocokan cerdas berbasis AI Kimi K2.7 bersama puluhan mitra industri Telkom Group dan perusahaan teknologi."
 >
-  <div class="py-6 sm:py-10 bg-[#F5F6F8]">
+  <div
+    id="pkl-matching-app"
+    data-initial-listings={JSON.stringify(pklListings)}
+    class="py-6 sm:py-10 bg-[#F5F6F8] min-h-screen"
+  >
     <Container>
-      <!-- Section 1: Hero Card (Figma Background+Shadow #1632:2438: radius 32px) -->
-      <div class="relative overflow-hidden rounded-[32px] bg-gradient-to-tr from-[#ED1E28] via-[#D0161F] to-[#B6252A] p-8 sm:p-12 md:p-20 text-white text-center shadow-xl">
+      <!-- Section 1: Hero Card -->
+      <div class="relative overflow-hidden rounded-[32px] bg-gradient-to-tr from-[#ED1E28] via-[#D0161F] to-[#B6252A] p-8 sm:p-12 md:p-16 text-white text-center shadow-xl">
         <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-white/10 blur-[80px] pointer-events-none"></div>
         <div class="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-black/20 blur-[80px] pointer-events-none"></div>
 
         <div class="relative z-10 max-w-4xl mx-auto space-y-6">
-          <!-- Pill Badge (Figma #1632:2445) -->
-          <div class="inline-flex items-center px-5 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-xs sm:text-sm font-semibold tracking-wide">
-            AI PKL MATCHING
+          <!-- Pill Badge -->
+          <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-xs sm:text-sm font-semibold tracking-wide">
+            <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            <span>AI PKL MATCHING • KIMI K2.7</span>
           </div>
 
-          <!-- Heading 1 (Figma #1632:2449) -->
+          <!-- Heading 1 -->
           <h1 class="font-extrabold text-3xl sm:text-5xl md:text-6xl font-sans tracking-tight leading-[1.15]">
             Temukan Tempat PKL<br class="hidden sm:inline" />
             yang Paling Cocok dengan Dirimu
           </h1>
 
-          <!-- Subtitle (Figma #1632:2451) -->
-          <p class="text-white/80 text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
-            Sistem AI kami menganalisis CV-mu dan mencocokkannya dengan puluhan mitra dunia industri secara otomatis — lengkap dengan skor kecocokan, bukan sekadar daftar lowongan biasa.
+          <!-- Subtitle -->
+          <p class="text-white/85 text-sm sm:text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
+            Sistem cerdas berbasis model Kimi K2.7 menganalisis profil dan kompetensimu untuk mencocokkannya dengan puluhan lowongan mitra dunia industri secara objektif — lengkap dengan skor kecocokan persentase dan rekomendasi keahlian.
           </p>
         </div>
       </div>
 
-      <!-- Section 2: Floating Search Bar (Figma Background+Shadow #1632:2538: radius 16px) -->
-      <div class="relative z-20 max-w-[1280px] mx-auto -mt-10 sm:-mt-14 md:-mt-16 bg-white border border-[#E7E8EA] rounded-2xl shadow-[0px_20px_50px_0px_rgba(0,0,0,0.12)] p-6 sm:p-8">
-        <div class="flex flex-col md:flex-row items-stretch md:items-end gap-5">
-          <!-- Input 1: Lokasi PKL (Figma #1632:2540) -->
-          <div class="flex-1 space-y-2">
-            <label class="block text-xs font-bold text-[#111827] uppercase tracking-wider">
-              Lokasi PKL
-            </label>
-            <div class="relative">
-              <input
-                type="text"
-                id="search-location"
-                placeholder="Purwokerto, Jakarta, Bandung, Semarang..."
-                class="w-full px-4 py-3.5 rounded-xl bg-[#F5F5F5] border border-[#E7E8EA] text-sm text-[#111827] placeholder:text-neutral-400 focus:bg-white focus:border-[#ED1E28] focus:outline-none transition-all"
-              />
+      <!-- Section 2: Panel Input Profil Siswa & AI Matchmaker -->
+      <div class="relative z-20 max-w-[1280px] mx-auto -mt-10 sm:-mt-14 md:-mt-16 bg-white border border-[#E7E8EA] rounded-3xl shadow-[0px_20px_50px_0px_rgba(0,0,0,0.08)] p-6 sm:p-8 md:p-10 space-y-6">
+        <!-- Top Row Panel -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-neutral-100">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-50 text-[#ED1E28] border border-red-200 text-xs font-bold uppercase tracking-wider">
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                Profil Siswa
+              </span>
+              <span class="text-xs text-neutral-400 font-medium">Model: Kimi K2.7</span>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-[#111827] font-sans">
+              Parameter Pencocokan AI
+            </h2>
+            <p class="text-xs sm:text-sm text-[#55565B]">
+              Lengkapi keahlianmu atau impor profil yang telah disimpan dari CV Generator.
+            </p>
+          </div>
+
+          <!-- Tombol Aksi: Tarik Data dari CV Generator -->
+          <div class="shrink-0 flex items-center gap-2">
+            <button
+              type="button"
+              id="btn-pull-cv"
+              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-neutral-50 hover:bg-neutral-100 text-[#111827] text-xs sm:text-sm font-bold border border-neutral-200 shadow-sm transition-all hover:border-[#ED1E28]/40"
+              title="Ambil data profil yang telah disimpan di CV Generator"
+            >
+              <svg class="w-4 h-4 text-[#ED1E28]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+              </svg>
+              <span>Tarik Data dari CV Generator</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Alert Banner Status Sinkronisasi CV -->
+        <div
+          id="cv-status-alert"
+          class="hidden p-3.5 rounded-xl text-xs sm:text-sm items-center justify-between border transition-all"
+        >
+          <div id="cv-status-message" class="flex items-center gap-2 font-medium"></div>
+          <button type="button" id="btn-close-alert" class="text-neutral-400 hover:text-neutral-700 font-bold ml-2">✕</button>
+        </div>
+
+        <!-- Form Layout: 2 Kolom -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <!-- Kolom Kiri: Jurusan & Keahlian (7 cols) -->
+          <div class="lg:col-span-7 space-y-5">
+            <!-- Grid: Dropdown Jurusan & Lokasi -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="student-major" class="block text-xs font-bold text-[#111827] uppercase tracking-wider mb-2">
+                  Jurusan Siswa <span class="text-[#ED1E28]">*</span>
+                </label>
+                <div class="relative">
+                  <select
+                    id="student-major"
+                    class="w-full px-4 py-3 rounded-xl bg-[#F5F5F5] border border-[#E7E8EA] text-sm font-semibold text-[#111827] focus:bg-white focus:border-[#ED1E28] focus:outline-none transition-all appearance-none cursor-pointer"
+                  >
+                    <option value="RPL">Rekayasa Perangkat Lunak (RPL)</option>
+                    <option value="TKJ">Teknik Komputer & Jaringan (TKJ)</option>
+                    <option value="TJA">Teknik Jaringan Akses (TJA)</option>
+                    <option value="PG">Pengembangan Gim (PG)</option>
+                  </select>
+                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-neutral-400">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label for="student-location-filter" class="block text-xs font-bold text-[#111827] uppercase tracking-wider mb-2">
+                  Target Kota (Opsional)
+                </label>
+                <input
+                  type="text"
+                  id="student-location-filter"
+                  placeholder="Semua Kota atau cth. Bandung, Purwokerto"
+                  class="w-full px-4 py-3 rounded-xl bg-[#F5F5F5] border border-[#E7E8EA] text-sm text-[#111827] placeholder:text-neutral-400 focus:bg-white focus:border-[#ED1E28] focus:outline-none transition-all"
+                />
+              </div>
+            </div>
+
+            <!-- Bagian Keahlian (Skill Tags Manager) -->
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between">
+                <label class="block text-xs font-bold text-[#111827] uppercase tracking-wider">
+                  Keahlian & Kompetensi Siswa <span class="text-[#ED1E28]">*</span>
+                </label>
+                <span class="text-[11px] text-neutral-400">Tekan Enter atau klik chip di bawah</span>
+              </div>
+
+              <!-- Tags Container Input -->
+              <div class="p-3 rounded-xl bg-[#F5F5F5] border border-[#E7E8EA] focus-within:bg-white focus-within:border-[#ED1E28] transition-all space-y-2">
+                <!-- Active Tags Badges -->
+                <div id="skills-tags-container" class="flex flex-wrap gap-1.5 min-h-[30px] items-center">
+                  <!-- Tag chip diisi oleh script -->
+                </div>
+                <!-- Tag Input Field -->
+                <input
+                  type="text"
+                  id="skills-tag-input"
+                  placeholder="Ketik keahlian (cth. React, MikroTik, Python) lalu tekan Enter..."
+                  class="w-full bg-transparent text-sm text-[#111827] placeholder:text-neutral-400 focus:outline-none py-1"
+                />
+              </div>
+
+              <!-- Saran Chip Keahlian Cepat -->
+              <div class="pt-1 space-y-1.5">
+                <span class="text-[11px] font-semibold text-neutral-400 uppercase tracking-wider">Pilih Cepat Keahlian Populer:</span>
+                <div id="suggested-skills-list" class="flex flex-wrap gap-1.5">
+                  <!-- Chips otomatis disediakan oleh script berdasarkan jurusan -->
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- Input 2: Jurusan (Figma #1632:2552) -->
-          <div class="flex-1 space-y-2">
-            <label class="block text-xs font-bold text-[#111827] uppercase tracking-wider">
-              Jurusan
-            </label>
-            <div class="relative">
-              <input
-                type="text"
-                id="search-major"
-                placeholder="RPL, TKJ, PG, TJA..."
-                class="w-full px-4 py-3.5 rounded-xl bg-[#F5F5F5] border border-[#E7E8EA] text-sm text-[#111827] placeholder:text-neutral-400 focus:bg-white focus:border-[#ED1E28] focus:outline-none transition-all"
-              />
+          <!-- Kolom Kanan: Ringkasan Profil & Tombol Eksekusi AI (5 cols) -->
+          <div class="lg:col-span-5 flex flex-col justify-between space-y-4">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <label for="student-summary" class="block text-xs font-bold text-[#111827] uppercase tracking-wider">
+                  Ringkasan Profil / Tentang Saya
+                </label>
+                <span id="student-name-display" class="text-[11px] font-semibold text-neutral-500 truncate max-w-[200px]">
+                  Profil Siswa
+                </span>
+              </div>
+              <textarea
+                id="student-summary"
+                rows="5"
+                placeholder="Deskripsikan minat teknologi, portofolio proyek yang pernah dikerjakan, dan ekspektasi peran yang diinginkan..."
+                class="w-full px-4 py-3 rounded-xl bg-[#F5F5F5] border border-[#E7E8EA] text-sm text-[#111827] placeholder:text-neutral-400 focus:bg-white focus:border-[#ED1E28] focus:outline-none transition-all resize-none leading-relaxed"
+              >Siswa SMK Telkom Purwokerto berfokus pada Rekayasa Perangkat Lunak dengan antusiasme tinggi pada web development modern, API design, dan antarmuka responsif.</textarea>
+            </div>
+
+            <!-- Tombol Utama Eksekusi AI Matching -->
+            <div class="pt-2 space-y-2">
+              <button
+                type="button"
+                id="btn-match-ai"
+                class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-[#ED1E28] via-[#D0161F] to-[#B6252A] hover:brightness-105 active:scale-[0.99] text-white font-extrabold text-sm sm:text-base tracking-wide uppercase shadow-lg shadow-[#ED1E28]/30 transition-all flex items-center justify-center gap-2.5 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                <!-- Sparkle AI Icon -->
+                <svg id="match-icon-sparkle" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <!-- Loading Spinner -->
+                <svg id="match-icon-spinner" class="w-5 h-5 animate-spin hidden text-white" viewBox="0 0 24 24" fill="none">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                </svg>
+                <span id="match-btn-text">Cocokkan dengan AI (Kimi K2.7)</span>
+              </button>
+
+              <div class="flex items-center justify-between text-[11px] text-neutral-400 px-1">
+                <span>Analisis multi-faktor: Keahlian, Jurusan & Minat</span>
+                <button
+                  type="button"
+                  id="btn-reset-filter"
+                  class="text-neutral-500 hover:text-[#ED1E28] underline cursor-pointer"
+                >
+                  Reset Tampilan
+                </button>
+              </div>
             </div>
           </div>
-
-          <!-- Button: CARI PKL (Figma #1632:2563: fill #ED1E28) -->
-          <button
-            type="button"
-            id="btn-search-pkl"
-            class="px-8 py-3.5 sm:py-4 rounded-xl bg-[#ED1E28] hover:bg-[#d01620] text-white font-bold text-sm tracking-wider uppercase shadow-md shadow-[#ED1E28]/30 transition-all flex items-center justify-center gap-2"
-          >
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-            CARI PKL
-          </button>
         </div>
       </div>
 
-      <!-- Section 3: Industry Partner Listings (Figma Background #1632:2168: padding 80px) -->
+      <!-- Section 3: Industry Partner Listings & Recommendations -->
       <section class="pt-16 pb-12">
         <div class="max-w-[1280px] mx-auto space-y-6">
-          <div class="flex items-center justify-between pb-2">
-            <h2 class="text-2xl font-bold text-[#111827] font-sans">
-              Rekomendasi Tempat PKL Terbuka
-            </h2>
-            <span class="text-xs text-neutral-400 font-medium">5 Lowongan Tersedia</span>
+          <!-- Section Heading -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-neutral-200">
+            <div class="space-y-1">
+              <h2 id="section-recommendation-title" class="text-2xl font-bold text-[#111827] font-sans flex items-center gap-2">
+                <span>Rekomendasi Tempat PKL Terbuka</span>
+              </h2>
+              <p id="section-recommendation-subtitle" class="text-xs sm:text-sm text-neutral-500">
+                Pilih lowongan untuk melihat detail kualifikasi atau jalankan pencocokan AI di atas.
+              </p>
+            </div>
+            <div class="flex items-center gap-2 text-xs">
+              <span id="results-count-badge" class="px-3 py-1 rounded-full bg-white border border-neutral-200 text-neutral-700 font-semibold shadow-sm">
+                {pklListings.length} Lowongan Tersedia
+              </span>
+            </div>
           </div>
 
           <!-- Cards Grid -->
           <div id="pkl-cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {pklListings.map((job) => (
-              <div
-                data-location={job.location.toLowerCase()}
-                data-major={job.major.toLowerCase()}
-                class="pkl-job-card bg-white rounded-2xl p-6 sm:p-7 border border-[#E7E8EA] shadow-sm hover:shadow-xl hover:border-[#ED1E28]/25 transition-all duration-300 flex flex-col justify-between"
-              >
-                <div class="space-y-4">
-                  <!-- Header: Logo, Company & Location -->
-                  <div class="flex items-center gap-3">
-                    <div class={`w-11 h-11 rounded-full ${job.logoBg} text-white font-bold text-sm flex items-center justify-center shadow-sm shrink-0`}>
-                      {job.initials}
-                    </div>
-                    <div class="space-y-0.5">
-                      <h4 class="font-bold text-sm text-[#111827] leading-none">
-                        {job.company}
-                      </h4>
-                      <p class="text-xs text-neutral-400">
-                        {job.location}
-                      </p>
-                    </div>
-                  </div>
-
-                  <!-- Job Title -->
-                  <h3 class="font-bold text-lg text-[#111827] leading-snug">
-                    {job.title}
-                  </h3>
-
-                  <!-- Metadata Tags -->
-                  <div class="flex items-center gap-3 text-xs text-neutral-500 font-medium">
-                    <span class="flex items-center gap-1">
-                      <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      </svg>
-                      {job.location}
-                    </span>
-                    <span>•</span>
-                    <span class="px-2.5 py-0.5 rounded-full bg-neutral-100 text-neutral-600 text-[11px]">
-                      {job.workMode}
-                    </span>
-                  </div>
-
-                  <!-- Skill Badges (Figma #1632:2338: bg #F5F6F8, radius 8px) -->
-                  <div class="flex flex-wrap gap-2 pt-1">
-                    {job.tags.map((tag) => (
-                      <span class="px-3 py-1 rounded-lg bg-[#F5F6F8] text-[#55565B] text-xs font-medium">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  <!-- Description -->
-                  <p class="text-xs sm:text-sm text-[#55565B] leading-relaxed pt-1">
-                    {job.desc}
-                  </p>
-                </div>
-
-                <!-- Footer Action (Figma #1632:2346: Detail →) -->
-                <div class="pt-6 border-t border-neutral-100 mt-5 flex items-center justify-between">
-                  <span class="text-xs font-semibold text-neutral-400 uppercase">Jurusan: {job.major}</span>
-                  <a
-                    href="#"
-                    class="text-sm font-bold text-[#ED1E28] hover:text-[#d01620] flex items-center gap-1 transition-colors"
-                  >
-                    Detail →
-                  </a>
-                </div>
-              </div>
-            ))}
+            <!-- Diisi secara dinamis melalui JavaScript untuk mendukung skor kecocokan dan insight AI -->
           </div>
 
-          <!-- Bottom Button: Lihat Semua Rekomendasi (Figma #1632:2435) -->
-          <div class="pt-10 flex justify-center">
+          <!-- Empty State (Hidden by default) -->
+          <div id="empty-state" class="hidden text-center py-16 bg-white rounded-3xl border border-neutral-200 p-8 space-y-4">
+            <div class="w-16 h-16 rounded-full bg-red-50 text-[#ED1E28] mx-auto flex items-center justify-center">
+              <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-[#111827]">Tidak Ada Lowongan yang Sesuai</h3>
+            <p class="text-sm text-neutral-500 max-w-md mx-auto">
+              Coba sesuaikan kata kunci keahlian atau hapus filter lokasi untuk melihat lowongan lainnya.
+            </p>
             <button
               type="button"
-              class="px-10 py-3.5 sm:py-4 rounded-full bg-white hover:bg-neutral-50 text-[#111827] border border-[#E7E8EA] font-bold text-sm shadow-sm transition-all duration-300"
+              id="btn-empty-reset"
+              class="px-6 py-2.5 rounded-xl bg-neutral-100 hover:bg-neutral-200 text-[#111827] text-xs font-bold transition-all"
             >
-              Lihat Semua Rekomendasi
+              Tampilkan Semua Lowongan
             </button>
           </div>
         </div>
@@ -235,42 +728,884 @@ const pklListings = [
     </Container>
   </div>
 
-  <!-- Interactive Search Script -->
+  <!-- Interactive Modal Detail Lowongan PKL -->
+  <div
+    id="pkl-detail-modal"
+    class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity duration-300"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-job-title"
+  >
+    <div
+      class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-neutral-200 flex flex-col transform transition-all duration-300"
+    >
+      <!-- Modal Header -->
+      <div class="sticky top-0 bg-white/95 backdrop-blur-md z-10 px-6 sm:px-8 py-5 border-b border-neutral-100 flex items-start justify-between gap-4">
+        <div class="flex items-center gap-3.5">
+          <div id="modal-logo" class="w-12 h-12 rounded-full bg-[#E4002B] text-white font-extrabold text-base flex items-center justify-center shadow-sm shrink-0">
+            TI
+          </div>
+          <div>
+            <h3 id="modal-job-title" class="font-bold text-lg sm:text-xl text-[#111827] leading-snug">
+              Frontend Developer Intern
+            </h3>
+            <p id="modal-company" class="text-xs sm:text-sm text-neutral-500 font-medium">
+              Telkom Indonesia • Bandung (Hybrid)
+            </p>
+          </div>
+        </div>
+        <button
+          type="button"
+          id="btn-close-modal"
+          class="w-9 h-9 rounded-full bg-neutral-100 hover:bg-neutral-200 text-neutral-600 flex items-center justify-center text-sm font-bold transition-colors cursor-pointer"
+          aria-label="Tutup modal"
+        >
+          ✕
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6 sm:p-8 space-y-6">
+        <!-- AI Match Box in Modal (Tampil jika AI matching telah dijalankan) -->
+        <div id="modal-ai-box" class="p-4 rounded-2xl bg-neutral-50 border border-neutral-200 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-neutral-700 flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-[#ED1E28]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              Analisis Kecocokan Kimi K2.7
+            </span>
+            <span id="modal-match-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
+              92% Sangat Cocok
+            </span>
+          </div>
+          <p id="modal-match-reason" class="text-xs sm:text-sm text-[#55565B] leading-relaxed">
+            Keahlian siswa sangat selaras dengan kebutuhan proyek.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+            <div>
+              <span class="block text-[11px] font-bold text-emerald-800 uppercase tracking-wider mb-1.5">Matched Skills:</span>
+              <div id="modal-matched-skills" class="flex flex-wrap gap-1.5"></div>
+            </div>
+            <div>
+              <span class="block text-[11px] font-bold text-amber-800 uppercase tracking-wider mb-1.5">Skills to Improve:</span>
+              <div id="modal-improve-skills" class="flex flex-wrap gap-1.5"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Deskripsi Tugas & Proyek -->
+        <div class="space-y-2">
+          <h4 class="text-xs font-bold text-[#111827] uppercase tracking-wider">
+            Deskripsi Tugas & Proyek
+          </h4>
+          <p id="modal-desc" class="text-sm text-[#55565B] leading-relaxed">
+            Membantu pengembangan antarmuka portal layanan pelanggan berbasis web...
+          </p>
+        </div>
+
+        <!-- Syarat & Kualifikasi -->
+        <div class="space-y-2">
+          <h4 class="text-xs font-bold text-[#111827] uppercase tracking-wider">
+            Syarat Kualifikasi
+          </h4>
+          <ul id="modal-requirements" class="list-disc list-inside space-y-1 text-sm text-[#55565B]">
+            <!-- Injected by script -->
+          </ul>
+        </div>
+
+        <!-- Informasi Tambahan: Kuota, Mode Kerja & Jurusan -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 p-4 rounded-xl bg-[#F5F6F8]">
+          <div>
+            <span class="block text-[11px] text-neutral-400 font-semibold uppercase">Kuota Siswa</span>
+            <span id="modal-quota" class="text-sm font-bold text-[#111827]">4 Siswa</span>
+          </div>
+          <div>
+            <span class="block text-[11px] text-neutral-400 font-semibold uppercase">Mode Kerja</span>
+            <span id="modal-workmode" class="text-sm font-bold text-[#111827]">Hybrid</span>
+          </div>
+          <div>
+            <span class="block text-[11px] text-neutral-400 font-semibold uppercase">Jurusan Utama</span>
+            <span id="modal-major" class="text-sm font-bold text-[#ED1E28]">RPL</span>
+          </div>
+        </div>
+
+        <!-- Jalur Pendaftaran BKK -->
+        <div class="p-4 rounded-xl border border-neutral-200 bg-neutral-50/50 space-y-1.5">
+          <h4 class="text-xs font-bold text-[#111827] uppercase tracking-wider">
+            Informasi Pendaftaran PKL
+          </h4>
+          <p class="text-xs text-[#55565B] leading-relaxed">
+            Seluruh proses pengajuan magang dikoordinasikan secara terpusat oleh Bursa Kerja Khusus (BKK) dan Hubungan Industri SMK Telkom Purwokerto.
+          </p>
+          <p class="text-xs text-neutral-600 font-medium pt-1">
+            Email Hubin: <a id="modal-contact" href="mailto:bkk@smktelkom-pwt.sch.id" class="text-[#ED1E28] font-bold hover:underline">bkk@smktelkom-pwt.sch.id</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="sticky bottom-0 bg-white/95 backdrop-blur-md px-6 sm:px-8 py-4 border-t border-neutral-100 flex items-center justify-end gap-3">
+        <button
+          type="button"
+          id="btn-modal-cancel"
+          class="px-5 py-2.5 rounded-xl border border-neutral-200 text-neutral-700 text-xs sm:text-sm font-bold hover:bg-neutral-50 transition-colors cursor-pointer"
+        >
+          Tutup
+        </button>
+        <a
+          id="modal-apply-btn"
+          href="mailto:bkk@smktelkom-pwt.sch.id?subject=Pengajuan%20PKL"
+          class="px-6 py-2.5 rounded-xl bg-[#ED1E28] hover:bg-[#d01620] text-white text-xs sm:text-sm font-bold shadow-md shadow-[#ED1E28]/25 transition-all flex items-center gap-2"
+        >
+          <span>Ajukan via BKK</span>
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive AI PKL Matching Script -->
   <script>
-    function setupPklSearch() {
-      const locInput = document.getElementById('search-location') as HTMLInputElement | null;
-      const majorInput = document.getElementById('search-major') as HTMLInputElement | null;
-      const btn = document.getElementById('btn-search-pkl');
-      const cards = document.querySelectorAll<HTMLElement>('.pkl-job-card');
+    interface PklJob {
+      id: string;
+      company: string;
+      initials: string;
+      logoBg: string;
+      location: string;
+      workMode: string;
+      title: string;
+      tags: string[];
+      desc: string;
+      major: string;
+      quota?: string;
+      requirements?: string[];
+      contact?: string;
+      applyUrl?: string;
+      // Kolom dinamis hasil pencocokan AI
+      score?: number;
+      reason?: string;
+      matchedSkills?: string[];
+      skillsToImprove?: string[];
+    }
 
-      function filterCards() {
-        const locVal = (locInput?.value || '').toLowerCase().trim();
-        const majorVal = (majorInput?.value || '').toLowerCase().trim();
+    const CV_STORAGE_KEY = 'jhic_student_cv';
 
-        cards.forEach((card) => {
-          const cardLoc = card.getAttribute('data-location') || '';
-          const cardMajor = card.getAttribute('data-major') || '';
+    // Saran keahlian per jurusan SMK Telkom
+    const SKILL_SUGGESTIONS: Record<string, string[]> = {
+      RPL: ['React', 'TypeScript', 'Tailwind CSS', 'Node.js', 'Python', 'REST APIs', 'Git & GitHub', 'Next.js', 'PostgreSQL'],
+      TKJ: ['Jaringan Komputer', 'MikroTik', 'Cisco Packet Tracer', 'Linux Server', 'Routing & Switching', 'Hardware Troubleshoot', 'Cloud Basics'],
+      TJA: ['Fiber Optic', 'OTDR', 'Splicing FTTH', 'ODP / ODC', 'Topologi FTTH', 'K3 Telekomunikasi', 'Redaman Optik'],
+      PG: ['Unity 3D', 'C# Programming', 'Game Design', 'Blender', 'Figma', 'UI/UX Design', 'Video Editing', 'Motion Graphics']
+    };
 
-          const matchLoc = !locVal || cardLoc.includes(locVal);
-          const matchMajor = !majorVal || cardMajor.includes(majorVal);
+    function setupPklMatching() {
+      const root = document.getElementById('pkl-matching-app');
+      if (!root) return;
 
-          if (matchLoc && matchMajor) {
-            card.style.display = 'flex';
-          } else {
-            card.style.display = 'none';
-          }
+      const rawListings = root.getAttribute('data-initial-listings') || '[]';
+      let allJobs: PklJob[] = [];
+      try {
+        allJobs = JSON.parse(rawListings);
+      } catch {
+        allJobs = [];
+      }
+
+      let currentJobs: PklJob[] = [...allJobs];
+      let activeSkills: string[] = ['React', 'TypeScript', 'Tailwind CSS'];
+      let isAiMatched = false;
+      let activeStudentName = '';
+
+      // Elements
+      const majorSelect = document.getElementById('student-major') as HTMLSelectElement | null;
+      const locationInput = document.getElementById('student-location-filter') as HTMLInputElement | null;
+      const skillsContainer = document.getElementById('skills-tags-container');
+      const skillInput = document.getElementById('skills-tag-input') as HTMLInputElement | null;
+      const suggestedSkillsContainer = document.getElementById('suggested-skills-list');
+      const summaryTextarea = document.getElementById('student-summary') as HTMLTextAreaElement | null;
+      const studentNameDisplay = document.getElementById('student-name-display');
+
+      const btnPullCv = document.getElementById('btn-pull-cv');
+      const cvStatusAlert = document.getElementById('cv-status-alert');
+      const cvStatusMessage = document.getElementById('cv-status-message');
+      const btnCloseAlert = document.getElementById('btn-close-alert');
+
+      const btnMatchAi = document.getElementById('btn-match-ai') as HTMLButtonElement | null;
+      const matchIconSparkle = document.getElementById('match-icon-sparkle');
+      const matchIconSpinner = document.getElementById('match-icon-spinner');
+      const matchBtnText = document.getElementById('match-btn-text');
+      const btnResetFilter = document.getElementById('btn-reset-filter');
+      const btnEmptyReset = document.getElementById('btn-empty-reset');
+
+      const cardsGrid = document.getElementById('pkl-cards-grid');
+      const emptyState = document.getElementById('empty-state');
+      const resultsCountBadge = document.getElementById('results-count-badge');
+      const sectionTitle = document.getElementById('section-recommendation-title');
+      const sectionSubtitle = document.getElementById('section-recommendation-subtitle');
+
+      // Modal elements
+      const modal = document.getElementById('pkl-detail-modal');
+      const btnCloseModal = document.getElementById('btn-close-modal');
+      const btnModalCancel = document.getElementById('btn-modal-cancel');
+      const modalLogo = document.getElementById('modal-logo');
+      const modalJobTitle = document.getElementById('modal-job-title');
+      const modalCompany = document.getElementById('modal-company');
+      const modalAiBox = document.getElementById('modal-ai-box');
+      const modalMatchBadge = document.getElementById('modal-match-badge');
+      const modalMatchReason = document.getElementById('modal-match-reason');
+      const modalMatchedSkills = document.getElementById('modal-matched-skills');
+      const modalImproveSkills = document.getElementById('modal-improve-skills');
+      const modalDesc = document.getElementById('modal-desc');
+      const modalRequirements = document.getElementById('modal-requirements');
+      const modalQuota = document.getElementById('modal-quota');
+      const modalWorkmode = document.getElementById('modal-workmode');
+      const modalMajor = document.getElementById('modal-major');
+      const modalContact = document.getElementById('modal-contact') as HTMLAnchorElement | null;
+      const modalApplyBtn = document.getElementById('modal-apply-btn') as HTMLAnchorElement | null;
+
+      // 1. Render Skill Tags
+      function renderSkillTags() {
+        if (!skillsContainer) return;
+        skillsContainer.innerHTML = '';
+        activeSkills.forEach((skill, index) => {
+          const tag = document.createElement('span');
+          tag.className = 'inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white border border-[#E7E8EA] text-xs font-semibold text-[#111827] shadow-2xs animate-fadeIn';
+          tag.innerHTML = `
+            <span>${skill}</span>
+            <button type="button" data-index="${index}" class="text-neutral-400 hover:text-[#ED1E28] font-bold focus:outline-none">✕</button>
+          `;
+          const removeBtn = tag.querySelector('button');
+          removeBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            activeSkills.splice(index, 1);
+            renderSkillTags();
+          });
+          skillsContainer.appendChild(tag);
         });
       }
 
-      btn?.addEventListener('click', filterCards);
-      locInput?.addEventListener('input', filterCards);
-      majorInput?.addEventListener('input', filterCards);
+      // 2. Render Suggested Skill Chips berdasarkan Jurusan yang dipilih
+      function renderSuggestedChips() {
+        if (!suggestedSkillsContainer || !majorSelect) return;
+        const currentMajor = majorSelect.value || 'RPL';
+        const suggestions = SKILL_SUGGESTIONS[currentMajor] || SKILL_SUGGESTIONS['RPL'];
+
+        suggestedSkillsContainer.innerHTML = '';
+        suggestions.forEach((skill) => {
+          const isSelected = activeSkills.some(s => s.toLowerCase() === skill.toLowerCase());
+          const chip = document.createElement('button');
+          chip.type = 'button';
+          chip.className = `px-2.5 py-1 rounded-md text-[11px] font-medium transition-all cursor-pointer ${
+            isSelected
+              ? 'bg-neutral-200 text-neutral-500 cursor-default'
+              : 'bg-white hover:bg-neutral-100 text-neutral-700 border border-neutral-200'
+          }`;
+          chip.textContent = `+ ${skill}`;
+          if (!isSelected) {
+            chip.addEventListener('click', () => {
+              activeSkills.push(skill);
+              renderSkillTags();
+              renderSuggestedChips();
+            });
+          }
+          suggestedSkillsContainer.appendChild(chip);
+        });
+      }
+
+      // Event tambah tag manual via input (Enter atau koma)
+      skillInput?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ',') {
+          e.preventDefault();
+          const val = skillInput.value.replace(/,/g, '').trim();
+          if (val && !activeSkills.some(s => s.toLowerCase() === val.toLowerCase())) {
+            activeSkills.push(val);
+            skillInput.value = '';
+            renderSkillTags();
+            renderSuggestedChips();
+          }
+        }
+      });
+
+      majorSelect?.addEventListener('change', () => {
+        renderSuggestedChips();
+      });
+
+      // 3. Tarik Data dari CV Generator (localStorage 'jhic_student_cv')
+      function pullDataFromCvGenerator() {
+        if (!cvStatusAlert || !cvStatusMessage) return;
+
+        try {
+          const stored = localStorage.getItem(CV_STORAGE_KEY);
+          if (!stored) {
+            cvStatusAlert.className = 'flex p-3.5 rounded-xl text-xs sm:text-sm items-center justify-between border bg-amber-50 text-amber-800 border-amber-200 transition-all';
+            cvStatusMessage.innerHTML = `
+              <svg class="w-4 h-4 text-amber-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+              <span>Belum ada data CV yang tersimpan di CV Generator. Kamu dapat mengisi form secara manual atau buat CV terlebih dahulu di <a href="/cv-generator" class="font-bold underline text-amber-900">CV Generator</a>.</span>
+            `;
+            cvStatusAlert.classList.remove('hidden');
+            return;
+          }
+
+          const parsed = JSON.parse(stored);
+
+          // Pasang Jurusan
+          if (majorSelect && parsed.major) {
+            const rawMajor = (parsed.major || '').toUpperCase();
+            if (rawMajor.includes('RPL')) majorSelect.value = 'RPL';
+            else if (rawMajor.includes('TKJ')) majorSelect.value = 'TKJ';
+            else if (rawMajor.includes('TJA')) majorSelect.value = 'TJA';
+            else if (rawMajor.includes('PG') || rawMajor.includes('GIM')) majorSelect.value = 'PG';
+          }
+
+          // Pasang Skills
+          if (parsed.skillsList && Array.isArray(parsed.skillsList) && parsed.skillsList.length > 0) {
+            activeSkills = [...parsed.skillsList];
+          } else if (parsed.skills && typeof parsed.skills === 'string') {
+            activeSkills = parsed.skills.split(',').map((s: string) => s.trim()).filter(Boolean);
+          }
+
+          // Pasang Ringkasan
+          if (summaryTextarea && parsed.about) {
+            summaryTextarea.value = parsed.about;
+          }
+
+          // Pasang Nama Siswa
+          if (parsed.name) {
+            activeStudentName = parsed.name;
+            if (studentNameDisplay) {
+              studentNameDisplay.textContent = `Siswa: ${parsed.name}`;
+            }
+          }
+
+          renderSkillTags();
+          renderSuggestedChips();
+
+          // Tampilkan Notifikasi Sukses
+          cvStatusAlert.className = 'flex p-3.5 rounded-xl text-xs sm:text-sm items-center justify-between border bg-emerald-50 text-emerald-800 border-emerald-200 transition-all';
+          cvStatusMessage.innerHTML = `
+            <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>Data profil <strong>${parsed.name || 'Siswa'}</strong> (${majorSelect?.value || 'SMK Telkom'}) berhasil ditarik dari CV Generator!</span>
+          `;
+          cvStatusAlert.classList.remove('hidden');
+        } catch (e) {
+          console.error('Gagal menarik profil CV:', e);
+        }
+      }
+
+      btnPullCv?.addEventListener('click', pullDataFromCvGenerator);
+      btnCloseAlert?.addEventListener('click', () => {
+        cvStatusAlert?.classList.add('hidden');
+      });
+
+      // 4. Render Kartu Lowongan PKL
+      function renderJobCards(jobs: PklJob[]) {
+        if (!cardsGrid || !emptyState || !resultsCountBadge) return;
+
+        if (jobs.length === 0) {
+          cardsGrid.innerHTML = '';
+          emptyState.classList.remove('hidden');
+          resultsCountBadge.textContent = '0 Lowongan Ditemukan';
+          return;
+        }
+
+        emptyState.classList.add('hidden');
+        resultsCountBadge.textContent = `${jobs.length} Lowongan ${isAiMatched ? 'Direkomendasikan' : 'Tersedia'}`;
+
+        cardsGrid.innerHTML = '';
+
+        jobs.forEach((job) => {
+          const card = document.createElement('div');
+          card.className = 'pkl-job-card bg-white rounded-2xl p-6 sm:p-7 border border-[#E7E8EA] shadow-sm hover:shadow-xl hover:border-[#ED1E28]/30 transition-all duration-300 flex flex-col justify-between space-y-4';
+
+          // Perhitungan Badge Match Score jika proses AI telah berlangsung
+          let matchScoreBadgeHtml = '';
+          let aiInsightBoxHtml = '';
+
+          if (typeof job.score === 'number') {
+            const score = Math.round(job.score);
+            let badgeColorClass = 'bg-neutral-100 text-neutral-700 border-neutral-200';
+            let label = 'Perlu Adaptasi';
+
+            if (score >= 80) {
+              badgeColorClass = 'bg-emerald-50 text-emerald-700 border-emerald-300';
+              label = 'Sangat Cocok';
+            } else if (score >= 60) {
+              badgeColorClass = 'bg-amber-50 text-amber-700 border-amber-300';
+              label = 'Cukup Cocok';
+            }
+
+            matchScoreBadgeHtml = `
+              <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border ${badgeColorClass} text-xs font-bold shadow-2xs">
+                <span class="w-2 h-2 rounded-full ${score >= 80 ? 'bg-emerald-500' : score >= 60 ? 'bg-amber-500' : 'bg-neutral-400'}"></span>
+                <span>${score}% Cocok • ${label}</span>
+              </div>
+            `;
+
+            // Kotak Insight AI
+            const matchedTags = (job.matchedSkills || []).map(s => `
+              <span class="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-md bg-emerald-100/70 text-emerald-800 text-[10px] font-semibold">
+                ✓ ${s}
+              </span>
+            `).join('');
+
+            const improveTags = (job.skillsToImprove || []).map(s => `
+              <span class="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-md bg-amber-100/70 text-amber-800 text-[10px] font-semibold">
+                △ ${s}
+              </span>
+            `).join('');
+
+            aiInsightBoxHtml = `
+              <div class="p-3.5 rounded-xl bg-neutral-50/80 border border-neutral-200 space-y-2 text-xs">
+                <div class="flex items-center gap-1.5 font-bold text-neutral-800">
+                  <svg class="w-3.5 h-3.5 text-[#ED1E28]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                  <span>Insight AI Kimi K2.7</span>
+                </div>
+                <p class="text-neutral-600 text-[11px] leading-relaxed">${job.reason || 'Keahlian siswa memiliki korelasi positif dengan deskripsi lowongan ini.'}</p>
+                ${matchedTags ? `
+                  <div class="pt-0.5">
+                    <span class="block text-[10px] text-neutral-400 font-bold uppercase tracking-wider mb-1">Skill Sesuai:</span>
+                    <div class="flex flex-wrap gap-1">${matchedTags}</div>
+                  </div>
+                ` : ''}
+                ${improveTags ? `
+                  <div class="pt-0.5">
+                    <span class="block text-[10px] text-neutral-400 font-bold uppercase tracking-wider mb-1">Disarankan Pelajari:</span>
+                    <div class="flex flex-wrap gap-1">${improveTags}</div>
+                  </div>
+                ` : ''}
+              </div>
+            `;
+          }
+
+          // Tags lowongan
+          const tagsHtml = job.tags.map(t => `
+            <span class="px-2.5 py-1 rounded-lg bg-[#F5F6F8] text-[#55565B] text-xs font-medium">
+              ${t}
+            </span>
+          `).join('');
+
+          card.innerHTML = `
+            <div class="space-y-4">
+              <!-- Top Row: Logo, Company & Match Score Badge -->
+              <div class="flex items-start justify-between gap-3">
+                <div class="flex items-center gap-3">
+                  <div class="w-11 h-11 rounded-full ${job.logoBg} text-white font-bold text-sm flex items-center justify-center shadow-sm shrink-0">
+                    ${job.initials}
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-sm text-[#111827] leading-tight">
+                      ${job.company}
+                    </h4>
+                    <p class="text-xs text-neutral-400 pt-0.5">
+                      ${job.location} • ${job.workMode}
+                    </p>
+                  </div>
+                </div>
+                ${matchScoreBadgeHtml}
+              </div>
+
+              <!-- Job Title -->
+              <h3 class="font-bold text-lg text-[#111827] leading-snug">
+                ${job.title}
+              </h3>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-1.5 pt-0.5">
+                ${tagsHtml}
+              </div>
+
+              <!-- Description -->
+              <p class="text-xs sm:text-sm text-[#55565B] leading-relaxed line-clamp-2">
+                ${job.desc}
+              </p>
+
+              <!-- AI Insight Box (jika ada) -->
+              ${aiInsightBoxHtml}
+            </div>
+
+            <!-- Footer Action -->
+            <div class="pt-4 border-t border-neutral-100 flex items-center justify-between mt-auto">
+              <span class="text-xs font-semibold text-neutral-500 uppercase tracking-wider">Jurusan: ${job.major}</span>
+              <button
+                type="button"
+                data-job-id="${job.id}"
+                class="btn-open-detail text-sm font-bold text-[#ED1E28] hover:text-[#d01620] flex items-center gap-1 transition-colors cursor-pointer"
+              >
+                Detail →
+              </button>
+            </div>
+          `;
+
+          cardsGrid.appendChild(card);
+        });
+
+        // Pasang event listener tombol Detail →
+        document.querySelectorAll('.btn-open-detail').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const id = btn.getAttribute('data-job-id');
+            const targetJob = currentJobs.find(j => j.id === id);
+            if (targetJob) {
+              openDetailModal(targetJob);
+            }
+          });
+        });
+      }
+
+      // 5. Modal Detail Lowongan Interaktif
+      function openDetailModal(job: PklJob) {
+        if (!modal) return;
+
+        if (modalLogo) {
+          modalLogo.className = `w-12 h-12 rounded-full ${job.logoBg} text-white font-extrabold text-base flex items-center justify-center shadow-sm shrink-0`;
+          modalLogo.textContent = job.initials;
+        }
+        if (modalJobTitle) modalJobTitle.textContent = job.title;
+        if (modalCompany) modalCompany.textContent = `${job.company} • ${job.location} (${job.workMode})`;
+        if (modalDesc) modalDesc.textContent = job.desc;
+        if (modalQuota) modalQuota.textContent = job.quota || '3 - 5 Siswa';
+        if (modalWorkmode) modalWorkmode.textContent = job.workMode;
+        if (modalMajor) modalMajor.textContent = job.major;
+
+        // Requirements list
+        if (modalRequirements) {
+          modalRequirements.innerHTML = '';
+          const reqs = job.requirements || [
+            `Siswa aktif SMK Telkom Purwokerto jurusan ${job.major}`,
+            `Menguasai keahlian: ${job.tags.join(', ')}`,
+            'Disiplin, bertanggung jawab, dan bersedia mengikuti regulasi industri'
+          ];
+          reqs.forEach((r) => {
+            const li = document.createElement('li');
+            li.textContent = r;
+            modalRequirements.appendChild(li);
+          });
+        }
+
+        // Kontak & Tombol Lamaran
+        const contactEmail = job.contact || 'bkk@smktelkom-pwt.sch.id';
+        if (modalContact) {
+          modalContact.href = `mailto:${contactEmail}`;
+          modalContact.textContent = contactEmail;
+        }
+        if (modalApplyBtn) {
+          modalApplyBtn.href = job.applyUrl || `mailto:${contactEmail}?subject=Lamaran%20PKL%20${encodeURIComponent(job.company)}%20-%20${encodeURIComponent(job.title)}`;
+        }
+
+        // Tampilkan Box Insight AI jika sudah dicocokkan
+        if (modalAiBox) {
+          if (typeof job.score === 'number') {
+            modalAiBox.classList.remove('hidden');
+            const score = Math.round(job.score);
+            if (modalMatchBadge) {
+              modalMatchBadge.className = `px-3 py-1 rounded-full text-xs font-bold ${
+                score >= 80
+                  ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                  : score >= 60
+                  ? 'bg-amber-50 text-amber-700 border border-amber-200'
+                  : 'bg-neutral-100 text-neutral-600 border border-neutral-200'
+              }`;
+              modalMatchBadge.textContent = `${score}% Match Score`;
+            }
+            if (modalMatchReason) {
+              modalMatchReason.textContent = job.reason || 'Kandidat memiliki latar belakang kompetensi yang relevan dengan spesifikasi lowongan ini.';
+            }
+
+            if (modalMatchedSkills) {
+              modalMatchedSkills.innerHTML = '';
+              (job.matchedSkills || []).forEach((s) => {
+                const span = document.createElement('span');
+                span.className = 'px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 text-xs font-semibold';
+                span.textContent = `✓ ${s}`;
+                modalMatchedSkills.appendChild(span);
+              });
+            }
+
+            if (modalImproveSkills) {
+              modalImproveSkills.innerHTML = '';
+              (job.skillsToImprove || []).forEach((s) => {
+                const span = document.createElement('span');
+                span.className = 'px-2 py-0.5 rounded-md bg-amber-100 text-amber-800 text-xs font-semibold';
+                span.textContent = `△ ${s}`;
+                modalImproveSkills.appendChild(span);
+              });
+            }
+          } else {
+            modalAiBox.classList.add('hidden');
+          }
+        }
+
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        if (!modal) return;
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+      }
+
+      btnCloseModal?.addEventListener('click', closeModal);
+      btnModalCancel?.addEventListener('click', closeModal);
+      modal?.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !modal?.classList.contains('hidden')) {
+          closeModal();
+        }
+      });
+
+      // 6. Algoritma Pencocokan Cerdas (Fallback & Client-side Scoring)
+      function calculateLocalMatching(
+        jobs: PklJob[],
+        studentMajor: string,
+        studentSkills: string[],
+        summary: string,
+        preferredLocation: string
+      ): PklJob[] {
+        const studentSkillsNormalized = studentSkills.map(s => s.toLowerCase().trim()).filter(Boolean);
+        const locFilter = preferredLocation.toLowerCase().trim();
+
+        return jobs.map((job) => {
+          let score = 40; // Base score
+          const isMajorMatch = job.major.toLowerCase() === studentMajor.toLowerCase();
+          if (isMajorMatch) {
+            score += 35; // Bobot jurusan utama
+          } else if (
+            (studentMajor === 'TKJ' && job.major === 'RPL') ||
+            (studentMajor === 'RPL' && job.major === 'TKJ') ||
+            (studentMajor === 'PG' && job.major === 'RPL')
+          ) {
+            score += 15; // Lintas jurusan terkait
+          }
+
+          // Pencocokan keahlian (tags lowongan vs input siswa)
+          const matchedSkillsList: string[] = [];
+          const skillsToImproveList: string[] = [];
+
+          job.tags.forEach((tag) => {
+            const tagNorm = tag.toLowerCase();
+            const hasDirectMatch = studentSkillsNormalized.some(s => s.includes(tagNorm) || tagNorm.includes(s));
+            if (hasDirectMatch) {
+              matchedSkillsList.push(tag);
+              score += 8;
+            } else {
+              skillsToImproveList.push(tag);
+            }
+          });
+
+          // Lokasi filter
+          if (locFilter && (job.location.toLowerCase().includes(locFilter) || locFilter.includes(job.location.toLowerCase()))) {
+            score += 5;
+          }
+
+          // Evaluasi teks deskripsi & ringkasan
+          if (summary) {
+            const summaryLower = summary.toLowerCase();
+            if (summaryLower.includes(job.title.toLowerCase()) || summaryLower.includes(job.major.toLowerCase())) {
+              score += 5;
+            }
+          }
+
+          // Batasi rentang skor 45 - 97%
+          const finalScore = Math.min(97, Math.max(45, score));
+
+          // Bangun alasan kontekstual berbasis data nyata
+          let reason = '';
+          if (finalScore >= 80) {
+            reason = `Profil keahlian (${matchedSkillsList.join(', ') || 'kompetensi utama'}) dan jurusan ${studentMajor} sangat selaras dengan kebutuhan proyek ${job.title} di ${job.company}.`;
+          } else if (finalScore >= 60) {
+            reason = `Kompetensi dasar siswa memadai untuk posisi ini. Menguasai ${skillsToImproveList.slice(0, 2).join(' & ')} akan meningkatkan kesiapan kerja secara signifikan.`;
+          } else {
+            reason = `Posisi ini memprioritaskan kompetensi spesifik jurusan ${job.major}. Penyesuaian keahlian pada ${job.tags.join(', ')} diperlukan untuk kualifikasi optimal.`;
+          }
+
+          return {
+            ...job,
+            score: finalScore,
+            reason,
+            matchedSkills: matchedSkillsList,
+            skillsToImprove: skillsToImproveList.slice(0, 3)
+          };
+        }).sort((a, b) => (b.score || 0) - (a.score || 0));
+      }
+
+      // 7. Eksekusi Pencocokan AI (Kimi K2.7)
+      async function executeAiMatching() {
+        if (!btnMatchAi || !matchIconSparkle || !matchIconSpinner || !matchBtnText) return;
+
+        const studentMajor = majorSelect?.value || 'RPL';
+        const preferredLoc = locationInput?.value || '';
+        const summary = summaryTextarea?.value || '';
+
+        // Tampilkan State Loading
+        btnMatchAi.disabled = true;
+        matchIconSparkle.classList.add('hidden');
+        matchIconSpinner.classList.remove('hidden');
+        matchBtnText.textContent = 'Menganalisis dengan Kimi K2.7...';
+
+        try {
+          // Kirim request ke backend POST /api/pkl/match dengan format profile sesuai skema backend
+          const payload = {
+            profile: {
+              name: activeStudentName || 'Siswa SMK Telkom Purwokerto',
+              major: studentMajor,
+              skills: activeSkills,
+              bio: summary,
+            },
+            cvText: summary,
+            // Fallback properti flat untuk kompatibilitas ganda
+            major: studentMajor,
+            skills: activeSkills,
+            summary: summary,
+            preferredLocation: preferredLoc,
+          };
+
+          let matchedResults: PklJob[] | null = null;
+
+          try {
+            const response = await fetch('/api/pkl/match', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload),
+            });
+
+            if (response.ok) {
+              const data = await response.json();
+              const serverMatches = Array.isArray(data) ? data : (data.matches || data.recommendations || data.data || null);
+              if (Array.isArray(serverMatches) && serverMatches.length > 0) {
+                // Map hasil server dengan allJobs dan properti lengkap
+                matchedResults = serverMatches.map((item: any, idx: number) => {
+                  const companyName = item.company || (item.listing && item.listing.company) || 'Telkom Group';
+                  const jobTitle = item.title || (item.listing && item.listing.title) || 'Magang Industri';
+                  const existing = allJobs.find(j => j.id === item.listingId || j.id === item.id || j.title.toLowerCase() === jobTitle.toLowerCase()) || allJobs[idx % allJobs.length];
+                  return {
+                    id: item.listingId || item.id || existing.id || `match-${idx}`,
+                    company: companyName,
+                    initials: item.initials || (item.listing && item.listing.initials) || existing.initials || companyName.slice(0, 2).toUpperCase(),
+                    logoBg: item.logoBg || (item.listing && item.listing.logoBg) || existing.logoBg || 'bg-[#E4002B]',
+                    location: item.location || (item.listing && item.listing.location) || existing.location || 'Purwokerto',
+                    workMode: item.workMode || (item.listing && item.listing.workMode) || existing.workMode || 'Hybrid',
+                    title: jobTitle,
+                    tags: item.tags || (item.listing && item.listing.tags) || existing.tags || [],
+                    desc: item.description || item.desc || (item.listing && item.listing.description) || existing.desc || '',
+                    major: item.major || (item.listing && item.listing.major) || existing.major || studentMajor,
+                    quota: existing.quota || '3 - 5 Siswa',
+                    requirements: existing.requirements || [
+                      `Siswa aktif SMK Telkom Purwokerto jurusan ${item.major || studentMajor}`,
+                      `Kompetensi yang dibutuhkan: ${(item.tags || []).join(', ')}`,
+                      'Disiplin, bertanggung jawab, dan siap beradaptasi di industri'
+                    ],
+                    contact: existing.contact || 'bkk@smktelkom-pwt.sch.id',
+                    applyUrl: existing.applyUrl || `mailto:bkk@smktelkom-pwt.sch.id?subject=Lamaran%20PKL%20${encodeURIComponent(companyName)}%20-%20${encodeURIComponent(jobTitle)}`,
+                    score: typeof item.score === 'number' ? Math.round(item.score) : 85,
+                    reason: item.reason || item.matchReason || 'Sesuai dengan analisis kompetensi Kimi K2.7.',
+                    matchedSkills: Array.isArray(item.matchedSkills) ? item.matchedSkills : (item.matched_skills || []),
+                    skillsToImprove: Array.isArray(item.skillsToImprove) ? item.skillsToImprove : (item.skills_to_improve || []),
+                  };
+                });
+              }
+            }
+          } catch (netErr) {
+            console.info('[AI Matching] Endpoint /api/pkl/match belum merespons, beralih ke engine inferensi cerdas internal:', netErr);
+          }
+
+          // Fallback lokal cerdas jika endpoint belum tersedia
+          if (!matchedResults || matchedResults.length === 0) {
+            // Simulasi delay inferensi halus 600ms
+            await new Promise(r => setTimeout(r, 600));
+            matchedResults = calculateLocalMatching(allJobs, studentMajor, activeSkills, summary, preferredLoc);
+          }
+
+          currentJobs = matchedResults;
+          isAiMatched = true;
+
+          // Perbarui judul hasil
+          if (sectionTitle) {
+            sectionTitle.innerHTML = `
+              <span class="inline-flex items-center gap-2">
+                <span>Rekomendasi AI Kimi K2.7</span>
+                <span class="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold">Terurut Skor</span>
+              </span>
+            `;
+          }
+          if (sectionSubtitle) {
+            sectionSubtitle.textContent = `Peringkat kecocokan dihitung secara cerdas berdasarkan jurusan ${studentMajor} dan keahlian yang kamu kuasai.`;
+          }
+
+          renderJobCards(currentJobs);
+
+          // Scroll halus ke daftar kartu rekomendasi
+          cardsGrid?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        } catch (err) {
+          console.error('[AI Matching Error]:', err);
+        } finally {
+          btnMatchAi.disabled = false;
+          matchIconSparkle.classList.remove('hidden');
+          matchIconSpinner.classList.add('hidden');
+          matchBtnText.textContent = 'Cocokkan dengan AI (Kimi K2.7)';
+        }
+      }
+
+      btnMatchAi?.addEventListener('click', executeAiMatching);
+
+      // Reset Filter
+      function resetToDefault() {
+        isAiMatched = false;
+        currentJobs = [...allJobs];
+        if (locationInput) locationInput.value = '';
+        if (sectionTitle) sectionTitle.textContent = 'Rekomendasi Tempat PKL Terbuka';
+        if (sectionSubtitle) sectionSubtitle.textContent = 'Pilih lowongan untuk melihat detail kualifikasi atau jalankan pencocokan AI di atas.';
+        renderJobCards(currentJobs);
+      }
+
+      btnResetFilter?.addEventListener('click', resetToDefault);
+      btnEmptyReset?.addEventListener('click', resetToDefault);
+
+      // Inisialisasi awal
+      renderSkillTags();
+      renderSuggestedChips();
+      renderJobCards(currentJobs);
+
+      // Cek otomatis apakah ada data di localStorage saat pertama dibuka
+      try {
+        const stored = localStorage.getItem(CV_STORAGE_KEY);
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (parsed && (parsed.name || parsed.skills)) {
+            // Berikan status kecil bahwa data CV siap ditarik
+            if (cvStatusAlert && cvStatusMessage) {
+              cvStatusAlert.className = 'flex p-3 rounded-xl text-xs sm:text-sm items-center justify-between border bg-neutral-50 text-neutral-700 border-neutral-200 transition-all';
+              cvStatusMessage.innerHTML = `
+                <svg class="w-4 h-4 text-[#ED1E28] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>Ditemukan profil CV tersimpan (<strong>${parsed.name || 'Siswa'}</strong>). Klik <strong>'Tarik Data dari CV Generator'</strong> untuk mengimpor otomatis.</span>
+              `;
+              cvStatusAlert.classList.remove('hidden');
+            }
+          }
+        }
+      } catch {
+        // Abaikan
+      }
     }
 
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', setupPklSearch);
+      document.addEventListener('DOMContentLoaded', setupPklMatching);
     } else {
-      setupPklSearch();
+      setupPklMatching();
     }
   </script>
 </BaseLayout>

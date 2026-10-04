@@ -1,0 +1,34 @@
+---
+import AdminLayout from "../../layouts/AdminLayout.astro";
+import { AdminModuleManager } from "../../components/admin/AdminModuleManager";
+
+const { module } = Astro.params;
+
+const VALID_MODULES: Record<string, string> = {
+  berita: "Berita & Pengumuman",
+  jurusan: "Program Keahlian (Jurusan)",
+  guru: "Dewan Guru & Pimpinan",
+  fasilitas: "Fasilitas & Lab 3D",
+  prestasi: "Prestasi Siswa",
+  ekstrakurikuler: "Ekstrakurikuler",
+  mitra: "Mitra Kerjasama Industri",
+  pkl: "Lowongan Praktik Kerja Lapangan",
+  alumni: "Cerita Sukses Alumni",
+  faq: "Pertanyaan Umum (FAQ)",
+  pengaturan: "Pengaturan Website",
+  "ai-sync": "Sinkronisasi AI",
+};
+
+// Validasi modul yang diminta
+if (!module || !VALID_MODULES[module]) {
+  return Astro.redirect("/admin");
+}
+
+const moduleTitle = VALID_MODULES[module];
+---
+
+<AdminLayout title={`${moduleTitle} - Admin Panel`} activeModule={module}>
+  <div class="space-y-6">
+    <AdminModuleManager client:load moduleKey={module} />
+  </div>
+</AdminLayout>

@@ -16,7 +16,7 @@ type Section = {
   leaders: Leader[];
 };
 
-const sections: Section[] = [
+const defaultSections: Section[] = [
   {
     id: "pucuk-pimpinan",
     badge: "01. Dewan Pimpinan",
@@ -159,6 +159,42 @@ const sections: Section[] = [
     ],
   },
 ];
+let sections: Section[] = defaultSections;
+
+try {
+  const { prisma } = await import("../server/lib/prisma.js");
+  const dbLeaders = await prisma.teacherLeader.findMany({
+    orderBy: { order: "asc" },
+  });
+
+  if (dbLeaders && dbLeaders.length > 0) {
+    const leadersBySection: Record<string, Leader[]> = {};
+    for (const item of dbLeaders) {
+      const sId = item.sectionId || "pucuk-pimpinan";
+      if (!leadersBySection[sId]) {
+        leadersBySection[sId] = [];
+      }
+      leadersBySection[sId].push({
+        name: item.name,
+        position: item.position,
+        image: item.imageUrl || "/images/guru/kepala-sekolah.png",
+      });
+    }
+
+    sections = defaultSections.map((sec) => {
+      const dbGroup = leadersBySection[sec.id];
+      if (dbGroup && dbGroup.length > 0) {
+        return {
+          ...sec,
+          leaders: dbGroup,
+        };
+      }
+      return sec;
+    });
+  }
+} catch {
+  // Gunakan data default jika database offline atau belum terisi
+}
 ---
 
 <BaseLayout
@@ -247,7 +283,10 @@ const sections: Section[] = [
                               ? "object-cover object-top"
                               : "object-contain object-bottom p-4"
                           }`}
+                          width="300"
+                          height="340"
                           loading="lazy"
+                          decoding="async"
                           draggable="false"
                         />
                       </div>

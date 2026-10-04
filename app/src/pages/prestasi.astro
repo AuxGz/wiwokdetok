@@ -2,8 +2,8 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/Container.astro";
 
-// Data Prestasi exact from Figma frame Prestasi #923:1287
-const prestasiItems = [
+// Data Prestasi exact from Figma frame Prestasi #923:1287 (fallback default)
+const defaultPrestasiItems = [
   {
     category: "akademik",
     badge: "Juara 1 Nasional",
@@ -47,6 +47,31 @@ const prestasiItems = [
     desc: "Kompetisi konfigurasi router dan troubleshooting jaringan komputer tingkat nasional.",
   },
 ];
+
+let prestasiItems = defaultPrestasiItems;
+
+try {
+  const { prisma } = await import("../server/lib/prisma.js");
+  const dbAchievements = await prisma.studentAchievement.findMany({
+    orderBy: { order: "asc" },
+  });
+
+  if (dbAchievements && dbAchievements.length > 0) {
+    prestasiItems = dbAchievements.map((a) => {
+      const cat = (a.category || "").toLowerCase();
+      const isNonAkademik = cat.includes("non") || cat.includes("olahraga") || cat.includes("seni") || cat.includes("ekskul");
+      return {
+        category: isNonAkademik ? "non-akademik" : "akademik",
+        badge: a.badge,
+        meta: a.meta || (a.year ? `${a.year} • ${a.category}` : "2024 • Kompetisi Siswa"),
+        title: a.title,
+        desc: a.description || "",
+      };
+    });
+  }
+} catch {
+  // Gunakan data default jika database offline atau belum terisi
+}
 ---
 
 <BaseLayout
@@ -195,7 +220,10 @@ const prestasiItems = [
                   src="/images/placeholders/image-not-found.svg"
                   alt="Foto dokumentasi belum tersedia"
                   class="h-24 sm:h-28 w-auto object-contain opacity-70 group-hover:opacity-90 group-hover:scale-105 transition-all duration-300"
+                  width="112"
+                  height="112"
                   loading="lazy"
+                  decoding="async"
                 />
                 {item.badge && (
                   <div class="absolute top-4 left-4 px-3.5 py-1 rounded-full bg-[#ED1E28] text-white text-xs font-bold shadow-md">
