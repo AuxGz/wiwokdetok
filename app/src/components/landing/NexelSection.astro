@@ -247,7 +247,12 @@ import Container from "../Container.astro";
 
   document.querySelectorAll(".nexel-example-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
-      openChatbot();
+      const q = btn.getAttribute("data-question");
+      if (q) {
+        window.dispatchEvent(new CustomEvent("nexel:ask", { detail: { question: q } }));
+      } else {
+        openChatbot();
+      }
     });
   });
 </script>

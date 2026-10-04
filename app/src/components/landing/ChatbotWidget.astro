@@ -1,53 +1,326 @@
 ---
-// Chatbot floating widget for interactive support
+// NEXEL AI - Official AI Assistant Floating Chatbot Widget for SMK Telkom Purwokerto
 ---
 
-<div class="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-50" id="chatbot-widget">
-  <!-- Popup Message Box -->
-  <div class="chatbot-popup absolute bottom-[70px] right-0 w-[290px] sm:w-[330px] max-w-[calc(100vw-2rem)] bg-white border border-[#e7e8ea] rounded-2xl shadow-[0_8px_16px_rgba(85,86,91,0.12)] overflow-hidden [transform-origin:bottom_right]" id="chatbot-popup" hidden>
-    <div class="bg-[#ed1e28] text-white py-4 px-5 flex items-center gap-3">
-      <div class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center shrink-0">
-        <img src="/images/brand/chatbot-avatar.png" alt="" width="22" height="20" />
+<div class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 font-jakarta" id="chatbot-widget">
+  <!-- Greeting Callout Tooltip (Live chat style) -->
+  <div
+    id="chat-callout"
+    class="absolute bottom-2 right-[68px] sm:right-[76px] bg-white text-slate-800 text-xs py-2.5 px-4 rounded-2xl rounded-br-xs shadow-[0_10px_30px_rgba(0,0,0,0.12)] border border-slate-200/90 flex items-center gap-2.5 whitespace-nowrap transition-all duration-300 pointer-events-auto cursor-pointer hover:shadow-lg select-none group"
+    role="button"
+    tabindex="0"
+    aria-label="Buka Chatbot NEXEL AI"
+  >
+    <div class="relative flex items-center justify-center shrink-0">
+      <span class="w-2.5 h-2.5 rounded-full bg-[#22c55e] inline-block"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-[#22c55e] inline-block absolute animate-ping opacity-75"></span>
+    </div>
+    <div class="flex flex-col">
+      <span class="font-bold text-[#ed1e28] text-[11px] leading-tight">NEXEL AI</span>
+      <span class="text-slate-700 text-[11.5px] leading-tight mt-0.5">Ada pertanyaan seputar sekolah? Tanya saya 👋</span>
+    </div>
+    <button
+      type="button"
+      id="close-callout"
+      class="text-slate-400 hover:text-slate-600 p-1 rounded-md hover:bg-slate-100 transition-colors ml-1 cursor-pointer"
+      title="Tutup pesan"
+      aria-label="Tutup pesan"
+    >
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Popup Message Box (Modern Live Chat Window) -->
+  <div
+    class="chatbot-popup absolute bottom-18 sm:bottom-20 right-0 w-[calc(100vw-2rem)] sm:w-[395px] max-w-[420px] h-[570px] max-h-[calc(100vh-100px)] bg-white border border-slate-200/90 rounded-3xl shadow-[0_24px_60px_-12px_rgba(0,0,0,0.25)] flex flex-col overflow-hidden origin-bottom-right transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
+    id="chatbot-popup"
+    hidden
+  >
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-[#ed1e28] via-[#dc1720] to-[#b91c1c] text-white py-3.5 px-4 sm:px-5 flex items-center justify-between shrink-0 shadow-sm">
+      <div class="flex items-center gap-3">
+        <div class="relative w-10 h-10 rounded-full bg-white/15 flex items-center justify-center shrink-0 border border-white/25 p-1.5 shadow-xs">
+          <img src="/images/brand/chatbot-avatar.png" alt="NEXEL AI" width="24" height="22" class="object-contain" />
+          <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-[#22c55e] border-2 border-[#ed1e28] inline-block" aria-hidden="true"></span>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <h2 class="font-poppins text-sm sm:text-[0.9375rem] font-bold leading-tight tracking-tight">NEXEL AI</h2>
+            <span class="bg-white/20 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wider">Resmi</span>
+          </div>
+          <span class="text-[0.6875rem] text-white/90 block leading-tight mt-0.5">Asisten Resmi SMK Telkom Purwokerto</span>
+        </div>
       </div>
-      <div>
-        <strong class="block font-poppins text-sm font-bold leading-tight">Layanan Informasi Siswa</strong>
-        <span class="text-[0.6875rem] text-[#fee2e2]">Online • Respons Cepat</span>
+
+      <div class="flex items-center gap-1">
+        <!-- Reset / Restart Chat Button -->
+        <button
+          type="button"
+          class="text-white/80 hover:text-white p-2 rounded-xl hover:bg-white/15 active:scale-95 transition-all cursor-pointer focus-visible:outline-2 focus-visible:outline-white"
+          id="reset-chat"
+          title="Mulai Percakapan Baru"
+          aria-label="Mulai Percakapan Baru"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
+            <path d="M21 3v5h-5" />
+            <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
+            <path d="M3 21v-5h5" />
+          </svg>
+        </button>
+
+        <!-- Close Window Button -->
+        <button
+          type="button"
+          class="text-white/80 hover:text-white p-2 rounded-xl hover:bg-white/15 active:scale-95 transition-all cursor-pointer focus-visible:outline-2 focus-visible:outline-white"
+          id="close-chat"
+          title="Tutup Obrolan"
+          aria-label="Tutup Obrolan"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
       </div>
-      <button type="button" class="ml-auto text-white/80 hover:text-white p-1 cursor-pointer" id="close-chat" aria-label="Tutup Obrolan">
-        <svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </div>
+
+    <!-- Message List Container -->
+    <div
+      class="flex-1 p-4 sm:p-5 overflow-y-auto bg-[#f8fafc] flex flex-col gap-4 text-xs sm:text-[0.8125rem] leading-relaxed scroll-smooth"
+      id="chat-messages"
+      aria-live="polite"
+    >
+      <!-- Date Divider -->
+      <div class="flex items-center justify-center my-1" id="date-divider">
+        <span class="bg-slate-200/80 text-slate-500 text-[10px] font-medium px-3 py-0.5 rounded-full">Hari Ini</span>
+      </div>
+
+      <!-- Welcome Message from NEXEL AI -->
+      <div class="flex items-start gap-2.5 max-w-[94%] initial-greeting">
+        <div class="w-8 h-8 rounded-full bg-[#ed1e28] text-white flex items-center justify-center shrink-0 p-1.5 mt-0.5 shadow-xs">
+          <img src="/images/brand/chatbot-avatar.png" alt="" width="16" height="16" class="object-contain" />
+        </div>
+        <div class="flex flex-col items-start w-full">
+          <div class="bg-white text-slate-800 p-3.5 rounded-2xl rounded-tl-xs border border-slate-200/80 shadow-xs leading-relaxed">
+            <p class="font-medium mb-1">Halo! 👋 Saya <strong>NEXEL AI</strong></p>
+            <p class="text-slate-600 mb-2.5">
+              Asisten virtual resmi SMK Telkom Purwokerto. Ada yang ingin Anda tanyakan seputar jurusan, pendaftaran PPDB 2026/2027, fasilitas, atau kegiatan sekolah?
+            </p>
+            <p class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Pilihan Cepat:</p>
+            <!-- Quick Suggestion Chips -->
+            <div class="flex flex-wrap gap-1.5" id="chat-quick-suggestions">
+              <button
+                type="button"
+                class="quick-pill inline-flex items-center gap-1.5 bg-red-50 hover:bg-red-100/80 text-[#ed1e28] border border-red-200/70 px-3 py-1.5 rounded-full text-[11px] font-medium transition-all active:scale-95 cursor-pointer shadow-2xs"
+                data-text="Jurusan apa saja yang tersedia di SMK Telkom Purwokerto?"
+              >
+                <span>🎓 Pilihan Jurusan</span>
+              </button>
+              <button
+                type="button"
+                class="quick-pill inline-flex items-center gap-1.5 bg-red-50 hover:bg-red-100/80 text-[#ed1e28] border border-red-200/70 px-3 py-1.5 rounded-full text-[11px] font-medium transition-all active:scale-95 cursor-pointer shadow-2xs"
+                data-text="Bagaimana alur dan syarat pendaftaran PPDB 2026?"
+              >
+                <span>📝 Alur PPDB 2026</span>
+              </button>
+              <button
+                type="button"
+                class="quick-pill inline-flex items-center gap-1.5 bg-red-50 hover:bg-red-100/80 text-[#ed1e28] border border-red-200/70 px-3 py-1.5 rounded-full text-[11px] font-medium transition-all active:scale-95 cursor-pointer shadow-2xs"
+                data-text="Apa saja fasilitas yang ada di sekolah?"
+              >
+                <span>🏫 Fasilitas Kampus</span>
+              </button>
+              <button
+                type="button"
+                class="quick-pill inline-flex items-center gap-1.5 bg-red-50 hover:bg-red-100/80 text-[#ed1e28] border border-red-200/70 px-3 py-1.5 rounded-full text-[11px] font-medium transition-all active:scale-95 cursor-pointer shadow-2xs"
+                data-text="Apa saja ekstrakurikuler dan prestasi siswa?"
+              >
+                <span>🏆 Ekskul & Prestasi</span>
+              </button>
+            </div>
+          </div>
+          <span class="text-[10px] text-slate-400 mt-1 pl-1">Baru saja</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error & Retry Banner -->
+    <div
+      class="hidden px-4 py-2.5 bg-red-50 border-t border-red-200 text-[#b91c1c] text-xs flex items-center justify-between"
+      id="chat-error-banner"
+    >
+      <div class="flex items-center gap-2">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10" />
+          <line x1="12" y1="8" x2="12" y2="12" />
+          <line x1="12" y1="16" x2="12.01" y2="16" />
         </svg>
+        <span id="chat-error-text">Terjadi gangguan koneksi.</span>
+      </div>
+      <button
+        type="button"
+        class="font-bold underline text-[#ed1e28] hover:text-[#991b1b] cursor-pointer ml-2"
+        id="chat-retry-btn"
+      >
+        Coba Lagi
       </button>
     </div>
 
-    <div class="p-5 flex flex-col gap-4 bg-[#f8fafc]">
-      <div class="bg-white border border-[#e7e8ea] rounded-xl rounded-tl-sm p-3.5 sm:px-4 text-sm text-[#2b2c31] leading-relaxed shadow-sm">
-        Halo! 👋 Selamat datang di SMK Telkom Purwokerto. Ada yang bisa kami bantu mengenai informasi PPDB 2026 atau program keahlian?
-      </div>
-      <div class="flex flex-col gap-2">
-        <a href="/#ppdb" class="block bg-white border border-[#e7e8ea] rounded-md py-2 px-3.5 text-[0.8125rem] font-medium text-[#2b2c31] hover:border-[#ed1e28] hover:text-[#ed1e28] hover:bg-[#fef2f2] transition-colors duration-150">Informasi PPDB 2026</a>
-        <a href="/#jurusan" class="block bg-white border border-[#e7e8ea] rounded-md py-2 px-3.5 text-[0.8125rem] font-medium text-[#2b2c31] hover:border-[#ed1e28] hover:text-[#ed1e28] hover:bg-[#fef2f2] transition-colors duration-150">Pilihan Jurusan</a>
-        <a href="https://wa.me/6281229701800" target="_blank" rel="noopener" class="flex items-center justify-between bg-[#22c55e] hover:bg-[#16a34a] text-white text-[0.8125rem] font-semibold py-2.5 px-3.5 rounded-md transition-colors duration-150">
-          <span>Hubungi via WhatsApp</span>
-          <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+    <!-- Input Bar -->
+    <div class="p-3 sm:p-3.5 bg-white border-t border-slate-100 shrink-0">
+      <form class="flex items-center gap-2" id="chat-form">
+        <input
+          type="text"
+          id="chat-input"
+          class="flex-1 bg-slate-100/80 focus:bg-white border border-transparent focus:border-[#ed1e28] focus:ring-2 focus:ring-red-100/70 rounded-full px-4 py-2.5 text-xs sm:text-sm text-slate-800 placeholder-slate-400 outline-none transition-all shadow-2xs"
+          placeholder="Tanya info SMK Telkom Purwokerto..."
+          maxlength="4000"
+          autocomplete="off"
+        />
+
+        <!-- Send Button -->
+        <button
+          type="submit"
+          id="chat-send-btn"
+          class="w-10 h-10 rounded-full bg-[#ed1e28] hover:bg-[#dc2626] active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed text-white flex items-center justify-center shrink-0 shadow-sm transition-all cursor-pointer focus-visible:outline-2 focus-visible:outline-[#ed1e28]"
+          aria-label="Kirim Pesan"
+          title="Kirim Pesan"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
           </svg>
-        </a>
+        </button>
+
+        <!-- Stop Button (Visible during streaming) -->
+        <button
+          type="button"
+          id="chat-stop-btn"
+          class="hidden w-10 h-10 rounded-full bg-slate-700 hover:bg-slate-800 active:scale-95 text-white flex items-center justify-center shrink-0 shadow-sm transition-all cursor-pointer focus-visible:outline-2 focus-visible:outline-slate-700"
+          aria-label="Hentikan Jawaban"
+          title="Hentikan Jawaban"
+        >
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+            <rect x="4" y="4" width="16" height="16" rx="2" />
+          </svg>
+        </button>
+      </form>
+
+      <div class="mt-2 text-[10.5px] text-slate-400 text-center select-none flex items-center justify-center gap-1.5">
+        <span>NEXEL AI</span>
+        <span>•</span>
+        <span>Menjawab berdasarkan informasi resmi sekolah</span>
       </div>
     </div>
   </div>
 
-  <!-- Trigger Button -->
-  <button type="button" class="group relative w-14 h-14 rounded-full bg-[#ed1e28] hover:bg-[#dc2626] text-white flex items-center justify-center shadow-[0_8px_24px_rgba(237,30,40,0.4)] hover:scale-105 transition-all duration-200 cursor-pointer" id="open-chat" aria-label="Buka Chatbot Layanan Sekolah">
-    <div class="absolute inset-0 rounded-full border-2 border-[#ed1e28] animate-ping opacity-75 pointer-events-none"></div>
-    <img src="/images/brand/chatbot-avatar.png" alt="" class="w-9 h-auto block select-none pointer-events-none" width="36" height="33" />
+  <!-- Floating Trigger Button (Matches the launcher with soft halo ring) -->
+  <button
+    type="button"
+    class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#ed1e28] hover:bg-[#dc2626] active:scale-95 text-white flex items-center justify-center shadow-[0_8px_28px_rgba(237,30,40,0.38)] transition-all duration-300 cursor-pointer focus-visible:outline-2 focus-visible:outline-[#ed1e28] z-10"
+    id="open-chat"
+    aria-label="Buka Chatbot Layanan Sekolah"
+    aria-expanded="false"
+  >
+    <!-- Soft Pulsing Halo Rings (Matching user screenshot) -->
+    <div class="absolute -inset-1.5 rounded-full bg-red-500/20 animate-pulse pointer-events-none" id="trigger-ring-1"></div>
+    <div class="absolute -inset-3 rounded-full bg-red-500/10 animate-ping opacity-60 pointer-events-none" id="trigger-ring-2"></div>
+
+    <!-- Closed Icon: Nexel Avatar -->
+    <div id="trigger-icon-open" class="flex items-center justify-center transition-transform duration-200">
+      <img src="/images/brand/chatbot-avatar.png" alt="" class="w-8 h-8 sm:w-9 sm:h-9 object-contain block select-none pointer-events-none" width="36" height="36" />
+    </div>
+
+    <!-- Opened Icon: Close 'X' -->
+    <div id="trigger-icon-close" class="hidden items-center justify-center transition-transform duration-200">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </div>
   </button>
 </div>
 
 <script>
-  const openBtn = document.getElementById("open-chat");
-  const closeBtn = document.getElementById("close-chat");
-  const popup = document.getElementById("chatbot-popup");
+  // ==============================================================================
+  // CLIENT ORCHESTRATION UNTUK NEXEL AI STREAMING SSE
+  // ==============================================================================
+  const openBtn = document.getElementById("open-chat") as HTMLButtonElement | null;
+  const closeBtn = document.getElementById("close-chat") as HTMLButtonElement | null;
+  const resetBtn = document.getElementById("reset-chat") as HTMLButtonElement | null;
+  const popup = document.getElementById("chatbot-popup") as HTMLDivElement | null;
+  const calloutEl = document.getElementById("chat-callout") as HTMLDivElement | null;
+  const closeCalloutBtn = document.getElementById("close-callout") as HTMLButtonElement | null;
+  const triggerIconOpen = document.getElementById("trigger-icon-open") as HTMLDivElement | null;
+  const triggerIconClose = document.getElementById("trigger-icon-close") as HTMLDivElement | null;
+  const triggerRing1 = document.getElementById("trigger-ring-1") as HTMLDivElement | null;
+  const triggerRing2 = document.getElementById("trigger-ring-2") as HTMLDivElement | null;
+
+  const messagesContainer = document.getElementById("chat-messages") as HTMLDivElement | null;
+  const form = document.getElementById("chat-form") as HTMLFormElement | null;
+  const input = document.getElementById("chat-input") as HTMLInputElement | null;
+  const sendBtn = document.getElementById("chat-send-btn") as HTMLButtonElement | null;
+  const stopBtn = document.getElementById("chat-stop-btn") as HTMLButtonElement | null;
+  const errorBanner = document.getElementById("chat-error-banner") as HTMLDivElement | null;
+  const errorText = document.getElementById("chat-error-text") as HTMLSpanElement | null;
+  const retryBtn = document.getElementById("chat-retry-btn") as HTMLButtonElement | null;
+
+  let currentAbortController: AbortController | null = null;
+  let lastUserMessage = "";
+  let isGenerating = false;
+
+  // Template initial greeting HTML untuk reset obrolan
+  const initialGreetingHtml = `
+    <div class="flex items-center justify-center my-1" id="date-divider">
+      <span class="bg-slate-200/80 text-slate-500 text-[10px] font-medium px-3 py-0.5 rounded-full">Hari Ini</span>
+    </div>
+    <div class="flex items-start gap-2.5 max-w-[94%] initial-greeting">
+      <div class="w-8 h-8 rounded-full bg-[#ed1e28] text-white flex items-center justify-center shrink-0 p-1.5 mt-0.5 shadow-xs">
+        <img src="/images/brand/chatbot-avatar.png" alt="" width="16" height="16" class="object-contain" />
+      </div>
+      <div class="flex flex-col items-start w-full">
+        <div class="bg-white text-slate-800 p-3.5 rounded-2xl rounded-tl-xs border border-slate-200/80 shadow-xs leading-relaxed">
+          <p class="font-medium mb-1">Halo! 👋 Saya <strong>NEXEL AI</strong></p>
+          <p class="text-slate-600 mb-2.5">
+            Asisten virtual resmi SMK Telkom Purwokerto. Ada yang ingin Anda tanyakan seputar jurusan, pendaftaran PPDB 2026/2027, fasilitas, atau kegiatan sekolah?
+          </p>
+          <p class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">Pilihan Cepat:</p>
+          <div class="flex flex-wrap gap-1.5" id="chat-quick-suggestions">
+            <button
+              type="button"
+              class="quick-pill inline-flex items-center gap-1.5 bg-red-50 hover:bg-red-100/80 text-[#ed1e28] border border-red-200/70 px-3 py-1.5 rounded-full text-[11px] font-medium transition-all active:scale-95 cursor-pointer shadow-2xs"
+              data-text="Jurusan apa saja yang tersedia di SMK Telkom Purwokerto?"
+            >
+              <span>🎓 Pilihan Jurusan</span>
+            </button>
+            <button
+              type="button"
+              class="quick-pill inline-flex items-center gap-1.5 bg-red-50 hover:bg-red-100/80 text-[#ed1e28] border border-red-200/70 px-3 py-1.5 rounded-full text-[11px] font-medium transition-all active:scale-95 cursor-pointer shadow-2xs"
+              data-text="Bagaimana alur dan syarat pendaftaran PPDB 2026?"
+            >
+              <span>📝 Alur PPDB 2026</span>
+            </button>
+            <button
+              type="button"
+              class="quick-pill inline-flex items-center gap-1.5 bg-red-50 hover:bg-red-100/80 text-[#ed1e28] border border-red-200/70 px-3 py-1.5 rounded-full text-[11px] font-medium transition-all active:scale-95 cursor-pointer shadow-2xs"
+              data-text="Apa saja fasilitas yang ada di sekolah?"
+            >
+              <span>🏫 Fasilitas Kampus</span>
+            </button>
+            <button
+              type="button"
+              class="quick-pill inline-flex items-center gap-1.5 bg-red-50 hover:bg-red-100/80 text-[#ed1e28] border border-red-200/70 px-3 py-1.5 rounded-full text-[11px] font-medium transition-all active:scale-95 cursor-pointer shadow-2xs"
+              data-text="Apa saja ekstrakurikuler dan prestasi siswa?"
+            >
+              <span>🏆 Ekskul & Prestasi</span>
+            </button>
+          </div>
+        </div>
+        <span class="text-[10px] text-slate-400 mt-1 pl-1">Baru saja</span>
+      </div>
+    </div>
+  `;
 
   function toggleChat(show?: boolean) {
     if (!popup || !openBtn) return;
@@ -57,14 +330,339 @@
     if (nextState) {
       popup.removeAttribute("hidden");
       openBtn.setAttribute("aria-expanded", "true");
+      // Sembunyikan callout saat chat terbuka
+      if (calloutEl) {
+        calloutEl.classList.add("hidden");
+      }
+      // Switch icon ke Close 'X'
+      if (triggerIconOpen && triggerIconClose) {
+        triggerIconOpen.classList.add("hidden");
+        triggerIconClose.classList.remove("hidden");
+        triggerIconClose.classList.add("flex");
+      }
+      if (triggerRing1 && triggerRing2) {
+        triggerRing1.classList.add("opacity-0");
+        triggerRing2.classList.add("opacity-0");
+      }
+      input?.focus();
     } else {
       popup.setAttribute("hidden", "");
       openBtn.setAttribute("aria-expanded", "false");
+      // Switch icon ke Nexel Avatar
+      if (triggerIconOpen && triggerIconClose) {
+        triggerIconOpen.classList.remove("hidden");
+        triggerIconClose.classList.add("hidden");
+        triggerIconClose.classList.remove("flex");
+      }
+      if (triggerRing1 && triggerRing2) {
+        triggerRing1.classList.remove("opacity-0");
+        triggerRing2.classList.remove("opacity-0");
+      }
     }
   }
 
+  function resetChat() {
+    if (!messagesContainer) return;
+    messagesContainer.innerHTML = initialGreetingHtml;
+    hideError();
+    input?.focus();
+  }
+
+  function scrollToBottom() {
+    if (messagesContainer) {
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+  }
+
+  function formatTime(): string {
+    const now = new Date();
+    return `${now.getHours().toString().padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}`;
+  }
+
+  // Parser Markdown sederhana & aman untuk chat responses
+  function parseMarkdown(raw: string): string {
+    // 1. Escape HTML untuk mencegah XSS
+    let html = raw
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+    // 2. Bold: **teks**
+    html = html.replace(/\*\*(.*?)\*\*/g, "<strong class='font-semibold text-slate-900'>$1</strong>");
+
+    // 3. Italic: *teks*
+    html = html.replace(/\*([^*\n]+)\*/g, "<em>$1</em>");
+
+    // 4. Inline code: `code`
+    html = html.replace(/`([^`]+)`/g, "<code class='bg-slate-100 text-[#ed1e28] px-1 py-0.5 rounded text-[11px] font-mono'>$1</code>");
+
+    // 5. Link: [label](url)
+    html = html.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-[#ed1e28] underline font-semibold hover:text-[#b91c1c]">$1</a>');
+
+    // 6. Baris per baris untuk list dan paragraf
+    const lines = html.split("\n");
+    const output: string[] = [];
+    let inUl = false;
+    let inOl = false;
+
+    for (const line of lines) {
+      const trimmed = line.trim();
+
+      // Bullet List (- atau * atau •)
+      const bulletMatch = trimmed.match(/^[-*•]\s+(.*)$/);
+      if (bulletMatch) {
+        if (!inUl) {
+          if (inOl) { output.push("</ol>"); inOl = false; }
+          output.push("<ul class='list-disc pl-4 space-y-1 my-1 text-slate-700'>");
+          inUl = true;
+        }
+        output.push(`<li>${bulletMatch[1]}</li>`);
+        continue;
+      }
+
+      // Numbered List (1. 2. dst)
+      const numberMatch = trimmed.match(/^(\d+)\.\s+(.*)$/);
+      if (numberMatch) {
+        if (!inOl) {
+          if (inUl) { output.push("</ul>"); inUl = false; }
+          output.push("<ol class='list-decimal pl-4 space-y-1 my-1 text-slate-700'>");
+          inOl = true;
+        }
+        output.push(`<li>${numberMatch[2]}</li>`);
+        continue;
+      }
+
+      // Tutup list jika baris biasa
+      if (inUl) {
+        output.push("</ul>");
+        inUl = false;
+      }
+      if (inOl) {
+        output.push("</ol>");
+        inOl = false;
+      }
+
+      if (!trimmed) {
+        output.push("<div class='h-1.5'></div>");
+        continue;
+      }
+
+      output.push(`<p class='my-0.5 leading-relaxed'>${trimmed}</p>`);
+    }
+
+    if (inUl) output.push("</ul>");
+    if (inOl) output.push("</ol>");
+
+    return output.join("");
+  }
+
+  function appendUserMessage(text: string) {
+    if (!messagesContainer) return;
+    const msgEl = document.createElement("div");
+    msgEl.className = "flex flex-col items-end self-end max-w-[85%]";
+    const escaped = text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+
+    msgEl.innerHTML = `
+      <div class="bg-[#ed1e28] text-white p-3 sm:p-3.5 rounded-2xl rounded-tr-xs shadow-xs break-words leading-relaxed">
+        ${escaped}
+      </div>
+      <span class="text-[10px] text-slate-400 mt-1 pr-1">${formatTime()}</span>
+    `;
+    messagesContainer.appendChild(msgEl);
+    scrollToBottom();
+  }
+
+  function createAssistantMessageElement(): {
+    container: HTMLDivElement;
+    textBody: HTMLDivElement;
+    sourcesContainer: HTMLDivElement;
+  } {
+    const wrapper = document.createElement("div");
+    wrapper.className = "flex items-start gap-2.5 max-w-[94%]";
+
+    wrapper.innerHTML = `
+      <div class="w-8 h-8 rounded-full bg-[#ed1e28] text-white flex items-center justify-center shrink-0 p-1.5 mt-0.5 shadow-xs">
+        <img src="/images/brand/chatbot-avatar.png" alt="" width="16" height="16" class="object-contain" />
+      </div>
+      <div class="flex flex-col items-start w-full">
+        <div class="bg-white text-slate-800 p-3.5 rounded-2xl rounded-tl-xs border border-slate-200/80 shadow-xs w-full break-words assistant-content leading-relaxed">
+          <div class="flex items-center gap-1.5 py-1 text-slate-500">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#ed1e28] animate-bounce [animation-delay:-0.3s]"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-[#ed1e28] animate-bounce [animation-delay:-0.15s]"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-[#ed1e28] animate-bounce"></span>
+            <span class="text-[11px] text-slate-400 font-medium ml-1">Menyiapkan jawaban...</span>
+          </div>
+        </div>
+        <div class="assistant-sources hidden mt-1.5 flex flex-wrap gap-1 items-center">
+          <span class="text-[9.5px] font-bold text-slate-400 uppercase tracking-wider">Rujukan:</span>
+        </div>
+        <span class="text-[10px] text-slate-400 mt-1 pl-1">${formatTime()}</span>
+      </div>
+    `;
+
+    messagesContainer?.appendChild(wrapper);
+    scrollToBottom();
+
+    const textBody = wrapper.querySelector(".assistant-content") as HTMLDivElement;
+    const sourcesContainer = wrapper.querySelector(".assistant-sources") as HTMLDivElement;
+
+    return { container: wrapper, textBody, sourcesContainer };
+  }
+
+  function setGeneratingState(generating: boolean) {
+    isGenerating = generating;
+    if (sendBtn && stopBtn && input) {
+      if (generating) {
+        sendBtn.classList.add("hidden");
+        stopBtn.classList.remove("hidden");
+        input.disabled = true;
+      } else {
+        sendBtn.classList.remove("hidden");
+        stopBtn.classList.add("hidden");
+        input.disabled = false;
+        input.focus();
+      }
+    }
+  }
+
+  function showError(msg: string) {
+    if (errorBanner && errorText) {
+      errorText.textContent = msg;
+      errorBanner.classList.remove("hidden");
+    }
+  }
+
+  function hideError() {
+    if (errorBanner) {
+      errorBanner.classList.add("hidden");
+    }
+  }
+
+  async function sendMessage(textToSend: string) {
+    const text = textToSend.trim();
+    if (!text || isGenerating) return;
+
+    hideError();
+    lastUserMessage = text;
+    if (input) input.value = "";
+
+    appendUserMessage(text);
+    setGeneratingState(true);
+
+    const { textBody, sourcesContainer } = createAssistantMessageElement();
+    let accumulatedText = "";
+    let hasReceivedFirstToken = false;
+    const seenSources = new Set<string>();
+
+    currentAbortController = new AbortController();
+
+    try {
+      const response = await fetch("/api/ai/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: text }),
+        signal: currentAbortController.signal,
+      });
+
+      if (!response.ok) {
+        let errDesc = "Maaf, chatbot sedang mengalami gangguan.";
+        try {
+          const errJson = await response.json();
+          if (errJson?.error?.message) {
+            errDesc = errJson.error.message;
+          }
+        } catch {
+          // Fallback to default
+        }
+        textBody.innerHTML = `<span class="text-red-600">${errDesc}</span>`;
+        showError(errDesc);
+        setGeneratingState(false);
+        return;
+      }
+
+      if (!response.body) {
+        throw new Error("Respons stream tidak valid");
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder("utf-8");
+      let buffer = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split("\n");
+        buffer = lines.pop() ?? "";
+
+        for (const line of lines) {
+          const trimmed = line.trim();
+          if (!trimmed.startsWith("data:")) continue;
+
+          const jsonStr = trimmed.slice(5).trim();
+          if (!jsonStr) continue;
+
+          try {
+            const event = JSON.parse(jsonStr);
+
+            if (event.type === "text") {
+              if (!hasReceivedFirstToken) {
+                textBody.innerHTML = "";
+                hasReceivedFirstToken = true;
+              }
+              accumulatedText += event.text;
+              textBody.innerHTML = parseMarkdown(accumulatedText);
+              scrollToBottom();
+            } else if (event.type === "source" && event.source?.title) {
+              const srcTitle = event.source.title;
+              if (!seenSources.has(srcTitle)) {
+                seenSources.add(srcTitle);
+                sourcesContainer.classList.remove("hidden");
+                const pill = document.createElement("span");
+                pill.className = "inline-flex items-center gap-1 text-[10px] font-medium text-[#ed1e28] bg-red-50 border border-red-100 px-2.5 py-0.5 rounded-full";
+                pill.innerHTML = `<span>📄</span><span>${srcTitle}</span>`;
+                sourcesContainer.appendChild(pill);
+                scrollToBottom();
+              }
+            } else if (event.type === "error") {
+              textBody.innerHTML = `<span class="text-red-600">${event.message || "Terjadi kesalahan."}</span>`;
+              showError(event.message || "Gagal memproses respons.");
+            }
+          } catch {
+            // Abaikan JSON parsial
+          }
+        }
+      }
+
+      // Pastikan hasil akhir ter-render rapi
+      if (accumulatedText) {
+        textBody.innerHTML = parseMarkdown(accumulatedText);
+      }
+    } catch (err: unknown) {
+      if (err instanceof Error && err.name === "AbortError") {
+        if (!hasReceivedFirstToken) {
+          textBody.innerHTML = "<span class='text-slate-400 italic'>Generasi pesan dihentikan oleh pengguna.</span>";
+        }
+      } else {
+        textBody.innerHTML = "<span class='text-red-600'>Gagal terhubung dengan server chatbot.</span>";
+        showError("Koneksi terputus. Silakan periksa jaringan Anda.");
+      }
+    } finally {
+      setGeneratingState(false);
+      currentAbortController = null;
+    }
+  }
+
+  // Event Listeners
   if (openBtn && popup) {
-    openBtn.setAttribute("aria-expanded", "false");
     openBtn.addEventListener("click", () => toggleChat());
   }
 
@@ -72,6 +670,65 @@
     closeBtn.addEventListener("click", () => toggleChat(false));
   }
 
+  if (resetBtn) {
+    resetBtn.addEventListener("click", () => {
+      if (isGenerating && currentAbortController) {
+        currentAbortController.abort();
+      }
+      resetChat();
+    });
+  }
+
+  if (calloutEl) {
+    calloutEl.addEventListener("click", () => toggleChat(true));
+  }
+
+  if (closeCalloutBtn && calloutEl) {
+    closeCalloutBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      calloutEl.classList.add("hidden");
+    });
+  }
+
+  if (stopBtn) {
+    stopBtn.addEventListener("click", () => {
+      if (currentAbortController) {
+        currentAbortController.abort();
+      }
+    });
+  }
+
+  if (retryBtn) {
+    retryBtn.addEventListener("click", () => {
+      if (lastUserMessage) {
+        sendMessage(lastUserMessage);
+      }
+    });
+  }
+
+  if (form && input) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const val = input.value.trim();
+      if (val) {
+        sendMessage(val);
+      }
+    });
+  }
+
+  // Klik pil rekomendasi cepat
+  document.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement | null;
+    const pill = target?.closest(".quick-pill") as HTMLElement | null;
+    if (pill) {
+      const qText = pill.getAttribute("data-text");
+      if (qText) {
+        sendMessage(qText);
+      }
+    }
+  });
+
+  // Keyboard shortcut Escape
   document.addEventListener("keydown", (e: KeyboardEvent) => {
     if (e.key === "Escape" && popup && !popup.hasAttribute("hidden")) {
       toggleChat(false);
@@ -83,9 +740,18 @@
   document.addEventListener("click", (e: MouseEvent) => {
     if (popup && !popup.hasAttribute("hidden")) {
       const widget = document.getElementById("chatbot-widget");
-      if (widget && !widget.contains(e.target as Node)) {
+      const isNexelTrigger = (e.target as HTMLElement)?.closest("#btn-open-nexel-chat, .nexel-trigger-icon, .nexel-example-btn");
+      if (widget && !widget.contains(e.target as Node) && !isNexelTrigger) {
         toggleChat(false);
       }
     }
   });
+
+  // Global listener untuk integrasi dengan komponen lain (seperti tombol di NexelSection)
+  window.addEventListener("nexel:ask", ((e: CustomEvent<{ question: string }>) => {
+    toggleChat(true);
+    if (e.detail?.question) {
+      sendMessage(e.detail.question);
+    }
+  }) as EventListener);
 </script>

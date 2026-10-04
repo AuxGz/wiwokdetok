@@ -9,4 +9,8 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/SystemSetting.js'
+export type * from './models/ChatSession.js'
+export type * from './models/ChatMessage.js'
+export type * from './models/KnowledgeDocument.js'
+export type * from './models/KnowledgeChunk.js'
 export type * from './commonInputTypes.js'

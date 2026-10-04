@@ -18,3 +18,58 @@ model SystemSetting {
 
   @@map("system_settings")
 }
+
+enum Role {
+  USER
+  ASSISTANT
+}
+
+model ChatSession {
+  id        String        @id @default(uuid())
+  createdAt DateTime      @default(now()) @map("created_at")
+  updatedAt DateTime      @updatedAt @map("updated_at")
+  messages  ChatMessage[]
+
+  @@map("chat_sessions")
+}
+
+model ChatMessage {
+  id        String      @id @default(uuid())
+  sessionId String      @map("session_id")
+  role      Role
+  content   String      @db.Text
+  createdAt DateTime    @default(now()) @map("created_at")
+  session   ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+  @@map("chat_messages")
+}
+
+model KnowledgeDocument {
+  id          String           @id @default(uuid())
+  title       String
+  source      String           @unique
+  content     String           @db.Text
+  contentHash String           @map("content_hash")
+  metadata    Json?
+  createdAt   DateTime         @default(now()) @map("created_at")
+  updatedAt   DateTime         @updatedAt @map("updated_at")
+  chunks      KnowledgeChunk[]
+
+  @@map("knowledge_documents")
+}
+
+model KnowledgeChunk {
+  id         String            @id @default(uuid())
+  documentId String            @map("document_id")
+  chunkIndex Int               @map("chunk_index")
+  content    String            @db.Text
+  embedding  Unsupported("vector(2048)")?
+  metadata   Json?
+  createdAt  DateTime          @default(now()) @map("created_at")
+  document   KnowledgeDocument @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@index([documentId])
+  @@map("knowledge_chunks")
+}
+

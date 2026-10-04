@@ -11,7 +11,8 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./docker/postgres/init/01-init-databases.sh:/docker-entrypoint-initdb.d/01-init-databases.sh:ro
-    # CATATAN: Port 5432 sengaja TIDAK dipublikasikan ke host demi keamanan produksi.
+    ports:
+      - "127.0.0.1:5432:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
       interval: 10s

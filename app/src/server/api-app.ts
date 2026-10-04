@@ -1,5 +1,6 @@
 import express, { type Express } from "express";
 import { healthRouter } from "./modules/health/health.router.js";
+import { aiRouter } from "./modules/ai/ai.router.js";
 import { errorHandler } from "./middleware/error-handler.js";
 import { notFoundHandler } from "./middleware/not-found.js";
 
@@ -13,6 +14,7 @@ export function createApiApp(): Express {
 
   const apiRouter = express.Router();
   apiRouter.use("/health", healthRouter);
+  apiRouter.use("/ai", aiRouter);
   apiRouter.use(notFoundHandler);
 
   app.use("/api", apiRouter);
