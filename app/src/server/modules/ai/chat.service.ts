@@ -1,5 +1,5 @@
 import { defaultEmbeddingProvider } from "./embedding.service.js";
-import { retrieveRelevantChunks } from "./retrieval.service.js";
+import { retrieveRelevantChunks, retrieveRelevantChunksByKeyword } from "./retrieval.service.js";
 import { streamChatCompletion, ProviderError, type ProviderMessage } from "./provider.js";
 import {
   buildSystemPrompt,
@@ -185,50 +185,46 @@ export async function handleChatStream(options: ChatServiceOptions): Promise<voi
     return;
   }
 
-  // 3. Query Embedding (Fail-Safe Anggun)
-  let queryEmbedding: number[];
+  // 3. Retrieval Pengetahuan (Hybrid: Vector Embedding dengan Fallback Kata Kunci)
+  let retrievalResult;
   try {
     const embeddings = await embeddingProvider.embed([trimmedMessage]);
-    queryEmbedding = embeddings[0];
+    const queryEmbedding = embeddings[0];
     if (!queryEmbedding || queryEmbedding.length === 0) {
       throw new Error("Hasil embedding kosong");
     }
-  } catch (err: unknown) {
-    console.error("[NEXEL AI] Embedding failure:", err);
-    // Penanganan fail-safe yang anggun tanpa memunculkan error kaku di UI pengguna
-    const fallbackResponse = isSchoolRelatedQuery(trimmedMessage)
-      ? "Mohon maaf, sistem pencarian informasi sekolah sedang mengalami perlambatan koneksi. Untuk informasi lengkap mengenai jurusan, PPDB, atau fasilitas, silakan hubungi kontak resmi SMK Telkom Purwokerto atau coba tanyakan kembali sesaat lagi."
-      : "Mohon maaf, sistem asisten saat ini sedang mengalami gangguan koneksi sementara. Silakan coba kembali dalam beberapa saat.";
-
-    onEvent({ type: "text", text: fallbackResponse });
-    await saveAssistantMessage(sessionId, fallbackResponse);
-    onEvent({ type: "done" });
-    return;
-  }
-
-  // 4. pgvector Retrieval & Scope Gate (Fail-Safe Anggun)
-  let retrievalResult;
-  try {
     retrievalResult = await retrieveRelevantChunks(queryEmbedding);
-  } catch (err: unknown) {
-    console.error("[NEXEL AI] Retrieval failure:", err);
-    const fallbackResponse =
-      "Mohon maaf, basis data informasi sekolah sedang dalam pemeliharaan berkala. Silakan coba kembali sesaat lagi.";
-    onEvent({ type: "text", text: fallbackResponse });
-    await saveAssistantMessage(sessionId, fallbackResponse);
-    onEvent({ type: "done" });
-    return;
+  } catch (embeddingErr: unknown) {
+    console.warn(
+      "[NEXEL AI] Vector embedding tidak tersedia, menjalankan fallback pencarian kata kunci:",
+      embeddingErr instanceof Error ? embeddingErr.message : embeddingErr
+    );
+    try {
+      retrievalResult = await retrieveRelevantChunksByKeyword(trimmedMessage);
+    } catch (fallbackErr: unknown) {
+      console.error("[NEXEL AI] Keyword retrieval fallback failure:", fallbackErr);
+    }
+
+    // Jika fallback kata kunci tidak menemukan apa pun atau gagal
+    if (!retrievalResult || !retrievalResult.isRelevant || retrievalResult.chunks.length === 0) {
+      const fallbackResponse = isSchoolRelatedQuery(trimmedMessage)
+        ? "Mohon maaf, sistem pencarian informasi sekolah sedang mengalami perlambatan koneksi. Untuk informasi lengkap mengenai jurusan, PPDB, atau fasilitas, silakan hubungi kontak resmi SMK Telkom Purwokerto atau coba tanyakan kembali sesaat lagi."
+        : "Mohon maaf, sistem asisten saat ini sedang mengalami gangguan koneksi sementara. Silakan coba kembali dalam beberapa saat.";
+
+      onEvent({ type: "text", text: fallbackResponse });
+      await saveAssistantMessage(sessionId, fallbackResponse);
+      onEvent({ type: "done" });
+      return;
+    }
   }
 
-  // 5. Evaluasi Scope Gate
-  if (!retrievalResult.isRelevant || retrievalResult.chunks.length === 0) {
-    // Tidak ada konteks sekolah yang relevan
+  // 4. Evaluasi Scope Gate
+  if (!retrievalResult || !retrievalResult.isRelevant || retrievalResult.chunks.length === 0) {
     const isSchoolContext = isSchoolRelatedQuery(trimmedMessage);
     const rejectionText = isSchoolContext
       ? UNKNOWN_SCHOOL_INFO_RESPONSE
       : OUT_OF_SCOPE_RESPONSE;
 
-    // JANGAN MEMANGGIL NEMOTRON / GENERATION MODEL
     onEvent({ type: "text", text: rejectionText });
     await saveAssistantMessage(sessionId, rejectionText);
     onEvent({ type: "done" });
