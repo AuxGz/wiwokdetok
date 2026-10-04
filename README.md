@@ -128,6 +128,7 @@ Di dalam direktori `app`, jalankan perintah berikut untuk validasi:
 
 ## Dokumentasi Lanjutan
 
-- [Dokumentasi Arsitektur Sistem](file:///docs/architecture.md)
-- [Panduan Setup Pengembangan Lokal](file:///docs/setup.md)
-- [Panduan Deployment VPS & CI/CD](file:///docs/deployment.md)
+- [Dokumentasi Teknis Sistem, Infrastruktur VPS, & Pemeliharaan (Lengkap)](docs/DOKUMENTASI_SISTEM.md)
+- [Dokumentasi Arsitektur Sistem](docs/architecture.md)
+- [Panduan Setup Pengembangan Lokal](docs/setup.md)
+- [Panduan Deployment VPS & CI/CD](docs/deployment.md)
