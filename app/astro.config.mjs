@@ -13,6 +13,9 @@ export default defineConfig({
   // Proxy rute /api/* ke Express dev server saat menjalankan 'npm run dev' di lokal
   vite: {
     plugins: [tailwindcss()],
+    optimizeDeps: {
+      noDiscovery: true,
+    },
     server: {
       proxy: {
         "/api": {
