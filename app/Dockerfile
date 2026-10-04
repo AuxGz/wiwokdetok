@@ -14,6 +14,7 @@ COPY . .
 # Mencegah crash ABI Rust, pembatasan thread, dan menonaktifkan telemetry jaringan
 ENV CI=1
 ENV ASTRO_TELEMETRY_DISABLED=1
+ENV CHECKPOINT_DISABLE=1
 ENV NODE_OPTIONS="--max-old-space-size=2048"
 ENV TOKIO_WORKER_THREADS=1
 ENV RAYON_NUM_THREADS=1
