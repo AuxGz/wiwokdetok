@@ -7,20 +7,20 @@ import Container from "../Container.astro";
     <div class="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-14 lg:gap-16 items-center max-w-[1140px] mx-auto">
       <!-- Left Column: Copy -->
       <div class="flex flex-col">
-        <div class="inline-flex items-center gap-2.5 font-poppins text-[0.8125rem] font-bold text-[#ed1e28] tracking-[0.06em] uppercase mb-5">
+        <div class="animate-about-eyebrow inline-flex items-center gap-2.5 font-poppins text-[0.8125rem] font-bold text-[#ed1e28] tracking-[0.06em] uppercase mb-5">
           <span class="inline-block w-[22px] h-[2px] bg-[#ed1e28] rounded-[1px]"></span>
           <span>TENTANG KAMI</span>
         </div>
 
-        <h2 class="font-poppins text-3xl sm:text-4xl lg:text-[2.85rem] font-bold leading-[1.12] text-[#111827] tracking-[-0.025em] mb-5.5">
+        <h2 class="animate-about-heading font-poppins text-3xl sm:text-4xl lg:text-[2.85rem] font-bold leading-[1.12] text-[#111827] tracking-[-0.025em] mb-5.5">
           Apa itu <span class="text-[#ed1e28]">SMK Telkom<br />Purwokerto</span>?
         </h2>
 
-        <p class="font-jakarta text-[0.9375rem] leading-[1.7] text-[#4b5563] mb-4.5">
+        <p class="animate-about-desc font-jakarta text-[0.9375rem] leading-[1.7] text-[#4b5563] mb-4.5">
           SMK Telkom Purwokerto berada di bawah naungan Yayasan Pendidikan Telkom (YPT) dan menjadi bagian dari jaringan Telkom Schools. Sejak angkatan pertama, sekolah ini fokus mencetak lulusan siap kerja di bidang perangkat lunak, jaringan, dan industri kreatif.
         </p>
 
-        <p class="font-jakarta text-[0.9375rem] leading-[1.7] text-[#4b5563] [&_strong]:font-bold [&_strong]:text-[#1f2937]">
+        <p class="animate-about-desc font-jakarta text-[0.9375rem] leading-[1.7] text-[#4b5563] [&_strong]:font-bold [&_strong]:text-[#1f2937]">
           Terdapat empat program keahlian: <strong>RPL</strong>, <strong>PG</strong>, <strong>TKJ</strong>, dan <strong>TJAT</strong>, masing-masing dengan laboratorium, sertifikasi, dan jalur karier yang jelas.
         </p>
       </div>
@@ -28,27 +28,18 @@ import Container from "../Container.astro";
       <!-- Right Column: Visual Photo Stack with Red Accent Card -->
       <div class="flex justify-center lg:justify-end items-center relative">
         <div class="group relative w-full max-w-[480px] lg:max-w-[550px] mx-auto lg:ml-auto">
-          <!-- Red Dot Grid Matrix Decoration -->
-          <svg class="absolute -top-[55px] -right-[45px] z-0 pointer-events-none opacity-85" width="220" height="170" viewBox="0 0 220 170" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <defs>
-              <pattern id="about-dot-pattern" x="0" y="0" width="26" height="26" patternUnits="userSpaceOnUse">
-                <circle cx="13" cy="13" r="2.5" fill="#ed1e28" fill-opacity="0.45" />
-              </pattern>
-            </defs>
-            <rect width="220" height="170" fill="url(#about-dot-pattern)" />
-          </svg>
-
           <!-- Red Accent Card Behind -->
-          <div class="absolute top-[10.5%] sm:top-[12%] -bottom-3.5 sm:-bottom-[26px] left-[20.6%] -right-3 sm:-right-[24px] bg-[#ed1e28] rounded-2xl sm:rounded-[20px] z-1 pointer-events-none transition-transform duration-250 group-hover:translate-x-0.5 group-hover:translate-y-0.5" aria-hidden="true"></div>
+          <div class="animate-about-card absolute top-[11.5%] bottom-[4.5%] left-[22%] right-[1.2%] bg-[#ed1e28] rounded-2xl z-1 pointer-events-none transition-transform duration-250 group-hover:translate-x-0.5 group-hover:translate-y-0.5" aria-hidden="true"></div>
 
           <!-- Campus Building Photo -->
           <img
             src="/images/brand/gedung-sekolah.png"
             alt="Gedung SMK Telkom Purwokerto"
-            class="relative z-2 w-full h-auto rounded-2xl sm:rounded-[20px] block shadow-[0_16px_36px_rgba(0,0,0,0.16)] transition-all duration-250 group-hover:-translate-y-0.5 group-hover:shadow-[0_18px_38px_rgba(0,0,0,0.16)]"
+            class="animate-about-photo relative z-2 w-full h-auto block transition-transform duration-250 group-hover:-translate-y-0.5"
             width="607"
             height="333"
             loading="lazy"
+            decoding="async"
           />
         </div>
       </div>

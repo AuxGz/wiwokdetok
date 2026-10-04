@@ -4,6 +4,7 @@ import "lenis/dist/lenis.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import SmoothScroll from "../components/common/SmoothScroll.astro";
+import ChatbotWidget from "../components/landing/ChatbotWidget.astro";
 
 interface Props {
   title?: string;
@@ -37,6 +38,7 @@ const {
       <slot />
     </main>
     <Footer />
+    <ChatbotWidget />
     <SmoothScroll />
   </body>
 </html>

@@ -55,14 +55,96 @@ const SCHOOL_KEYWORDS = [
   "pkl",
 ];
 
-function isSchoolRelatedQuery(text: string): boolean {
+export const FRIENDLY_GREETING_RESPONSE =
+  "Halo! Saya NEXEL AI, asisten virtual resmi SMK Telkom Purwokerto. Ada yang bisa saya bantu seputar informasi jurusan, pendaftaran (PPDB), fasilitas, atau kegiatan sekolah?";
+
+const GREETING_TOKENS = new Set([
+  "halo",
+  "hai",
+  "hi",
+  "hey",
+  "helo",
+  "pagi",
+  "siang",
+  "sore",
+  "malam",
+  "ping",
+  "p",
+  "assalamualaikum",
+  "kulonuwun",
+  "permisi",
+  "sampurasun",
+]);
+
+const INQUIRY_KEYWORDS = [
+  "berapa",
+  "biaya",
+  "daftar",
+  "pendaftaran",
+  "syarat",
+  "cara",
+  "jadwal",
+  "lokasi",
+  "alamat",
+  "kapan",
+  "dimana",
+  "mengapa",
+  "kenapa",
+  "info",
+  "informasi",
+  "tanya",
+  "bisa tanya",
+];
+
+export function isGreetingQuery(text: string): boolean {
+  const normalized = text
+    .toLowerCase()
+    .replace(/['’]/g, "")
+    .replace(/[^\p{L}\p{N}\s]/gu, " ")
+    .trim();
+
+  if (!normalized) return false;
+
+  // Jika mengandung kata kunci sekolah atau kata tanya substantif, arahkan ke retrieval
+  if (SCHOOL_KEYWORDS.some((kw) => normalized.includes(kw))) return false;
+  if (INQUIRY_KEYWORDS.some((kw) => normalized.includes(kw))) return false;
+
+  const words = normalized.split(/\s+/).filter(Boolean);
+  if (words.length > 5) return false;
+
+  // Cek frasa percakapan sapaan 'apa kabar' / 'gimana kabar'
+  const isKabarPhrase =
+    normalized.includes("apa kabar") ||
+    normalized.includes("gimana kabar") ||
+    normalized.includes("bagaimana kabar");
+  if (isKabarPhrase) return true;
+
+  // Cek awalan sapaan waktu formal (selamat pagi/siang/sore/malam/datang)
+  const isSelamat =
+    words[0] === "selamat" &&
+    ["pagi", "siang", "sore", "malam", "datang", "sejahtera"].includes(words[1]);
+  if (isSelamat) return true;
+
+  // Cek token sapaan umum
+  const hasGreetingToken = words.some((w) => GREETING_TOKENS.has(w));
+  if (hasGreetingToken) {
+    // Pastikan bukan pertanyaan dengan kata tanya lain
+    const questionTokens = ["apa", "siapa", "bagaimana", "gimana"];
+    const hasQuestion = words.some((w) => questionTokens.includes(w));
+    if (!hasQuestion) return true;
+  }
+
+  return false;
+}
+
+export function isSchoolRelatedQuery(text: string): boolean {
   const lower = text.toLowerCase();
   return SCHOOL_KEYWORDS.some((kw) => lower.includes(kw));
 }
 
 /**
  * Orkestrasi alur percakapan NEXEL AI:
- * Validasi -> Sesi Anonim -> Query Embedding -> pgvector Retrieval ->
+ * Validasi -> Sesi Anonim -> Sapaan Fast-Path -> Query Embedding -> pgvector Retrieval ->
  * Scope Gate -> Grounded Prompt -> Streaming LLM -> Simpan Jawaban
  */
 export async function handleChatStream(options: ChatServiceOptions): Promise<void> {
@@ -95,7 +177,15 @@ export async function handleChatStream(options: ChatServiceOptions): Promise<voi
 
   await saveUserMessage(sessionId, trimmedMessage);
 
-  // 3. Query Embedding (Fail-Safe)
+  // 2.5 Sapaan Ramah (Fast-Path untuk Pesan Sapaan Pengguna)
+  if (isGreetingQuery(trimmedMessage)) {
+    onEvent({ type: "text", text: FRIENDLY_GREETING_RESPONSE });
+    await saveAssistantMessage(sessionId, FRIENDLY_GREETING_RESPONSE);
+    onEvent({ type: "done" });
+    return;
+  }
+
+  // 3. Query Embedding (Fail-Safe Anggun)
   let queryEmbedding: number[];
   try {
     const embeddings = await embeddingProvider.embed([trimmedMessage]);
@@ -105,25 +195,28 @@ export async function handleChatStream(options: ChatServiceOptions): Promise<voi
     }
   } catch (err: unknown) {
     console.error("[NEXEL AI] Embedding failure:", err);
-    onEvent({
-      type: "error",
-      code: "EMBEDDING_FAILURE",
-      message: "Maaf, chatbot sedang mengalami gangguan. Silakan coba lagi nanti.",
-    });
+    // Penanganan fail-safe yang anggun tanpa memunculkan error kaku di UI pengguna
+    const fallbackResponse = isSchoolRelatedQuery(trimmedMessage)
+      ? "Mohon maaf, sistem pencarian informasi sekolah sedang mengalami perlambatan koneksi. Untuk informasi lengkap mengenai jurusan, PPDB, atau fasilitas, silakan hubungi kontak resmi SMK Telkom Purwokerto atau coba tanyakan kembali sesaat lagi."
+      : "Mohon maaf, sistem asisten saat ini sedang mengalami gangguan koneksi sementara. Silakan coba kembali dalam beberapa saat.";
+
+    onEvent({ type: "text", text: fallbackResponse });
+    await saveAssistantMessage(sessionId, fallbackResponse);
+    onEvent({ type: "done" });
     return;
   }
 
-  // 4. pgvector Retrieval & Scope Gate (Fail-Safe)
+  // 4. pgvector Retrieval & Scope Gate (Fail-Safe Anggun)
   let retrievalResult;
   try {
     retrievalResult = await retrieveRelevantChunks(queryEmbedding);
   } catch (err: unknown) {
     console.error("[NEXEL AI] Retrieval failure:", err);
-    onEvent({
-      type: "error",
-      code: "RETRIEVAL_FAILURE",
-      message: "Maaf, sistem pencarian informasi sekolah sedang tidak tersedia.",
-    });
+    const fallbackResponse =
+      "Mohon maaf, basis data informasi sekolah sedang dalam pemeliharaan berkala. Silakan coba kembali sesaat lagi.";
+    onEvent({ type: "text", text: fallbackResponse });
+    await saveAssistantMessage(sessionId, fallbackResponse);
+    onEvent({ type: "done" });
     return;
   }
 

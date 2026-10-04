@@ -280,29 +280,225 @@
 }
 
 /* Scroll Reveal Utilities - Emil Kowalski /animate */
-.reveal-on-scroll {
+html.scroll-ready .reveal-on-scroll {
   opacity: 0;
-  transform: translateY(26px);
-  transition: opacity 550ms cubic-bezier(0.23, 1, 0.32, 1), transform 550ms cubic-bezier(0.23, 1, 0.32, 1);
+  transform: translateY(32px);
+  transition: opacity 520ms cubic-bezier(0.23, 1, 0.32, 1), transform 520ms cubic-bezier(0.23, 1, 0.32, 1);
   will-change: opacity, transform;
 }
 
-.is-visible .reveal-on-scroll,
-.reveal-on-scroll.is-visible {
+html.scroll-ready .reveal-on-scroll.is-visible {
   opacity: 1;
   transform: translateY(0);
+  will-change: auto;
 }
 
-.reveal-delay-1 { transition-delay: 80ms; }
-.reveal-delay-2 { transition-delay: 160ms; }
-.reveal-delay-3 { transition-delay: 240ms; }
-.reveal-delay-4 { transition-delay: 320ms; }
+/* Stagger children inside a section */
+html.scroll-ready .reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 520ms cubic-bezier(0.23, 1, 0.32, 1), transform 520ms cubic-bezier(0.23, 1, 0.32, 1);
+  will-change: opacity, transform;
+}
 
-/* Jurusan Tab Switch Animations - Emil Kowalski /animate */
+html.scroll-ready .reveal-stagger.is-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+  will-change: auto;
+}
+
+html.scroll-ready .reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 40ms; }
+html.scroll-ready .reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 80ms; }
+html.scroll-ready .reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 120ms; }
+html.scroll-ready .reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 160ms; }
+html.scroll-ready .reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 200ms; }
+html.scroll-ready .reveal-stagger.is-visible > *:nth-child(6) { transition-delay: 240ms; }
+
+/* About Section Scroll Reveal Animations - Emil Kowalski /animate */
+@keyframes aboutFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes aboutCardPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes aboutPhotoEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sembunyikan elemen sebelum section terlihat */
+html.scroll-ready .reveal-on-scroll:not(.is-visible) #about .animate-about-eyebrow,
+html.scroll-ready .reveal-on-scroll:not(.is-visible) #about .animate-about-heading,
+html.scroll-ready .reveal-on-scroll:not(.is-visible) #about .animate-about-desc,
+html.scroll-ready .reveal-on-scroll:not(.is-visible) #about .animate-about-card,
+html.scroll-ready .reveal-on-scroll:not(.is-visible) #about .animate-about-photo {
+  opacity: 0;
+  animation: none !important;
+}
+
+/* Ketika section terlihat */
+html.scroll-ready .reveal-on-scroll.is-visible #about .animate-about-eyebrow {
+  animation: aboutFadeUp 480ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+html.scroll-ready .reveal-on-scroll.is-visible #about .animate-about-heading {
+  animation: aboutFadeUp 520ms 80ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+html.scroll-ready .reveal-on-scroll.is-visible #about .animate-about-desc {
+  animation: aboutFadeUp 540ms 160ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+html.scroll-ready .reveal-on-scroll.is-visible #about .animate-about-card {
+  animation: aboutCardPop 580ms 180ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+html.scroll-ready .reveal-on-scroll.is-visible #about .animate-about-photo {
+  animation: aboutPhotoEnter 580ms 240ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+/* Sambutan Section Scroll Reveal Animations - Emil Kowalski /animate */
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 36s linear infinite;
+  transform-origin: center center;
+}
+
+@keyframes sambutanHaloPop {
+  0% {
+    opacity: 0;
+    transform: rotate(-60deg) scale(0.7);
+    transform-origin: center center;
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+    transform-origin: center center;
+  }
+}
+
+@keyframes sambutanCardEnter {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(32px);
+    transform-origin: center bottom;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    transform-origin: center bottom;
+  }
+}
+
+@keyframes sambutanPhotoGlide {
+  0% {
+    opacity: 0;
+    transform: translateY(36px);
+    transform-origin: center bottom;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    transform-origin: center bottom;
+  }
+}
+
+@keyframes sambutanTextFade {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sembunyikan sebelum section visible */
+html.scroll-ready .reveal-on-scroll:not(.is-visible) #sambutan .animate-sambutan-halo,
+html.scroll-ready .reveal-on-scroll:not(.is-visible) #sambutan .animate-sambutan-card,
+html.scroll-ready .reveal-on-scroll:not(.is-visible) #sambutan .animate-sambutan-photo,
+html.scroll-ready .reveal-on-scroll:not(.is-visible) #sambutan .animate-sambutan-eyebrow,
+html.scroll-ready .reveal-on-scroll:not(.is-visible) #sambutan .animate-sambutan-heading,
+html.scroll-ready .reveal-on-scroll:not(.is-visible) #sambutan .animate-sambutan-text,
+html.scroll-ready .reveal-on-scroll:not(.is-visible) #sambutan .animate-sambutan-profile {
+  opacity: 0;
+  animation: none !important;
+}
+
+/* Ketika section visible */
+html.scroll-ready .reveal-on-scroll.is-visible #sambutan .animate-sambutan-halo {
+  animation: sambutanHaloPop 640ms 160ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+html.scroll-ready .reveal-on-scroll.is-visible #sambutan .animate-sambutan-card {
+  animation: sambutanCardEnter 560ms 80ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+html.scroll-ready .reveal-on-scroll.is-visible #sambutan .animate-sambutan-photo {
+  animation: sambutanPhotoGlide 580ms 160ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+html.scroll-ready .reveal-on-scroll.is-visible #sambutan .animate-sambutan-eyebrow {
+  animation: sambutanTextFade 480ms 80ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+html.scroll-ready .reveal-on-scroll.is-visible #sambutan .animate-sambutan-heading {
+  animation: sambutanTextFade 500ms 160ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+html.scroll-ready .reveal-on-scroll.is-visible #sambutan .animate-sambutan-text {
+  animation: sambutanTextFade 520ms 240ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+html.scroll-ready .reveal-on-scroll.is-visible #sambutan .animate-sambutan-profile {
+  animation: sambutanTextFade 540ms 320ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.scroll-ready .reveal-on-scroll,
+  html.scroll-ready .reveal-stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Jurusan Tab Switch & Scroll Animations - Emil Kowalski /animate */
 @keyframes majorVisualEnter {
   0% {
     opacity: 0;
-    transform: translateY(18px) scale(0.975);
+    transform: translateY(32px) scale(0.95);
   }
   100% {
     opacity: 1;
@@ -313,7 +509,7 @@
 @keyframes majorFadeUp {
   0% {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(28px);
   }
   100% {
     opacity: 1;
@@ -321,24 +517,57 @@
   }
 }
 
-.major-panel.active .animate-major-visual {
-  animation: majorVisualEnter 320ms cubic-bezier(0.23, 1, 0.32, 1) both;
+/* Sebelum section terlihat, sembunyikan elemen visual dan detail jika dalam mode scroll-ready */
+html.scroll-ready .reveal-on-scroll:not(.is-visible) #jurusan .animate-major-visual,
+html.scroll-ready .reveal-on-scroll:not(.is-visible) #jurusan .animate-major-heading,
+html.scroll-ready .reveal-on-scroll:not(.is-visible) #jurusan .animate-major-desc,
+html.scroll-ready .reveal-on-scroll:not(.is-visible) #jurusan .animate-major-pillars,
+html.scroll-ready .reveal-on-scroll:not(.is-visible) #jurusan .animate-major-footer {
+  opacity: 0;
+  animation: none !important;
 }
 
-.major-panel.active .animate-major-heading {
-  animation: majorFadeUp 300ms 40ms cubic-bezier(0.23, 1, 0.32, 1) both;
+/* Ketika section terlihat atau saat tab aktif */
+html.scroll-ready .reveal-on-scroll.is-visible .major-panel.active .animate-major-visual,
+html:not(.scroll-ready) .major-panel.active .animate-major-visual {
+  animation: majorVisualEnter 540ms cubic-bezier(0.23, 1, 0.32, 1) both;
 }
 
-.major-panel.active .animate-major-desc {
-  animation: majorFadeUp 300ms 80ms cubic-bezier(0.23, 1, 0.32, 1) both;
+html.scroll-ready .reveal-on-scroll.is-visible .major-panel.active .animate-major-heading,
+html:not(.scroll-ready) .major-panel.active .animate-major-heading {
+  animation: majorFadeUp 480ms 80ms cubic-bezier(0.23, 1, 0.32, 1) both;
 }
 
-.major-panel.active .animate-major-pillars {
-  animation: majorFadeUp 300ms 120ms cubic-bezier(0.23, 1, 0.32, 1) both;
+html.scroll-ready .reveal-on-scroll.is-visible .major-panel.active .animate-major-desc,
+html:not(.scroll-ready) .major-panel.active .animate-major-desc {
+  animation: majorFadeUp 500ms 160ms cubic-bezier(0.23, 1, 0.32, 1) both;
 }
 
-.major-panel.active .animate-major-footer {
-  animation: majorFadeUp 300ms 160ms cubic-bezier(0.23, 1, 0.32, 1) both;
+html.scroll-ready .reveal-on-scroll.is-visible .major-panel.active .animate-major-pillars,
+html:not(.scroll-ready) .major-panel.active .animate-major-pillars {
+  animation: majorFadeUp 520ms 240ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+html.scroll-ready .reveal-on-scroll.is-visible .major-panel.active .animate-major-footer,
+html:not(.scroll-ready) .major-panel.active .animate-major-footer {
+  animation: majorFadeUp 520ms 320ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+/* Jurusan Section Header & Tabs Entrance */
+html.scroll-ready .reveal-on-scroll:not(.is-visible) .jurusan-header,
+html.scroll-ready .reveal-on-scroll:not(.is-visible) .jurusan-tabs {
+  opacity: 0;
+  transform: translateY(24px);
+}
+html.scroll-ready .reveal-on-scroll.is-visible .jurusan-header {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 500ms cubic-bezier(0.23, 1, 0.32, 1), transform 500ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+html.scroll-ready .reveal-on-scroll.is-visible .jurusan-tabs {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 500ms 100ms cubic-bezier(0.23, 1, 0.32, 1), transform 500ms 100ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 /* Reduced Motion Override - Emil Kowalski Rule #7 */
@@ -348,6 +577,9 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  .animate-spin-slow {
+    animation: none !important;
   }
 }
 

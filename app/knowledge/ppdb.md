@@ -23,5 +23,3 @@ Calon peserta didik baru perlu menyiapkan dokumen-dokumen berikut dalam bentuk s
 ## Fasilitas Tempat Tinggal / Asrama
 Bagi calon siswa yang berasal dari luar kota Purwokerto, SMK Telkom Purwokerto menyediakan dan bekerjasama dengan mitra asrama dan pondokan / kos terverifikasi di sekitar lingkungan sekolah. Tempat tinggal binaan ini diawasi dengan tata tertib yang aman, nyaman, dan teratur.
 
-## Kunjungan Sekolah (School Tour)
-Calon siswa dan orang tua dapat mengikuti program School Tour untuk melihat langsung fasilitas kampus, laboratorium, dan lingkungan belajar sebelum mendaftar. Pendaftaran jadwal School Tour dapat dilakukan melalui menu School Tour di website atau dengan konfirmasi langsung ke nomor WhatsApp admisi (0812-2970-1800).

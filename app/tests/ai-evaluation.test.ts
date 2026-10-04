@@ -86,7 +86,7 @@ describe("NEXEL AI Evaluation Corpus & Grounding Tests", () => {
         metadata: {},
         documentTitle: "Profil",
         documentSource: "sekolah.md",
-        similarity: 0.2, // Jauh di bawah threshold 0.65
+        similarity: 0.05, // Di bawah threshold minSimilarity 0.15
       },
     ] as never);
 

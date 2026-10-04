@@ -2,71 +2,90 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/Container.astro";
 
-// 8 Fasilitas Unggulan exact from Figma frame Fasilitas Sekolah #1044:2261
+// Fasilitas Unggulan & Ruang Kelas 3D SMK Telkom Purwokerto
 const facilities = [
   {
-    badge: "Lapangan",
-    title: "Lapangan Olahraga",
-    desc: "Lapangan olahraga multifungsi meliputi lapangan basket, voli, dan futsal untuk mendukung aktivitas fisik dan prestasi olahraga siswa.",
-    image: "/images/kegiatan/kegiatan-basket.png",
-    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />`
+    badge: "Ruang PG",
+    title: "Ruangan PG",
+    desc: "Ruang berstandar industri untuk perancangan mekanik gim, pemodelan 3D, dan pengujian gim interaktif dengan workstation spesifikasi tinggi.",
+    image: "/images/class3d/RuangPG.jpg",
+    isPanorama: true,
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 11h4m-2-2v4m7-3h.01m2.99 2h.01M7.8 17h8.4c1.1 0 2.05-.73 2.33-1.8l1.4-5.6A2.4 2.4 0 0017.6 6.8H6.4A2.4 2.4 0 004.07 9.6l1.4 5.6A2.4 2.4 0 007.8 17z" />`
   },
   {
-    badge: "Perpustakaan",
-    title: "Perpustakaan",
-    desc: "Perpustakaan modern dengan koleksi ribuan buku, referensi digital, dan ruang baca nyaman untuk mendukung literasi siswa.",
-    image: "/images/profile/indoor-coworking.png",
-    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />`
-  },
-  {
-    badge: "Lab Komputer",
-    title: "Laboratorium Komputer",
-    desc: "Ruang laboratorium komputer berkapasitas 40 unit PC dengan spesifikasi terkini untuk praktik pemrograman, desain grafis, dan multimedia.",
-    image: "/images/profile/smart-school-fasilitas.png",
-    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />`
-  },
-  {
-    badge: "Ruang Kelas",
-    title: "Ruang Kelas",
-    desc: "Ruang kelas ber-AC dengan proyektor interaktif, meja ergonomis, dan suasana belajar kondusif untuk mendukung proses KBM.",
-    image: "/images/brand/gedung-sekolah.png",
-    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />`
-  },
-  {
-    badge: "Masjid",
-    title: "Masjid",
-    desc: "Masjid sekolah yang indah dan representatif sebagai pusat kegiatan keagamaan, ibadah, dan pembinaan karakter islami siswa.",
-    image: "/images/brand/gedung-sekolah.png",
-    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />`
-  },
-  {
-    badge: "Lab Jaringan",
-    title: "Laboratorium Jaringan",
-    desc: "Fasilitas praktik jaringan komputer lengkap dengan perangkat Cisco, server, dan infrastruktur jaringan nyata untuk simulasi industri.",
-    image: "/images/profile/smart-school-fasilitas.png",
+    badge: "Lab TJKT",
+    title: "Laboratorium Jaringan & Telekomunikasi",
+    desc: "Fasilitas praktik infrastruktur fiber optik, perangkat routing Cisco & Mikrotik, dan server berstandar sertifikasi internasional.",
+    image: "/images/class3d/RuangTJKT.jpg",
+    isPanorama: true,
     icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />`
+  },
+  {
+    badge: "Lab Robotik",
+    title: "Laboratorium Robotika & IoT",
+    desc: "Pusat riset dan perakitan robot, otomasi, dan mikrokontroler untuk kompetisi nasional dan inovasi teknologi cerdas.",
+    image: "/images/class3d/RuangRobotik.jpg",
+    isPanorama: true,
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM12 9v6m-3-3h6" />`
+  },
+  {
+    badge: "Studio Podcast",
+    title: "Studio Podcast & Konten Digital",
+    desc: "Ruang kedap suara dilengkapi tata cahaya profesional, mikrofon broadcast, dan sistem rekaman multi-kamera untuk produksi media.",
+    image: "/images/class3d/RuangPodcast.jpg",
+    isPanorama: true,
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />`
   },
   {
     badge: "Aula",
     title: "Aula",
     desc: "Gedung serbaguna berkapasitas besar dilengkapi sistem audio visual canggih untuk kegiatan upacara, seminar, dan pentas seni.",
-    image: "/images/kegiatan/extrakurikuler-banner.png",
+    image: "/images/class3d/Aula.jpg",
+    isPanorama: true,
     icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />`
   },
   {
+    badge: "Masjid",
+    title: "Masjid",
+    desc: "Masjid sekolah yang indah dan representatif sebagai pusat kegiatan keagamaan, ibadah, dan pembinaan karakter islami siswa.",
+    image: "/images/class3d/Masjid.jpg",
+    isPanorama: true,
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />`
+  },
+  {
+    badge: "Lapangan",
+    title: "Lapangan Upacara",
+    desc: "Area lapangan utama yang luas dan representatif untuk pelaksanaan upacara bendera, apel pagi, kegiatan baris-berbaris, serta berbagai agenda luar ruangan sekolah.",
+    image: "/images/class3d/LapanganUpacara.jpg",
+    isPanorama: true,
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />`
+  },
+  {
     badge: "UKS",
-    title: "UKS (Unit Kesehatan Siswa)",
-    desc: "Unit Kesehatan Siswa dengan peralatan medis lengkap, tenaga kesehatan terlatih, dan layanan konsultasi kesehatan untuk siswa.",
-    image: "/images/profile/smart-school-playing.png",
-    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />`
+    title: "Unit Kesehatan Sekolah (UKS)",
+    desc: "Fasilitas layanan kesehatan primer dan pertolongan pertama yang bersih, nyaman, dan dilengkapi tempat tidur medis serta perlengkapan kesehatan siaga.",
+    image: "/images/class3d/UKS.jpg",
+    isPanorama: true,
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />`
   }
 ];
+
+// Daftar fasilitas 360 panorama untuk navigasi virtual tour
+const panoramaRooms = facilities
+  .filter((f) => f.isPanorama)
+  .map((f, i) => ({
+    index: i,
+    title: f.title,
+    badge: f.badge,
+    image: f.image
+  }));
 ---
 
 <BaseLayout
   title="Fasilitas Sekolah - SMK Telkom Purwokerto"
   description="Fasilitas modern dan lengkap untuk mendukung proses belajar dan berkarya siswa SMK Telkom Purwokerto."
 >
+
   <!-- Section 1: Hero Banner (Figma Fasilitas Kami #1044:2315: height 520px) -->
   <section class="relative w-full h-[480px] sm:h-[520px] overflow-hidden bg-black">
     <!-- Background Image -->
@@ -115,8 +134,8 @@ const facilities = [
           <!-- Hero Stat Row (Figma #1044:2340: 12+, 1200+, 4) -->
           <div class="pt-4 flex items-center gap-6 sm:gap-10">
             <div>
-              <p class="text-2xl sm:text-3xl font-bold text-white font-sans">12+</p>
-              <p class="text-white/60 text-xs font-normal">Fasilitas Unggulan</p>
+              <p class="text-2xl sm:text-3xl font-bold text-white font-sans">{facilities.length}</p>
+              <p class="text-white/60 text-xs font-normal">Fasilitas Unggulan 3D</p>
             </div>
             <div class="w-px h-8 bg-white/20"></div>
             <div>
@@ -138,50 +157,866 @@ const facilities = [
   <section class="py-16 md:py-24 bg-[#F7F8F9]">
     <Container>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-[1360px] mx-auto">
-        {facilities.map((fac) => (
-          <div class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between border border-neutral-100">
-            <!-- Image & Badge Container -->
-            <div class="relative w-full aspect-[16/10] overflow-hidden bg-neutral-100">
-              <img
-                src={fac.image}
-                alt={fac.title}
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-              />
-              <div class="absolute top-4 left-4 px-4 py-1 rounded-full bg-[#BD0C12] text-white text-xs font-bold shadow-md">
-                {fac.badge}
-              </div>
-            </div>
-
-            <!-- Card Body Container -->
-            <div class="p-6 sm:p-7 space-y-4 flex-1 flex flex-col justify-between">
-              <div class="space-y-3">
-                <div class="flex items-center gap-3">
-                  <!-- Red Icon Box (Figma bg: #FEF2F2, radius: 12px) -->
-                  <div class="w-10 h-10 rounded-xl bg-[#FEF2F2] flex items-center justify-center text-[#BD0C12] shrink-0">
-                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <Fragment set:html={fac.icon} />
-                    </svg>
-                  </div>
-                  <h3 class="font-bold text-lg sm:text-xl text-[#2B2C31] font-sans">
-                    {fac.title}
-                  </h3>
+        {facilities.map((fac) => {
+          const facIndex = panoramaRooms.findIndex((p) => p.image === fac.image);
+          return (
+            <div class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between border border-neutral-100">
+              <!-- Image & Badge Container -->
+              <div class="relative w-full aspect-[16/10] overflow-hidden bg-neutral-100">
+                <img
+                  src={fac.image}
+                  alt={fac.title}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <!-- Facility Badge -->
+                <div class="absolute top-4 left-4 px-3.5 py-1 rounded-full bg-[#BD0C12] text-white text-xs font-bold shadow-md z-10">
+                  {fac.badge}
                 </div>
 
-                <p class="text-[#959597] text-sm leading-relaxed">
-                  {fac.desc}
-                </p>
+                <!-- 360 Indicator Badge -->
+                {fac.isPanorama && (
+                  <div class="absolute top-4 right-4 px-3 py-1 rounded-full bg-neutral-950/70 backdrop-blur-md text-white text-xs font-medium flex items-center gap-1.5 shadow-md border border-white/15 z-10">
+                    <svg class="w-3.5 h-3.5 text-white/90 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="9" />
+                      <ellipse cx="12" cy="12" rx="4" ry="9" />
+                      <line x1="3" y1="12" x2="21" y2="12" />
+                    </svg>
+                    <span>360° Virtual</span>
+                  </div>
+                )}
+
+                <!-- Hover Action Button Overlay for 360 rooms -->
+                {fac.isPanorama && (
+                  <button
+                    type="button"
+                    class="btn-trigger-360 absolute inset-0 bg-black/35 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2 text-white font-semibold text-sm cursor-pointer z-20"
+                    data-index={facIndex >= 0 ? facIndex : 0}
+                    data-title={fac.title}
+                    data-panorama={fac.image}
+                    aria-label={`Jelajahi ${fac.title} dalam mode 360 derajat`}
+                  >
+                    <span class="px-4 py-2 rounded-xl bg-[#BD0C12] hover:bg-[#a00a0f] text-white shadow-lg flex items-center gap-2 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                      </svg>
+                      Buka Tur 360°
+                    </span>
+                  </button>
+                )}
               </div>
 
-              <!-- Horizontal Border Divider (Figma #1703:1697: stroke #E7E8EA) -->
-              <div class="pt-4 border-t border-[#E7E8EA] flex items-center justify-between text-xs text-neutral-400">
-                <span>Fasilitas Resmi</span>
-                <span class="text-[#BD0C12] font-semibold group-hover:translate-x-1 transition-transform">Standar Industri →</span>
+              <!-- Card Body Container -->
+              <div class="p-6 sm:p-7 space-y-4 flex-1 flex flex-col justify-between">
+                <div class="space-y-3">
+                  <div class="flex items-center gap-3">
+                    <!-- Red Icon Box (Figma bg: #FEF2F2, radius: 12px) -->
+                    <div class="w-10 h-10 rounded-xl bg-[#FEF2F2] flex items-center justify-center text-[#BD0C12] shrink-0">
+                      <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <Fragment set:html={fac.icon} />
+                      </svg>
+                    </div>
+                    <h3 class="font-bold text-lg sm:text-xl text-[#2B2C31] font-sans">
+                      {fac.title}
+                    </h3>
+                  </div>
+
+                  <p class="text-[#959597] text-sm leading-relaxed">
+                    {fac.desc}
+                  </p>
+                </div>
+
+                <!-- Card Footer Action -->
+                {fac.isPanorama ? (
+                  <div class="pt-4 border-t border-[#E7E8EA] flex items-center justify-between">
+                    <div class="flex items-center gap-1.5 text-xs text-neutral-500">
+                      <svg class="w-4 h-4 text-[#BD0C12]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span>Panorama 360°</span>
+                    </div>
+                    <button
+                      type="button"
+                      class="btn-trigger-360 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#BD0C12] hover:bg-[#9a090e] active:scale-95 text-white text-xs font-semibold shadow-sm hover:shadow transition-all duration-150 cursor-pointer"
+                      data-index={facIndex >= 0 ? facIndex : 0}
+                      data-title={fac.title}
+                      data-panorama={fac.image}
+                    >
+                      <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                      </svg>
+                      <span>Jelajahi 360°</span>
+                    </button>
+                  </div>
+                ) : (
+                  <div class="pt-4 border-t border-[#E7E8EA] flex items-center justify-between text-xs text-neutral-400">
+                    <span>Fasilitas Resmi</span>
+                    <span class="text-[#BD0C12] font-semibold group-hover:translate-x-1 transition-transform">Standar Industri →</span>
+                  </div>
+                )}
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </Container>
   </section>
+
+  <!-- Modal Penampil Panorama 360° Interaktif (Native WebGL) -->
+  <div
+    id="modal-360"
+    class="fixed inset-0 z-[100] hidden w-screen h-screen bg-black text-white select-none overflow-hidden transition-opacity duration-300"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-360-title"
+    data-lenis-prevent
+  >
+    <!-- Floating Minimalist Top Bar (Header HUD) -->
+    <header class="absolute top-0 inset-x-0 z-20 bg-gradient-to-b from-black/85 via-black/35 to-transparent pt-4 pb-12 px-4 sm:px-8 flex items-center justify-between pointer-events-none">
+      <!-- Sisi Kiri: Label & Judul Fasilitas -->
+      <div class="pointer-events-auto space-y-0.5">
+        <h2 id="modal-360-title" class="font-poppins font-semibold text-lg sm:text-xl text-white tracking-tight drop-shadow-md">
+          Ruangan PG
+        </h2>
+        <p class="text-xs text-white/60 font-sans tracking-wide">
+          SMK Telkom Purwokerto
+        </p>
+      </div>
+
+      <!-- Sisi Kanan: Fullscreen Toggle & Tombol Tutup -->
+      <div class="pointer-events-auto flex items-center gap-2 sm:gap-3">
+        <button
+          id="btn-fullscreen"
+          type="button"
+          class="w-10 h-10 rounded-full bg-black/50 hover:bg-white/20 active:scale-95 text-white flex items-center justify-center backdrop-blur-md border border-white/10 transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-white/40"
+          title="Mode Layar Penuh (F)"
+          aria-label="Mode Layar Penuh"
+        >
+          <svg id="fullscreen-icon-expand" class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-5h-4m4 0v4m0-4l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+          </svg>
+          <svg id="fullscreen-icon-compress" class="w-4 h-4 shrink-0 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 4v4H5m4 0L4 3m11 1v4h4m-4 0l5-5M9 20v-4H5m4 0l-5 5m11-1v-4h4m-4 0l5 5" />
+          </svg>
+        </button>
+
+        <button
+          id="modal-360-close"
+          type="button"
+          class="w-10 h-10 rounded-full bg-black/50 hover:bg-neutral-800 active:scale-95 text-white flex items-center justify-center backdrop-blur-md border border-white/10 transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-white/40"
+          title="Tutup (ESC)"
+          aria-label="Tutup penampil 360"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- WebGL Canvas (100% Viewport, edge-to-edge) -->
+    <canvas id="panorama-canvas" class="absolute inset-0 w-full h-full block cursor-grab active:cursor-grabbing"></canvas>
+
+    <!-- Loading Indicator Overlay -->
+    <div
+      id="panorama-loading"
+      class="absolute inset-0 flex flex-col items-center justify-center bg-black/80 backdrop-blur-sm transition-opacity duration-300 z-30 pointer-events-none"
+    >
+      <div class="w-10 h-10 border-2 border-white/20 border-t-[#ED1E28] rounded-full animate-spin"></div>
+      <p class="text-xs font-medium text-white/80 font-sans mt-3.5 tracking-wider uppercase">Memuat Panorama 360°...</p>
+    </div>
+
+    <!-- Unified Architectural Floating HUD Dock (Bottom Center) -->
+    <nav aria-label="Kontrol Tur 360" class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 sm:gap-3 bg-neutral-950/85 backdrop-blur-xl border border-white/15 px-3 py-2 rounded-2xl shadow-2xl pointer-events-auto max-w-[calc(100vw-2rem)] select-none">
+      <!-- Stepper Navigasi Fasilitas -->
+      <div class="flex items-center gap-1 sm:gap-1.5">
+        <button
+          id="btn-facility-prev"
+          type="button"
+          class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 text-white flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#ED1E28]"
+          title="Fasilitas Sebelumnya (Panah Kiri)"
+          aria-label="Fasilitas Sebelumnya"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        <span id="facility-counter" class="text-xs font-mono font-semibold text-white/90 px-2 min-w-[54px] text-center">
+          01 / 08
+        </span>
+
+        <button
+          id="btn-facility-next"
+          type="button"
+          class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 text-white flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#ED1E28]"
+          title="Fasilitas Berikutnya (Panah Kanan)"
+          aria-label="Fasilitas Berikutnya"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Pemisah Vertikal -->
+      <div class="w-px h-6 bg-white/20 shrink-0"></div>
+
+      <!-- Kontrol Kamera & Zoom -->
+      <div class="flex items-center gap-1">
+        <button
+          id="btn-zoom-in"
+          type="button"
+          class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 text-white flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#ED1E28]"
+          title="Perbesar (+)"
+          aria-label="Perbesar tampilan"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+          </svg>
+        </button>
+
+        <button
+          id="btn-zoom-out"
+          type="button"
+          class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 text-white flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#ED1E28]"
+          title="Perkecil (-)"
+          aria-label="Perkecil tampilan"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" />
+          </svg>
+        </button>
+
+        <button
+          id="btn-reset-view"
+          type="button"
+          class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 text-white flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#ED1E28]"
+          title="Reset Sudut Pandang (R)"
+          aria-label="Reset sudut pandang"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+        </button>
+
+        <button
+          id="btn-toggle-autorotate"
+          type="button"
+          class="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 active:scale-95 text-white flex items-center justify-center transition-all cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#ED1E28]"
+          title="Jeda Putar Otomatis"
+          aria-label="Toggle putar otomatis"
+        >
+          <svg id="icon-autorotate-pause" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 9v6m4-6v6" />
+          </svg>
+          <svg id="icon-autorotate-play" class="w-4 h-4 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- WebGL 360 Panorama Script (Self-contained, 100% offline, Zero External Dependencies) -->
+  <script is:inline define:vars={{ panoramaRooms }}>
+    (function () {
+      const modal = document.getElementById("modal-360");
+      const modalTitle = document.getElementById("modal-360-title");
+      const closeBtn = document.getElementById("modal-360-close");
+      const panoramaLoading = document.getElementById("panorama-loading");
+      const canvas = document.getElementById("panorama-canvas");
+      const btnZoomIn = document.getElementById("btn-zoom-in");
+      const btnZoomOut = document.getElementById("btn-zoom-out");
+      const btnResetView = document.getElementById("btn-reset-view");
+      const btnToggleAutorotate = document.getElementById("btn-toggle-autorotate");
+      const iconAutorotatePause = document.getElementById("icon-autorotate-pause");
+      const iconAutorotatePlay = document.getElementById("icon-autorotate-play");
+      const btnFullscreen = document.getElementById("btn-fullscreen");
+      const iconFullscreenExpand = document.getElementById("fullscreen-icon-expand");
+      const iconFullscreenCompress = document.getElementById("fullscreen-icon-compress");
+      const btnPrev = document.getElementById("btn-facility-prev");
+      const btnNext = document.getElementById("btn-facility-next");
+      const facilityCounter = document.getElementById("facility-counter");
+
+      if (!modal || !canvas) return;
+
+      // Vertex Shader: fullscreen quad
+      const vsSource = `
+        attribute vec2 a_position;
+        varying vec2 v_uv;
+        void main() {
+          v_uv = a_position * 0.5 + 0.5;
+          gl_Position = vec4(a_position, 0.0, 1.0);
+        }
+      `;
+
+      // Fragment Shader: Equirectangular raymarch
+      const fsSource = `
+        precision highp float;
+        varying vec2 v_uv;
+        uniform sampler2D u_tex;
+        uniform vec2 u_rot; // rotX (yaw), rotY (pitch)
+        uniform float u_fov; // field of view in radians
+        uniform float u_aspect;
+        #define PI 3.141592653589793
+        void main() {
+          vec2 p = (v_uv - 0.5) * 2.0;
+          p.x *= u_aspect;
+          float z = 1.0 / tan(u_fov * 0.5);
+          vec3 ray = normalize(vec3(p.x, p.y, z));
+          
+          float cp = cos(u_rot.y);
+          float sp = sin(u_rot.y);
+          vec3 r1 = vec3(ray.x, ray.y * cp - ray.z * sp, ray.y * sp + ray.z * cp);
+          
+          float cy = cos(u_rot.x);
+          float sy = sin(u_rot.x);
+          vec3 r2 = vec3(r1.x * cy + r1.z * sy, r1.y, -r1.x * sy + r1.z * cy);
+          
+          float lon = atan(r2.x, r2.z);
+          float lat = asin(clamp(r2.y, -1.0, 1.0));
+          vec2 uv = vec2(fract(0.5 - lon / (2.0 * PI)), clamp(0.5 + lat / PI, 0.001, 0.999));
+          gl_FragColor = texture2D(u_tex, uv);
+        }
+      `;
+
+      let gl = null;
+      let program = null;
+      let positionBuffer = null;
+      let texture = null;
+      let uTexLoc = null;
+      let uRotLoc = null;
+      let uFovLoc = null;
+      let uAspectLoc = null;
+      let aPositionLoc = null;
+
+      let isInitialized = false;
+      let animationFrameId = null;
+      let isRunning = false;
+      let currentImage = null;
+
+      // Camera State
+      const minFov = (35 * Math.PI) / 180;
+      const maxFov = (100 * Math.PI) / 180;
+      const defaultFov = (75 * Math.PI) / 180;
+      let currentFov = defaultFov;
+      let targetFov = defaultFov;
+      let rotX = 0; // Yaw
+      let rotY = 0; // Pitch
+      const maxPitch = 1.4; // ~80 degrees
+
+      // Rooms & Mode State
+      let currentRoomIndex = 0;
+      let isAutoRotateEnabled = true;
+
+      // Interaction State
+      let isDragging = false;
+      let startPointerX = 0;
+      let startPointerY = 0;
+      let lastInteractionTime = performance.now();
+      const activePointers = new Map();
+      let initialPinchDistance = null;
+      let initialPinchFov = null;
+
+      function createShader(glCtx, type, source) {
+        const shader = glCtx.createShader(type);
+        glCtx.shaderSource(shader, source);
+        glCtx.compileShader(shader);
+        if (!glCtx.getShaderParameter(shader, glCtx.COMPILE_STATUS)) {
+          console.error("Shader compile error:", glCtx.getShaderInfoLog(shader));
+          glCtx.deleteShader(shader);
+          return null;
+        }
+        return shader;
+      }
+
+      function initWebGL() {
+        if (isInitialized) return true;
+        try {
+          gl = canvas.getContext("webgl", { preserveDrawingBuffer: true, antialias: true }) ||
+               canvas.getContext("experimental-webgl", { preserveDrawingBuffer: true, antialias: true });
+        } catch (e) {
+          console.error("WebGL not supported:", e);
+        }
+
+        if (!gl) {
+          console.error("Gagal menginisialisasi WebGL.");
+          return false;
+        }
+
+        const vs = createShader(gl, gl.VERTEX_SHADER, vsSource);
+        const fs = createShader(gl, gl.FRAGMENT_SHADER, fsSource);
+        if (!vs || !fs) return false;
+
+        program = gl.createProgram();
+        gl.attachShader(program, vs);
+        gl.attachShader(program, fs);
+        gl.linkProgram(program);
+
+        if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+          console.error("Program link error:", gl.getProgramInfoLog(program));
+          return false;
+        }
+
+        aPositionLoc = gl.getAttribLocation(program, "a_position");
+        uTexLoc = gl.getUniformLocation(program, "u_tex");
+        uRotLoc = gl.getUniformLocation(program, "u_rot");
+        uFovLoc = gl.getUniformLocation(program, "u_fov");
+        uAspectLoc = gl.getUniformLocation(program, "u_aspect");
+
+        // Fullscreen quad buffer
+        positionBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+        gl.bufferData(
+          gl.ARRAY_BUFFER,
+          new Float32Array([
+            -1, -1,
+             1, -1,
+            -1,  1,
+            -1,  1,
+             1, -1,
+             1,  1,
+          ]),
+          gl.STATIC_DRAW
+        );
+
+        // Texture setup with CLAMP_TO_EDGE and LINEAR
+        texture = gl.createTexture();
+        gl.bindTexture(gl.TEXTURE_2D, texture);
+        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+        gl.texImage2D(
+          gl.TEXTURE_2D,
+          0,
+          gl.RGBA,
+          1,
+          1,
+          0,
+          gl.RGBA,
+          gl.UNSIGNED_BYTE,
+          new Uint8Array([15, 15, 15, 255])
+        );
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+
+        isInitialized = true;
+        return true;
+      }
+
+      function updateCanvasSize() {
+        if (!canvas || !gl) return;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const w = Math.floor(canvas.clientWidth * dpr);
+        const h = Math.floor(canvas.clientHeight * dpr);
+        if (canvas.width !== w || canvas.height !== h) {
+          canvas.width = w;
+          canvas.height = h;
+          gl.viewport(0, 0, w, h);
+        }
+      }
+
+      function render() {
+        if (!isRunning || !gl || !program) return;
+
+        updateCanvasSize();
+
+        // Smooth FOV interpolation
+        currentFov += (targetFov - currentFov) * 0.15;
+
+        // Auto-rotation when idle (> 1500ms since last interaction) and enabled
+        const now = performance.now();
+        if (isAutoRotateEnabled && !isDragging && now - lastInteractionTime > 1500) {
+          rotX += 0.0012;
+        }
+
+        gl.useProgram(program);
+
+        gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+        gl.enableVertexAttribArray(aPositionLoc);
+        gl.vertexAttribPointer(aPositionLoc, 2, gl.FLOAT, false, 0, 0);
+
+        gl.activeTexture(gl.TEXTURE0);
+        gl.bindTexture(gl.TEXTURE_2D, texture);
+        gl.uniform1i(uTexLoc, 0);
+
+        gl.uniform2f(uRotLoc, rotX, rotY);
+        gl.uniform1f(uFovLoc, currentFov);
+        const aspect = canvas.clientWidth / (canvas.clientHeight || 1);
+        gl.uniform1f(uAspectLoc, aspect);
+
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+        animationFrameId = requestAnimationFrame(render);
+      }
+
+      function loadTexture(url) {
+        if (panoramaLoading) {
+          panoramaLoading.style.opacity = "1";
+          panoramaLoading.classList.remove("hidden");
+        }
+
+        if (currentImage) {
+          currentImage.onload = null;
+          currentImage.onerror = null;
+        }
+
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        currentImage = img;
+
+        img.onload = function () {
+          if (!gl || !texture) return;
+          gl.bindTexture(gl.TEXTURE_2D, texture);
+          gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+
+          if (panoramaLoading) {
+            panoramaLoading.style.opacity = "0";
+            setTimeout(function () {
+              if (panoramaLoading.style.opacity === "0") {
+                panoramaLoading.classList.add("hidden");
+              }
+            }, 300);
+          }
+        };
+
+        img.onerror = function () {
+          console.error("Gagal memuat gambar panorama 360:", url);
+          if (panoramaLoading) {
+            panoramaLoading.classList.add("hidden");
+          }
+        };
+
+        img.src = url;
+      }
+
+      function updateCounterUI() {
+        if (facilityCounter && panoramaRooms && panoramaRooms.length) {
+          const cur = String(currentRoomIndex + 1).padStart(2, "0");
+          const total = String(panoramaRooms.length).padStart(2, "0");
+          facilityCounter.textContent = cur + " / " + total;
+        }
+      }
+
+      function updateAutoRotateUI() {
+        if (iconAutorotatePause && iconAutorotatePlay && btnToggleAutorotate) {
+          if (isAutoRotateEnabled) {
+            iconAutorotatePause.classList.remove("hidden");
+            iconAutorotatePlay.classList.add("hidden");
+            btnToggleAutorotate.setAttribute("title", "Jeda Putar Otomatis");
+          } else {
+            iconAutorotatePause.classList.add("hidden");
+            iconAutorotatePlay.classList.remove("hidden");
+            btnToggleAutorotate.setAttribute("title", "Mulai Putar Otomatis");
+          }
+        }
+      }
+
+      function updateFullscreenUI() {
+        const isFs = !!document.fullscreenElement;
+        if (iconFullscreenExpand && iconFullscreenCompress) {
+          if (isFs) {
+            iconFullscreenExpand.classList.add("hidden");
+            iconFullscreenCompress.classList.remove("hidden");
+          } else {
+            iconFullscreenExpand.classList.remove("hidden");
+            iconFullscreenCompress.classList.add("hidden");
+          }
+        }
+      }
+
+      function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+          if (modal.requestFullscreen) {
+            modal.requestFullscreen().catch(function (e) {
+              console.error("Gagal masuk fullscreen:", e);
+            });
+          } else if (modal.webkitRequestFullscreen) {
+            modal.webkitRequestFullscreen();
+          }
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen().catch(function (e) {
+              console.error("Gagal keluar fullscreen:", e);
+            });
+          } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          }
+        }
+      }
+
+      function switchRoom(index) {
+        if (!panoramaRooms || panoramaRooms.length === 0) return;
+        currentRoomIndex = (index + panoramaRooms.length) % panoramaRooms.length;
+        const room = panoramaRooms[currentRoomIndex];
+        if (modalTitle) {
+          modalTitle.textContent = room.title;
+        }
+        updateCounterUI();
+        rotX = 0;
+        rotY = 0;
+        targetFov = defaultFov;
+        loadTexture(room.image);
+        lastInteractionTime = performance.now();
+      }
+
+      function openViewer(index) {
+        if (!modal) return;
+        if (!initWebGL()) {
+          alert("Peramban Anda tidak mendukung WebGL untuk tur virtual 360°.");
+          return;
+        }
+
+        modal.classList.remove("hidden");
+        modal.classList.add("block");
+        document.body.style.overflow = "hidden";
+
+        currentRoomIndex = (index + panoramaRooms.length) % panoramaRooms.length;
+        const room = panoramaRooms[currentRoomIndex];
+        if (modalTitle) modalTitle.textContent = room.title;
+
+        updateCounterUI();
+        updateAutoRotateUI();
+        updateFullscreenUI();
+
+        rotX = 0;
+        rotY = 0;
+        currentFov = defaultFov;
+        targetFov = defaultFov;
+        isDragging = false;
+        activePointers.clear();
+        lastInteractionTime = performance.now();
+
+        loadTexture(room.image);
+
+        isRunning = true;
+        if (animationFrameId) cancelAnimationFrame(animationFrameId);
+        requestAnimationFrame(function () {
+          updateCanvasSize();
+          animationFrameId = requestAnimationFrame(render);
+        });
+      }
+
+      function closeViewer() {
+        if (!modal) return;
+        if (document.fullscreenElement) {
+          try {
+            document.exitFullscreen();
+          } catch (_) {}
+        }
+        modal.classList.add("hidden");
+        modal.classList.remove("block");
+        document.body.style.overflow = "";
+
+        isRunning = false;
+        if (animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
+          animationFrameId = null;
+        }
+
+        if (currentImage) {
+          currentImage.onload = null;
+          currentImage.onerror = null;
+          currentImage = null;
+        }
+
+        activePointers.clear();
+        isDragging = false;
+      }
+
+      // Pointer interactions (mouse & touch drag)
+      canvas.addEventListener("pointerdown", function (e) {
+        try {
+          canvas.setPointerCapture(e.pointerId);
+        } catch (_) {}
+        activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+        lastInteractionTime = performance.now();
+
+        if (activePointers.size === 1) {
+          isDragging = true;
+          startPointerX = e.clientX;
+          startPointerY = e.clientY;
+        } else if (activePointers.size === 2) {
+          isDragging = false;
+          const pts = Array.from(activePointers.values());
+          initialPinchDistance = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+          initialPinchFov = targetFov;
+        }
+      });
+
+      canvas.addEventListener("pointermove", function (e) {
+        if (!activePointers.has(e.pointerId)) return;
+        activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+        lastInteractionTime = performance.now();
+
+        if (activePointers.size === 2 && initialPinchDistance) {
+          const pts = Array.from(activePointers.values());
+          const currentDist = Math.hypot(pts[0].x - pts[1].x, pts[0].y - pts[1].y);
+          const ratio = initialPinchDistance / Math.max(currentDist, 1);
+          targetFov = Math.max(minFov, Math.min(maxFov, initialPinchFov * ratio));
+        } else if (isDragging && activePointers.size === 1) {
+          const dx = e.clientX - startPointerX;
+          const dy = e.clientY - startPointerY;
+          startPointerX = e.clientX;
+          startPointerY = e.clientY;
+
+          const sensitivity = (currentFov / (canvas.clientHeight || 500)) * 1.1;
+          rotX -= dx * sensitivity;
+          rotY -= dy * sensitivity;
+          rotY = Math.max(-maxPitch, Math.min(maxPitch, rotY));
+        }
+      });
+
+      function onPointerEnd(e) {
+        if (canvas.hasPointerCapture && canvas.hasPointerCapture(e.pointerId)) {
+          try {
+            canvas.releasePointerCapture(e.pointerId);
+          } catch (_) {}
+        }
+        activePointers.delete(e.pointerId);
+        if (activePointers.size === 0) {
+          isDragging = false;
+          initialPinchDistance = null;
+        } else if (activePointers.size === 1) {
+          const pt = Array.from(activePointers.values())[0];
+          startPointerX = pt.x;
+          startPointerY = pt.y;
+          isDragging = true;
+          initialPinchDistance = null;
+        }
+        lastInteractionTime = performance.now();
+      }
+
+      canvas.addEventListener("pointerup", onPointerEnd);
+      canvas.addEventListener("pointercancel", onPointerEnd);
+
+      // Mouse wheel zoom
+      canvas.addEventListener(
+        "wheel",
+        function (e) {
+          e.preventDefault();
+          lastInteractionTime = performance.now();
+          const zoomDelta = e.deltaY > 0 ? 0.08 : -0.08;
+          targetFov = Math.max(minFov, Math.min(maxFov, targetFov + zoomDelta));
+        },
+        { passive: false }
+      );
+
+      // Button controls
+      if (btnZoomIn) {
+        btnZoomIn.addEventListener("click", function () {
+          targetFov = Math.max(minFov, targetFov - 0.15);
+          lastInteractionTime = performance.now();
+        });
+      }
+
+      if (btnZoomOut) {
+        btnZoomOut.addEventListener("click", function () {
+          targetFov = Math.min(maxFov, targetFov + 0.15);
+          lastInteractionTime = performance.now();
+        });
+      }
+
+      if (btnResetView) {
+        btnResetView.addEventListener("click", function () {
+          targetFov = defaultFov;
+          rotX = 0;
+          rotY = 0;
+          lastInteractionTime = performance.now();
+        });
+      }
+
+      if (btnToggleAutorotate) {
+        btnToggleAutorotate.addEventListener("click", function () {
+          isAutoRotateEnabled = !isAutoRotateEnabled;
+          updateAutoRotateUI();
+          lastInteractionTime = performance.now();
+        });
+      }
+
+      if (btnPrev) {
+        btnPrev.addEventListener("click", function () {
+          switchRoom(currentRoomIndex - 1);
+        });
+      }
+
+      if (btnNext) {
+        btnNext.addEventListener("click", function () {
+          switchRoom(currentRoomIndex + 1);
+        });
+      }
+
+      if (btnFullscreen) {
+        btnFullscreen.addEventListener("click", toggleFullscreen);
+      }
+
+      document.addEventListener("fullscreenchange", function () {
+        updateFullscreenUI();
+        if (isRunning) updateCanvasSize();
+      });
+
+      // Triggers on facility cards
+      document.querySelectorAll(".btn-trigger-360").forEach(function (btn) {
+        btn.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          const idxAttr = btn.getAttribute("data-index");
+          let idx = idxAttr !== null ? parseInt(idxAttr, 10) : NaN;
+          if (isNaN(idx) || idx < 0 || idx >= panoramaRooms.length) {
+            const panorama = btn.getAttribute("data-panorama");
+            idx = panoramaRooms.findIndex(function (r) {
+              return r.image === panorama;
+            });
+            if (idx === -1) idx = 0;
+          }
+          openViewer(idx);
+        });
+      });
+
+      if (closeBtn) {
+        closeBtn.addEventListener("click", closeViewer);
+      }
+
+      window.addEventListener("keydown", function (e) {
+        if (!modal || modal.classList.contains("hidden")) return;
+
+        if (e.key === "Escape") {
+          closeViewer();
+        } else if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          switchRoom(currentRoomIndex - 1);
+        } else if (e.key === "ArrowRight") {
+          e.preventDefault();
+          switchRoom(currentRoomIndex + 1);
+        } else if (e.key === "+" || e.key === "=") {
+          targetFov = Math.max(minFov, targetFov - 0.15);
+          lastInteractionTime = performance.now();
+        } else if (e.key === "-" || e.key === "_") {
+          targetFov = Math.min(maxFov, targetFov + 0.15);
+          lastInteractionTime = performance.now();
+        } else if (e.key === "r" || e.key === "R") {
+          targetFov = defaultFov;
+          rotX = 0;
+          rotY = 0;
+          lastInteractionTime = performance.now();
+        } else if (e.key === "f" || e.key === "F") {
+          toggleFullscreen();
+        }
+      });
+
+      window.addEventListener("resize", function () {
+        if (isRunning) {
+          updateCanvasSize();
+        }
+      });
+    })();
+  </script>
 </BaseLayout>

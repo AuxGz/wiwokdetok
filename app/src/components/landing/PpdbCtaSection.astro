@@ -2,64 +2,98 @@
 import Container from "../Container.astro";
 ---
 
-<section class="py-12 sm:py-16 lg:pt-12 lg:pb-24 bg-white" id="ppdb">
+<section class="pt-2 pb-12 sm:pt-3 sm:pb-16 lg:pt-0 lg:pb-20 -mt-6 sm:-mt-8 lg:-mt-10 bg-white" id="ppdb">
   <Container>
     <div class="max-w-[1140px] mx-auto">
-      <div class="relative bg-gradient-to-br from-[#ed1e28] via-[#dc2626] to-[#c41d24] rounded-2xl sm:rounded-[32px] py-14 sm:py-18 px-6 sm:px-12 text-white overflow-hidden shadow-[0_24px_48px_-12px_rgba(237,30,40,0.32)] text-center">
-        <!-- Circular Rings Pattern Overlay -->
-        <svg class="absolute inset-0 w-full h-full pointer-events-none z-1" viewBox="0 0 1200 400" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="150" cy="200" r="160" stroke="rgba(255, 255, 255, 0.07)" stroke-width="32" />
-          <circle cx="150" cy="200" r="260" stroke="rgba(255, 255, 255, 0.05)" stroke-width="32" />
-          <circle cx="1050" cy="200" r="180" stroke="rgba(255, 255, 255, 0.07)" stroke-width="32" />
-          <circle cx="1050" cy="200" r="280" stroke="rgba(255, 255, 255, 0.05)" stroke-width="32" />
-        </svg>
+      <!-- Outer Dashed Frame Container -->
+      <div class="border-2 border-dashed border-[#D1D5DB] rounded-[24px] sm:rounded-[32px] p-2 sm:p-3.5 lg:p-4 bg-white">
+        <div class="relative bg-gradient-to-r from-[#ea2027] via-[#dc222a] to-[#ba1a22] rounded-xl sm:rounded-[24px] py-8 sm:py-10 lg:py-11 px-5 sm:px-10 text-white overflow-hidden shadow-[0_12px_32px_-6px_rgba(220,38,38,0.28)] text-center">
+          <!-- Circular Rings Pattern Overlay -->
+          <svg class="absolute inset-0 w-full h-full pointer-events-none z-1" viewBox="0 0 1200 420" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- Center 1 (Left) -->
+            <circle cx="140" cy="210" r="90" stroke="rgba(255, 255, 255, 0.08)" stroke-width="36" />
+            <circle cx="140" cy="210" r="180" stroke="rgba(255, 255, 255, 0.065)" stroke-width="36" />
+            <circle cx="140" cy="210" r="270" stroke="rgba(255, 255, 255, 0.05)" stroke-width="36" />
+            <circle cx="140" cy="210" r="360" stroke="rgba(255, 255, 255, 0.035)" stroke-width="36" />
 
-        <div class="relative z-2 max-w-[780px] mx-auto flex flex-col items-center">
-          <!-- Status Badge -->
-          <div class="inline-block bg-white/18 border border-white/30 font-jakarta text-xs font-bold tracking-[0.08em] py-1.5 px-4.5 rounded-full mb-6">
-            <span>PENDAFTARAN DIBUKA</span>
-          </div>
+            <!-- Center 2 (Center-Left) -->
+            <circle cx="460" cy="210" r="90" stroke="rgba(255, 255, 255, 0.07)" stroke-width="36" />
+            <circle cx="460" cy="210" r="180" stroke="rgba(255, 255, 255, 0.06)" stroke-width="36" />
+            <circle cx="460" cy="210" r="270" stroke="rgba(255, 255, 255, 0.045)" stroke-width="36" />
+            <circle cx="460" cy="210" r="360" stroke="rgba(255, 255, 255, 0.035)" stroke-width="36" />
 
-          <!-- Title -->
-          <h2 class="font-poppins text-3xl sm:text-4xl lg:text-[2.75rem] font-bold leading-[1.15] text-white mb-5 tracking-[-0.025em]">
-            Mulai langkahmu di PPDB 2026/2027
-          </h2>
+            <!-- Center 3 (Center-Right) -->
+            <circle cx="780" cy="210" r="90" stroke="rgba(255, 255, 255, 0.07)" stroke-width="36" />
+            <circle cx="780" cy="210" r="180" stroke="rgba(255, 255, 255, 0.06)" stroke-width="36" />
+            <circle cx="780" cy="210" r="270" stroke="rgba(255, 255, 255, 0.045)" stroke-width="36" />
+            <circle cx="780" cy="210" r="360" stroke="rgba(255, 255, 255, 0.035)" stroke-width="36" />
 
-          <!-- Subtitle -->
-          <p class="font-jakarta text-sm sm:text-base leading-[1.65] text-white/90 mb-9 max-w-[620px]">
-            Satu alur pendaftaran, satu akun, satu status. Pantau progres seleksi langsung dari dashboard calon siswa.
-          </p>
+            <!-- Center 4 (Right) -->
+            <circle cx="1080" cy="210" r="90" stroke="rgba(255, 255, 255, 0.08)" stroke-width="36" />
+            <circle cx="1080" cy="210" r="180" stroke="rgba(255, 255, 255, 0.065)" stroke-width="36" />
+            <circle cx="1080" cy="210" r="270" stroke="rgba(255, 255, 255, 0.05)" stroke-width="36" />
+            <circle cx="1080" cy="210" r="360" stroke="rgba(255, 255, 255, 0.035)" stroke-width="36" />
+          </svg>
 
-          <!-- Action Buttons -->
-          <div class="flex items-center gap-4 mb-12 flex-wrap justify-center">
-            <a href="https://wa.me/6281229701800" target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-3 bg-white text-[#ed1e28] font-jakarta text-[0.9375rem] font-bold py-2 pl-6 pr-2.5 rounded-full shadow-[0_4px_14px_rgba(0,0,0,0.12)] hover:bg-[#fef2f2] hover:-translate-y-0.5 hover:shadow-[0_6px_18px_rgba(0,0,0,0.16)] transition-all duration-200">
-              <span>Daftar PPDB 2026</span>
-              <span class="w-8 h-8 rounded-full bg-[#ed1e28] text-white flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="7" y1="17" x2="17" y2="7"></line>
-                  <polyline points="7 7 17 7 17 17"></polyline>
-                </svg>
-              </span>
-            </a>
-
-            <a href="https://wa.me/6281229701800?text=Halo%20Admin,%20saya%20ingin%20unduh%20brosur%20PPDB%20SMK%20Telkom%20Purwokerto" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center py-3.5 px-7 rounded-full border-[1.5px] border-white/80 bg-transparent hover:bg-white/15 hover:border-white text-white font-jakarta text-[0.9375rem] font-bold transition-all duration-200">
-              <span>Unduh Brosur</span>
-            </a>
-          </div>
-
-          <!-- Bottom Highlights Divider -->
-          <div class="flex items-center justify-center gap-6 sm:gap-8 pt-7 border-t border-white/20 w-full flex-wrap">
-            <div class="inline-flex items-center gap-2 font-jakarta text-sm text-white/90">
-              <span class="text-xs">◆</span>
-              <span>Gelombang 2 (sisa 148 kursi)</span>
+          <div class="relative z-2 max-w-[780px] mx-auto flex flex-col items-center">
+            <!-- Status Badge -->
+            <div class="inline-flex items-center justify-center bg-white/10 border border-white/25 backdrop-blur-[2px] font-jakarta text-[0.6875rem] sm:text-xs font-bold tracking-[0.1em] py-1 px-4 sm:py-1.5 sm:px-4.5 rounded-full mb-3 sm:mb-4 text-white shadow-sm">
+              <span>PENDAFTARAN DIBUKA</span>
             </div>
-            <div class="inline-flex items-center gap-2 font-jakarta text-sm text-white/90">
-              <span class="text-xs">◆</span>
-              <span>Beasiswa prestasi tersedia</span>
+
+            <!-- Title -->
+            <h2 class="font-poppins text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-bold leading-[1.2] text-white mb-2 sm:mb-2.5 tracking-[-0.02em]">
+              Mulai langkahmu di PPDB 2026/2027
+            </h2>
+
+            <!-- Subtitle -->
+            <p class="font-jakarta text-xs sm:text-sm md:text-[0.9375rem] leading-[1.65] text-white/90 mb-6 sm:mb-7 max-w-[620px] mx-auto">
+              Satu alur pendaftaran, satu akun, satu status. Pantau progres seleksi langsung dari dashboard calon siswa.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center justify-center gap-3.5 sm:gap-4 mb-7 sm:mb-8 flex-wrap">
+              <!-- Button 1: Daftar Sekarang -->
+              <a
+                href="https://wa.me/6281229701800"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group inline-flex items-center gap-3 bg-white text-[#ea2027] font-jakarta text-[0.875rem] sm:text-[0.9375rem] font-bold py-2 sm:py-2 pl-5 sm:pl-6 pr-2 sm:pr-2.5 rounded-full shadow-[0_4px_14px_rgba(0,0,0,0.12)] hover:bg-[#fff5f5] hover:-translate-y-0.5 hover:shadow-[0_6px_18px_rgba(0,0,0,0.18)] transition-all duration-200"
+              >
+                <span>Daftar Sekarang</span>
+                <span class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#ea2027] text-white flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 shadow-sm">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </span>
+              </a>
+
+              <!-- Button 2: Unduh Brosur -->
+              <a
+                href="https://wa.me/6281229701800?text=Halo%20Admin,%20saya%20ingin%20unduh%20brosur%20PPDB%20SMK%20Telkom%20Purwokerto"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center py-2.5 sm:py-3 px-6 sm:px-7 rounded-full border-[1.5px] border-white/70 bg-transparent hover:bg-white/15 hover:border-white text-white font-jakarta text-[0.875rem] sm:text-[0.9375rem] font-bold transition-all duration-200"
+              >
+                <span>Unduh Brosur</span>
+              </a>
             </div>
-            <div class="inline-flex items-center gap-2 font-jakarta text-sm text-white/90">
-              <span class="text-xs">◆</span>
-              <span>Pendaftaran 100% daring</span>
+
+            <!-- Bottom Highlights Divider -->
+            <div class="flex items-center justify-center gap-5 sm:gap-8 pt-5 sm:pt-6 border-t border-white/20 w-full max-w-[760px] flex-wrap">
+              <div class="inline-flex items-center gap-2 font-jakarta text-xs sm:text-sm text-white/95">
+                <span class="text-[0.625rem] sm:text-xs">◆</span>
+                <span>Gelombang 2 — sisa 148 kursi</span>
+              </div>
+              <div class="inline-flex items-center gap-2 font-jakarta text-xs sm:text-sm text-white/95">
+                <span class="text-[0.625rem] sm:text-xs">◆</span>
+                <span>Beasiswa prestasi tersedia</span>
+              </div>
+              <div class="inline-flex items-center gap-2 font-jakarta text-xs sm:text-sm text-white/95">
+                <span class="text-[0.625rem] sm:text-xs">◆</span>
+                <span>Pendaftaran 100% daring</span>
+              </div>
             </div>
           </div>
         </div>

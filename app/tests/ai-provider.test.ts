@@ -58,7 +58,7 @@ describe("NEXEL AI Provider Tests", () => {
   });
 
   it("handles provider rate limit with AI_PROVIDER_RATE_LIMIT error code", async () => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce({
+    vi.spyOn(globalThis, "fetch").mockResolvedValue({
       ok: false,
       status: 429,
       statusText: "Too Many Requests",
@@ -97,7 +97,13 @@ describe("NEXEL AI Provider Tests", () => {
       status: 500,
       statusText: "Internal Server Error",
     } as Response);
-    // Panggilan 2 (stream: false fallback) sukses
+    // Panggilan 2 (stream: true retry) gagal 500
+    fetchSpy.mockResolvedValueOnce({
+      ok: false,
+      status: 500,
+      statusText: "Internal Server Error",
+    } as Response);
+    // Panggilan 3 (stream: false fallback) sukses
     fetchSpy.mockResolvedValueOnce({
       ok: true,
       json: async () => ({

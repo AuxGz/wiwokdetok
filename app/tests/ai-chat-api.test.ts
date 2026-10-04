@@ -155,4 +155,91 @@ describe("NEXEL AI Chat API Integration Tests", () => {
     expect(res.text).toContain('"type":"error"');
     expect(res.text).toContain('"code":"AI_PROVIDER_UNAVAILABLE"');
   });
+
+  it("POST /api/ai/chat returns friendly greeting without invoking LLM when user sends greeting", async () => {
+    vi.spyOn(prisma.chatSession, "upsert").mockResolvedValue({ id: "mock-sess" } as never);
+    vi.spyOn(prisma.chatMessage, "create").mockResolvedValue({ id: "mock-msg" } as never);
+
+    const res = await request(app)
+      .post("/api/ai/chat")
+      .send({ message: "halo" });
+
+    expect(res.status).toBe(200);
+    expect(res.text).toContain('"type":"start"');
+    expect(res.text).toContain('"type":"text"');
+    expect(res.text).toContain("NEXEL AI");
+    expect(res.text).toContain('"type":"done"');
+    expect(res.text).not.toContain('"type":"error"');
+  });
+
+  it("POST /api/ai/chat correctly treats conversational greetings as greetings and does not reject them as out-of-scope", async () => {
+    vi.spyOn(prisma.chatSession, "upsert").mockResolvedValue({ id: "mock-sess" } as never);
+    vi.spyOn(prisma.chatMessage, "create").mockResolvedValue({ id: "mock-msg" } as never);
+
+    const res = await request(app)
+      .post("/api/ai/chat")
+      .send({ message: "halo apa kabar?" });
+
+    expect(res.status).toBe(200);
+    expect(res.text).toContain('"type":"text"');
+    expect(res.text).toContain("NEXEL AI");
+    expect(res.text).toContain('"type":"done"');
+  });
+
+  it("POST /api/ai/chat does not swallow substantive inquiries prefixed with greetings", async () => {
+    vi.spyOn(prisma.chatSession, "upsert").mockResolvedValue({ id: "mock-sess" } as never);
+    vi.spyOn(prisma.chatMessage, "create").mockResolvedValue({ id: "mock-msg" } as never);
+    vi.spyOn(prisma.chatMessage, "findMany").mockResolvedValue([] as never);
+    vi.spyOn(prisma, "$queryRaw").mockResolvedValue([
+      {
+        id: "chunk-1",
+        documentId: "doc-1",
+        documentTitle: "Informasi PPDB",
+        content: "Pendaftaran PPDB SMK Telkom Purwokerto dibuka secara daring.",
+        similarity: 0.85,
+      },
+    ] as never);
+
+    // Jika pertanyaan substantif, embedding provider akan dipanggil
+    const embedSpy = vi.spyOn(globalThis, "fetch").mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({
+        data: [{ index: 0, embedding: new Array(2048).fill(0.01) }],
+      }),
+    } as never).mockResolvedValueOnce({
+      ok: true,
+      body: new ReadableStream({
+        start(controller) {
+          controller.enqueue(new TextEncoder().encode('data: {"choices":[{"delta":{"content":"Pendaftaran PPDB"}}]}\n\ndata: [DONE]\n\n'));
+          controller.close();
+        },
+      }),
+    } as never);
+
+    const res = await request(app)
+      .post("/api/ai/chat")
+      .send({ message: "Selamat pagi info ppdb" });
+
+    expect(res.status).toBe(200);
+    // Harus memanggil embedding (bukan fast-path sapaan belaka)
+    expect(embedSpy).toHaveBeenCalled();
+    expect(res.text).toContain("Pendaftaran PPDB");
+  });
+
+  it("POST /api/ai/chat provides graceful fallback text when embedding upstream fails", async () => {
+    vi.spyOn(prisma.chatSession, "upsert").mockResolvedValue({ id: "mock-sess" } as never);
+    vi.spyOn(prisma.chatMessage, "create").mockResolvedValue({ id: "mock-msg" } as never);
+    vi.spyOn(globalThis, "fetch").mockRejectedValueOnce(new Error("Network timeout to embedding service"));
+
+    const res = await request(app)
+      .post("/api/ai/chat")
+      .send({ message: "Berapa biaya masuk jurusan RPL?" });
+
+    expect(res.status).toBe(200);
+    expect(res.text).toContain('"type":"start"');
+    expect(res.text).toContain('"type":"text"');
+    expect(res.text).toContain("Mohon maaf");
+    expect(res.text).toContain('"type":"done"');
+    expect(res.text).not.toContain('"type":"error"');
+  });
 });

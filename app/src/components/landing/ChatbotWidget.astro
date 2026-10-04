@@ -495,7 +495,7 @@
             <span class="w-1.5 h-1.5 rounded-full bg-[#ed1e28] animate-bounce [animation-delay:-0.3s]"></span>
             <span class="w-1.5 h-1.5 rounded-full bg-[#ed1e28] animate-bounce [animation-delay:-0.15s]"></span>
             <span class="w-1.5 h-1.5 rounded-full bg-[#ed1e28] animate-bounce"></span>
-            <span class="text-[11px] text-slate-400 font-medium ml-1">Menyiapkan jawaban...</span>
+            <span class="status-text text-[11px] text-slate-400 font-medium ml-1">Menyiapkan jawaban...</span>
           </div>
         </div>
         <div class="assistant-sources hidden mt-1.5 flex flex-wrap gap-1 items-center">
@@ -555,9 +555,26 @@
     setGeneratingState(true);
 
     const { textBody, sourcesContainer } = createAssistantMessageElement();
+    const statusTextEl = textBody.querySelector(".status-text") as HTMLElement | null;
     let accumulatedText = "";
     let hasReceivedFirstToken = false;
     const seenSources = new Set<string>();
+
+    const startTime = Date.now();
+    const statusInterval = setInterval(() => {
+      if (hasReceivedFirstToken || !statusTextEl) {
+        clearInterval(statusInterval);
+        return;
+      }
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      if (elapsed >= 12) {
+        statusTextEl.textContent = "Menyusun jawaban lengkap...";
+      } else if (elapsed >= 5) {
+        statusTextEl.textContent = "Menganalisis dokumen & data sekolah...";
+      } else if (elapsed >= 2) {
+        statusTextEl.textContent = "Menghubungkan asisten NEXEL AI...";
+      }
+    }, 1000);
 
     currentAbortController = new AbortController();
 
@@ -572,6 +589,7 @@
       });
 
       if (!response.ok) {
+        clearInterval(statusInterval);
         let errDesc = "Maaf, chatbot sedang mengalami gangguan.";
         try {
           const errJson = await response.json();
@@ -615,6 +633,7 @@
 
             if (event.type === "text") {
               if (!hasReceivedFirstToken) {
+                clearInterval(statusInterval);
                 textBody.innerHTML = "";
                 hasReceivedFirstToken = true;
               }
@@ -633,6 +652,7 @@
                 scrollToBottom();
               }
             } else if (event.type === "error") {
+              clearInterval(statusInterval);
               textBody.innerHTML = `<span class="text-red-600">${event.message || "Terjadi kesalahan."}</span>`;
               showError(event.message || "Gagal memproses respons.");
             }
@@ -647,6 +667,7 @@
         textBody.innerHTML = parseMarkdown(accumulatedText);
       }
     } catch (err: unknown) {
+      clearInterval(statusInterval);
       if (err instanceof Error && err.name === "AbortError") {
         if (!hasReceivedFirstToken) {
           textBody.innerHTML = "<span class='text-slate-400 italic'>Generasi pesan dihentikan oleh pengguna.</span>";
@@ -656,6 +677,7 @@
         showError("Koneksi terputus. Silakan periksa jaringan Anda.");
       }
     } finally {
+      clearInterval(statusInterval);
       setGeneratingState(false);
       currentAbortController = null;
     }

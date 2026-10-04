@@ -37,16 +37,24 @@ export async function streamChatCompletion(
     ? `${cleanBase}/chat/completions`
     : `${cleanBase}/v1/chat/completions`;
   const model = options.model || env.AI_MODEL;
-  const timeoutMs = env.AI_TIMEOUT_MS;
+  const timeoutMs = Math.max(env.AI_TIMEOUT_MS, 60000);
 
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => {
+  let timeoutId = setTimeout(() => {
     controller.abort(new ProviderError("AI_PROVIDER_TIMEOUT", "Permintaan ke penyedia AI melebihi batas waktu (timeout)"));
   }, timeoutMs);
+
+  function refreshTimeout() {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      controller.abort(new ProviderError("AI_PROVIDER_TIMEOUT", "Permintaan ke penyedia AI melebihi batas waktu (timeout)"));
+    }, timeoutMs);
+  }
 
   // Jika sinyal klien dibatalkan (misal: user klik Stop atau tab ditutup)
   if (options.signal) {
     options.signal.addEventListener("abort", () => {
+      clearTimeout(timeoutId);
       controller.abort(new ProviderError("AI_PROVIDER_ABORTED", "Permintaan pembuatan respons dibatalkan oleh pengguna"));
     });
   }
@@ -54,7 +62,7 @@ export async function streamChatCompletion(
   let fullResponse = "";
 
   try {
-    const response = await fetch(endpoint, {
+    let response = await fetch(endpoint, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -70,8 +78,39 @@ export async function streamChatCompletion(
     });
 
     if (!response.ok) {
-      // Fallback toleran: Jika proxy upstream gagal pada mode streaming (500), coba mode non-streaming
-      if (response.status >= 500) {
+      // Auto-retry 1x jika proxy upstream mengembalikan error 429 atau >= 500 (rate limit sementara / upstream timeout)
+      if ((response.status >= 500 || response.status === 429) && !controller.signal.aborted) {
+        try {
+          const delay = response.status === 429 ? 2000 : 1200;
+          await new Promise((r) => setTimeout(r, delay));
+          if (!controller.signal.aborted) {
+            const retryStreamRes = await fetch(endpoint, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${env.AI_API_KEY}`,
+              },
+              body: JSON.stringify({
+                model,
+                messages: options.messages,
+                stream: true,
+                temperature: options.temperature ?? 0.2,
+              }),
+              signal: controller.signal,
+            });
+            if (retryStreamRes?.ok) {
+              response = retryStreamRes;
+            } else if (retryStreamRes?.status) {
+              response = retryStreamRes;
+            }
+          }
+        } catch {
+          // Abaikan jika retry stream gagal, lanjutkan ke fallback non-streaming di bawah
+        }
+      }
+
+      // Fallback toleran: Jika proxy upstream masih gagal pada mode streaming (500), coba mode non-streaming
+      if (!response.ok && response.status >= 500) {
         try {
           const nonStreamRes = await fetch(endpoint, {
             method: "POST",
@@ -133,6 +172,7 @@ export async function streamChatCompletion(
       const { done, value } = await reader.read();
       if (done) break;
 
+      refreshTimeout();
       buffer += decoder.decode(value, { stream: true });
       const lines = buffer.split("\n");
       // Pertahankan baris terakhir yang belum lengkap di buffer

@@ -12,7 +12,6 @@ import AlumniSection from "../components/landing/AlumniSection.astro";
 import BeritaSection from "../components/landing/BeritaSection.astro";
 import NexelSection from "../components/landing/NexelSection.astro";
 import FaqSection from "../components/landing/FaqSection.astro";
-import ChatbotWidget from "../components/landing/ChatbotWidget.astro";
 ---
 
 <BaseLayout
@@ -20,16 +19,113 @@ import ChatbotWidget from "../components/landing/ChatbotWidget.astro";
   description="Website resmi SMK Telkom Purwokerto. Menyelenggarakan program keahlian RPL, TKJ, TJA, dan DKV berstandar industri bersama Yayasan Pendidikan Telkom."
 >
   <HeroSection />
+
   <StatsSection />
-  <AboutSection />
-  <SambutanSection />
-  <WhyUsSection />
-  <KerjasamaSection />
-  <JurusanSection />
-  <PpdbCtaSection />
-  <AlumniSection />
-  <BeritaSection />
-  <NexelSection />
-  <FaqSection />
-  <ChatbotWidget />
+
+  <div class="reveal-on-scroll">
+    <AboutSection />
+  </div>
+
+  <div class="reveal-on-scroll">
+    <SambutanSection />
+  </div>
+
+  <div class="reveal-on-scroll">
+    <WhyUsSection />
+  </div>
+
+  <div class="reveal-on-scroll">
+    <KerjasamaSection />
+  </div>
+
+  <div class="reveal-on-scroll">
+    <JurusanSection />
+  </div>
+
+  <div class="reveal-on-scroll">
+    <PpdbCtaSection />
+  </div>
+
+  <div class="reveal-on-scroll">
+    <AlumniSection />
+  </div>
+
+  <div class="reveal-on-scroll">
+    <BeritaSection />
+  </div>
+
+  <div class="reveal-on-scroll">
+    <NexelSection />
+  </div>
+
+  <div class="reveal-on-scroll">
+    <FaqSection />
+  </div>
 </BaseLayout>
+
+<script>
+  function initScrollReveal() {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return;
+
+    // Tandai dokumen siap scroll reveal
+    document.documentElement.classList.add("scroll-ready");
+
+    const revealElements = document.querySelectorAll<HTMLElement>(".reveal-on-scroll");
+    if (!revealElements.length) return;
+
+    // Pengecekan instan awal
+    const windowHeight = window.innerHeight;
+    revealElements.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top <= windowHeight * 0.65) {
+        el.classList.add("is-visible");
+      }
+    });
+
+    // IntersectionObserver dengan konfigurasi aman
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: "0px 0px -25% 0px",
+        threshold: 0.04,
+      }
+    );
+
+    revealElements.forEach((el) => {
+      if (!el.classList.contains("is-visible")) {
+        observer.observe(el);
+      }
+    });
+
+    // Safety scroll listener cadangan agar konten dijamin 100% selalu muncul saat user scroll
+    window.addEventListener(
+      "scroll",
+      () => {
+        revealElements.forEach((el) => {
+          if (!el.classList.contains("is-visible")) {
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= windowHeight * 0.88) {
+              el.classList.add("is-visible");
+            }
+          }
+        });
+      },
+      { passive: true }
+    );
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initScrollReveal);
+  } else {
+    initScrollReveal();
+  }
+</script>

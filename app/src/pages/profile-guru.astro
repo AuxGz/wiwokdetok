@@ -2,200 +2,305 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/Container.astro";
 
-const stats = [
+type Leader = {
+  name: string;
+  position: string;
+  image: string;
+};
+
+type Section = {
+  id: string;
+  badge: string;
+  title: string;
+  shortTitle: string;
+  leaders: Leader[];
+};
+
+const sections: Section[] = [
   {
-    number: "60+",
-    display: "60+",
-    title: "Guru Bersertifikat",
-    desc: "Tenaga pengajar profesional tersertifikasi",
+    id: "pucuk-pimpinan",
+    badge: "01. Dewan Pimpinan",
+    title: "Pucuk Pimpinan & Dewan Pertimbangan",
+    shortTitle: "Pucuk Pimpinan",
+    leaders: [
+      {
+        name: "Aris Puji Santoso, S.Kom., M.M.",
+        position: "Kepala Sekolah",
+        image: "/images/guru/kepala-sekolah.png",
+      },
+      {
+        name: "Ferat Kristanto, S.E., S.Kom.",
+        position: "Kaur Quality Development & Performance Management",
+        image: "/images/guru/dsc05988_EVEREST (1) - 06740003 FERAT KRISTANTO, SE. S.KOM.jpg",
+      },
+    ],
   },
   {
-    number: "4",
-    display: "4",
-    title: "Jurusan Unggulan",
-    desc: "Program studi berstandar industri nasional",
+    id: "kurikulum",
+    badge: "02. Kurikulum & Pembelajaran",
+    title: "Bidang Kurikulum & Pembelajaran",
+    shortTitle: "Kurikulum",
+    leaders: [
+      {
+        name: "Desti Nurcahyani, S.Pd.Si.",
+        position: "Waka Bid. Kurikulum",
+        image: "/images/guru/dsc08058_EVEREST - 09860097 DESTI NURCAHYANI, SPd Si.jpg",
+      },
+      {
+        name: "Bayu Aji Sukma, S.Si.",
+        position: "Pgs. Kaur Pembelajaran & Perpustakaan",
+        image: "/images/guru/dsc05924_EVEREST - 16850007 BAYU AJI SUKMA.jpg",
+      },
+      {
+        name: "Ragil Rudi Priyanto, S.Si.",
+        position: "Pgs. Kaur Pengembangan KurSilMat",
+        image: "/images/guru/dsc05823_EVEREST - 12850092 RAGIL RUDI PRIYANTO.jpg",
+      },
+    ],
   },
   {
-    number: "100%",
-    display: "100%",
-    title: "Tingkat Kelulusan",
-    desc: "Rata-rata kelulusan siswa setiap tahun",
+    id: "it-sarpras",
+    badge: "03. IT, Lab & Sarpras",
+    title: "Bidang IT, Laboratorium & Sarana Prasarana",
+    shortTitle: "IT & Sarpras",
+    leaders: [
+      {
+        name: "Yogi Sasongko, S.Kom.",
+        position: "Pgs. Waka Bid. IT, Lab, dan SarPra",
+        image: "/images/guru/Yogi S - Yogi S.jpg",
+      },
+      {
+        name: "Agung Restu Saputra, S.Kom.",
+        position: "Pgs. Kaur Laboratorium & Teknologi Informasi",
+        image: "/images/guru/dsc05760_EVEREST - 17990002 AGUNG RESTU SAPUTRA.jpg",
+      },
+      {
+        name: "Aris Rianto, S.Kom.",
+        position: "Pgs. Kaur Sarana Prasarana",
+        image: "/images/guru/dsc06099_EVEREST - Aris R.jpg",
+      },
+    ],
   },
   {
-    number: "50+",
-    display: "50+",
-    title: "Penghargaan Nasional",
-    desc: "Prestasi tingkat nasional dan regional",
+    id: "hubin",
+    badge: "04. Hubungan Industri & Komunikasi",
+    title: "Bidang Hubungan Industri & Komunikasi",
+    shortTitle: "Hubin",
+    leaders: [
+      {
+        name: "Krisna Dwi Brata, S.Kom.",
+        position: "Pgs. Waka Bid. Hubin dan Komunikasi",
+        image: "/images/guru/dsc08047_EVEREST - 17900075 KRISMA DWI BRATA.jpg",
+      },
+      {
+        name: "Afhali Luqci Sianggang, S.Kom.",
+        position: "Kaur PPDB dan Komunikasi",
+        image: "/images/guru/IMG_20250925_200821 - Humas SMK Telkom Purwokerto.jpg",
+      },
+      {
+        name: "Bintang Nugraha K.S., S.Kom.",
+        position: "Pgs. Kaur Sinergi, Unit Produksi & Alumni",
+        image: "/images/guru/dsc05960_EVEREST - 20192020 BINTANG NUGRAHA KASALURI S.jpg",
+      },
+    ],
+  },
+  {
+    id: "kesiswaan",
+    badge: "05. Kesiswaan & Karakter",
+    title: "Bidang Kesiswaan & Karakter",
+    shortTitle: "Kesiswaan",
+    leaders: [
+      {
+        name: "Arif Muttakin, S.T.",
+        position: "Pgs. Waka Bid. Kesiswaan & Karakter",
+        image: "/images/guru/dsc05964_EVEREST - 14870028 ARIF MUTTAKIN.jpg",
+      },
+      {
+        name: "Prasetyo Adi W., S.Pd., M.Pd.",
+        position: "Pgs. Kaur Bimbingan Konseling & Karakter",
+        image: "/images/guru/dsc06054_EVEREST - 20192020 PRASETYO ADI WIBOWO.jpg",
+      },
+      {
+        name: "Andang Jaka P., S.Pd.",
+        position: "Kaur Ekstrakurikuler & Pembinaan Prestasi",
+        image: "/images/guru/1758848686419 - 20182019 ANDANG JAKA PATRIANTA, S.Pd.jpg",
+      },
+    ],
+  },
+  {
+    id: "administrasi",
+    badge: "06. Tata Kelola & Keuangan",
+    title: "Bidang Tata Kelola & Administrasi",
+    shortTitle: "Tata Kelola",
+    leaders: [
+      {
+        name: "Tety Wityasari, S.E.",
+        position: "Kaur Keuangan / Bendahara",
+        image: "/images/guru/dsc06063_EVEREST - 07830021 TETY WITYASARI.jpg",
+      },
+    ],
+  },
+  {
+    id: "kejuruan",
+    badge: "07. Program Keahlian",
+    title: "Pimpinan Program Keahlian",
+    shortTitle: "Program Keahlian",
+    leaders: [
+      {
+        name: "Putra Utama Eka Sakti, S.T.",
+        position: "Pgs. Ketua Program Keahlian TJKT",
+        image: "/images/guru/dsc05752_EVEREST - 15920046 PUTRA UTAMA EKA SAKTI.jpg",
+      },
+      {
+        name: "Berlian Windasari, S.Kom.",
+        position: "Pgs. Ketua Program Keahlian PPLG",
+        image: "/images/guru/dsc05967_EVEREST - 17840098 BERLIAN WINDASARI S KOM.jpg",
+      },
+    ],
   },
 ];
 ---
 
 <BaseLayout
-  title="Profile Guru & Struktur Organisasi | SMK Telkom Purwokerto"
-  description="Profil pimpinan, struktur organisasi, dan tenaga pendidik profesional SMK Telkom Purwokerto Tahun Ajaran 2025/2026."
+  title="Guru & Pimpinan | SMK Telkom Purwokerto"
+  description="Kenali jajaran pimpinan dan pejabat struktural SMK Telkom Purwokerto."
 >
-  <!-- Hero Section: Profil Kepala Sekolah -->
-  <section class="relative pt-8 sm:pt-14 pb-14 sm:pb-20 bg-white overflow-hidden" id="kepala-sekolah">
+  <!-- Hero Section (Clean, Anti-Slop, No Redundant Eyebrow Pill) -->
+  <section class="pt-14 sm:pt-18 pb-8 sm:pb-10 bg-white text-center">
     <Container>
-      <div class="max-w-[1140px] mx-auto grid grid-cols-1 lg:grid-cols-[1.18fr_0.82fr] gap-10 lg:gap-14 items-center">
-        <!-- Left Column: Copy & Identity -->
-        <div class="flex flex-col items-start text-left z-2">
-          <!-- Red Pill Tag -->
-          <div class="inline-flex items-center bg-[#ed1e28] text-white font-poppins text-xs font-bold py-1.5 px-4 rounded-full mb-6 tracking-[0.06em] shadow-[0_2px_8px_rgba(237,30,40,0.25)]">
-            <span>Kepala Sekolah</span>
-          </div>
+      <div class="max-w-3xl mx-auto flex flex-col items-center">
+        <h1 class="font-poppins text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
+          Guru &amp; Pimpinan
+        </h1>
+        <p class="font-jakarta text-sm sm:text-base text-slate-600 mt-3 max-w-xl leading-relaxed">
+          Struktur kepemimpinan dan pejabat pengelola SMK Telkom Purwokerto yang mengawal tata kelola akademik, sarana, dan pengembangan karakter siswa.
+        </p>
+      </div>
+    </Container>
+  </section>
 
-          <!-- Main Name -->
-          <h1 class="font-poppins text-3xl sm:text-5xl lg:text-[3.5rem] font-bold text-[#111827] leading-[1.12] tracking-[-0.025em] mb-6">
-            Aris Puji Santoso,<br />S.Kom., M.M
-          </h1>
+  <!-- Sub-Navigation Bar (Static Anchor Navigation) -->
+  <nav
+    class="relative z-10 bg-white border-y border-slate-200/80 py-2.5 sm:py-3"
+    aria-label="Navigasi Bidang Kepemimpinan"
+  >
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div
+        class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar py-1 justify-start md:justify-center"
+      >
+        {
+          sections.map((section) => (
+            <a
+              href={`#${section.id}`}
+              class="inline-flex items-center whitespace-nowrap px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium font-poppins text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors duration-150"
+            >
+              {section.shortTitle}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </nav>
 
-          <!-- Vision Quote -->
-          <p class="font-jakarta text-base sm:text-lg text-[#64748b] leading-[1.7] max-w-[540px]">
-            "Mendidik generasi unggul dengan karakter kuat, kompetensi teknologi, dan semangat kebangsaan yang tak tergoyahkan."
-          </p>
-        </div>
-
-        <!-- Right Column: Photo Card with Red Accent Frame -->
-        <div class="flex justify-center lg:justify-end items-center z-2">
-          <div class="relative w-[280px] sm:w-[320px] lg:w-[340px]">
-            <!-- Decorative Red Offset Card Behind -->
-            <div class="absolute -top-2.5 -right-2.5 w-full h-full bg-[#fef2f2] border-2 border-[#ed1e28] rounded-[24px] pointer-events-none -z-1" aria-hidden="true"></div>
-
-            <!-- Main White Card Container -->
-            <div class="relative bg-white border-2 border-[#ed1e28] rounded-[22px] overflow-hidden shadow-[0_16px_36px_rgba(237,30,40,0.08)] flex flex-col items-center">
-              <div class="w-full pt-4 px-4 flex justify-center items-end h-[360px] sm:h-[410px]">
-                <img
-                  src="/images/guru/kepala-sekolah.png"
-                  alt="Aris Puji Santoso, S.Kom., M.M - Kepala Sekolah SMK Telkom Purwokerto"
-                  class="h-full w-auto object-contain object-bottom block"
-                  width="530"
-                  height="796"
-                  loading="eager"
-                />
-              </div>
-
-              <!-- Bottom Red Banner Label -->
-              <div class="w-full bg-[#ed1e28] py-2.5 text-center">
-                <span class="font-poppins text-xs font-bold text-white tracking-[0.14em] uppercase block">
-                  KEPALA SEKOLAH
+  <!-- 7 Seksi Bertingkat Showcase (Unified Rhythm, Honest Depth) -->
+  <div class="showcase-sections-wrapper bg-white">
+    {
+      sections.map((section, sIdx) => {
+        return (
+          <section
+            id={section.id}
+            class={`scroll-mt-28 py-12 sm:py-16 ${sIdx > 0 ? "border-t border-slate-100" : ""}`}
+            aria-labelledby={`heading-${section.id}`}
+          >
+            <Container>
+              {/* Header Seksi (Clean Typographic Hierarchy, No Status Dots, No Cliché Bars) */}
+              <div class="text-center max-w-xl mx-auto mb-10 sm:mb-12">
+                <span class="text-xs font-semibold tracking-wider text-[#ed1e28] uppercase font-poppins block mb-1">
+                  {section.badge}
                 </span>
+                <h2
+                  id={`heading-${section.id}`}
+                  class="font-poppins text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight"
+                >
+                  {section.title}
+                </h2>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </Container>
-  </section>
 
-  <!-- Struktur Organisasi Section -->
-  <section class="relative pt-6 pb-0 bg-gradient-to-b from-white from-60% to-[#fafafa] overflow-hidden" id="struktur-organisasi">
-    <!-- Interactive Notice for Mobile (Scroll horizontally) -->
-    <div class="flex lg:hidden justify-center mb-4 px-4">
-      <div class="inline-flex items-center gap-2 text-xs font-jakarta text-[#64748b] bg-white border border-slate-200 py-1.5 px-3.5 rounded-full shadow-xs">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="15 18 9 12 15 6"></polyline>
-        </svg>
-        <span>Geser horizontal untuk melihat bagan lengkap</span>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
-      </div>
-    </div>
+              {/* Leader Cards Grid / Flex */}
+              <div class="w-full flex flex-wrap items-stretch justify-center gap-6 sm:gap-8">
+                {section.leaders.map((leader) => {
+                  const isJpg =
+                    leader.image.toLowerCase().endsWith(".jpg") ||
+                    leader.image.toLowerCase().includes(".jpg");
 
-    <!-- Chart Container with Scroll Viewport (100% width up to 1440px for edge-to-edge wave) -->
-    <div class="w-full overflow-x-auto scrollbar-none">
-      <div class="min-w-[960px] lg:min-w-full flex justify-center">
-        <img
-          src="/images/guru/bagan-struktur-organisasi.png"
-          alt="Struktur Organisasi SMK Telkom Purwokerto Tahun Ajaran 2025/2026"
-          class="w-full max-w-[1440px] h-auto block object-contain select-none"
-          width="1440"
-          height="1376"
-          loading="eager"
-        />
-      </div>
-    </div>
-  </section>
+                  return (
+                    <article
+                      class="leader-card group w-full max-w-[280px] sm:max-w-[300px] md:w-[270px] lg:w-[300px] bg-white rounded-xl border border-slate-200/80 shadow-xs hover:border-slate-300 transition-all duration-200 flex flex-col overflow-hidden"
+                    >
+                      {/* Foto Frame */}
+                      <div class="relative w-full h-[290px] sm:h-[310px] lg:h-[340px] bg-slate-100/70 flex items-end justify-center overflow-hidden">
+                        <img
+                          src={leader.image}
+                          alt={leader.name}
+                          class={`w-full h-full pointer-events-none select-none transition-transform duration-300 ease-out group-hover:scale-[1.02] ${
+                            isJpg
+                              ? "object-cover object-top"
+                              : "object-contain object-bottom p-4"
+                          }`}
+                          loading="lazy"
+                          draggable="false"
+                        />
+                      </div>
 
-  <!-- Stats Section (Below Red Wave Ribbon) -->
-  <section class="relative pt-10 sm:pt-14 pb-16 sm:pb-24 bg-[#fafafa] overflow-hidden" id="stats-guru">
-    <!-- Subtle Dot Grid Matrix matching landing page theme -->
-    <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1440 400" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <defs>
-        <pattern id="stats-guru-dot-pat" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
-          <circle cx="14" cy="14" r="1.8" fill="#ed1e28" fill-opacity="0.08" />
-        </pattern>
-      </defs>
-      <rect width="1440" height="400" fill="url(#stats-guru-dot-pat)" />
-    </svg>
-
-    <Container>
-      <div class="relative z-1 max-w-[1140px] mx-auto">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {
-            stats.map((item) => (
-              <div class="bg-white border border-black/[0.06] rounded-[22px] p-6 sm:p-7 shadow-[0_8px_24px_rgba(0,0,0,0.04)] hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(0,0,0,0.08)] transition-all duration-200 text-center flex flex-col items-center justify-center">
-                <div class="stat-num font-poppins text-3xl sm:text-[2.5rem] font-bold text-[#ed1e28] leading-[1.1] mb-2 [font-variant-numeric:tabular-nums]" data-value={item.display}>
-                  {item.display}
-                </div>
-                <h3 class="font-jakarta text-sm sm:text-base font-bold text-[#111827] mb-1">
-                  {item.title}
-                </h3>
-                <p class="font-jakarta text-xs sm:text-[0.8125rem] text-[#64748b] leading-[1.5] m-0 max-w-[200px]">
-                  {item.desc}
-                </p>
+                      {/* Informasi Pejabat: Nama & Jabatan */}
+                      <div class="p-4 sm:p-5 text-center bg-white flex flex-col justify-center flex-1 border-t border-slate-100">
+                        <h3 class="font-poppins font-bold text-base sm:text-[1.02rem] text-slate-900 leading-snug">
+                          {leader.name}
+                        </h3>
+                        <p class="font-jakarta text-xs sm:text-sm font-medium text-slate-600 mt-1 leading-snug">
+                          {leader.position}
+                        </p>
+                      </div>
+                    </article>
+                  );
+                })}
               </div>
-            ))
-          }
-        </div>
-      </div>
-    </Container>
-  </section>
+            </Container>
+          </section>
+        );
+      })
+    }
+  </div>
 </BaseLayout>
 
-<script>
-  const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (!isReduced) {
-    const statCards = document.querySelectorAll("#stats-guru .stat-num");
-
-    const observer = new IntersectionObserver(
-      (entries, obs) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const numEl = entry.target as HTMLElement;
-            if (numEl && !numEl.classList.contains("counted")) {
-              numEl.classList.add("counted");
-              const rawVal = numEl.getAttribute("data-value") || "";
-              const target = parseInt(rawVal.replace(/\D/g, ""), 10);
-              const suffix = rawVal.replace(/[0-9]/g, "");
-              const duration = 1800;
-              let startTime: number | null = null;
-
-              numEl.textContent = `0${suffix}`;
-
-              const step = (now: number) => {
-                if (startTime === null) startTime = now;
-                const elapsed = now - startTime;
-                const progress = Math.max(0, Math.min(elapsed / duration, 1));
-                const ease = 1 - Math.pow(1 - progress, 3);
-                const current = Math.round(ease * target);
-                numEl.textContent = `${current.toLocaleString("id-ID")}${suffix}`;
-                if (progress < 1) {
-                  requestAnimationFrame(step);
-                } else {
-                  numEl.textContent = rawVal;
-                }
-              };
-              requestAnimationFrame(step);
-            }
-            obs.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    statCards.forEach((c) => observer.observe(c));
+<style>
+  /* No-scrollbar helper */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
-</script>
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .leader-card {
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, border-color 0.2s ease;
+  }
+
+  .leader-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px -6px rgba(15, 23, 42, 0.08), 0 4px 8px -2px rgba(15, 23, 42, 0.04);
+  }
+
+  .leader-card:active {
+    transform: translateY(-1px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .leader-card,
+    .leader-card:hover {
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+</style>

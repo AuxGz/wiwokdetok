@@ -112,11 +112,11 @@ const studentPositionMap: Record<string, string> = {
 };
 ---
 
-<section class="relative py-12 sm:py-16 lg:pt-18 lg:pb-24 bg-white overflow-hidden" id="jurusan">
+<section class="relative pt-12 pb-8 sm:pt-16 sm:pb-10 lg:pt-18 lg:pb-12 bg-white overflow-hidden" id="jurusan">
   <Container>
     <div class="relative z-1 max-w-[1200px] mx-auto">
       <!-- Section Header -->
-      <div class="text-center mb-9">
+      <div class="jurusan-header text-center mb-9">
         <div class="inline-flex items-center gap-2.5 mb-3.5">
           <span class="inline-block w-[22px] h-[2px] bg-[#ed1e28] rounded-[1px]"></span>
           <span class="font-poppins text-[0.8125rem] font-bold text-[#ed1e28] tracking-[0.08em] uppercase">PROGRAM KEAHLIAN</span>
@@ -128,7 +128,7 @@ const studentPositionMap: Record<string, string> = {
       </div>
 
       <!-- Tab Switcher Bar -->
-      <div class="flex justify-center mb-10 sm:mb-14">
+      <div class="jurusan-tabs flex justify-center mb-10 sm:mb-14">
         <div class="relative inline-flex items-center bg-[#f8fafc] border border-slate-200 rounded-full p-1 sm:p-1.5 gap-1 sm:gap-1.5 shadow-[0_2px_10px_rgba(0,0,0,0.03)]" role="tablist">
           <span class="tab-indicator absolute top-1 sm:top-1.5 left-0 h-[calc(100%-0.5rem)] sm:h-[calc(100%-0.75rem)] bg-gradient-to-br from-[#ed1e28] to-[#dc2626] rounded-full shadow-[0_4px_14px_rgba(237,30,40,0.32)] pointer-events-none z-1 will-change-transform" id="tabIndicator" aria-hidden="true"></span>
           {
@@ -204,7 +204,7 @@ const studentPositionMap: Record<string, string> = {
                     class={`absolute z-2 w-auto object-contain object-bottom block ${studentPositionMap[m.code]}`}
                     width="478"
                     height="660"
-                    loading="eager"
+                    loading="lazy"
                     decoding="async"
                   />
                 </div>
@@ -307,13 +307,13 @@ const studentPositionMap: Record<string, string> = {
                 </div>
 
                 <!-- Career Section & Action Button -->
-                <div class="animate-major-footer will-change-transform">
-                  <div class="mb-8">
-                    <span class="block font-jakarta text-sm font-bold text-[#ed1e28] mb-1">Prospek Kerja:</span>
-                    <p class="font-jakarta text-sm leading-[1.6] text-[#4b5563] m-0">{m.careers}</p>
-                  </div>
+                <div class="mb-8 animate-major-footer will-change-transform">
+                  <span class="block font-jakarta text-sm font-bold text-[#ed1e28] mb-1">Prospek Kerja:</span>
+                  <p class="font-jakarta text-sm leading-[1.6] text-[#4b5563] m-0">{m.careers}</p>
+                </div>
 
-                  <a href="#ppdb" class="group inline-flex items-center gap-2 bg-[#ed1e28] text-white font-jakarta text-sm font-bold py-3 px-7 rounded-full shadow-[0_4px_14px_rgba(237,30,40,0.3)] self-start hover:bg-[#dc1822] hover:-translate-y-0.5 hover:shadow-[0_6px_18px_rgba(237,30,40,0.4)] transition-all duration-200">
+                <div>
+                  <a href="#ppdb" class="animate-major-footer will-change-transform group inline-flex items-center gap-2 bg-[#ed1e28] text-white font-jakarta text-sm font-bold py-3 px-7 rounded-full shadow-[0_4px_14px_rgba(237,30,40,0.3)] self-start hover:bg-[#dc1822] hover:-translate-y-0.5 hover:shadow-[0_6px_18px_rgba(237,30,40,0.4)] transition-all duration-200">
                     <span>Pelajari lebih lanjut</span>
                     <span class="transition-transform duration-200 group-hover:translate-x-1">→</span>
                   </a>
@@ -378,6 +378,7 @@ const studentPositionMap: Record<string, string> = {
 
         const activePanel = document.getElementById(`panel-${targetCode}`);
         if (activePanel) {
+          activePanel.classList.add("active");
           const animElements = activePanel.querySelectorAll(
             ".animate-major-visual, .animate-major-heading, .animate-major-desc, .animate-major-pillars, .animate-major-footer"
           );
@@ -386,7 +387,6 @@ const studentPositionMap: Record<string, string> = {
             void (el as HTMLElement).offsetHeight;
             (el as HTMLElement).style.animation = "";
           });
-          activePanel.classList.add("active");
         }
       });
     });
